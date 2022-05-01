@@ -1,6 +1,6 @@
 # Custom Camera ROM
 This project has been created with [GBDK 2020](https://github.com/gbdk-2020/gbdk-2020).  
-It provides a custom ROM for the [flashable Game Boy Camera](https://github.com/HDR/Gameboy-Camera-Flashcart) targeted on accessing the full potential of the sensor, as well as giving photographers more control.  
+It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.com/HDR/Gameboy-Camera-Flashcart) targeted on accessing the full potential of the sensor, as well as giving photographers more control.  
 
 ## Current features:
 + Most settings of the camera's sensor are already configurable:
@@ -30,7 +30,7 @@ It provides a custom ROM for the [flashable Game Boy Camera](https://github.com/
 
 # Contributing
 _This project is very much a work in progress._  
-Join the [Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG) for discussions in detail. And feel free to check [this project's issues](https://github.com/HerrZatacke/custom-camera-rom/issues)  
+Join the [Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG) for discussions in detail. And feel free to check and add to [this project's issues](https://github.com/HerrZatacke/custom-camera-rom/issues)  
 
 # Feedback
 If you have actually used this ROM any type of feedback is very much appreciated. This includes but is not restricted to things like:
