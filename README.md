@@ -33,12 +33,12 @@ _This project is very much a work in progress._
 Join the [Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG) for discussions in detail. And feel free to check and add to [this project's issues](https://github.com/HerrZatacke/custom-camera-rom/issues)  
 
 # Feedback
+**Remember: I can only improve things I know about!!**
 If you have actually used this ROM any type of feedback is very much appreciated. This includes but is not restricted to things like:
 + "I'd like to have feature XX"
 + "I've used the following combination of parameters which work really well/bad"
 + "When I set param XX, I'd also like param YY to change"
 
-## Remember: I can only improve things I know about!!
 
 # Research and related projects
 - [Documentation regarding the sensor by AntonioND](https://github.com/AntonioND/gbcam-rev-engineer)
