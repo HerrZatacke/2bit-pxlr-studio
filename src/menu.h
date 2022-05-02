@@ -1,7 +1,7 @@
 unsigned char jp = 0;
 unsigned char menuPos = 0;
 
-unsigned char numMenuElements = 8;
+unsigned char numMenuElements = 10;
 
 unsigned char numGainLevels = sizeof gains / sizeof gains[0];
 unsigned char numExposureTimes = sizeof exposureTimes / sizeof exposureTimes[0];
@@ -10,6 +10,8 @@ unsigned char numEdgeModes = sizeof edgeModes;
 unsigned char numVoltageRefs = sizeof voltageRefs;
 unsigned char numZeroPoints = sizeof zeroPoints;
 unsigned char numVoltageOuts = sizeof voltageOuts;
+unsigned char numEdgeOpModes = sizeof edgeOpModes;
+unsigned char numEdgeExtracts = sizeof edgeExtracts;
 
 unsigned char gain = 0;
 unsigned char exposureTime = 0;
@@ -19,6 +21,8 @@ unsigned char edgeMode = 0;
 unsigned char voltageRef = 0;
 unsigned char zeroPoint = 0;
 unsigned char voltageOut = 0;
+unsigned char edgeOpMode = 0;
+unsigned char edgeExtract = 0;
 
 extern unsigned char nextImageIndex;
 
@@ -31,21 +35,41 @@ inline void captureMenuJp() {
 inline void renderMenu() {
   clonk();
 
-  unsigned char posOffsetX = 40 * (menuPos % 4);
-  unsigned char posOffsetY = menuPos > 3 ? 24 : 152;
+  unsigned char posOffsetX = 0;
+  unsigned char posOffsetY = menuPos > 4 ? 24 : 152;
 
-  move_sprite(SPRITE_MENU_INDICATOR_L, 10 + posOffsetX, posOffsetY);
-  move_sprite(SPRITE_MENU_INDICATOR_R, 38 + posOffsetX, posOffsetY);
+  switch (menuPos % 5) {
+    case 0:
+      posOffsetX = 10;
+      break;
+    case 1:
+      posOffsetX = 42;
+      break;
+    case 2:
+      posOffsetX = 74;
+      break;
+    case 3:
+      posOffsetX = 106;
+      break;
+    case 4:
+      posOffsetX = 138;
+      break;
+  }
 
-  showDigit(edgeMode + 1, 3, 1, 1);
-  showDigit(voltageRef + 1, 3, 6, 1);
-  showDigit(zeroPoint + 1, 3, 11, 1);
-  showDigit(voltageOut + 1, 3, 16, 1);
+  move_sprite(SPRITE_MENU_INDICATOR_L, posOffsetX, posOffsetY);
+  move_sprite(SPRITE_MENU_INDICATOR_R, posOffsetX + 20, posOffsetY);
 
-  showDigit(gain + 1, 3, 1, 17);
-  showDigit(exposureTime + 1, 3, 6, 17);
-  showDigit(ditherIndex + 1, 3, 11, 17);
-  showDigit(highLow, 3, 16, 17);
+  showDigit(edgeMode + 1, 2, 1, 1);
+  showDigit(edgeExtract + 1, 2, 5, 1);
+  showDigit(voltageRef + 1, 2, 9, 1);
+  showDigit(zeroPoint + 1, 2, 13, 1);
+  showDigit(voltageOut + 1, 2, 17, 1);
+
+  showDigit(gain + 1, 2, 1, 17);
+  showDigit(exposureTime + 1, 2, 5, 17);
+  showDigit(ditherIndex + 1, 2, 9, 17);
+  showDigit(highLow, 2, 13, 17);
+  showDigit(edgeOpMode, 2, 17, 17);
 
   // nextImageIndex is also the "number of taken images"
   showDigit(nextImageIndex, 2, 18, 3);
@@ -90,23 +114,32 @@ inline void menu() {
           renderMenu();
           break;
         case 4:
-          edgeMode = (edgeMode + 1) % numEdgeModes;
+          edgeOpMode = (edgeOpMode + 1) % numEdgeOpModes;
           renderMenu();
           break;
         case 5:
-          voltageRef = (voltageRef + 1) % numVoltageRefs;
+          edgeMode = (edgeMode + 1) % numEdgeModes;
           renderMenu();
           break;
         case 6:
-          zeroPoint = (zeroPoint + 1) % numZeroPoints;
+          edgeExtract = (edgeExtract + 1) % numEdgeExtracts;
           renderMenu();
           break;
         case 7:
+          voltageRef = (voltageRef + 1) % numVoltageRefs;
+          renderMenu();
+          break;
+        case 8:
+          zeroPoint = (zeroPoint + 1) % numZeroPoints;
+          renderMenu();
+          break;
+        case 9:
           voltageOut = (voltageOut + 1) % numVoltageOuts;
           renderMenu();
           break;
       }
       break;
+
     case J_DOWN:
       switch (menuPos) {
         case 0:
@@ -126,18 +159,26 @@ inline void menu() {
           renderMenu();
           break;
         case 4:
-          edgeMode = (edgeMode + numEdgeModes - 1) % numEdgeModes;
+          edgeOpMode = (edgeOpMode + numEdgeOpModes - 1) % numEdgeOpModes;
           renderMenu();
           break;
         case 5:
-          voltageRef = (voltageRef + numVoltageRefs - 1) % numVoltageRefs;
+          edgeMode = (edgeMode + numEdgeModes - 1) % numEdgeModes;
           renderMenu();
           break;
         case 6:
-          zeroPoint = (zeroPoint + numZeroPoints - 1) % numZeroPoints;
+          edgeExtract = (edgeExtract + numEdgeExtracts - 1) % numEdgeExtracts;
           renderMenu();
           break;
         case 7:
+          voltageRef = (voltageRef + numVoltageRefs - 1) % numVoltageRefs;
+          renderMenu();
+          break;
+        case 8:
+          zeroPoint = (zeroPoint + numZeroPoints - 1) % numZeroPoints;
+          renderMenu();
+          break;
+        case 9:
           voltageOut = (voltageOut + numVoltageOuts - 1) % numVoltageOuts;
           renderMenu();
           break;
