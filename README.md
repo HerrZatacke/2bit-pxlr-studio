@@ -41,8 +41,9 @@ If you have actually used this ROM any type of feedback is very much appreciated
 
 
 # Research and related projects
-- [Documentation regarding the sensor by AntonioND](https://github.com/AntonioND/gbcam-rev-engineer)
+- [Documentation regarding the sensor by AntonioND](https://github.com/AntonioND/gbcam-rev-engineer) [PDF](https://github.com/AntonioND/gbcam-rev-engineer/blob/master/doc/gb_camera_doc_v1_1_1.pdf)
 - [References regarding the Game Boy Camera's sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor)
+- Mitsubishi [Sensor Datasheet](https://pdf1.alldatasheet.com/datasheet-pdf/view/146598/MITSUBISHI/M64282FP.html)
 - I also received a lot of help and ideas from the [Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG)
 
 # License
