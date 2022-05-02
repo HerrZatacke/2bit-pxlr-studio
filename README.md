@@ -7,7 +7,7 @@ It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.co
   + Sensor gain
   + Exposure time
   + Dithering matrices
-  + Edge enhancement ratio
+  + All edge enhancement settings
   + Output node bias voltage
   + Zero point calibration
   + Output reference voltage offset
@@ -17,6 +17,8 @@ It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.co
 - A name (and a logo) for this project [(suggestions welcome)](#1)
 - Displaying images
 - Sorting/deleting images
+- Thumbnail generation
+- Setting new saved images to visible
 - Better UI in general
 - Saving "EXIF-like" information with an image (possibly in the comment area for an image)
 - Different modes for taking images:
@@ -25,6 +27,7 @@ It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.co
   - Re-using settings (from "EXIF-like" info)
   - suggestions welcome
 - Printing images
+- Storing settings persistently in the RAM (using momory-areas which do not get deleted by a reset of a parallel original ROM)
 - Using beep-tones to transfer an image without any additional hardware. [Decoder by Raphaël Boichot](https://github.com/Raphael-Boichot/custom-camera-rom-beep-tone-converter)
 - Currently this project has no makefile (just a [compile.bat](compile.bat)) 
 
