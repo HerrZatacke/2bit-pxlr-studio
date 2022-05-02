@@ -25,7 +25,7 @@ It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.co
   - Re-using settings (from "EXIF-like" info)
   - suggestions welcome
 - Printing images
-- Using beep-tones to transfer an image without any additional hardware. [Decoder by Raphaël Biochot](https://github.com/Raphael-Boichot/custom-camera-rom-beep-tone-converter)
+- Using beep-tones to transfer an image without any additional hardware. [Decoder by Raphaël Boichot](https://github.com/Raphael-Boichot/custom-camera-rom-beep-tone-converter)
 - Currently this project has no makefile (just a [compile.bat](compile.bat)) 
 
 # Contributing
