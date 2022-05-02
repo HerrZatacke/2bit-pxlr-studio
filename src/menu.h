@@ -11,7 +11,7 @@ unsigned char numVoltageRefs = sizeof voltageRefs;
 unsigned char numZeroPoints = sizeof zeroPoints;
 unsigned char numVoltageOuts = sizeof voltageOuts;
 unsigned char numEdgeOpModes = sizeof edgeOpModes;
-unsigned char numEdgeExtracts = sizeof edgeExtracts;
+unsigned char numEdgeExclusive = sizeof edgeExclusives;
 
 unsigned char gain = 0;
 unsigned char exposureTime = 0;
@@ -22,7 +22,7 @@ unsigned char voltageRef = 0;
 unsigned char zeroPoint = 0;
 unsigned char voltageOut = 0;
 unsigned char edgeOpMode = 0;
-unsigned char edgeExtract = 0;
+unsigned char edgeExclusive = 0;
 
 extern unsigned char nextImageIndex;
 
@@ -60,7 +60,7 @@ inline void renderMenu() {
   move_sprite(SPRITE_MENU_INDICATOR_R, posOffsetX + 20, posOffsetY);
 
   showDigit(edgeMode + 1, 2, 1, 1);
-  showDigit(edgeExtract + 1, 2, 5, 1);
+  showDigit(edgeExclusive, 2, 5, 1);
   showDigit(voltageRef + 1, 2, 9, 1);
   showDigit(zeroPoint + 1, 2, 13, 1);
   showDigit(voltageOut + 1, 2, 17, 1);
@@ -122,7 +122,7 @@ inline void menu() {
           renderMenu();
           break;
         case 6:
-          edgeExtract = (edgeExtract + 1) % numEdgeExtracts;
+          edgeExclusive = (edgeExclusive + 1) % numEdgeExclusive;
           renderMenu();
           break;
         case 7:
@@ -167,7 +167,7 @@ inline void menu() {
           renderMenu();
           break;
         case 6:
-          edgeExtract = (edgeExtract + numEdgeExtracts - 1) % numEdgeExtracts;
+          edgeExclusive = (edgeExclusive + numEdgeExclusive - 1) % numEdgeExclusive;
           renderMenu();
           break;
         case 7:

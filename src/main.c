@@ -105,7 +105,7 @@ void init_cam() {
   zeroPoint = 1;
   voltageOut = (numVoltageOuts >> 1) - 1;
   edgeOpMode = 0;
-  edgeExtract = 0;
+  edgeExclusive = 0;
 }
 
 unsigned char readA000() {
@@ -121,7 +121,7 @@ void capture() {
   // G 0-4 Analog output gain.
 //  A001 = 0b00001010;  // NHVGGGGG
 
-  A001 = edgeOpModes[edgeOpMode] | gains[gain] /* | A001_EDGE_EXTRACTION */;
+  A001 = edgeOpModes[edgeOpMode] | gains[gain] | edgeExclusives[edgeExclusive];
   A002 = exposureTimes[exposureTime] >> 8;
   A003 = exposureTimes[exposureTime];
   A004 = edgeModes[edgeMode] | voltageRefs[voltageRef];
