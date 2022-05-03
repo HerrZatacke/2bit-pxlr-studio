@@ -96,16 +96,18 @@ void setDitherMatrix() {
 }
 
 void init_cam() {
-  gain = (numGainLevels >> 1) - 1;
-  exposureTime = (numExposureTimes >> 1) - 1;
-  ditherIndex = (numDithers >> 1) - 1;
-  highLow = 1;
-  edgeMode = (numEdgeModes >> 1) - 1;
-  voltageRef = (numVoltageRefs >> 1) - 1;
-  zeroPoint = 1;
-  voltageOut = (numVoltageOuts >> 1) - 1;
-  edgeOpMode = 0;
-  edgeExclusive = 0;
+  if (restoreSettings()) {
+    gain = (numGainLevels >> 1) - 1;
+    exposureTime = (numExposureTimes >> 1) - 1;
+    ditherIndex = (numDithers >> 1) - 1;
+    highLow = 1;
+    edgeMode = (numEdgeModes >> 1) - 1;
+    voltageRef = (numVoltageRefs >> 1) - 1;
+    zeroPoint = 1;
+    voltageOut = (numVoltageOuts >> 1) - 1;
+    edgeOpMode = 0;
+    edgeExclusive = 0;
+  };
 }
 
 unsigned char readA000() {

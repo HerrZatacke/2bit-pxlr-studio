@@ -6,6 +6,7 @@ unsigned char numMenuElements = 10;
 unsigned char numGainLevels = sizeof gains / sizeof gains[0];
 unsigned char numExposureTimes = sizeof exposureTimes / sizeof exposureTimes[0];
 unsigned char numDithers = 16; //sizeof ditherLowLight;
+// HighLow
 unsigned char numEdgeModes = sizeof edgeModes;
 unsigned char numVoltageRefs = sizeof voltageRefs;
 unsigned char numZeroPoints = sizeof zeroPoints;
@@ -30,6 +31,52 @@ inline void captureMenuJp() {
   if (jp == 0) {
     jp = joypad();
   }
+}
+
+inline void storeSettings() {
+  SWITCH_RAM(1);
+  image_01_unused[0] = gain;
+  image_01_unused[1] = exposureTime;
+  image_01_unused[2] = ditherIndex;
+  image_01_unused[3] = highLow;
+  image_01_unused[4] = edgeMode;
+  image_01_unused[5] = voltageRef;
+  image_01_unused[6] = zeroPoint;
+  image_01_unused[7] = voltageOut;
+  image_01_unused[8] = edgeOpMode;
+  image_01_unused[9] = edgeExclusive;
+}
+
+inline unsigned char restoreSettings() {
+
+  if (
+    image_01_unused[0] == 170 &&
+    image_01_unused[1] == 170 &&
+    image_01_unused[2] == 170 &&
+    image_01_unused[3] == 170 &&
+    image_01_unused[4] == 170 &&
+    image_01_unused[5] == 170 &&
+    image_01_unused[6] == 170 &&
+    image_01_unused[7] == 170 &&
+    image_01_unused[8] == 170 &&
+    image_01_unused[9] == 170
+  ) {
+    return 1;
+  }
+
+  SWITCH_RAM(1);
+  gain = image_01_unused[0] % numGainLevels;
+  exposureTime = image_01_unused[1] % numExposureTimes;
+  ditherIndex = image_01_unused[2] % numDithers;
+  highLow = image_01_unused[3] % 2;
+  edgeMode = image_01_unused[4] % numEdgeModes;
+  voltageRef = image_01_unused[5] % numVoltageRefs;
+  zeroPoint = image_01_unused[6] % numZeroPoints;
+  voltageOut = image_01_unused[7] % numVoltageOuts;
+  edgeOpMode = image_01_unused[8] % numEdgeOpModes;
+  edgeExclusive = image_01_unused[9] % numEdgeExclusive;
+
+  return 0;
 }
 
 inline void renderMenu() {
@@ -73,6 +120,8 @@ inline void renderMenu() {
 
   // nextImageIndex is also the "number of taken images"
   showDigit(nextImageIndex, 2, 18, 3);
+
+  storeSettings();
 }
 
 

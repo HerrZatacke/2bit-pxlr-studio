@@ -80,3 +80,6 @@ extern unsigned char A003;
 extern unsigned char A004;
 extern unsigned char A005;
 extern unsigned char A006A035[48];
+
+extern unsigned char image_01_unused[];
+extern unsigned char image_02_unused[];
