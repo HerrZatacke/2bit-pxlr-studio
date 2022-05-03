@@ -115,7 +115,7 @@ void init_cam() {
     boop();
     pause(20);
     beep();
-  };
+  }
 }
 
 unsigned char readA000() {
