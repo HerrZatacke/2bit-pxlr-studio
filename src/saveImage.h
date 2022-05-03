@@ -35,15 +35,19 @@ void saveImage() {
   }
 
   nextImageIndex += 1;
+
+  renderMenu();
 }
 
 void saveImageDialog() {
-  waitRelease();
-
-  if (nextImageIndex == 30) {
+  if (nextImageIndex >= 30) {
     boop();
+    waitRelease();
     return;
   }
+
+  beep();
+  waitRelease();
 
   dialogState = DIALOG_WAITING;
   while (dialogState == DIALOG_WAITING) {

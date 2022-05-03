@@ -110,6 +110,7 @@ void init_cam() {
     voltageOut = (numVoltageOuts >> 1) - 1;
     edgeOpMode = 0;
     edgeExclusive = 0;
+    nextImageIndex = 0; // reset "images taken"
 
     boop();
     pause(20);

@@ -45,6 +45,7 @@ inline void storeSettings() {
   image_01_unused[7] = voltageOut;
   image_01_unused[8] = edgeOpMode;
   image_01_unused[9] = edgeExclusive;
+  image_01_unused[10] = nextImageIndex;
 }
 
 inline unsigned char restoreSettings() {
@@ -75,6 +76,7 @@ inline unsigned char restoreSettings() {
   voltageOut = image_01_unused[7] % numVoltageOuts;
   edgeOpMode = image_01_unused[8] % numEdgeOpModes;
   edgeExclusive = image_01_unused[9] % numEdgeExclusive;
+  nextImageIndex = image_01_unused[10] > 30 ? 30 : image_01_unused[10];
 
   return 0;
 }
