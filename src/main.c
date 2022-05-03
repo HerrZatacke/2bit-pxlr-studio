@@ -127,11 +127,6 @@ void capture() {
 
   SWITCH_RAM(16);
 
-  // N 7 Exclusively set vertical edge enhancement mode.
-  // VH 5-6 Select vertical/horizontal edge operation mode.
-  // G 0-4 Analog output gain.
-//  A001 = 0b00001010;  // NHVGGGGG
-
   A001 = edgeOpModes[edgeOpMode] | gains[gain] | edgeExclusives[edgeExclusive];
   A002 = exposureTimes[exposureTime] >> 8;
   A003 = exposureTimes[exposureTime];
