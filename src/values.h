@@ -34,7 +34,8 @@
 #define A004_EDGE_RATIO_400   0b01100000
 #define A004_EDGE_RATIO_500   0b01110000
 
-#define A004_INVERT_OUTPUT    0b00001000
+#define A004_INVERT_OUTPUT_ON    0b00001000
+#define A004_INVERT_OUTPUT_OFF   0b00000000
 
 #define A004_VOLTAGE_REF_00   0b00000000
 #define A004_VOLTAGE_REF_05   0b00000001
@@ -148,7 +149,6 @@ unsigned char edgeOpModes[4] = {
 };
 
 unsigned char edgeExclusives[2] = {
-
   A001_EDGE_EXCLUSIVE_VERT_OFF,
   A001_EDGE_EXCLUSIVE_VERT_ON,
 };
@@ -202,6 +202,11 @@ unsigned char edgeModes[8] = {
   A004_EDGE_RATIO_300,
   A004_EDGE_RATIO_400,
   A004_EDGE_RATIO_500,
+};
+
+unsigned char invertOutputs[2] = {
+    A004_INVERT_OUTPUT_OFF,
+    A004_INVERT_OUTPUT_ON,
 };
 
 unsigned char voltageRefs[8] = {
