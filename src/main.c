@@ -87,7 +87,7 @@ void scanline_isr() {
 void setDitherMatrix() {
   SWITCH_RAM(16);
   for (unsigned int i = 0; i < 48; i += 1) {
-    if (highLow) {
+    if (ditherHighLow == DITHER_SET_HIGH) {
       A006A035[i] = ditherHighLight[ditherIndex][i];
     } else {
       A006A035[i] = ditherLowLight[ditherIndex][i];
@@ -104,7 +104,7 @@ void init_cam() {
     gain = (numGainLevels >> 1) - 1;
     exposureTime = (numExposureTimes >> 1) - 1;
     ditherIndex = (numDithers >> 1) - 1;
-    highLow = 1;
+    ditherHighLow = 1;
     edgeMode = (numEdgeModes >> 1) - 1;
     voltageRef = (numVoltageRefs >> 1) - 1;
     zeroPoint = 1;

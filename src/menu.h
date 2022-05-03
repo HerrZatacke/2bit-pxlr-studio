@@ -6,7 +6,7 @@ unsigned char numMenuElements = 11;
 unsigned char numGainLevels = sizeof gains / sizeof gains[0];
 unsigned char numExposureTimes = sizeof exposureTimes / sizeof exposureTimes[0];
 unsigned char numDithers = 16; //sizeof ditherLowLight;
-// HighLow
+unsigned char numDitherHighLows = sizeof ditherHighLows;
 unsigned char numEdgeModes = sizeof edgeModes;
 unsigned char numVoltageRefs = sizeof voltageRefs;
 unsigned char numZeroPoints = sizeof zeroPoints;
@@ -18,7 +18,7 @@ unsigned char numInvertOutputs = sizeof invertOutputs;
 unsigned char gain = 0;
 unsigned char exposureTime = 0;
 unsigned char ditherIndex = 0;
-unsigned char highLow = 0;
+unsigned char ditherHighLow = 0;
 unsigned char edgeMode = 0;
 unsigned char voltageRef = 0;
 unsigned char zeroPoint = 0;
@@ -41,7 +41,7 @@ inline void storeSettings() {
   image_01_unused[1] = gain;
   image_01_unused[2] = exposureTime;
   image_01_unused[3] = ditherIndex;
-  image_01_unused[4] = highLow;
+  image_01_unused[4] = ditherHighLow;
   image_01_unused[5] = edgeMode;
   image_01_unused[6] = voltageRef;
   image_01_unused[7] = zeroPoint;
@@ -75,7 +75,7 @@ inline unsigned char restoreSettings() {
   gain = image_01_unused[1] % numGainLevels;
   exposureTime = image_01_unused[2] % numExposureTimes;
   ditherIndex = image_01_unused[3] % numDithers;
-  highLow = image_01_unused[4] % 2;
+  ditherHighLow = image_01_unused[4] % numDitherHighLows;
   edgeMode = image_01_unused[5] % numEdgeModes;
   voltageRef = image_01_unused[6] % numVoltageRefs;
   zeroPoint = image_01_unused[7] % numZeroPoints;
@@ -130,7 +130,7 @@ inline void renderMenu() {
   showDigit(gain + 1, 2, 1, 17);
   showDigit(exposureTime + 1, 2, 4, 17);
   showDigit(ditherIndex + 1, 2, 7, 17);
-  showDigit(highLow, 2, 10, 17);
+  showDigit(ditherHighLow, 2, 10, 17);
   showDigit(edgeOpMode, 2, 13, 17);
 
   // nextImageIndex is also the "number of taken images"
@@ -174,7 +174,7 @@ inline void menu() {
           renderMenu();
           break;
         case 3:
-          highLow = (highLow + 1) % 2;
+          ditherHighLow = (ditherHighLow + 1) % numDitherHighLows;
           renderMenu();
           break;
         case 4:
@@ -223,7 +223,7 @@ inline void menu() {
           renderMenu();
           break;
         case 3:
-          highLow = (highLow + 2 - 1) % 2;
+          ditherHighLow = (ditherHighLow + 2 - 1) % numDitherHighLows;
           renderMenu();
           break;
         case 4:
