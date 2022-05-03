@@ -49,23 +49,23 @@ inline void storeSettings() {
 }
 
 inline unsigned char restoreSettings() {
+  SWITCH_RAM(1);
 
   if (
-    image_01_unused[0] == 170 &&
-    image_01_unused[1] == 170 &&
-    image_01_unused[2] == 170 &&
-    image_01_unused[3] == 170 &&
-    image_01_unused[4] == 170 &&
-    image_01_unused[5] == 170 &&
-    image_01_unused[6] == 170 &&
-    image_01_unused[7] == 170 &&
-    image_01_unused[8] == 170 &&
-    image_01_unused[9] == 170
+    image_01_unused[0] == 0xAA &&
+    image_01_unused[1] == 0xAA &&
+    image_01_unused[2] == 0xAA &&
+    image_01_unused[3] == 0xAA &&
+    image_01_unused[4] == 0xAA &&
+    image_01_unused[5] == 0xAA &&
+    image_01_unused[6] == 0xAA &&
+    image_01_unused[7] == 0xAA &&
+    image_01_unused[8] == 0xAA &&
+    image_01_unused[9] == 0xAA
   ) {
     return 1;
   }
 
-  SWITCH_RAM(1);
   gain = image_01_unused[0] % numGainLevels;
   exposureTime = image_01_unused[1] % numExposureTimes;
   ditherIndex = image_01_unused[2] % numDithers;
