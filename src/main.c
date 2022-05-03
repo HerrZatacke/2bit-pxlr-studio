@@ -101,14 +101,14 @@ void init_cam() {
     (joypad() == (J_START | J_SELECT)) // "factory" reset
   ) {
     nextImageIndex = 0; // reset "images taken"
-    gain = (numGainLevels >> 1) - 1;
-    exposureTime = (numExposureTimes >> 1) - 1;
-    ditherIndex = (numDithers >> 1) - 1;
+    gain = (NUM_GAIN_LEVELS >> 1) - 1;
+    exposureTime = (NUM_EXPOSURE_TIMES >> 1) - 1;
+    ditherIndex = (NUM_DITHERS >> 1) - 1;
     ditherHighLow = 1;
-    edgeMode = (numEdgeModes >> 1) - 1;
-    voltageRef = (numVoltageRefs >> 1) - 1;
+    edgeMode = (NUM_EDGE_MODES >> 1) - 1;
+    voltageRef = (NUM_VOLTAGE_REFS >> 1) - 1;
     zeroPoint = 1;
-    voltageOut = (numVoltageOuts >> 1) - 1;
+    voltageOut = (NUM_VOLTAGE_OUTS >> 1) - 1;
     edgeOpMode = 0;
     edgeExclusive = 0;
     invertOutput = 0;

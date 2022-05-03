@@ -3,18 +3,6 @@ unsigned char menuPos = 0;
 
 unsigned char numMenuElements = 11;
 
-unsigned char numGainLevels = sizeof gains / sizeof gains[0];
-unsigned char numExposureTimes = sizeof exposureTimes / sizeof exposureTimes[0];
-unsigned char numDithers = 16; //sizeof ditherLowLight;
-unsigned char numDitherHighLows = sizeof ditherHighLows;
-unsigned char numEdgeModes = sizeof edgeModes;
-unsigned char numVoltageRefs = sizeof voltageRefs;
-unsigned char numZeroPoints = sizeof zeroPoints;
-unsigned char numVoltageOuts = sizeof voltageOuts;
-unsigned char numEdgeOpModes = sizeof edgeOpModes;
-unsigned char numEdgeExclusive = sizeof edgeExclusives;
-unsigned char numInvertOutputs = sizeof invertOutputs;
-
 unsigned char gain = 0;
 unsigned char exposureTime = 0;
 unsigned char ditherIndex = 0;
@@ -72,17 +60,17 @@ inline unsigned char restoreSettings() {
   }
 
   nextImageIndex = image_01_unused[0] > 30 ? 30 : image_01_unused[10];
-  gain = image_01_unused[1] % numGainLevels;
-  exposureTime = image_01_unused[2] % numExposureTimes;
-  ditherIndex = image_01_unused[3] % numDithers;
-  ditherHighLow = image_01_unused[4] % numDitherHighLows;
-  edgeMode = image_01_unused[5] % numEdgeModes;
-  voltageRef = image_01_unused[6] % numVoltageRefs;
-  zeroPoint = image_01_unused[7] % numZeroPoints;
-  voltageOut = image_01_unused[8] % numVoltageOuts;
-  edgeOpMode = image_01_unused[9] % numEdgeOpModes;
-  edgeExclusive = image_01_unused[10] % numEdgeExclusive;
-  invertOutput = image_01_unused[11] % numInvertOutputs;
+  gain = image_01_unused[1] % NUM_GAIN_LEVELS;
+  exposureTime = image_01_unused[2] % NUM_EXPOSURE_TIMES;
+  ditherIndex = image_01_unused[3] % NUM_DITHERS;
+  ditherHighLow = image_01_unused[4] % NUM_DITHER_HIGHLOWS;
+  edgeMode = image_01_unused[5] % NUM_EDGE_MODES;
+  voltageRef = image_01_unused[6] % NUM_VOLTAGE_REFS;
+  zeroPoint = image_01_unused[7] % NUM_ZERO_POINTS;
+  voltageOut = image_01_unused[8] % NUM_VOLTAGE_OUTS;
+  edgeOpMode = image_01_unused[9] % NUM_EDGE_OP_MODES;
+  edgeExclusive = image_01_unused[10] % NUM_EDGE_EXCLUSIVE;
+  invertOutput = image_01_unused[11] % NUM_INVERT_OUTPUTS;
 
   return 0;
 }
@@ -162,47 +150,47 @@ inline void menu() {
     case J_UP:
       switch (menuPos) {
         case 0:
-          gain = (gain + 1) % numGainLevels;
+          gain = (gain + 1) % NUM_GAIN_LEVELS;
           renderMenu();
           break;
         case 1:
-          exposureTime = (exposureTime + 1) % numExposureTimes;
+          exposureTime = (exposureTime + 1) % NUM_EXPOSURE_TIMES;
           renderMenu();
           break;
         case 2:
-          ditherIndex = (ditherIndex + 1) % numDithers;
+          ditherIndex = (ditherIndex + 1) % NUM_DITHERS;
           renderMenu();
           break;
         case 3:
-          ditherHighLow = (ditherHighLow + 1) % numDitherHighLows;
+          ditherHighLow = (ditherHighLow + 1) % NUM_DITHER_HIGHLOWS;
           renderMenu();
           break;
         case 4:
-          edgeOpMode = (edgeOpMode + 1) % numEdgeOpModes;
+          edgeOpMode = (edgeOpMode + 1) % NUM_EDGE_OP_MODES;
           renderMenu();
           break;
         case 5:
-          edgeMode = (edgeMode + 1) % numEdgeModes;
+          edgeMode = (edgeMode + 1) % NUM_EDGE_MODES;
           renderMenu();
           break;
         case 6:
-          edgeExclusive = (edgeExclusive + 1) % numEdgeExclusive;
+          edgeExclusive = (edgeExclusive + 1) % NUM_EDGE_EXCLUSIVE;
           renderMenu();
           break;
         case 7:
-          voltageRef = (voltageRef + 1) % numVoltageRefs;
+          voltageRef = (voltageRef + 1) % NUM_VOLTAGE_REFS;
           renderMenu();
           break;
         case 8:
-          zeroPoint = (zeroPoint + 1) % numZeroPoints;
+          zeroPoint = (zeroPoint + 1) % NUM_ZERO_POINTS;
           renderMenu();
           break;
         case 9:
-          voltageOut = (voltageOut + 1) % numVoltageOuts;
+          voltageOut = (voltageOut + 1) % NUM_VOLTAGE_OUTS;
           renderMenu();
           break;
         case 10:
-          invertOutput = (invertOutput + 1) % numInvertOutputs;
+          invertOutput = (invertOutput + 1) % NUM_INVERT_OUTPUTS;
           renderMenu();
           break;
       }
@@ -211,47 +199,47 @@ inline void menu() {
     case J_DOWN:
       switch (menuPos) {
         case 0:
-          gain = (gain + numGainLevels - 1) % numGainLevels;
+          gain = (gain + NUM_GAIN_LEVELS - 1) % NUM_GAIN_LEVELS;
           renderMenu();
           break;
         case 1:
-          exposureTime = (exposureTime + numExposureTimes - 1) % numExposureTimes;
+          exposureTime = (exposureTime + NUM_EXPOSURE_TIMES - 1) % NUM_EXPOSURE_TIMES;
           renderMenu();
           break;
         case 2:
-          ditherIndex = (ditherIndex + numDithers - 1) % numDithers;
+          ditherIndex = (ditherIndex + NUM_DITHERS - 1) % NUM_DITHERS;
           renderMenu();
           break;
         case 3:
-          ditherHighLow = (ditherHighLow + 2 - 1) % numDitherHighLows;
+          ditherHighLow = (ditherHighLow + 2 - 1) % NUM_DITHER_HIGHLOWS;
           renderMenu();
           break;
         case 4:
-          edgeOpMode = (edgeOpMode + numEdgeOpModes - 1) % numEdgeOpModes;
+          edgeOpMode = (edgeOpMode + NUM_EDGE_OP_MODES - 1) % NUM_EDGE_OP_MODES;
           renderMenu();
           break;
         case 5:
-          edgeMode = (edgeMode + numEdgeModes - 1) % numEdgeModes;
+          edgeMode = (edgeMode + NUM_EDGE_MODES - 1) % NUM_EDGE_MODES;
           renderMenu();
           break;
         case 6:
-          edgeExclusive = (edgeExclusive + numEdgeExclusive - 1) % numEdgeExclusive;
+          edgeExclusive = (edgeExclusive + NUM_EDGE_EXCLUSIVE - 1) % NUM_EDGE_EXCLUSIVE;
           renderMenu();
           break;
         case 7:
-          voltageRef = (voltageRef + numVoltageRefs - 1) % numVoltageRefs;
+          voltageRef = (voltageRef + NUM_VOLTAGE_REFS - 1) % NUM_VOLTAGE_REFS;
           renderMenu();
           break;
         case 8:
-          zeroPoint = (zeroPoint + numZeroPoints - 1) % numZeroPoints;
+          zeroPoint = (zeroPoint + NUM_ZERO_POINTS - 1) % NUM_ZERO_POINTS;
           renderMenu();
           break;
         case 9:
-          voltageOut = (voltageOut + numVoltageOuts - 1) % numVoltageOuts;
+          voltageOut = (voltageOut + NUM_VOLTAGE_OUTS - 1) % NUM_VOLTAGE_OUTS;
           renderMenu();
           break;
         case 10:
-          invertOutput = (invertOutput + numInvertOutputs - 1) % numInvertOutputs;
+          invertOutput = (invertOutput + NUM_INVERT_OUTPUTS - 1) % NUM_INVERT_OUTPUTS;
           renderMenu();
           break;
       }
