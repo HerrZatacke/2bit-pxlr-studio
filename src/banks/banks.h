@@ -39,7 +39,7 @@ typedef struct {
   unsigned char* const metaEcho;
 } Image;
 
-Image images[] = {
+const Image images[] = {
   { 1, image_01_upper, image_01_lower, image_01_meta, image_01_meta_echo },
   { 1, image_02_upper, image_02_lower, image_02_meta, image_02_meta_echo },
   { 2, image_03_upper, image_03_lower, image_03_meta, image_03_meta_echo },
