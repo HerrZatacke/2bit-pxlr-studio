@@ -164,4 +164,5 @@ const unsigned char gbps_logo_map[360] = {
 void splash() {
   set_bkg_data(0, gbps_logo_TILE_COUNT, gbps_logo_tiles);
   set_bkg_tiles(0, 0, 20, 18, gbps_logo_map);
+  pause(10);
 }

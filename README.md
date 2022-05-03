@@ -12,6 +12,7 @@ It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.co
   + Zero point calibration
   + Output reference voltage offset
 + Raw image data can be saved to the same positions where the original ROM stores it's data.
++ Sensor settings are being saved across restarts. To reset hold `start`+`select` on boot
 
 ## Missing features:
 - A name (and a logo) for this project [(suggestions welcome)](#1)

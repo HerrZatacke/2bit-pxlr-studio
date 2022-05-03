@@ -96,7 +96,10 @@ void setDitherMatrix() {
 }
 
 void init_cam() {
-  if (restoreSettings()) {
+  if (
+    restoreSettings() ||
+    (joypad() == (J_START | J_SELECT)) // "factory" reset
+  ) {
     gain = (numGainLevels >> 1) - 1;
     exposureTime = (numExposureTimes >> 1) - 1;
     ditherIndex = (numDithers >> 1) - 1;
@@ -107,6 +110,10 @@ void init_cam() {
     voltageOut = (numVoltageOuts >> 1) - 1;
     edgeOpMode = 0;
     edgeExclusive = 0;
+
+    boop();
+    pause(20);
+    beep();
   };
 }
 
@@ -147,6 +154,8 @@ int main(void) {
   init_sound();
   splash();
 
+  init_cam();
+
   waitPush(J_A);
   waitRelease();
 
@@ -162,7 +171,6 @@ int main(void) {
   set_bkg_data(OFFSET_MENU_TILES, 31, menu_labels_tiles);
   set_bkg_tiles(0, 0, 20, 18, map_normal);
 
-  init_cam();
   renderMenu();
 
   // Loop forever
