@@ -186,5 +186,7 @@ int main(void) {
     if (joypad() == J_A) {
       saveImageDialog();
     }
+
+    wait_vbl_done();
   }
 }
