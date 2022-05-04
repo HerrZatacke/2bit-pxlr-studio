@@ -7,6 +7,7 @@ inline void init_gfx() {
   SPRITES_8x8;
   set_sprite_tile(SPRITE_MENU_INDICATOR_L, OFFSET_MENU_ARROW);
   set_sprite_tile(SPRITE_MENU_INDICATOR_R, OFFSET_MENU_ARROW);
+  set_sprite_prop(SPRITE_MENU_INDICATOR_L, S_FLIPX);
   set_sprite_prop(SPRITE_MENU_INDICATOR_R, S_FLIPX);
 }
 
@@ -56,29 +57,29 @@ inline void pause(unsigned char frames) {
 
 unsigned char digits_map[10];
 
-void showDigit(unsigned char digit, unsigned char numChars, unsigned char xposition, unsigned char ypositoion) {
-  BCD bcd = MAKE_BCD(0);
-  uint2bcd(digit, &bcd);
-  bcd2text(&bcd, OFFSET_FONT, digits_map);
-
-  if (numChars == 3) {
-    unsigned char threeDigits[] = {
-      digits_map[5],
-      digits_map[6],
-      digits_map[7],
-    };
-
-    set_bkg_tiles(xposition, ypositoion, 3, 1, threeDigits);
-  } else if (numChars == 2) {
-    unsigned char twoDigits[] = {
-      digits_map[6],
-      digits_map[7],
-    };
-
-    set_bkg_tiles(xposition, ypositoion, 2, 1, twoDigits);
-  }
-
-}
+//void showDigit(unsigned char digit, unsigned char numChars, unsigned char xposition, unsigned char ypositoion) {
+//  BCD bcd = MAKE_BCD(0);
+//  uint2bcd(digit, &bcd);
+//  bcd2text(&bcd, OFFSET_FONT, digits_map);
+//
+//  if (numChars == 3) {
+//    unsigned char threeDigits[] = {
+//      digits_map[5],
+//      digits_map[6],
+//      digits_map[7],
+//    };
+//
+//    set_bkg_tiles(xposition, ypositoion, 3, 1, threeDigits);
+//  } else if (numChars == 2) {
+//    unsigned char twoDigits[] = {
+//      digits_map[6],
+//      digits_map[7],
+//    };
+//
+//    set_bkg_tiles(xposition, ypositoion, 2, 1, twoDigits);
+//  }
+//
+//}
 
 void waitPush(unsigned char what) {
   // Wait until A has been pressed

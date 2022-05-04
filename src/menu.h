@@ -1,21 +1,50 @@
 unsigned char jp = 0;
 unsigned char menuPos = 0;
 
-unsigned char numMenuElements = 11;
+#define NUM_MENU_ELEMENTS 11
 
-unsigned char gain = 0;
-unsigned char exposureTime = 0;
-unsigned char ditherIndex = 0;
-unsigned char ditherHighLow = 0;
-unsigned char edgeMode = 0;
-unsigned char voltageRef = 0;
-unsigned char zeroPoint = 0;
-unsigned char voltageOut = 0;
-unsigned char edgeOpMode = 0;
-unsigned char edgeExclusive = 0;
-unsigned char invertOutput = 0;
-
+// same as readable number of "images taken"
 extern unsigned char nextImageIndex;
+
+typedef struct {
+  const unsigned char x;
+  const unsigned char page;
+  unsigned char value;
+  const unsigned char storeOffset;
+  const unsigned char numOptions;
+  const unsigned char defaultValue;
+  const unsigned char* title;
+  const unsigned char* description;
+  const MenuOption* options;
+} MenuItem;
+
+MenuItem gainsMenu =          {  0, 0, 0,  1,     NUM_GAIN_LEVELS,     (NUM_GAIN_LEVELS >> 1) - 1, "Gain", "   Sensor     Gain",          &gains[0], };
+MenuItem exposureTimesMenu =  {  5, 0, 0,  2,  NUM_EXPOSURE_TIMES, (NUM_EXPOSURE_TIMES >> 1) - 1 , "ExpT", " Exposure     Time",  &exposureTimes[0], };
+MenuItem voltageRefsMenu =    { 10, 0, 0,  6,    NUM_VOLTAGE_REFS,   (NUM_VOLTAGE_REFS >> 1) - 1 , "vRef", "  VoltageReference",    &voltageRefs[0], };
+MenuItem voltageOutsMenu =    { 15, 0, 0,  8,    NUM_VOLTAGE_OUTS,   (NUM_VOLTAGE_OUTS >> 1) - 1 , "vOut", "  Voltage   Output",    &voltageOuts[0], };
+MenuItem invertOutputsMenu =  {  0, 1, 0, 11,  NUM_INVERT_OUTPUTS,                              0, "InvO", "   Invert   Output",  &invertOutputs[0], };
+MenuItem zeroPointsMenu =     {  5, 1, 0,  7,     NUM_ZERO_POINTS,                              1, "0 Pt", "     Zero   Points",     &zeroPoints[0], };
+MenuItem ditherHighLowsMenu = { 10, 1, 0,  4, NUM_DITHER_HIGHLOWS,                              1, "dSet", "   Dither      set", &ditherHighLows[0], };
+MenuItem ditherSetsMenu =     { 15, 1, 0,  3,         NUM_DITHERS,                              1, "Dith", "   Dither   Matrix",     &ditherSets[0], };
+MenuItem edgeOpModesMenu =    {  0, 2, 0,  9,    NUM_EDGE_OP_MODES,                             0, "EdOp", "     EdgeOperation",    &edgeOpModes[0], };
+MenuItem edgeModesMenu =      {  5, 2, 0, 5 ,       NUM_EDGE_MODES,    (NUM_EDGE_MODES >> 1) - 1 , "EdMo", "     Edge     Mode",      &edgeModes[0], };
+MenuItem edgeExclusivesMenu = { 10, 2, 0, 10,   NUM_EDGE_EXCLUSIVE,                             0, "EdEx", "     EdgeExclusive", &edgeExclusives[0], };
+
+MenuItem *menuItems[NUM_MENU_ELEMENTS] = {
+  &gainsMenu,
+  &exposureTimesMenu,
+  &voltageRefsMenu,
+  &voltageOutsMenu,
+  &invertOutputsMenu,
+  &zeroPointsMenu,
+  &ditherHighLowsMenu,
+  &ditherSetsMenu,
+  &edgeOpModesMenu,
+  &edgeModesMenu,
+  &edgeExclusivesMenu,
+};
+
+#define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
 inline void captureMenuJp() {
   if (jp == 0) {
@@ -25,226 +54,84 @@ inline void captureMenuJp() {
 
 inline void storeSettings() {
   SWITCH_RAM(1);
-  image_01_unused[0] = nextImageIndex;
-  image_01_unused[1] = gain;
-  image_01_unused[2] = exposureTime;
-  image_01_unused[3] = ditherIndex;
-  image_01_unused[4] = ditherHighLow;
-  image_01_unused[5] = edgeMode;
-  image_01_unused[6] = voltageRef;
-  image_01_unused[7] = zeroPoint;
-  image_01_unused[8] = voltageOut;
-  image_01_unused[9] = edgeOpMode;
-  image_01_unused[10] = edgeExclusive;
-  image_01_unused[11] = invertOutput;
+  for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+    image_01_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
+  }
+}
+
+inline void restoreDefaults() {
+  for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+    menuItems[i]->value = menuItems[i]->defaultValue;
+  }
 }
 
 inline unsigned char restoreSettings() {
   SWITCH_RAM(1);
 
-  if (
-    image_01_unused[0] == 0xAA &&
-    image_01_unused[1] == 0xAA &&
-    image_01_unused[2] == 0xAA &&
-    image_01_unused[3] == 0xAA &&
-    image_01_unused[4] == 0xAA &&
-    image_01_unused[5] == 0xAA &&
-    image_01_unused[6] == 0xAA &&
-    image_01_unused[7] == 0xAA &&
-    image_01_unused[8] == 0xAA &&
-    image_01_unused[9] == 0xAA &&
-    image_01_unused[10] == 0xAA &&
-    image_01_unused[11] == 0xAA
-  ) {
-    return 1;
+  unsigned char i = 0;
+  unsigned char noAA = 0;
+
+  // check if any of the storage cells already has a valid value
+  // the initial value which is never changes on an original cart is 0xAA
+  for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+    if (image_01_unused[menuItems[i]->storeOffset] != 0xAA) {
+      noAA = 1;
+    }
   }
 
-  nextImageIndex = image_01_unused[0] > 30 ? 30 : image_01_unused[10];
-  gain = image_01_unused[1] % NUM_GAIN_LEVELS;
-  exposureTime = image_01_unused[2] % NUM_EXPOSURE_TIMES;
-  ditherIndex = image_01_unused[3] % NUM_DITHERS;
-  ditherHighLow = image_01_unused[4] % NUM_DITHER_HIGHLOWS;
-  edgeMode = image_01_unused[5] % NUM_EDGE_MODES;
-  voltageRef = image_01_unused[6] % NUM_VOLTAGE_REFS;
-  zeroPoint = image_01_unused[7] % NUM_ZERO_POINTS;
-  voltageOut = image_01_unused[8] % NUM_VOLTAGE_OUTS;
-  edgeOpMode = image_01_unused[9] % NUM_EDGE_OP_MODES;
-  edgeExclusive = image_01_unused[10] % NUM_EDGE_EXCLUSIVE;
-  invertOutput = image_01_unused[11] % NUM_INVERT_OUTPUTS;
+  // load initial values from storage cells
+  if (noAA) {
+    nextImageIndex = image_01_unused[0] > 30 ? 30 : image_01_unused[0];
 
-  return 0;
+    for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+      menuItems[i]->value = image_01_unused[menuItems[i]->storeOffset];
+    }
+
+    return 0;
+  }
+
+  // 1 forces a reset to defaults
+  return 1;
 }
 
 inline void renderMenu() {
   clonk();
+  unsigned char currentPage = menuItems[menuPos]->page;
+  fill_bkg_rect(0, 0, 20, 2, BLNK);
+  fill_bkg_rect(0, 16, 20, 2, BLNK);
 
-  unsigned char posOffsetX = 0;
-  unsigned char posOffsetY = menuPos > 4 ? 24 : 152;
+  for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
 
-  switch (menuPos % 5) {
-    case 0:
-      posOffsetX = 10;
-      break;
-    case 1:
-      posOffsetX = 34;
-      break;
-    case 2:
-      posOffsetX = 58;
-      break;
-    case 3:
-      posOffsetX = 82;
-      break;
-    case 4:
-      posOffsetX = 106;
-      break;
+    if (menuItems[i]->page == currentPage) {
+      unsigned char value = menuItems[i]->value;
+      set_bkg_based_tiles(menuItems[i]->x, 0, 4, 1, menuItems[i]->title, 224);
+      set_bkg_based_tiles(menuItems[i]->x, 1, 4, 1, menuItems[i]->options[value].title, 224);
+    }
   }
 
-  if (menuPos == 10) {
-    posOffsetX = 130;
-    posOffsetY = 24;
-  }
+  set_bkg_based_tiles(0, 16, 9, 2, menuItems[menuPos]->description, 224);
 
-
-  move_sprite(SPRITE_MENU_INDICATOR_L, posOffsetX, posOffsetY);
-  move_sprite(SPRITE_MENU_INDICATOR_R, posOffsetX + 20, posOffsetY);
-
-  showDigit(edgeMode + 1, 2, 1, 1);
-  showDigit(edgeExclusive, 2, 4, 1);
-  showDigit(voltageRef + 1, 2, 7, 1);
-  showDigit(zeroPoint + 1, 2, 10, 1);
-  showDigit(voltageOut + 1, 2, 13, 1);
-  showDigit(invertOutput, 2, 16, 1);
-
-  showDigit(gain + 1, 2, 1, 17);
-  showDigit(exposureTime + 1, 2, 4, 17);
-  showDigit(ditherIndex + 1, 2, 7, 17);
-  showDigit(ditherHighLow, 2, 10, 17);
-  showDigit(edgeOpMode, 2, 13, 17);
-
-  // nextImageIndex is also the "number of taken images"
-  showDigit(nextImageIndex, 2, 18, 3);
-
-  storeSettings();
+  unsigned char spriteX = (menuItems[menuPos]->x * 8) + 38;
+  move_sprite(SPRITE_MENU_INDICATOR_L, spriteX, 20);
 }
 
-
 inline void menu() {
-  switch(jp) {
-    case 0:
-    case J_A:
-    case J_B:
-    case J_SELECT:
-    case J_START:
-      jp = 0;
-      return;
-
-    case J_RIGHT:
-      menuPos = (menuPos + 1) % numMenuElements;
-      renderMenu();
-      break;
-    case J_LEFT:
-      menuPos = (menuPos + numMenuElements - 1) % numMenuElements;
-      renderMenu();
-      break;
-
-    case J_UP:
-      switch (menuPos) {
-        case 0:
-          gain = (gain + 1) % NUM_GAIN_LEVELS;
-          renderMenu();
-          break;
-        case 1:
-          exposureTime = (exposureTime + 1) % NUM_EXPOSURE_TIMES;
-          renderMenu();
-          break;
-        case 2:
-          ditherIndex = (ditherIndex + 1) % NUM_DITHERS;
-          renderMenu();
-          break;
-        case 3:
-          ditherHighLow = (ditherHighLow + 1) % NUM_DITHER_HIGHLOWS;
-          renderMenu();
-          break;
-        case 4:
-          edgeOpMode = (edgeOpMode + 1) % NUM_EDGE_OP_MODES;
-          renderMenu();
-          break;
-        case 5:
-          edgeMode = (edgeMode + 1) % NUM_EDGE_MODES;
-          renderMenu();
-          break;
-        case 6:
-          edgeExclusive = (edgeExclusive + 1) % NUM_EDGE_EXCLUSIVE;
-          renderMenu();
-          break;
-        case 7:
-          voltageRef = (voltageRef + 1) % NUM_VOLTAGE_REFS;
-          renderMenu();
-          break;
-        case 8:
-          zeroPoint = (zeroPoint + 1) % NUM_ZERO_POINTS;
-          renderMenu();
-          break;
-        case 9:
-          voltageOut = (voltageOut + 1) % NUM_VOLTAGE_OUTS;
-          renderMenu();
-          break;
-        case 10:
-          invertOutput = (invertOutput + 1) % NUM_INVERT_OUTPUTS;
-          renderMenu();
-          break;
-      }
-      break;
-
-    case J_DOWN:
-      switch (menuPos) {
-        case 0:
-          gain = (gain + NUM_GAIN_LEVELS - 1) % NUM_GAIN_LEVELS;
-          renderMenu();
-          break;
-        case 1:
-          exposureTime = (exposureTime + NUM_EXPOSURE_TIMES - 1) % NUM_EXPOSURE_TIMES;
-          renderMenu();
-          break;
-        case 2:
-          ditherIndex = (ditherIndex + NUM_DITHERS - 1) % NUM_DITHERS;
-          renderMenu();
-          break;
-        case 3:
-          ditherHighLow = (ditherHighLow + 2 - 1) % NUM_DITHER_HIGHLOWS;
-          renderMenu();
-          break;
-        case 4:
-          edgeOpMode = (edgeOpMode + NUM_EDGE_OP_MODES - 1) % NUM_EDGE_OP_MODES;
-          renderMenu();
-          break;
-        case 5:
-          edgeMode = (edgeMode + NUM_EDGE_MODES - 1) % NUM_EDGE_MODES;
-          renderMenu();
-          break;
-        case 6:
-          edgeExclusive = (edgeExclusive + NUM_EDGE_EXCLUSIVE - 1) % NUM_EDGE_EXCLUSIVE;
-          renderMenu();
-          break;
-        case 7:
-          voltageRef = (voltageRef + NUM_VOLTAGE_REFS - 1) % NUM_VOLTAGE_REFS;
-          renderMenu();
-          break;
-        case 8:
-          zeroPoint = (zeroPoint + NUM_ZERO_POINTS - 1) % NUM_ZERO_POINTS;
-          renderMenu();
-          break;
-        case 9:
-          voltageOut = (voltageOut + NUM_VOLTAGE_OUTS - 1) % NUM_VOLTAGE_OUTS;
-          renderMenu();
-          break;
-        case 10:
-          invertOutput = (invertOutput + NUM_INVERT_OUTPUTS - 1) % NUM_INVERT_OUTPUTS;
-          renderMenu();
-          break;
-      }
-      break;
+  if ( jp == 0 || jp == J_A || jp == J_B || jp == J_SELECT || jp == J_START
+  ) {
+    jp = 0;
+    return;
+  } else if (jp == J_RIGHT) {
+    menuPos = (menuPos + 1) % NUM_MENU_ELEMENTS;
+  } else if (jp == J_LEFT) {
+    menuPos = (menuPos + NUM_MENU_ELEMENTS - 1) % NUM_MENU_ELEMENTS;
+  } else if (jp == J_UP) {
+    menuItems[menuPos]->value = (menuItems[menuPos]->value + 1) % menuItems[menuPos]->numOptions;
+  } else if (jp == J_DOWN) {
+    menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
   }
+
+  storeSettings();
+  renderMenu();
 
   jp = 0;
 }
