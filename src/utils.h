@@ -17,14 +17,14 @@ inline void init_gfx() {
   set_sprite_tile(SPRITE_BORDER_H_7, OFFSET_BORDER_H);
   set_sprite_tile(SPRITE_BORDER_H_8, OFFSET_BORDER_H);
 
-  move_sprite(SPRITE_BORDER_H_1, 23, 136);
-  move_sprite(SPRITE_BORDER_H_2, 31, 136);
-  move_sprite(SPRITE_BORDER_H_3, 137, 136);
-  move_sprite(SPRITE_BORDER_H_4, 145, 136);
-  move_sprite(SPRITE_BORDER_H_5, 23, 24);
-  move_sprite(SPRITE_BORDER_H_6, 31, 24);
-  move_sprite(SPRITE_BORDER_H_7, 137, 24);
-  move_sprite(SPRITE_BORDER_H_8, 145, 24);
+  move_sprite(SPRITE_BORDER_H_1, 23, 24);
+  move_sprite(SPRITE_BORDER_H_2, 31, 24);
+  move_sprite(SPRITE_BORDER_H_3, 137, 24);
+  move_sprite(SPRITE_BORDER_H_4, 145, 24);
+  move_sprite(SPRITE_BORDER_H_5, 23, 136);
+  move_sprite(SPRITE_BORDER_H_6, 31, 136);
+  move_sprite(SPRITE_BORDER_H_7, 137, 136);
+  move_sprite(SPRITE_BORDER_H_8, 145, 136);
 }
 
 inline void init_sound() {
