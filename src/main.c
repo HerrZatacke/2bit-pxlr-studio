@@ -1,11 +1,15 @@
 #define OFFSET_FONT 128
+  #define OFFSET_BLANK 128
 #define OFFSET_TILES 219
-  #define FILL 219
-  #define BLNK 220
-  #define OFFSET_MENU_ARROW 221
+  #define OFFSET_FILL 219
+  #define OFFSET_MENU_ARROW 220
+  #define OFFSET_BORDER_RIGHT 221
+  #define OFFSET_BORDER_LEFT 222
+  #define OFFSET_BORDER_H 223
 
-#define SPRITE_MENU_INDICATOR_L 0
-#define SPRITE_MENU_INDICATOR_R 1
+#define SPRITE_MENU_INDICATOR 0
+#define SPRITE_BORDER_1 1
+#define SPRITE_BORDER_2 2
 
 #define PALETTE_SPRITES 0b11100100u
 #define PALETTE_NORMAL 0b11100100u
@@ -117,8 +121,8 @@ int main(void) {
   // ToDo: Fade-effect?
 
   set_bkg_tiles(0, 0, 20, 18, map_normal);
-  set_bkg_data(OFFSET_FONT, 96, font);
-  set_bkg_data(OFFSET_TILES, 3, tiles);
+  set_bkg_data(OFFSET_FONT, sizeof(font), font);
+  set_bkg_data(OFFSET_TILES, sizeof(tiles), tiles);
 
   CRITICAL {
     STAT_REG |= STATF_LYC;
