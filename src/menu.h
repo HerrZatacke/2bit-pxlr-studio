@@ -104,12 +104,12 @@ inline void renderMenu() {
 
     if (menuItems[i]->page == currentPage) {
       unsigned char value = menuItems[i]->value;
-      set_bkg_based_tiles(menuItems[i]->x, 0, 4, 1, menuItems[i]->title, 224);
-      set_bkg_based_tiles(menuItems[i]->x, 1, 4, 1, menuItems[i]->options[value].title, 224);
+      set_bkg_based_tiles(menuItems[i]->x, 0, 4, 1, menuItems[i]->title, OFFSET_FONT - 32);
+      set_bkg_based_tiles(menuItems[i]->x, 1, 4, 1, menuItems[i]->options[value].title, OFFSET_FONT - 32);
     }
   }
 
-  set_bkg_based_tiles(0, 16, 9, 2, menuItems[menuPos]->description, 224);
+  set_bkg_based_tiles(0, 16, 9, 2, menuItems[menuPos]->description, OFFSET_FONT - 32);
 
   unsigned char spriteX = (menuItems[menuPos]->x * 8) + 38;
   move_sprite(SPRITE_MENU_INDICATOR_L, spriteX, 20);
