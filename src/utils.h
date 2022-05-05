@@ -5,10 +5,26 @@ inline void init_gfx() {
   OBP0_REG = OBP1_REG = PALETTE_SPRITES;
   SHOW_SPRITES;
   SPRITES_8x8;
-  set_sprite_tile(SPRITE_MENU_INDICATOR_L, OFFSET_MENU_ARROW);
-  set_sprite_tile(SPRITE_MENU_INDICATOR_R, OFFSET_MENU_ARROW);
-  set_sprite_prop(SPRITE_MENU_INDICATOR_L, S_FLIPX);
-  set_sprite_prop(SPRITE_MENU_INDICATOR_R, S_FLIPX);
+  set_sprite_tile(SPRITE_MENU_INDICATOR, OFFSET_MENU_ARROW);
+  set_sprite_prop(SPRITE_MENU_INDICATOR, S_FLIPX);
+
+  set_sprite_tile(SPRITE_BORDER_H_1, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_2, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_3, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_4, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_5, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_6, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_7, OFFSET_BORDER_H);
+  set_sprite_tile(SPRITE_BORDER_H_8, OFFSET_BORDER_H);
+
+  move_sprite(SPRITE_BORDER_H_1, 23, 136);
+  move_sprite(SPRITE_BORDER_H_2, 31, 136);
+  move_sprite(SPRITE_BORDER_H_3, 137, 136);
+  move_sprite(SPRITE_BORDER_H_4, 145, 136);
+  move_sprite(SPRITE_BORDER_H_5, 23, 24);
+  move_sprite(SPRITE_BORDER_H_6, 31, 24);
+  move_sprite(SPRITE_BORDER_H_7, 137, 24);
+  move_sprite(SPRITE_BORDER_H_8, 145, 24);
 }
 
 inline void init_sound() {

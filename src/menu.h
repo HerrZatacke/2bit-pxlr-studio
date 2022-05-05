@@ -112,7 +112,7 @@ inline void renderMenu() {
   set_bkg_based_tiles(0, 16, 9, 2, menuItems[menuPos]->description, OFFSET_FONT - 32);
 
   unsigned char spriteX = (menuItems[menuPos]->x * 8) + 38;
-  move_sprite(SPRITE_MENU_INDICATOR_L, spriteX, 20);
+  move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
 }
 
 inline void menu() {
