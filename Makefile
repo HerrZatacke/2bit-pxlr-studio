@@ -1,4 +1,4 @@
-CC	= $(GBDK_BIN_FOLDER)/lcc -Wa-l -Wl-m -Wl-j
+CC	= $(GBDK_FOLDER)/bin/lcc -Wa-l -Wl-m -Wl-j
 
 BIN	= pxlr.gb
 
