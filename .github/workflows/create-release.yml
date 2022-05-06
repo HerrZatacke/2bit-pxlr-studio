@@ -1,0 +1,43 @@
+name: Create Release 🛳
+
+on:
+  push:
+    branches: [ feature/create-release ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 💳
+        uses: actions/checkout@v2.3.1
+
+      - name: Add release version to environment variables 🌍
+        run: |
+          echo version >> $GITHUB_ENV
+
+      - name: Check if tag already exists 🏷
+        id: checkTag
+        uses: mukunku/tag-exists-action@v1.0.0
+        with:
+          tag: ${{ env.RELEASE_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download and install GBDK 🛠
+        if: steps.checkTag.outputs.exists == 'false'
+        run: |
+          wget https://github.com/gbdk-2020/gbdk-2020/releases/download/4.0.6/gbdk-linux64.tar.gz
+          tar -xvf archive.tar.gz          
+
+#      - name: Make 🧱
+#        if: steps.checkTag.outputs.exists == 'false'
+#        run: make
+#
+#      - name: Create Release 🎉 🥳
+#        uses: softprops/action-gh-release@v1
+#        if: steps.checkTag.outputs.exists == 'false'
+#        with:
+#          tag_name: ${{ env.RELEASE_VERSION }}
+#          name: Version ${{ env.RELEASE_VERSION }}
+#          files: obj/pxlr.gb
