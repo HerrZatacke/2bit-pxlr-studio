@@ -14,7 +14,10 @@ jobs:
 
       - name: Add release version to environment variables 🌍
         run: |
-          cat version >> $GITHUB_ENV
+          pwd
+          ls
+          cat version
+#          cat version >> $GITHUB_ENV
 
       - name: Check if tag already exists 🏷
         id: checkTag
