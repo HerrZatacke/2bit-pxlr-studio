@@ -34,10 +34,10 @@ jobs:
         if: steps.checkTag.outputs.exists == 'false'
         run: make
 
-#      - name: Create Release 🎉 🥳
-#        uses: softprops/action-gh-release@v1
-#        if: steps.checkTag.outputs.exists == 'false'
-#        with:
-#          tag_name: ${{ env.RELEASE_VERSION }}
-#          name: Version ${{ env.RELEASE_VERSION }}
-#          files: obj/pxlr.gb
+      - name: Create Release 🎉 🥳
+        uses: softprops/action-gh-release@v1
+        if: steps.checkTag.outputs.exists == 'false'
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          name: Version ${{ env.RELEASE_VERSION }}
+          files: obj/pxlr.gb
