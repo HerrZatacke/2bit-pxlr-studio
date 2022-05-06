@@ -127,10 +127,13 @@ int main(void) {
   init_sound();
   init_cam();
 
-  splash();
+  set_bkg_data(OFFSET_FONT, sizeof(font), font);
 
+  HIDE_SPRITES;
+  splash();
   waitPush(J_A);
   waitRelease();
+  SHOW_SPRITES;
   // ToDo: Fade-effect?
 
   set_bkg_tiles(0, 0, 20, 18, map_normal);
