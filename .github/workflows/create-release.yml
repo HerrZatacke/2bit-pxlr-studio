@@ -27,7 +27,7 @@ jobs:
         if: steps.checkTag.outputs.exists == 'false'
         run: |
           wget https://github.com/gbdk-2020/gbdk-2020/releases/download/4.0.6/gbdk-linux64.tar.gz
-          tar -xf gbdk-linux64.tar.gz gbdk/bin gbdk/include
+          tar -xf gbdk-linux64.tar.gz gbdk/bin gbdk/include gbdk/lib
           echo GBDK_FOLDER=gbdk >> $GITHUB_ENV
 
       - name: Make 🧱
