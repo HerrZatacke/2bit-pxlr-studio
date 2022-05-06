@@ -2,7 +2,7 @@ name: Create Release 🛳
 
 on:
   push:
-    branches: [ feature/create-release ]
+    branches: [ master ]
 
 jobs:
   build-and-deploy:
