@@ -1,3 +1,5 @@
+#include "../version.h"
+
 // TileCount
 #define LOGO_TILE_COUNT 151
 
