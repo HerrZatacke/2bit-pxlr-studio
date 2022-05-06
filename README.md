@@ -1,6 +1,7 @@
-# Custom Camera ROM
-This project has been created with [GBDK 2020](https://github.com/gbdk-2020/gbdk-2020).  
-It provides a custom ROM for [HDR's flashable Game Boy Camera](https://github.com/HDR/Gameboy-Camera-Flashcart) targeted on accessing the full potential of the sensor, as well as giving photographers more control.  
+# 2bit PXLR Studio
+**2bit PXLR Studio** is a custom ROM for the Gameboy Camera targeted on accessing the full potential of the original Game Boy Camera's sensor, as well as giving photographers more control.   
+It is meant to be used with [HDR's flashable Game Boy Camera PCB](https://github.com/HDR/Gameboy-Camera-Flashcart).   
+You can tag your images with [#2bitpxlr](https://www.instagram.com/explore/tags/2bitpxlr/).   
 
 ## Current features:
 + Most settings of the camera's sensor are already configurable:
@@ -44,6 +45,7 @@ If you have actually used this ROM any type of feedback is very much appreciated
 + "When I set param XX, I'd also like param YY to change"
 
 # Building
+This project has been created with [GBDK 2020](https://github.com/gbdk-2020/gbdk-2020).  
 This project requires an environment variable `GBDK_BIN_FOLDER="..."` pointing to the `bin` folder of GBDK  
 E.g. on wsl for windows add `export GBDK_BIN_FOLDER="/mnt/c/path_to_gbdk/bin"` to your `.bashrc`
 
