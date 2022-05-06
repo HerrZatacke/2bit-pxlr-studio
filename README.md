@@ -46,8 +46,8 @@ If you have actually used this ROM any type of feedback is very much appreciated
 
 # Building
 This project has been created with [GBDK 2020](https://github.com/gbdk-2020/gbdk-2020).  
-This project requires an environment variable `GBDK_BIN_FOLDER="..."` pointing to the `bin` folder of GBDK  
-E.g. on wsl for windows add `export GBDK_BIN_FOLDER="/mnt/c/path_to_gbdk/bin"` to your `.bashrc`
+This project requires an environment variable `GBDK_FOLDER="..."` pointing to the `bin` folder of GBDK  
+E.g. on wsl for windows add `export GBDK_FOLDER="/mnt/c/path_to_gbdk/bin"` to your `.bashrc`
 
 # Research and related projects
 - [Documentation regarding the sensor by AntonioND](https://github.com/AntonioND/gbcam-rev-engineer) [PDF](https://github.com/AntonioND/gbcam-rev-engineer/blob/master/doc/gb_camera_doc_v1_1_1.pdf)
