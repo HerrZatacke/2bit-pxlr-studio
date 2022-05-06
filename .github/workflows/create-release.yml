@@ -28,13 +28,12 @@ jobs:
         run: |
           wget https://github.com/gbdk-2020/gbdk-2020/releases/download/4.0.6/gbdk-linux64.tar.gz
           tar -xf gbdk-linux64.tar.gz gbdk/bin
-          ls
-          
+          echo GBDK_BIN_FOLDER=gbdk/bin >> $GITHUB_ENV
 
-#      - name: Make 🧱
-#        if: steps.checkTag.outputs.exists == 'false'
-#        run: make
-#
+      - name: Make 🧱
+        if: steps.checkTag.outputs.exists == 'false'
+        run: make
+
 #      - name: Create Release 🎉 🥳
 #        uses: softprops/action-gh-release@v1
 #        if: steps.checkTag.outputs.exists == 'false'

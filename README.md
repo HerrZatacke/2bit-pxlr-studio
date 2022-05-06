@@ -43,6 +43,9 @@ If you have actually used this ROM any type of feedback is very much appreciated
 + "I've used the following combination of parameters which work really well/bad"
 + "When I set param XX, I'd also like param YY to change"
 
+# Building
+This project requires an environment variable `GBDK_BIN_FOLDER="..."` pointing to the `bin` folder of GBDK  
+E.g. on wsl for windows add `export GBDK_BIN_FOLDER="/mnt/c/path_to_gbdk/bin"` to your `.bashrc`
 
 # Research and related projects
 - [Documentation regarding the sensor by AntonioND](https://github.com/AntonioND/gbcam-rev-engineer) [PDF](https://github.com/AntonioND/gbcam-rev-engineer/blob/master/doc/gb_camera_doc_v1_1_1.pdf)
