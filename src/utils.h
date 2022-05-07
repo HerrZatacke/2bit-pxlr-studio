@@ -93,9 +93,9 @@ unsigned char digits_map[10];
 void writeNumber(unsigned char x, unsigned char y, unsigned char number) {
   BCD bcd = MAKE_BCD(0);
   uint2bcd(number, &bcd);
-  bcd2text(&bcd, OFFSET_FONT + 16, digits_map);
+  bcd2text(&bcd, OFFSET_FONT + 16u, digits_map);
 
-  unsigned char digits[3] = { ' ', ' ' , ' ', };
+  unsigned char digits[3] = { 0x80, 0x80 , 0x80, };
 
   digits[2] = digits_map[7];
 

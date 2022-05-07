@@ -1,5 +1,5 @@
-#define OFFSET_FONT 128
-  #define OFFSET_BLANK 128
+#define OFFSET_FONT 128u
+  #define OFFSET_BLANK 128u
 #define OFFSET_TILES 219
   #define OFFSET_FILL 219
   #define OFFSET_MENU_ARROW 220
