@@ -1,3 +1,4 @@
+#define NUM_MENU_ELEMENTS 11
 
 MenuItem gainsMenu =          {  0, 0, 0,  1,     NUM_GAIN_LEVELS,     (NUM_GAIN_LEVELS >> 1) - 1, "Gain", "   Sensor     Gain",          &gains[0], };
 MenuItem exposureTimesMenu =  {  5, 0, 0,  2,  NUM_EXPOSURE_TIMES,  (NUM_EXPOSURE_TIMES >> 1) - 1, "ExpT", " Exposure     Time",  &exposureTimes[0], };

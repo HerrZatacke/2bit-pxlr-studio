@@ -1,10 +1,8 @@
-unsigned char jp = 0;
-unsigned char menuPos = 0;
-
-#define NUM_MENU_ELEMENTS 11
 
 // same as readable number of "images taken"
 extern unsigned char nextImageIndex;
+unsigned char jp = 0;
+unsigned char menuPos = 0;
 
 #include "menus/shootingManual.h"
 
