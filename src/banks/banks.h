@@ -70,7 +70,6 @@ const Image images[] = {
   {14, image_28_upper, image_28_lower, image_28_meta, image_28_meta_echo },
   {15, image_29_upper, image_29_lower, image_29_meta, image_29_meta_echo },
   {15, image_30_upper, image_30_lower, image_30_meta, image_30_meta_echo },
-  { 0, last_seen_upper, last_seen_lower, last_seen_meta, last_seen_meta_echo },
 };
 
 extern unsigned char A000;
