@@ -13,15 +13,15 @@ MenuItem edgeModesMenu =      {  5, 2, 0,  5,      NUM_EDGE_MODES,      (NUM_EDG
 MenuItem edgeExclusivesMenu = { 10, 2, 0, 10,  NUM_EDGE_EXCLUSIVE,                              0, "EdEx", "     EdgeExclusive", &edgeExclusives[0], };
 
 MenuItem *menuItems[NUM_MENU_ELEMENTS] = {
-    &gainsMenu,
-    &exposureTimesMenu,
-    &voltageRefsMenu,
-    &voltageOutsMenu,
-    &invertOutputsMenu,
-    &zeroPointsMenu,
-    &ditherHighLowsMenu,
-    &ditherSetsMenu,
-    &edgeOpModesMenu,
-    &edgeModesMenu,
-    &edgeExclusivesMenu,
+  &gainsMenu,
+  &exposureTimesMenu,
+  &voltageRefsMenu,
+  &voltageOutsMenu,
+  &invertOutputsMenu,
+  &zeroPointsMenu,
+  &ditherHighLowsMenu,
+  &ditherSetsMenu,
+  &edgeOpModesMenu,
+  &edgeModesMenu,
+  &edgeExclusivesMenu,
 };
