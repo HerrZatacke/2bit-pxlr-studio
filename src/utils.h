@@ -90,30 +90,25 @@ inline void pause(unsigned char frames) {
 }
 
 unsigned char digits_map[10];
+void writeNumber(unsigned char x, unsigned char y, unsigned char number) {
+  BCD bcd = MAKE_BCD(0);
+  uint2bcd(number, &bcd);
+  bcd2text(&bcd, OFFSET_FONT + 16, digits_map);
 
-//void showDigit(unsigned char digit, unsigned char numChars, unsigned char xposition, unsigned char ypositoion) {
-//  BCD bcd = MAKE_BCD(0);
-//  uint2bcd(digit, &bcd);
-//  bcd2text(&bcd, OFFSET_FONT, digits_map);
-//
-//  if (numChars == 3) {
-//    unsigned char threeDigits[] = {
-//      digits_map[5],
-//      digits_map[6],
-//      digits_map[7],
-//    };
-//
-//    set_bkg_tiles(xposition, ypositoion, 3, 1, threeDigits);
-//  } else if (numChars == 2) {
-//    unsigned char twoDigits[] = {
-//      digits_map[6],
-//      digits_map[7],
-//    };
-//
-//    set_bkg_tiles(xposition, ypositoion, 2, 1, twoDigits);
-//  }
-//
-//}
+  unsigned char digits[3] = { ' ', ' ' , ' ', };
+
+  digits[2] = digits_map[7];
+
+  if (number > 9) {
+    digits[1] = digits_map[6];
+  }
+
+  if (number > 99) {
+    digits[0] = digits_map[5];
+  }
+
+  set_bkg_tiles(x, y, 3, 1, digits);
+}
 
 void waitPush(unsigned char what) {
   // Wait until A has been pressed

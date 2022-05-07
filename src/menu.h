@@ -111,6 +111,9 @@ inline void renderMenu() {
 
   set_bkg_based_tiles(0, 16, 9, 2, menuItems[menuPos]->description, OFFSET_FONT - 32);
 
+  set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);
+  writeNumber(12, 16, nextImageIndex);
+
   unsigned char spriteX = (menuItems[menuPos]->x * 8) + 38;
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
 }

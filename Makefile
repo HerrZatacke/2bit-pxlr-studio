@@ -71,4 +71,4 @@ version.h: version
 	tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/unsigned char version[] = {\n/g; s/$$/};\n/g' > $@
 
 $(BIN):	obj version.h obj/main.o obj/bank_00.o obj/bank_01.o obj/bank_02.o obj/bank_03.o obj/bank_04.o obj/bank_05.o obj/bank_06.o obj/bank_07.o obj/bank_08.o obj/bank_09.o obj/bank_10.o obj/bank_11.o obj/bank_12.o obj/bank_13.o obj/bank_14.o obj/bank_15.o obj/bank_16.o obj/pxlr.sav
-	$(CC) -Wl-yt0xFC -Wl-yo4 -Wl-ya16 -o obj/$@ obj/main.o obj/bank_00.o obj/bank_01.o obj/bank_02.o obj/bank_03.o obj/bank_04.o obj/bank_05.o obj/bank_06.o obj/bank_07.o obj/bank_08.o obj/bank_09.o obj/bank_10.o obj/bank_11.o obj/bank_12.o obj/bank_13.o obj/bank_14.o obj/bank_15.o obj/bank_16.o
+	$(CC) -Wl-yt0xFC -Wl-yo4 -Wl-ya16 -Wm-yn"PXLR CAMERA" -o obj/$@ obj/main.o obj/bank_00.o obj/bank_01.o obj/bank_02.o obj/bank_03.o obj/bank_04.o obj/bank_05.o obj/bank_06.o obj/bank_07.o obj/bank_08.o obj/bank_09.o obj/bank_10.o obj/bank_11.o obj/bank_12.o obj/bank_13.o obj/bank_14.o obj/bank_15.o obj/bank_16.o
