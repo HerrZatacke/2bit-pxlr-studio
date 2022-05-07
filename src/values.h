@@ -130,12 +130,6 @@
 #define DITHER_SET_HIGH 0x00
 #define DITHER_SET_LOW 0xff
 
-
-typedef struct {
-  const unsigned char value;
-  const unsigned char* title;
-} MenuOption;
-
 // 0x0030 - Objects under direct sunlight.
 // 0x0300 - Objects not under direct sunlight.
 // 0x0800 - Room during the day with good light.

@@ -31,14 +31,6 @@ extern unsigned char image_28_upper[]; extern unsigned char image_28_lower[]; ex
 extern unsigned char image_29_upper[]; extern unsigned char image_29_lower[]; extern unsigned char image_29_meta[]; extern unsigned char image_29_meta_echo[];
 extern unsigned char image_30_upper[]; extern unsigned char image_30_lower[]; extern unsigned char image_30_meta[]; extern unsigned char image_30_meta_echo[];
 
-typedef struct {
-  const unsigned char bank;
-  unsigned char* const tilesUpper;
-  unsigned char* const tilesLower;
-  unsigned char* const meta;
-  unsigned char* const metaEcho;
-} Image;
-
 Image image01 = { 1, image_01_upper, image_01_lower, image_01_meta, image_01_meta_echo };
 Image image02 = { 1, image_02_upper, image_02_lower, image_02_meta, image_02_meta_echo };
 Image image03 = { 2, image_03_upper, image_03_lower, image_03_meta, image_03_meta_echo };

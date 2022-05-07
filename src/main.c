@@ -29,10 +29,14 @@
 #define PALETTE_INVERTED 0b00011011u
 #define PALETTE_BLANK 0b11111111u
 
-
 #include <gb/gb.h>
 #include <stdint.h>
 #include <gbdk/bcd.h>
+
+#include "typedefs/MenuOption.h"
+#include "typedefs/MenuItem.h"
+#include "typedefs/Image.h"
+
 #include "./utils.h"
 #include "../res/map.h"
 #include "../res/gbps-logo.h"

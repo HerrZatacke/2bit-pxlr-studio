@@ -6,18 +6,6 @@ unsigned char menuPos = 0;
 // same as readable number of "images taken"
 extern unsigned char nextImageIndex;
 
-typedef struct {
-  const unsigned char x;
-  const unsigned char page;
-  unsigned char value;
-  const unsigned char storeOffset;
-  const unsigned char numOptions;
-  const unsigned char defaultValue;
-  const unsigned char* title;
-  const unsigned char* description;
-  const MenuOption* options;
-} MenuItem;
-
 #include "menus/shootingManual.h"
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
