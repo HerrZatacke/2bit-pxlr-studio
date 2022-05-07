@@ -16,7 +16,6 @@ You can tag your images with [#2bitpxlr](https://www.instagram.com/explore/tags/
 + Sensor settings are being saved across restarts. To reset hold `start`+`select` on boot
 
 ## Missing features:
-- A name (and a logo) for this project [(suggestions welcome)](#1)
 - Displaying images
 - Sorting/deleting images
 - Thumbnail generation
