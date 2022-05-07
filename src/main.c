@@ -42,6 +42,14 @@
 #include "./menu.h"
 #include "./saveImage.h"
 
+void cleanViewfinder() {
+  SWITCH_RAM(0);
+  LCDC_REG &= ~ LCDCF_BG8000;
+  fill_bkg_rect(2, 2, 16, 7, BLNK);
+  LCDC_REG |= LCDCF_BG8000;
+  fill_bkg_rect(2, 2, 16, 7, BLNK);
+}
+
 void fastLoadImageTiles() {
   SWITCH_RAM(0);
   LCDC_REG &= ~ LCDCF_BG8000;
@@ -136,6 +144,8 @@ int main(void) {
   waitRelease();
   SHOW_SPRITES;
   // ToDo: Fade-effect?
+
+  cleanViewfinder();
 
   set_bkg_tiles(0, 0, 20, 18, map_normal);
   set_bkg_data(OFFSET_FONT, sizeof(font), font);

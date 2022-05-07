@@ -19,9 +19,9 @@ void saveImage() {
     copyTemp[i] = last_seen_upper[i];
   }
 
-  SWITCH_RAM(images[nextImageIndex].bank);
+  SWITCH_RAM(images[nextImageIndex]->bank);
   for (i = 0; i < HALF_IMAGE_SIZE; i += 1) {
-    images[nextImageIndex].tilesUpper[i] = copyTemp[i];
+    images[nextImageIndex]->tilesUpper[i] = copyTemp[i];
   }
 
   SWITCH_RAM(0);
@@ -29,9 +29,9 @@ void saveImage() {
     copyTemp[i] = last_seen_lower[i];
   }
 
-  SWITCH_RAM(images[nextImageIndex].bank);
+  SWITCH_RAM(images[nextImageIndex]->bank);
   for (i = 0; i < HALF_IMAGE_SIZE; i += 1) {
-    images[nextImageIndex].tilesLower[i] = copyTemp[i];
+    images[nextImageIndex]->tilesLower[i] = copyTemp[i];
   }
 
   nextImageIndex += 1;
