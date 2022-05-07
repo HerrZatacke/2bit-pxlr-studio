@@ -63,6 +63,7 @@ void saveImageDialog() {
         dialogState = DIALOG_ANSWERED;
         waitRelease();
         saveImage();
+        storeSettings();
         beep();
         break;
     }

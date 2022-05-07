@@ -88,6 +88,7 @@ void init_cam() {
   ) {
     nextImageIndex = 0; // reset "images taken"
     restoreDefaults(); // reset all sensor params to default
+    storeSettings();
     boop();
     pause(20);
     beep();

@@ -54,6 +54,7 @@ inline void captureMenuJp() {
 
 inline void storeSettings() {
   SWITCH_RAM(1);
+  image_01_unused[0] = nextImageIndex;
   for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     image_01_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
