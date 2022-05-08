@@ -77,12 +77,12 @@ inline void renderMenu() {
   set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);
   writeNumber(12, 16, nextImageIndex);
 
-  unsigned char spriteX = (menuItems[menuPos]->x * 8) + 38;
+  unsigned char spriteX = (menuItems[menuPos]->x * 8) + 3;
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
 }
 
 inline void menu() {
-  if ( jp == 0 || jp == J_A || jp == J_B || jp == J_SELECT || jp == J_START
+  if ( jp == 0 || jp == J_A || jp == J_SELECT || jp == J_START
   ) {
     jp = 0;
     return;
@@ -94,6 +94,12 @@ inline void menu() {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + 1) % menuItems[menuPos]->numOptions;
   } else if (jp == J_DOWN) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
+  } else if (jp == J_B) {
+    mainLoopState = MAIN_LOOP_MENU;
+    hideManualModeSprites();
+    initMainMenu();
+    jp = 0;
+    return;
   }
 
   storeSettings();

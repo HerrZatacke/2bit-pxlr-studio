@@ -29,6 +29,11 @@
 #define PALETTE_INVERTED 0b00011011u
 #define PALETTE_BLANK 0b11111111u
 
+#define MAIN_LOOP_MENU 0
+#define MAIN_LOOP_SHOOT_MANUAL 1
+
+unsigned char mainLoopState = MAIN_LOOP_SHOOT_MANUAL;
+
 #include <gb/gb.h>
 #include <stdint.h>
 #include <gbdk/bcd.h>
@@ -44,6 +49,7 @@
 #include "./banks/banks.h"
 #include "./values.h"
 #include "./menu.h"
+#include "./mainMenu.h"
 #include "./saveImage.h"
 
 void cleanViewfinder() {
@@ -163,18 +169,25 @@ int main(void) {
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
   renderMenu();
+  initManualModeSprites();
 
   // Loop forever
   while (1) {
-    capture();
 
-    fastLoadImageTiles();
-
-    menu();
-
-    if (joypad() == J_A) {
-      saveImageDialog();
+    switch (mainLoopState) {
+      case MAIN_LOOP_SHOOT_MANUAL:
+        capture();
+        fastLoadImageTiles();
+        menu();
+        if (joypad() == J_A) {
+          saveImageDialog();
+        }
+        break;
+      case MAIN_LOOP_MENU:
+        mainMenu();
+        break;
     }
+
 
     wait_vbl_done();
   }
