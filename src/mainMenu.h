@@ -20,8 +20,7 @@ inline void initMainMenu() {
 inline void mainMenu() {
   captureMenuJp();
 
-  if ( jp == 0 || jp == J_B || jp == J_RIGHT ||  jp == J_LEFT || jp == J_SELECT || jp == J_START
-      ) {
+  if ( jp == 0 || jp == J_B || jp == J_RIGHT ||  jp == J_LEFT || jp == J_SELECT || jp == J_START ) {
     jp = 0;
     return;
   } else if (jp == J_DOWN) {

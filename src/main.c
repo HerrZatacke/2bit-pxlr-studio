@@ -31,6 +31,7 @@
 
 #define MAIN_LOOP_MENU 0
 #define MAIN_LOOP_SHOOT_MANUAL 1
+#define MAIN_LOOP_IMAGE_GALLERY 2
 #define MAIN_LOOP_NOT_IMPLEMENTED 255
 
 unsigned char mainLoopState = 0;
@@ -53,6 +54,7 @@ void menuSelectMode(unsigned char loopState);
 #include "./values.h"
 #include "./mainMenu.h"
 #include "./menu.h"
+#include "./gallery.h"
 #include "./saveImage.h"
 
 void fastLoadImageTiles() {
@@ -134,6 +136,9 @@ void menuSelectMode(unsigned char loopState) {
   } else if (loopState == MAIN_LOOP_MENU) {
     hideManualModeSprites();
     initMainMenu();
+  } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
+    set_bkg_tiles(0, 0, 20, 18, map_normal);
+    initGallery();
   } else { // fallback to main menu
     boop();
     mainLoopState = MAIN_LOOP_MENU;
@@ -179,13 +184,16 @@ int main(void) {
       case MAIN_LOOP_SHOOT_MANUAL:
         capture();
         fastLoadImageTiles();
-        manualShootmenu();
+        manualShootMenu();
         if (joypad() == J_A) {
           saveImageDialog();
         }
         break;
       case MAIN_LOOP_MENU:
         mainMenu();
+        break;
+      case MAIN_LOOP_IMAGE_GALLERY:
+        galleryMenu();
         break;
     }
 
