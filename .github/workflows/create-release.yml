@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download and install GBDK 🛠
-        if: steps.checkTag.outputs.exists == 'false'
+#        if: steps.checkTag.outputs.exists == 'false'
         run: |
           wget https://github.com/gbdk-2020/gbdk-2020/releases/download/4.0.6/gbdk-linux64.tar.gz
           tar -xf gbdk-linux64.tar.gz gbdk/bin gbdk/include gbdk/lib
