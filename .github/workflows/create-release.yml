@@ -60,6 +60,6 @@ jobs:
           CHANNEL: gameboy
           ITCH_GAME: 2bit-pxlr-studio
           ITCH_USER: ${{ secrets.ITCHIO_USER }}
-          PACKAGE: release/pxlr.zip
+          PACKAGE: pxlr.zip
           VERSION_FILE: version
 
