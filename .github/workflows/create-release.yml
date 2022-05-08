@@ -34,7 +34,7 @@ jobs:
         if: steps.checkTag.outputs.exists == 'false'
         run: make
 
-      - name: Create Release 🎉 🥳
+      - name: Create GitHub Release 🥳
         uses: softprops/action-gh-release@v1
         if: steps.checkTag.outputs.exists == 'false'
         with:
@@ -43,3 +43,14 @@ jobs:
           files: |
             obj/pxlr.gb
             obj/pxlr.sav
+
+      - name: Create itch.io release 🎉
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: gameboy
+          ITCH_GAME: 2bit-pxlr-studio
+          ITCH_USER: herr_zatacke
+          PACKAGE: obj/pxlr.gb
+          VERSION_FILE: version
+
