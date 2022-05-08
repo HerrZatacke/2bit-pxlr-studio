@@ -74,7 +74,7 @@ inline void renderMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
 }
 
-inline void menu() {
+inline void manualShootmenu() {
   if ( jp == 0 || jp == J_A || jp == J_SELECT || jp == J_START
   ) {
     jp = 0;

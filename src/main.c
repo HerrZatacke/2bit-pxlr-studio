@@ -179,7 +179,7 @@ int main(void) {
       case MAIN_LOOP_SHOOT_MANUAL:
         capture();
         fastLoadImageTiles();
-        menu();
+        manualShootmenu();
         if (joypad() == J_A) {
           saveImageDialog();
         }
