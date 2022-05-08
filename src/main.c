@@ -31,8 +31,10 @@
 
 #define MAIN_LOOP_MENU 0
 #define MAIN_LOOP_SHOOT_MANUAL 1
+#define MAIN_LOOP_NOT_IMPLEMENTED 255
 
-unsigned char mainLoopState = MAIN_LOOP_SHOOT_MANUAL;
+unsigned char mainLoopState = 0;
+void menuSelectMode(unsigned char loopState);
 
 #include <gb/gb.h>
 #include <stdint.h>
@@ -48,17 +50,9 @@ unsigned char mainLoopState = MAIN_LOOP_SHOOT_MANUAL;
 #include "../res/font.h"
 #include "./banks/banks.h"
 #include "./values.h"
-#include "./menu.h"
 #include "./mainMenu.h"
+#include "./menu.h"
 #include "./saveImage.h"
-
-void cleanViewfinder() {
-  SWITCH_RAM(0);
-  LCDC_REG &= ~ LCDCF_BG8000;
-  fill_bkg_rect(2, 2, 16, 7, BLNK);
-  LCDC_REG |= LCDCF_BG8000;
-  fill_bkg_rect(2, 2, 16, 7, BLNK);
-}
 
 void fastLoadImageTiles() {
   SWITCH_RAM(0);
@@ -66,16 +60,6 @@ void fastLoadImageTiles() {
   set_bkg_data(0, 112, last_seen_upper);
   LCDC_REG |= LCDCF_BG8000;
   set_bkg_data(0, 112, last_seen_lower);
-}
-
-void waitabit() {
-  for (unsigned char i = 0; i < 15; i ++) {
-    wait_vbl_done();
-    if (joypad() == 0) {
-      i = 15;
-    }
-  }
-  return;
 }
 
 void scanline_isr() {
@@ -139,6 +123,18 @@ void capture() {
   }
 }
 
+void menuSelectMode(unsigned char loopState) {
+  fill_bkg_rect(0, 0, 20, 18, BLNK);
+  mainLoopState = loopState;
+  if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
+    set_bkg_tiles(0, 0, 20, 18, map_normal);
+    initManualModeSprites();
+    renderMenu();
+  } else if (loopState == MAIN_LOOP_MENU) {
+    hideManualModeSprites();
+    initMainMenu();
+  }
+}
 
 int main(void) {
 
@@ -149,15 +145,11 @@ int main(void) {
   set_bkg_data(OFFSET_FONT, sizeof(font), font);
 
   HIDE_SPRITES;
-  splash();
-  waitPush(J_A);
+  unsigned char splashPressed = splash();
   waitRelease();
   SHOW_SPRITES;
   // ToDo: Fade-effect?
 
-  cleanViewfinder();
-
-  set_bkg_tiles(0, 0, 20, 18, map_normal);
   set_bkg_data(OFFSET_FONT, sizeof(font), font);
   set_bkg_data(OFFSET_TILES, sizeof(tiles), tiles);
 
@@ -168,8 +160,11 @@ int main(void) {
   }
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
-  renderMenu();
-  initManualModeSprites();
+  if (splashPressed == J_A) {
+    menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);
+  } else {
+    menuSelectMode(MAIN_LOOP_MENU);
+  }
 
   // Loop forever
   while (1) {
@@ -187,7 +182,6 @@ int main(void) {
         mainMenu();
         break;
     }
-
 
     wait_vbl_done();
   }

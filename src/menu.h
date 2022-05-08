@@ -1,18 +1,11 @@
 
 // same as readable number of "images taken"
 extern unsigned char nextImageIndex;
-unsigned char jp = 0;
 unsigned char menuPos = 0;
 
 #include "menus/shootingManual.h"
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
-
-inline void captureMenuJp() {
-  if (jp == 0) {
-    jp = joypad();
-  }
-}
 
 inline void storeSettings() {
   SWITCH_RAM(1);
@@ -95,9 +88,7 @@ inline void menu() {
   } else if (jp == J_DOWN) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
   } else if (jp == J_B) {
-    mainLoopState = MAIN_LOOP_MENU;
-    hideManualModeSprites();
-    initMainMenu();
+    menuSelectMode(MAIN_LOOP_MENU);
     jp = 0;
     return;
   }

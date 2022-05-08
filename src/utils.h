@@ -66,6 +66,16 @@ inline void hideManualModeSprites() {
   move_sprite(SPRITE_BORDER_V_8, 0, 0);
 }
 
+
+// global joypad store variable
+unsigned char jp = 0;
+
+inline void captureMenuJp() {
+  if (jp == 0) {
+    jp = joypad();
+  }
+}
+
 inline void init_sound() {
   // This enables sound, registers must be in this specific order!
   NR52_REG = 0x80;
@@ -132,7 +142,7 @@ void writeNumber(unsigned char x, unsigned char y, unsigned char number) {
 }
 
 void waitPush(unsigned char what) {
-  // Wait until A has been pressed
+  // Wait until "what" has been pressed
   while (what != joypad()) {
     wait_vbl_done();
   }
@@ -145,3 +155,12 @@ void waitRelease() {
   }
 }
 
+void waitabit() {
+  for (unsigned char i = 0; i < 15; i ++) {
+    wait_vbl_done();
+    if (joypad() == 0) {
+      i = 15;
+    }
+  }
+  return;
+}

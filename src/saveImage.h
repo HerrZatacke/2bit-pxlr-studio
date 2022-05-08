@@ -57,6 +57,7 @@ void saveImageDialog() {
       case J_B:
         dialogState = DIALOG_ANSWERED;
         waitRelease();
+        jp = 0;
         boop();
         break;
       case J_A:
