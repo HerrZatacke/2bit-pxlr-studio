@@ -24,15 +24,25 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download and install GBDK 🛠
-#        if: steps.checkTag.outputs.exists == 'false'
+        if: steps.checkTag.outputs.exists == 'false'
         run: |
           wget https://github.com/gbdk-2020/gbdk-2020/releases/download/4.0.6/gbdk-linux64.tar.gz
           tar -xf gbdk-linux64.tar.gz gbdk/bin gbdk/include gbdk/lib
           echo GBDK_FOLDER=gbdk >> $GITHUB_ENV
 
       - name: Make 🧱
-#        if: steps.checkTag.outputs.exists == 'false'
+        if: steps.checkTag.outputs.exists == 'false'
         run: make
+
+      - name: Create archive for release 🗄
+        if: steps.checkTag.outputs.exists == 'false'
+        run: |
+          mkdir release
+          cp obj/pxlr.gb release/obj/pxlr.gb
+          cp obj/pxlr.sav release/obj/pxlr.sav          
+          cd release
+          zip -r ../pxlr.zip *
+          cd ..
 
       - name: Create GitHub Release 🥳
         uses: softprops/action-gh-release@v1
@@ -40,17 +50,16 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
           name: Version ${{ env.RELEASE_VERSION }}
-          files: |
-            obj/pxlr.gb
-            obj/pxlr.sav
+          files: release/pxlr.zip
 
       - name: Create itch.io release 🎉
+        if: steps.checkTag.outputs.exists == 'false'
         uses: manleydev/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: gameboy
           ITCH_GAME: 2bit-pxlr-studio
           ITCH_USER: ${{ secrets.ITCHIO_USER }}
-          PACKAGE: obj/pxlr.gb
+          PACKAGE: release/pxlr.zip
           VERSION_FILE: version
 
