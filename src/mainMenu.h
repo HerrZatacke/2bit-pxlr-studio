@@ -33,12 +33,7 @@ inline void mainMenu() {
     mainMenuPos = (mainMenuPos + NUM_MAIN_MENU_OPTIONS - 1) % NUM_MAIN_MENU_OPTIONS;
     mainMenuSprite();
   } else if (jp == J_A) {
-    if (mainMenuItems[mainMenuPos].value == MAIN_LOOP_SHOOT_MANUAL) {
-      menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);
-      beep();
-    } else {
-      boop();
-    }
+    menuSelectMode(mainMenuItems[mainMenuPos].value);
   }
 
   waitabit();

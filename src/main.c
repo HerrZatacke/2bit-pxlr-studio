@@ -133,6 +133,11 @@ void menuSelectMode(unsigned char loopState) {
   } else if (loopState == MAIN_LOOP_MENU) {
     hideManualModeSprites();
     initMainMenu();
+  } else { // fallback to main menu
+    boop();
+    mainLoopState = MAIN_LOOP_MENU;
+    hideManualModeSprites();
+    initMainMenu();
   }
 }
 
