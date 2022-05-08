@@ -1,5 +1,7 @@
 # 2bit PXLR Studio
-**2bit PXLR Studio** is a custom ROM for the Gameboy Camera targeted on accessing the full potential of the original Game Boy Camera's sensor, as well as giving photographers more control.   
+![2bit PXLR Studio Logo](assets/2bitpxlr.png "2bit PXLR Studio")
+
+**2bit PXLR Studio** is a custom ROM ("firmware") for the Game Boy Camera targeted on accessing the full potential of the original Game Boy Camera's sensor, as well as giving photographers more control.   
 It is meant to be used with [HDR's flashable Game Boy Camera PCB](https://github.com/HDR/Gameboy-Camera-Flashcart).   
 You can tag your images with [#2bitpxlr](https://www.instagram.com/explore/tags/2bitpxlr/).   
 
@@ -16,23 +18,11 @@ You can tag your images with [#2bitpxlr](https://www.instagram.com/explore/tags/
 + Sensor settings are being saved across restarts. To reset hold `start`+`select` on boot
 
 ## Missing features:
-- Displaying images
-- Sorting/deleting images
-- Thumbnail generation
-- Setting new saved images to visible
-- Better UI in general
-- Saving "EXIF-like" information with an image (possibly in the comment area for an image)
-- Different modes for taking images:
-  - Automatic exposure
-  - Presets for separate light-levels (daylight, inside, night, etc...)
-  - Re-using settings (from "EXIF-like" info)
-  - suggestions welcome
-- Printing images
-- Storing settings persistently in the RAM (using momory-areas which do not get deleted by a reset of a parallel original ROM)
-- Using beep-tones to transfer an image without any additional hardware. [Decoder by Raphaël Boichot](https://github.com/Raphael-Boichot/custom-camera-rom-beep-tone-converter)
-- Panorama helper (allowing more than the original four images)
+If you're missing a feature, [check the issues](https://github.com/HerrZatacke/custom-camera-rom/issues) if it has already been discussed.   
 
 # Contributing
+* Logo/Splashcreen created by [@rembrandx](https://www.instagram.com/rembrandx/)
+
 _This project is very much a work in progress._  
 Join the [Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG) for discussions in detail. And feel free to check and add to [this project's issues](https://github.com/HerrZatacke/custom-camera-rom/issues)  
 
