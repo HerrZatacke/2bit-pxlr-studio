@@ -4,6 +4,7 @@
 **2bit PXLR Studio** is a custom ROM ("firmware") for the Game Boy Camera targeted on accessing the full potential of the original Game Boy Camera's sensor, as well as giving photographers more control.   
 It is meant to be used with [HDR's flashable Game Boy Camera PCB](https://github.com/HDR/Gameboy-Camera-Flashcart).   
 You can tag your images with [#2bitpxlr](https://www.instagram.com/explore/tags/2bitpxlr/).   
+For convenience there's also a [itch.io page](https://herrzatacke.itch.io/2bit-pxlr-studio) now.
 
 ## Current features:
 + Most settings of the camera's sensor are already configurable:
