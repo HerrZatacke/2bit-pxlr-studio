@@ -50,7 +50,7 @@ jobs:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: gameboy
           ITCH_GAME: 2bit-pxlr-studio
-          ITCH_USER: herr_zatacke
+          ITCH_USER: ${{ secrets.ITCHIO_USER }}
           PACKAGE: obj/pxlr.gb
           VERSION_FILE: version
 
