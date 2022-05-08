@@ -12,27 +12,17 @@ void saveImage() {
     return;
   }
 
-  unsigned int i;
-
   SWITCH_RAM(0);
-  for (i = 0; i < HALF_IMAGE_SIZE; i += 1) {
-    copyTemp[i] = last_seen_upper[i];
-  }
+  memcpy(copyTemp, last_seen_upper, HALF_IMAGE_SIZE);
 
   SWITCH_RAM(images[nextImageIndex]->bank);
-  for (i = 0; i < HALF_IMAGE_SIZE; i += 1) {
-    images[nextImageIndex]->tilesUpper[i] = copyTemp[i];
-  }
+  memcpy(images[nextImageIndex]->tilesUpper, copyTemp, HALF_IMAGE_SIZE);
 
   SWITCH_RAM(0);
-  for (i = 0; i < HALF_IMAGE_SIZE; i += 1) {
-    copyTemp[i] = last_seen_lower[i];
-  }
+  memcpy(copyTemp, last_seen_lower, HALF_IMAGE_SIZE);
 
   SWITCH_RAM(images[nextImageIndex]->bank);
-  for (i = 0; i < HALF_IMAGE_SIZE; i += 1) {
-    images[nextImageIndex]->tilesLower[i] = copyTemp[i];
-  }
+  memcpy(images[nextImageIndex]->tilesLower, copyTemp, HALF_IMAGE_SIZE);
 
   nextImageIndex += 1;
 

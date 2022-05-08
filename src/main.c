@@ -38,6 +38,7 @@ void menuSelectMode(unsigned char loopState);
 
 #include <gb/gb.h>
 #include <stdint.h>
+#include <string.h>
 #include <gbdk/bcd.h>
 
 #include "typedefs/MenuOption.h"
