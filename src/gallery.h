@@ -10,6 +10,8 @@ void loadAndShowGalleryImage() {
   set_bkg_based_tiles(13, 16, 5, 2, "Image  /  ", OFFSET_FONT - 32);
   writeNumber(12, 17, 2, imageIndex + 1);
   writeNumber(15, 17, 2, numVisibleImages);
+
+  writeNumber(2, 16, 3, findFirstFreeSlot());
 }
 
 void initGallery() {

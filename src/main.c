@@ -92,7 +92,6 @@ void init_cam() {
     restoreSettings() ||
     (joypad() == (J_START | J_SELECT)) // "factory" reset
   ) {
-    nextImageIndex = 0; // reset "images taken"
     restoreDefaults(); // reset all sensor params to default
     storeSettings();
     boop();
@@ -131,8 +130,7 @@ void menuSelectMode(unsigned char loopState) {
   fill_bkg_rect(0, 0, 20, 18, BLNK);
   mainLoopState = loopState;
   if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
-    set_bkg_tiles(0, 0, 20, 18, map_normal);
-    initManualModeSprites();
+    initManualMode();
     renderMenu();
   } else if (loopState == MAIN_LOOP_MENU) {
     hideManualModeSprites();

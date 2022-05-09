@@ -3,34 +3,36 @@
 #define HALF_IMAGE_SIZE 1792
 
 unsigned char dialogState = 0;
-unsigned char nextImageIndex = 0;
 
 unsigned char copyTemp[HALF_IMAGE_SIZE];
 
 void saveImage() {
-  if (nextImageIndex == NUM_IMAGES) {
+  unsigned char firstFreeSlot = findFirstFreeSlot();
+
+  if (firstFreeSlot >= NUM_IMAGES) {
     return;
   }
 
   SWITCH_RAM(0);
   memcpy(copyTemp, last_seen_upper, HALF_IMAGE_SIZE);
 
-  SWITCH_RAM(images[nextImageIndex]->bank);
-  memcpy(images[nextImageIndex]->tilesUpper, copyTemp, HALF_IMAGE_SIZE);
+  SWITCH_RAM(images[firstFreeSlot]->bank);
+  memcpy(images[firstFreeSlot]->tilesUpper, copyTemp, HALF_IMAGE_SIZE);
 
   SWITCH_RAM(0);
   memcpy(copyTemp, last_seen_lower, HALF_IMAGE_SIZE);
 
-  SWITCH_RAM(images[nextImageIndex]->bank);
-  memcpy(images[nextImageIndex]->tilesLower, copyTemp, HALF_IMAGE_SIZE);
+  SWITCH_RAM(images[firstFreeSlot]->bank);
+  memcpy(images[firstFreeSlot]->tilesLower, copyTemp, HALF_IMAGE_SIZE);
 
-  nextImageIndex += 1;
+  setImageSlot(firstFreeSlot, numVisibleImages);
+  sortImages();
 
   renderMenu();
 }
 
 void saveImageDialog() {
-  if (nextImageIndex >= NUM_IMAGES) {
+  if (findFirstFreeSlot() >= NUM_IMAGES) {
     boop();
     waitRelease();
     return;

@@ -1,7 +1,11 @@
 extern unsigned char last_seen_upper[]; extern unsigned char last_seen_lower[];
-extern unsigned char game_data_meta_imageslots[];
-extern unsigned char game_data_meta_imageslots_copy[];
+
+extern unsigned char game_data_meta_imageslots[30];
+extern unsigned char game_data_meta_imageslots_checksum[2];
+extern unsigned char game_data_meta_imageslots_echo[30];
+extern unsigned char game_data_meta_imageslots_echo_checksum[2];
 extern unsigned char game_data_meta[];
+
 extern unsigned char image_01_upper[]; extern unsigned char image_01_lower[]; extern unsigned char image_01_meta[]; extern unsigned char image_01_meta_echo[];
 extern unsigned char image_02_upper[]; extern unsigned char image_02_lower[]; extern unsigned char image_02_meta[]; extern unsigned char image_02_meta_echo[];
 extern unsigned char image_03_upper[]; extern unsigned char image_03_lower[]; extern unsigned char image_03_meta[]; extern unsigned char image_03_meta_echo[];

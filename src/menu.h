@@ -1,15 +1,18 @@
 
-// same as readable number of "images taken"
-extern unsigned char nextImageIndex;
 unsigned char menuPos = 0;
 
 #include "menus/shootingManual.h"
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
+inline void initManualMode() {
+  set_bkg_tiles(0, 0, 20, 18, map_normal);
+  sortImages();
+  initManualModeSprites();
+}
+
 inline void storeSettings() {
   SWITCH_RAM(1);
-  image_01_unused[0] = nextImageIndex;
   for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     image_01_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
@@ -37,7 +40,6 @@ inline unsigned char restoreSettings() {
 
   // load initial values from storage cells
   if (noAA) {
-    nextImageIndex = image_01_unused[0] > 30 ? 30 : image_01_unused[0];
 
     for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
       menuItems[i]->value = image_01_unused[menuItems[i]->storeOffset];
@@ -68,7 +70,7 @@ inline void renderMenu() {
   set_bkg_based_tiles(0, 16, 9, 2, menuItems[menuPos]->description, OFFSET_FONT - 32);
 
   set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);
-  writeNumber(12, 16, 2, nextImageIndex);
+  writeNumber(12, 16, 2, numVisibleImages);
 
   unsigned char spriteX = (menuItems[menuPos]->x * 8) + 3;
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
