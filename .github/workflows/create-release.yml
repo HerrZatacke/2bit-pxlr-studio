@@ -50,7 +50,7 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
           name: Version ${{ env.RELEASE_VERSION }}
-          files: release/pxlr.zip
+          files: pxlr.zip
 
       - name: Create itch.io release 🎉
         if: steps.checkTag.outputs.exists == 'false'
