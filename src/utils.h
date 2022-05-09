@@ -121,24 +121,44 @@ inline void pause(unsigned char frames) {
 }
 
 unsigned char digits_map[10];
-void writeNumber(unsigned char x, unsigned char y, unsigned char number) {
+void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) {
   BCD bcd = MAKE_BCD(0);
   uint2bcd(number, &bcd);
   bcd2text(&bcd, OFFSET_FONT + 16u, digits_map);
 
   unsigned char digits[3] = { 0x80, 0x80 , 0x80, };
 
-  digits[2] = digits_map[7];
-
-  if (number > 9) {
-    digits[1] = digits_map[6];
+  if (length == 1) {
+    digits[0] = digits_map[7];
+    set_bkg_tiles(x + 2, y, 1, 1, digits);
+    return;
   }
 
-  if (number > 99) {
-    digits[0] = digits_map[5];
+  if (length == 2) {
+    digits[1] = digits_map[7];
+
+    if (number > 9) {
+      digits[0] = digits_map[6];
+    }
+
+    set_bkg_tiles(x + 1, y, 2, 1, digits);
+    return;
   }
 
-  set_bkg_tiles(x, y, 3, 1, digits);
+  if (length == 3) {
+    digits[2] = digits_map[7];
+
+    if (number > 9) {
+      digits[1] = digits_map[6];
+    }
+
+    if (number > 99) {
+      digits[0] = digits_map[5];
+    }
+
+    set_bkg_tiles(x, y, 3, 1, digits);
+    return;
+  }
 }
 
 void waitPush(unsigned char what) {

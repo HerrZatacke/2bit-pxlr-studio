@@ -51,6 +51,7 @@ void menuSelectMode(unsigned char loopState);
 #include "../res/gbps-logo.h"
 #include "../res/font.h"
 #include "./banks/banks.h"
+#include "./imageIndexing.h"
 #include "./values.h"
 #include "./mainMenu.h"
 #include "./menu.h"

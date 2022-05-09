@@ -9,4 +9,8 @@ unsigned char last_seen_padding[512];   // 0x0E00 - 0x0FFF
 // position of frame in ram: 0x0FB0
 // position of frame in meta: 0x01B0 -> 176
 
-unsigned char game_data_meta[4096];
+unsigned char game_data_meta_pad_0[434];
+unsigned char game_data_meta_imageslots[30];
+unsigned char game_data_meta_pad_1[7];
+unsigned char game_data_meta_imageslots_copy[30];
+unsigned char game_data_meta[3595];

@@ -8,7 +8,7 @@ unsigned char nextImageIndex = 0;
 unsigned char copyTemp[HALF_IMAGE_SIZE];
 
 void saveImage() {
-  if (nextImageIndex == 30) {
+  if (nextImageIndex == NUM_IMAGES) {
     return;
   }
 
@@ -30,7 +30,7 @@ void saveImage() {
 }
 
 void saveImageDialog() {
-  if (nextImageIndex >= 30) {
+  if (nextImageIndex >= NUM_IMAGES) {
     boop();
     waitRelease();
     return;

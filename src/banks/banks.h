@@ -1,4 +1,6 @@
-extern unsigned char last_seen_upper[]; extern unsigned char last_seen_lower[]; extern unsigned char last_seen_padding[];
+extern unsigned char last_seen_upper[]; extern unsigned char last_seen_lower[];
+extern unsigned char game_data_meta_imageslots[];
+extern unsigned char game_data_meta_imageslots_copy[];
 extern unsigned char game_data_meta[];
 extern unsigned char image_01_upper[]; extern unsigned char image_01_lower[]; extern unsigned char image_01_meta[]; extern unsigned char image_01_meta_echo[];
 extern unsigned char image_02_upper[]; extern unsigned char image_02_lower[]; extern unsigned char image_02_meta[]; extern unsigned char image_02_meta_echo[];
