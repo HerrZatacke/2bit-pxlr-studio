@@ -32,6 +32,7 @@
 #define MAIN_LOOP_MENU 0
 #define MAIN_LOOP_SHOOT_MANUAL 1
 #define MAIN_LOOP_IMAGE_GALLERY 2
+#define MAIN_LOOP_DEBUG 254
 #define MAIN_LOOP_NOT_IMPLEMENTED 255
 
 unsigned char mainLoopState = 0;
@@ -54,6 +55,7 @@ void menuSelectMode(unsigned char loopState);
 #include "./imageIndexing.h"
 #include "./values.h"
 #include "./mainMenu.h"
+#include "./debug.h"
 #include "./menu.h"
 #include "./gallery.h"
 #include "./saveImage.h"
@@ -138,6 +140,8 @@ void menuSelectMode(unsigned char loopState) {
   } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
     set_bkg_tiles(0, 0, 20, 18, map_normal);
     initGallery();
+  } else if (loopState == MAIN_LOOP_DEBUG) {
+    initDebug();
   } else { // fallback to main menu
     boop();
     mainLoopState = MAIN_LOOP_MENU;
@@ -190,6 +194,9 @@ int main(void) {
         break;
       case MAIN_LOOP_MENU:
         mainMenu();
+        break;
+      case MAIN_LOOP_DEBUG:
+        debugMenu();
         break;
       case MAIN_LOOP_IMAGE_GALLERY:
         galleryMenu();

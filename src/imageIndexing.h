@@ -13,16 +13,24 @@ unsigned char sortedIndices[NUM_IMAGES] = {
 void setImageSlot(unsigned char address, unsigned char newValue) {
   SWITCH_RAM(0);
 
-  unsigned char oldIndex = game_data_meta_imageslots[address];
+  if (address >= NUM_IMAGES) {
+    dead();
+  }
+
+  unsigned char oldValue = game_data_meta_imageslots[address];
+
+  if (newValue == oldValue) {
+    return;
+  }
 
   // Update value for imageslot
   game_data_meta_imageslots_echo[address] = game_data_meta_imageslots[address] = newValue;
 
   // Update checksum XOR
-  game_data_meta_imageslots_echo_checksum[0] = game_data_meta_imageslots_checksum[0] = game_data_meta_imageslots_checksum[0] + newValue - oldIndex;
+  game_data_meta_imageslots_echo_checksum[0] = game_data_meta_imageslots_checksum[0] = game_data_meta_imageslots_checksum[0] + newValue - oldValue;
 
   // Update checksum SUM
-  game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldIndex;
+  game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldValue;
 }
 
 inline unsigned char getImageSlot(unsigned char index) {
@@ -70,7 +78,9 @@ void cleanupIndexGaps() {
     // image number does not exist in list
     if (getAddressForIndex(index) >= NUM_IMAGES) {
       unsigned char address = getNextHighestAddress(index);
-      setImageSlot(address, index);
+      if (address < NUM_IMAGES) {
+        setImageSlot(address, index);
+      }
     }
   }
 }

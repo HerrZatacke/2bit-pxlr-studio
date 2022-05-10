@@ -184,3 +184,13 @@ void waitabit() {
   }
   return;
 }
+
+// ToDo: add a "reason" for calling "dead"
+void dead(/*unsigned char reason*/) {
+  while (1) {
+    boop();
+    for(unsigned char i = 0; i < 120; i++) {
+      wait_vbl_done();
+    }
+  }
+}
