@@ -1,8 +1,10 @@
 extern unsigned char last_seen_upper[]; extern unsigned char last_seen_lower[];
 
 extern unsigned char game_data_meta_imageslots[30];
+extern unsigned char game_data_meta_magic[5];
 extern unsigned char game_data_meta_imageslots_checksum[2];
 extern unsigned char game_data_meta_imageslots_echo[30];
+extern unsigned char game_data_meta_magic_echo[5];
 extern unsigned char game_data_meta_imageslots_echo_checksum[2];
 extern unsigned char game_data_meta[];
 

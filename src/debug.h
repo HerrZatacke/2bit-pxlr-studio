@@ -41,8 +41,9 @@ inline void initDebug() {
   writeNumber(12, 5, 3, game_data_meta_imageslots[28]);
   writeNumber(16, 5, 3, game_data_meta_imageslots[29]);
 
-  writeNumber(1, 7, 3, game_data_meta_imageslots_checksum[0]);
-  writeNumber(5, 7, 3, game_data_meta_imageslots_checksum[1]);
+  set_bkg_based_tiles(1, 7, 5, 1, game_data_meta_magic, OFFSET_FONT - 32);
+  writeNumber(7, 7, 3, game_data_meta_imageslots_checksum[0]);
+  writeNumber(11, 7, 3, game_data_meta_imageslots_checksum[1]);
 
 
   writeNumber(0, 9, 3, game_data_meta_imageslots_echo[0]);
@@ -78,6 +79,7 @@ inline void initDebug() {
   writeNumber(12, 14, 3, game_data_meta_imageslots_echo[28]);
   writeNumber(16, 14, 3, game_data_meta_imageslots_echo[29]);
 
-  writeNumber(1, 16, 3, game_data_meta_imageslots_echo_checksum[0]);
-  writeNumber(5, 16, 3, game_data_meta_imageslots_echo_checksum[1]);
+  set_bkg_based_tiles(1, 16, 5, 1, game_data_meta_magic_echo, OFFSET_FONT - 32);
+  writeNumber(7, 16, 3, game_data_meta_imageslots_echo_checksum[0]);
+  writeNumber(11, 16, 3, game_data_meta_imageslots_echo_checksum[1]);
 }
