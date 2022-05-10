@@ -156,6 +156,8 @@ int main(void) {
   init_sound();
   init_cam();
 
+  fill_bkg_rect(0, 0, 20, 18, BLNK);
+
   set_bkg_data(OFFSET_FONT, sizeof(font), font);
   cleanupIndexGaps();
 
