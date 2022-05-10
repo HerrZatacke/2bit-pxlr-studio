@@ -1,10 +1,10 @@
 #define OFFSET_FONT 128u
   #define OFFSET_BLANK 128u
-#define OFFSET_TILES 219
-  #define OFFSET_FILL 219
-  #define OFFSET_MENU_ARROW 220
-  #define OFFSET_BORDER_H 221
-  #define OFFSET_BORDER_V 222
+#define OFFSET_TILES 219u
+  #define OFFSET_FILL 219u
+  #define OFFSET_MENU_ARROW 220u
+  #define OFFSET_BORDER_H 221u
+  #define OFFSET_BORDER_V 222u
 
 #define SPRITE_MENU_INDICATOR 0
 #define SPRITE_BORDER_H_1 1
@@ -158,7 +158,9 @@ int main(void) {
 
   fill_bkg_rect(0, 0, 20, 18, BLNK);
 
-  set_bkg_data(OFFSET_FONT, sizeof(font), font);
+  set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
+  set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
+
   cleanupIndexGaps();
 
   HIDE_SPRITES;
@@ -167,8 +169,10 @@ int main(void) {
   SHOW_SPRITES;
   // ToDo: Fade-effect?
 
-  set_bkg_data(OFFSET_FONT, sizeof(font), font);
-  set_bkg_data(OFFSET_TILES, sizeof(tiles), tiles);
+  LCDC_REG &= ~ LCDCF_BG8000;
+  set_bkg_data(112, 16, upperLowerDoubleTiles);
+  LCDC_REG |= LCDCF_BG8000;
+  set_bkg_data(112, 16, upperLowerDoubleTiles);
 
   CRITICAL {
     STAT_REG |= STATF_LYC;
