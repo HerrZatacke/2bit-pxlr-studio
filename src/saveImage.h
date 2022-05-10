@@ -13,6 +13,8 @@ void saveImage() {
     return;
   }
 
+  sortImages();
+
   SWITCH_RAM(0);
   memcpy(copyTemp, last_seen_upper, HALF_IMAGE_SIZE);
 
@@ -26,7 +28,6 @@ void saveImage() {
   memcpy(images[firstFreeSlot]->tilesLower, copyTemp, HALF_IMAGE_SIZE);
 
   setImageSlot(firstFreeSlot, numVisibleImages);
-  sortImages();
 
   renderMenu();
 }

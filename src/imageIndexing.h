@@ -10,13 +10,13 @@ unsigned char sortedIndices[NUM_IMAGES] = {
     IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
 };
 
-void setImageSlot(unsigned char imageSlot, unsigned char newValue) {
+void setImageSlot(unsigned char address, unsigned char newValue) {
   SWITCH_RAM(0);
 
-  unsigned char oldIndex = game_data_meta_imageslots[imageSlot];
+  unsigned char oldIndex = game_data_meta_imageslots[address];
 
   // Update value for imageslot
-  game_data_meta_imageslots_echo[imageSlot] = game_data_meta_imageslots[imageSlot] = newValue;
+  game_data_meta_imageslots_echo[address] = game_data_meta_imageslots[address] = newValue;
 
   // Update checksum XOR
   game_data_meta_imageslots_echo_checksum[0] = game_data_meta_imageslots_checksum[0] = game_data_meta_imageslots_checksum[0] + newValue - oldIndex;
@@ -33,11 +33,55 @@ inline unsigned char getImageSlot(unsigned char index) {
   return sortedIndices[index];
 }
 
+
+
+inline unsigned char getAddressForIndex(unsigned char index) {
+  SWITCH_RAM(0);
+  for (unsigned char address = 0; address < NUM_IMAGES; address++) {
+    if (game_data_meta_imageslots[address] == index) {
+      return address;
+    }
+  }
+
+  return NUM_IMAGES;
+}
+
+
+inline unsigned char getNextHighestAddress(unsigned char searchIndex) {
+  SWITCH_RAM(0);
+
+  while (searchIndex < NUM_IMAGES) {
+    for (unsigned char address = 0; address < NUM_IMAGES; address++) {
+      if (game_data_meta_imageslots[address] == searchIndex) {
+        return address;
+      }
+    }
+
+    searchIndex += 1;
+  }
+
+  return NUM_IMAGES;
+}
+
+
+void cleanupIndexGaps() {
+  SWITCH_RAM(0);
+  for (unsigned char index = 0; index < NUM_IMAGES; index++) {
+    // image number does not exist in list
+    if (getAddressForIndex(index) >= NUM_IMAGES) {
+      unsigned char address = getNextHighestAddress(index);
+      setImageSlot(address, index);
+    }
+  }
+}
+
 void sortImages() {
   SWITCH_RAM(0);
 
+  cleanupIndexGaps();
+
   unsigned char deletedIndex = 0;
-  unsigned char visibleIndex = 0;
+  numVisibleImages = 0;
   unsigned char sortedDeletedIndices[NUM_IMAGES];
   unsigned char i = 0;
 
@@ -48,12 +92,10 @@ void sortImages() {
       sortedDeletedIndices[deletedIndex] = i;
       deletedIndex += 1;
     } else {
-      sortedIndices[visibleIndex] = i;
-      visibleIndex += 1;
+      sortedIndices[current] = i;
+      numVisibleImages += 1;
     }
   }
-
-  numVisibleImages = visibleIndex;
 
   deletedIndex = 0;
   for (i = 0; i < NUM_IMAGES; i++) {
