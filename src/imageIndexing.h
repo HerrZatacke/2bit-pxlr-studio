@@ -88,8 +88,6 @@ void cleanupIndexGaps() {
 void sortImages() {
   SWITCH_RAM(0);
 
-  cleanupIndexGaps();
-
   unsigned char deletedIndex = 0;
   numVisibleImages = 0;
   unsigned char sortedDeletedIndices[NUM_IMAGES];

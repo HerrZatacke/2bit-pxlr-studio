@@ -157,6 +157,7 @@ int main(void) {
   init_cam();
 
   set_bkg_data(OFFSET_FONT, sizeof(font), font);
+  cleanupIndexGaps();
 
   HIDE_SPRITES;
   unsigned char splashPressed = splash();
