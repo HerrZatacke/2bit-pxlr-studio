@@ -126,7 +126,7 @@ inline void imageMenuAction(unsigned char value) {
 
 void imageMenu() {
   captureMenuJp();
-  if ( jp == 0 || jp == J_LEFT ||  jp == J_RIGHT || jp == J_SELECT || jp == J_START ) {
+  if ( jp == 0 || jp == J_SELECT || jp == J_START ) {
     jp = 0;
     return;
   } else if (jp == J_UP) {
@@ -135,6 +135,12 @@ void imageMenu() {
   } else if (jp == J_DOWN) {
     imageMenuIndex = (imageMenuIndex + 1) % NUM_IMAGE_MENU_OPTIONS;
     clonk();
+  } else if (jp == J_RIGHT) {
+    imageIndex = (imageIndex + 1) % numVisibleImages;
+    loadAndShowGalleryImage();
+  } else if (jp == J_LEFT) {
+    imageIndex = (imageIndex + numVisibleImages - 1) % numVisibleImages;
+    loadAndShowGalleryImage();
   } else if (jp == J_A) {
     if (numVisibleImages > 0) {
       imageMenuAction(imageMenuItems[imageMenuIndex].value);
