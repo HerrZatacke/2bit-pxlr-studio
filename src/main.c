@@ -5,6 +5,7 @@
   #define OFFSET_MENU_ARROW 220u
   #define OFFSET_BORDER_H 221u
   #define OFFSET_BORDER_V 222u
+  #define MENU_BORDER_LEFT 223u
 
 #define SPRITE_MENU_INDICATOR 0
 #define SPRITE_BORDER_H_1 1
@@ -32,8 +33,14 @@
 #define MAIN_LOOP_MENU 0
 #define MAIN_LOOP_SHOOT_MANUAL 1
 #define MAIN_LOOP_IMAGE_GALLERY 2
+#define MAIN_LOOP_IMAGE 3
 #define MAIN_LOOP_DEBUG 254
 #define MAIN_LOOP_NOT_IMPLEMENTED 255
+
+#define IMAGE_MENU_DELETE 0
+#define IMAGE_MENU_PRINT 1
+#define IMAGE_MENU_BEEP 2
+#define IMAGE_MENU_EXPOSE 3
 
 unsigned char mainLoopState = 0;
 void menuSelectMode(unsigned char loopState);
@@ -52,6 +59,7 @@ void setDitherMatrix();
 #include "../res/map.h"
 #include "../res/gbps-logo.h"
 #include "../res/font.h"
+#include "../res/nope.h"
 #include "./banks/banks.h"
 #include "./imageIndexing.h"
 #include "./values.h"
@@ -102,6 +110,7 @@ void init_cam() {
     beep();
   }
 
+  imageIndex = 0; // gallery
   setDitherMatrix();
 }
 
@@ -126,20 +135,19 @@ void capture() {
 }
 
 void menuSelectMode(unsigned char loopState) {
-  fill_bkg_rect(0, 0, 20, 18, BLNK);
   mainLoopState = loopState;
   if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
     initManualMode();
-    renderMenu();
   } else if (loopState == MAIN_LOOP_MENU) {
-    hideManualModeSprites();
     initMainMenu();
   } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
-    set_bkg_tiles(0, 0, 20, 18, map_normal);
     initGallery();
+  } else if (loopState == MAIN_LOOP_IMAGE) {
+    initImageMenu();
   } else if (loopState == MAIN_LOOP_DEBUG) {
     initDebug();
   } else { // fallback to main menu
+    clearBkg();
     boop();
     mainLoopState = MAIN_LOOP_MENU;
     hideManualModeSprites();
@@ -204,6 +212,9 @@ int main(void) {
         break;
       case MAIN_LOOP_IMAGE_GALLERY:
         galleryMenu();
+        break;
+      case MAIN_LOOP_IMAGE:
+        imageMenu();
         break;
     }
 

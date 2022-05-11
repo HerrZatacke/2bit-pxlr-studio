@@ -5,6 +5,7 @@ inline void debugMenu() {
 }
 
 inline void initDebug() {
+  clearBkg();
   hideManualModeSprites();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
   SWITCH_RAM(0);

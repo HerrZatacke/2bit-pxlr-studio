@@ -5,10 +5,14 @@ unsigned char menuPos = 0;
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
+inline void renderMenu();
+
 inline void initManualMode() {
+  clearBkg();
   set_bkg_tiles(0, 0, 20, 18, map_normal);
   sortImages();
   initManualModeSprites();
+  renderMenu();
 }
 
 inline void storeSettings() {

@@ -3,7 +3,6 @@
 #define IMAGE_UNDEFINED 0xFE
 
 unsigned char numVisibleImages = 0;
-unsigned char imageIndex = 0;
 unsigned char sortedIndices[NUM_IMAGES] = {
     IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
     IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
@@ -71,6 +70,15 @@ inline unsigned char getNextHighestAddress(unsigned char searchIndex) {
   return NUM_IMAGES;
 }
 
+inline void reduceIndexAfterDelete(unsigned char deletedIndex) {
+  SWITCH_RAM(0);
+  for (unsigned char address = 0; address < NUM_IMAGES; address++) {
+    unsigned char index = game_data_meta_imageslots[address];
+    if (index > deletedIndex && index < NUM_IMAGES) {
+      setImageSlot(address, index - 1);
+    }
+  }
+}
 
 void cleanupIndexGaps() {
   SWITCH_RAM(0);
@@ -111,13 +119,6 @@ void sortImages() {
       sortedIndices[i] = sortedDeletedIndices[deletedIndex];
       deletedIndex += 1;
     }
-  }
-
-  // Cleanup indices: deleting an image on the original rom just marks
-  // that slot as 0xff but higher numbered images are not corrected.
-
-  for (i = 0; i < numVisibleImages; i++) {
-    // ToDo: YES PLEASE ???
   }
 }
 

@@ -115,6 +115,10 @@ inline void clonk() {
   NR44_REG=0xC0;
 }
 
+inline void clearBkg() {
+  fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
+}
+
 inline void pause(unsigned char frames) {
   for (unsigned char i = 0; i < frames; i++) {
     wait_vbl_done();
