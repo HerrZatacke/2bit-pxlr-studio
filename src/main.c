@@ -37,6 +37,7 @@
 
 unsigned char mainLoopState = 0;
 void menuSelectMode(unsigned char loopState);
+void setDitherMatrix();
 
 #include <gb/gb.h>
 #include <stdint.h>
@@ -100,6 +101,8 @@ void init_cam() {
     pause(20);
     beep();
   }
+
+  setDitherMatrix();
 }
 
 unsigned char readA000() {
@@ -116,8 +119,6 @@ void capture() {
   A003 = exposureTime;
   A004 = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   A005 = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
-
-  setDitherMatrix();
 
   A000 = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
 
@@ -192,12 +193,12 @@ int main(void) {
 
     switch (mainLoopState) {
       case MAIN_LOOP_SHOOT_MANUAL:
-        capture();
         fastLoadImageTiles();
         manualShootMenu();
         if (joypad() == J_A) {
           saveImageDialog();
         }
+        capture();
         break;
       case MAIN_LOOP_MENU:
         mainMenu();

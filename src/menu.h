@@ -76,6 +76,12 @@ inline void renderMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
 }
 
+inline void menuAction() {
+  if (menuItems[menuPos]->action == MENU_ACTION_DITHER) {
+    setDitherMatrix();
+  }
+}
+
 inline void manualShootMenu() {
   if ( jp == 0 || jp == J_A || jp == J_SELECT || jp == J_START ) {
     jp = 0;
@@ -86,8 +92,10 @@ inline void manualShootMenu() {
     menuPos = (menuPos + NUM_MENU_ELEMENTS - 1) % NUM_MENU_ELEMENTS;
   } else if (jp == J_UP) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + 1) % menuItems[menuPos]->numOptions;
+    menuAction();
   } else if (jp == J_DOWN) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
+    menuAction();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
     jp = 0;

@@ -9,4 +9,5 @@ typedef struct {
   const unsigned char* title;
   const unsigned char* description;
   const MenuOption* options;
+  const unsigned char action;
 } MenuItem;
