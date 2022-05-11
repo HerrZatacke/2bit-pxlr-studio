@@ -105,10 +105,6 @@ void init_cam() {
   setDitherMatrix();
 }
 
-unsigned char readA000() {
-  return A000;
-}
-
 void capture() {
   SWITCH_RAM(16);
 
@@ -124,7 +120,7 @@ void capture() {
 
   captureMenuJp(); // this call is only for the emulator to get some joypad input
 
-  while (readA000() % 2) {
+  while (A000 % 2) {
     captureMenuJp();
   }
 }
