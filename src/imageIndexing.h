@@ -26,10 +26,10 @@ void setImageSlot(unsigned char address, unsigned char newValue) {
   // Update value for imageslot
   game_data_meta_imageslots_echo[address] = game_data_meta_imageslots[address] = newValue;
 
-  // Update checksum XOR
+  // Update checksum SUM
   game_data_meta_imageslots_echo_checksum[0] = game_data_meta_imageslots_checksum[0] = game_data_meta_imageslots_checksum[0] + newValue - oldValue;
 
-  // Update checksum SUM
+  // Update checksum XOR
   game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldValue;
 }
 
