@@ -29,6 +29,7 @@ void saveImage() {
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 
+  sortImages();
   renderMenu();
 }
 
