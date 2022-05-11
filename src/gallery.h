@@ -2,6 +2,7 @@ unsigned char imageIndex = 0;
 unsigned char imageMenuIndex = 0;
 
 #include "menus/imageMenuItems.h"
+#include "./bleep.h"
 
 inline void appearImageMenu() {
   HIDE_SPRITES;
@@ -14,6 +15,7 @@ inline void appearImageMenu() {
 
 inline void disappearImageMenu() {
   HIDE_SPRITES;
+  move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
   while (SCX_REG > 0) {
     SCX_REG -= 5;
     wait_vbl_done();
@@ -117,8 +119,10 @@ inline void imageMenuAction(unsigned char value) {
     clonk();
   } else if (value == IMAGE_MENU_PRINT) {
     boop();
-  } else if (value == IMAGE_MENU_BEEP) {
-    boop();
+  } else if (value == IMAGE_MENU_BLEEP) {
+    disappearImageMenu();
+    bleep();
+    appearImageMenu();
   } else if (value == IMAGE_MENU_EXPOSE) {
     boop();
   }

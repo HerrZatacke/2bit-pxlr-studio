@@ -6,6 +6,7 @@ inline void init_gfx() {
   SHOW_SPRITES;
   SPRITES_8x8;
   set_sprite_tile(SPRITE_MENU_INDICATOR, OFFSET_MENU_ARROW);
+  set_sprite_tile(SPRITE_BLEEP_CURSOR, OFFSET_BLEEP_CURSOR);
 }
 
 inline void initManualModeSprites() {

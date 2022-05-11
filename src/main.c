@@ -6,6 +6,7 @@
   #define OFFSET_BORDER_H 221u
   #define OFFSET_BORDER_V 222u
   #define MENU_BORDER_LEFT 223u
+  #define OFFSET_BLEEP_CURSOR 224u
 
 #define SPRITE_MENU_INDICATOR 0
 #define SPRITE_BORDER_H_1 1
@@ -24,6 +25,7 @@
 #define SPRITE_BORDER_V_6 14
 #define SPRITE_BORDER_V_7 15
 #define SPRITE_BORDER_V_8 16
+#define SPRITE_BLEEP_CURSOR 17
 
 #define PALETTE_SPRITES 0b11100100u
 #define PALETTE_NORMAL 0b11100100u
@@ -39,7 +41,7 @@
 
 #define IMAGE_MENU_DELETE 0
 #define IMAGE_MENU_PRINT 1
-#define IMAGE_MENU_BEEP 2
+#define IMAGE_MENU_BLEEP 2
 #define IMAGE_MENU_EXPOSE 3
 
 unsigned char mainLoopState = 0;
@@ -66,8 +68,8 @@ void setDitherMatrix();
 #include "./mainMenu.h"
 #include "./debug.h"
 #include "./menu.h"
-#include "./gallery.h"
 #include "./saveImage.h"
+#include "./gallery.h"
 
 void fastLoadImageTiles() {
   SWITCH_RAM(0);
