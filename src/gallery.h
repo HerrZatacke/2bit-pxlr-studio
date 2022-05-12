@@ -28,20 +28,19 @@ void loadAndShowGalleryImage() {
     unsigned char imageSlot = getImageSlot(imageIndex);
     SWITCH_RAM(images[imageSlot]->bank);
 
-    LCDC_REG |= LCDCF_BG8000;
-    set_bkg_data(0, 112, images[imageSlot]->tilesLower);
     LCDC_REG &= ~LCDCF_BG8000;
     set_bkg_data(0, 112, images[imageSlot]->tilesUpper);
+    LCDC_REG |= LCDCF_BG8000;
+    set_bkg_data(0, 112, images[imageSlot]->tilesLower);
 
     set_bkg_based_tiles(13, 16, 5, 2, "Image  /  ", OFFSET_FONT - 32);
     writeNumber(12, 17, 2, imageIndex + 1);
     writeNumber(15, 17, 2, numVisibleImages);
-
   //  writeNumber(2, 16, 3, findFirstFreeSlot());
   } else {
-    LCDC_REG |= LCDCF_BG8000;
-    set_bkg_data(0, 112, nope_tiles);
     LCDC_REG &= ~LCDCF_BG8000;
+    set_bkg_data(0, 112, nope_tiles);
+    LCDC_REG |= LCDCF_BG8000;
     set_bkg_data(0, 112, nope_tiles);
 
     set_bkg_based_tiles(13, 16, 5, 2, "   NoImage", OFFSET_FONT - 32);
