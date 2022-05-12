@@ -121,6 +121,9 @@ void capture() {
 
   unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
+  // 0xE4, 0x45, 0x00, 0x03, 0xA7 when getting lighter
+  // 0xE8, 0x35, 0x00, 0x03, 0xA9 when getting darker
+
   A001 = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
   A002 = exposureTime >> 8;
   A003 = exposureTime;
