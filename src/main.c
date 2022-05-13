@@ -58,6 +58,7 @@ void setDitherMatrix();
 #include "typedefs/Image.h"
 
 #include "./utils.h"
+#include "../res/frames/frame_pxlr.h"
 #include "../res/map.h"
 #include "../res/gbps-logo.h"
 #include "../res/font.h"

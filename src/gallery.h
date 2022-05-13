@@ -1,8 +1,11 @@
 unsigned char imageIndex = 0;
 unsigned char imageMenuIndex = 0;
 
+void loadAndShowGalleryImage();
+
 #include "menus/imageMenuItems.h"
 #include "./bleep.h"
+#include "./expose.h"
 
 inline void appearImageMenu() {
   HIDE_SPRITES;
@@ -123,7 +126,9 @@ inline void imageMenuAction(unsigned char value) {
     bleep();
     appearImageMenu();
   } else if (value == IMAGE_MENU_EXPOSE) {
-    boop();
+    disappearImageMenu();
+    expose();
+    appearImageMenu();
   }
 }
 
