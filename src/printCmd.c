@@ -144,17 +144,6 @@ void printTileData(uint8_t *tileData, uint8_t lf, uint8_t num_packets) {
   }
 }
 
-//void printScreen(uint8_t linefeed) {
-//  uint8_t x, y;
-//  uint8_t p_data[16];
-//  for (y = 0; y < 18; y++) {
-//    for (x = 0; x < 20; x++) {
-//      get_bkg_data(get_vram_byte(get_bkg_xy_addr(x, y)), 1, p_data);
-//      printTileData(p_data, linefeed, 9);
-//    }
-//  }
-//}
-
 void printImage(uint8_t *lower, uint8_t *upper) {
   // We need to print a border of 16x16 pixels (2x2 tiles)
   uint8_t x, y;
