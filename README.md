@@ -7,15 +7,8 @@ For convenience there's also a [itch.io page](https://herrzatacke.itch.io/2bit-p
 You can also tag your images with [#2bitpxlr](https://www.instagram.com/explore/tags/2bitpxlr/) or use the hashtag [#2bitpxlr](https://twitter.com/search?q=2bitpxlr) on Twitter.  
 
 ## Current features:
-+ Most settings of the camera's sensor are already configurable:
-  + Sensor gain
-  + Exposure time
-  + Dithering matrices
-  + All edge enhancement settings
-  + Output node bias voltage
-  + Zero point calibration
-  + Output reference voltage offset
-+ Raw image data can be saved to the same positions where the original ROM stores it's data.
++ Most settings of the camera's sensor are already configurable
++ Images can be saved, deleted and printed
 + Sensor settings are being saved across restarts. To reset hold `start`+`select` on boot
 
 # Feedback
