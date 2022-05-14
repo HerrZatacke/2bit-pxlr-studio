@@ -6,6 +6,7 @@ void loadAndShowGalleryImage();
 #include "menus/imageMenuItems.h"
 #include "./bleep.h"
 #include "./expose.h"
+#include "./printCmd.h"
 
 inline void appearImageMenu() {
   HIDE_SPRITES;
@@ -120,7 +121,16 @@ inline void imageMenuAction(unsigned char value) {
     loadAndShowGalleryImage();
     clonk();
   } else if (value == IMAGE_MENU_PRINT) {
-    boop();
+    PrinterInit();
+    if (GetPrinterStatus()) {
+      clonk();
+    } else {
+      disappearImageMenu();
+      unsigned char imageSlot = getImageSlot(imageIndex);
+      PrintImage(images[imageSlot]->tilesLower, images[imageSlot]->tilesUpper);
+      boop();
+      appearImageMenu();
+    }
   } else if (value == IMAGE_MENU_BLEEP) {
     disappearImageMenu();
     bleep();
