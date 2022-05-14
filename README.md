@@ -37,7 +37,7 @@ Thanks to the following people for direct and indirect help with this project:
 * [Raphaël Boichot](https://github.com/Raphael-Boichot/) for the in-depth analysis of the [Game Boy Camera's RAM structure](https://funtography.online/wiki/Cartridge_RAM)
 * [AntonioND](https://github.com/AntonioND) for the outstanding [Documentation regarding the camera's sensor](https://github.com/AntonioND/gbcam-rev-engineer) / [PDF](https://github.com/AntonioND/gbcam-rev-engineer/blob/master/doc/gb_camera_doc_v1_1_1.pdf)
 * [reini1305](https://github.com/reini1305) for general help with some C concepts
-* [Alex](https://github.com/insidegadgets) for figuring out the flickering issue and more
+* [Alex (insidegadgets)](https://github.com/insidegadgets) for figuring out the flickering issue and more
 * [All the folks from Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG) for their support and ideas
 
 # Other resources
