@@ -4,6 +4,7 @@
 // Print Screen (360 tile mode) added by T0biasCZe
 
 #include <gb/gb.h>
+#include <string.h>
 
 extern unsigned char printerStatus[3];
 

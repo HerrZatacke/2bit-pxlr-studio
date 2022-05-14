@@ -4,6 +4,10 @@
 // Print Screen (360 tile mode) added by T0biasCZe
 
 #include <gb/gb.h>
+#include <string.h>
+
+extern const unsigned char frame_pxlr_tiles[544];
+extern const unsigned char frame_pxlr_map[360];
 
 uint8_t printerStatus[3];
 
@@ -148,7 +152,9 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
   SWITCH_RAM(bank);
   // We need to print a border of 16x16 pixels (2x2 tiles)
   uint8_t x, y;
-  const uint8_t border[16] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
+  uint16_t frameTileIndex = 0;
+  uint8_t border[16];
+
   uint8_t *image = upper;
   for (y = 0; y < 18; y++) {
     for (x = 0; x < 20; x++) {
@@ -156,11 +162,14 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
         image = lower;
       }
       if (x < 2 || y < 2 || x >= 18 || y >= 16) {
+        memcpy(border, &frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 16);
         printTileData(border, TRUE, 9);
       } else {
         printTileData(image, TRUE, 9);
         image += 16;
       }
+
+      frameTileIndex++;
     }
   }
 }
