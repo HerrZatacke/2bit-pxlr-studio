@@ -29,7 +29,7 @@ Thanks to the following people for direct and indirect help with this project:
 * [@rembrandx](https://www.instagram.com/rembrandx/) for the Logo/Splashcreen 
 * [Raphaël Boichot](https://github.com/Raphael-Boichot/) for the in-depth analysis of the [Game Boy Camera's RAM structure](https://funtography.online/wiki/Cartridge_RAM)
 * [AntonioND](https://github.com/AntonioND) for the outstanding [Documentation regarding the camera's sensor](https://github.com/AntonioND/gbcam-rev-engineer) / [PDF](https://github.com/AntonioND/gbcam-rev-engineer/blob/master/doc/gb_camera_doc_v1_1_1.pdf)
-* [reini1305](https://github.com/reini1305) for the print function and general help with some C concepts
+* [reini1305](https://github.com/reini1305) for the [print function](https://github.com/HerrZatacke/custom-camera-rom/commit/5976b47e6b6d577c954e2b678affa9925824f5b5) and general help with some C concepts
 * [Alex (insidegadgets)](https://github.com/insidegadgets) for figuring out the flickering issue and more
 * [All the folks from Game Boy Gamera Club Discord](https://discord.gg/C7WFJHG) for their support and ideas
 
