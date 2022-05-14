@@ -1,6 +1,7 @@
-unsigned char last_seen_upper[1792];    // 0x0000 - 0x0699
-unsigned char last_seen_lower[1792];    // 0x0700 - 0x0DFF
-unsigned char last_seen_padding[512];   // 0x0E00 - 0x0FFF
+unsigned char last_seen_upper_unused[256]; // 0x0000 - 0x00FF
+unsigned char last_seen_upper[1792];       // 0x0100 - 0x0799
+unsigned char last_seen_lower[1792];       // 0x0800 - 0x0EFF
+unsigned char last_seen_padding[256];      // 0x0F00 - 0x0FFF
 
 unsigned char game_data_meta_pad_0[434];
 
