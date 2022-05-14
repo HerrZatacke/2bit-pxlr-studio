@@ -121,14 +121,14 @@ inline void imageMenuAction(unsigned char value) {
     loadAndShowGalleryImage();
     clonk();
   } else if (value == IMAGE_MENU_PRINT) {
-    PrinterInit();
-    if (GetPrinterStatus()) {
-      clonk();
+    printerInit();
+    if (getPrinterStatus()) {
+      boop();
     } else {
       disappearImageMenu();
       unsigned char imageSlot = getImageSlot(imageIndex);
-      PrintImage(images[imageSlot]->tilesLower, images[imageSlot]->tilesUpper);
-      boop();
+      printImage(images[imageSlot]->tilesLower, images[imageSlot]->tilesUpper);
+      beep();
       appearImageMenu();
     }
   } else if (value == IMAGE_MENU_BLEEP) {
