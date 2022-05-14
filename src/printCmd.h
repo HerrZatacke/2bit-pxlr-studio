@@ -15,4 +15,4 @@ extern uint8_t getPrinterStatus();
 extern uint8_t checkForErrors();
 extern void printTileData(unsigned char *tileData, uint8_t lf, uint8_t num_packets);
 extern uint8_t checkBusy();
-extern void printImage(uint8_t *lower, uint8_t *upper);
+extern void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank);

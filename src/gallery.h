@@ -127,7 +127,7 @@ inline void imageMenuAction(unsigned char value) {
     } else {
       disappearImageMenu();
       unsigned char imageSlot = getImageSlot(imageIndex);
-      printImage(images[imageSlot]->tilesLower, images[imageSlot]->tilesUpper);
+      printImage(images[imageSlot]->tilesLower, images[imageSlot]->tilesUpper, images[imageSlot]->bank);
       beep();
       appearImageMenu();
     }

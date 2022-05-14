@@ -144,7 +144,8 @@ void printTileData(uint8_t *tileData, uint8_t lf, uint8_t num_packets) {
   }
 }
 
-void printImage(uint8_t *lower, uint8_t *upper) {
+void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
+  SWITCH_RAM(bank);
   // We need to print a border of 16x16 pixels (2x2 tiles)
   uint8_t x, y;
   const uint8_t border[16] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
