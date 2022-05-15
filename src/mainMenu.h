@@ -23,22 +23,20 @@ inline void initMainMenu() {
 inline void mainMenu() {
   captureMenuJp();
 
-  if ( jp == 0 || jp == J_B || jp == J_RIGHT ||  jp == J_LEFT || jp == J_SELECT || jp == J_START ) {
-    jp = 0;
-    return;
-  } else if (jp == J_DOWN) {
+  if (jp == J_DOWN) {
     clonk();
     mainMenuPos = (mainMenuPos + 1) % NUM_MAIN_MENU_OPTIONS;
     mainMenuSprite();
+    waitabit();
   } else if (jp == J_UP) {
     clonk();
     mainMenuPos = (mainMenuPos + NUM_MAIN_MENU_OPTIONS - 1) % NUM_MAIN_MENU_OPTIONS;
     mainMenuSprite();
+    waitabit();
   } else if (jp == J_A) {
     menuSelectMode(mainMenuItems[mainMenuPos].value);
+    waitabit();
   }
-
-  waitabit();
 
   jp = 0;
 }

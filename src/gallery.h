@@ -80,24 +80,22 @@ void initImageMenu() {
 void galleryMenu() {
   captureMenuJp();
 
-  if ( jp == 0 || jp == J_DOWN ||  jp == J_UP || jp == J_SELECT || jp == J_START ) {
-    jp = 0;
-    return;
-  } else if (jp == J_RIGHT) {
+  if (jp == J_RIGHT) {
     imageIndex = (imageIndex + 1) % numVisibleImages;
     loadAndShowGalleryImage();
+    waitabit();
   } else if (jp == J_LEFT) {
     imageIndex = (imageIndex + numVisibleImages - 1) % numVisibleImages;
     loadAndShowGalleryImage();
+    waitabit();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
-    jp = 0;
-    return;
+    waitabit();
   } else if (jp == J_A) {
     menuSelectMode(MAIN_LOOP_IMAGE);
+    waitabit();
   }
 
-  waitabit();
 
   jp = 0;
 }
@@ -144,36 +142,36 @@ inline void imageMenuAction(unsigned char value) {
 
 void imageMenu() {
   captureMenuJp();
-  if ( jp == 0 || jp == J_SELECT || jp == J_START ) {
-    jp = 0;
-    return;
-  } else if (jp == J_UP) {
+
+  if (jp == J_UP) {
     imageMenuIndex = (imageMenuIndex + NUM_IMAGE_MENU_OPTIONS - 1) % NUM_IMAGE_MENU_OPTIONS;
     clonk();
+    renderImageMenu();
+    waitabit();
   } else if (jp == J_DOWN) {
     imageMenuIndex = (imageMenuIndex + 1) % NUM_IMAGE_MENU_OPTIONS;
     clonk();
+    renderImageMenu();
+    waitabit();
   } else if (jp == J_RIGHT) {
     imageIndex = (imageIndex + 1) % numVisibleImages;
     loadAndShowGalleryImage();
+    waitabit();
   } else if (jp == J_LEFT) {
     imageIndex = (imageIndex + numVisibleImages - 1) % numVisibleImages;
     loadAndShowGalleryImage();
+    waitabit();
   } else if (jp == J_A) {
     if (numVisibleImages > 0) {
       imageMenuAction(imageMenuItems[imageMenuIndex].value);
     } else {
       boop();
     }
-    jp = 0;
+    waitabit();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_IMAGE_GALLERY);
-    jp = 0;
-    return;
+    waitabit();
   }
-
-  renderImageMenu();
-  waitabit();
 
   jp = 0;
 }

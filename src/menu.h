@@ -124,27 +124,30 @@ inline void menuAction() {
 }
 
 inline void manualShootMenu() {
-  if ( jp == 0 || jp == J_A || jp == J_SELECT || jp == J_START ) {
-    jp = 0;
-    return;
-  } else if (jp == J_RIGHT) {
+  if (jp == J_RIGHT) {
     menuPos = (menuPos + 1) % NUM_MENU_ELEMENTS;
+    renderMenu();
   } else if (jp == J_LEFT) {
     menuPos = (menuPos + NUM_MENU_ELEMENTS - 1) % NUM_MENU_ELEMENTS;
+    renderMenu();
   } else if (jp == J_UP) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + 1) % menuItems[menuPos]->numOptions;
     menuAction();
+    storeSettings();
+    renderMenu();
   } else if (jp == J_DOWN) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
     menuAction();
+    storeSettings();
+    renderMenu();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
-    jp = 0;
-    return;
+  } else if (jp == (J_SELECT | J_START)) {
+    restoreDefaults();
+    beep();
+    storeSettings();
+    renderMenu();
   }
-
-  storeSettings();
-  renderMenu();
 
   jp = 0;
 }
