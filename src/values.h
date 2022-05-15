@@ -116,7 +116,7 @@
 #define A005_VOLTAGE_OUT_POS_992 0b00111111 //  0.992mV
 
 #define NUM_GAIN_LEVELS 11
-#define NUM_EXPOSURE_TIMES 9
+#define NUM_EXPOSURE_TIMES 32
 #define NUM_DITHERS 16
 #define NUM_DITHER_HIGHLOWS 4
 #define NUM_EDGE_MODES 8
@@ -139,18 +139,47 @@
 // 0x5000 - Room at night with no light, only a reading lamp.
 // 0xF000 - Room at night with only a TV on in the background.
 
-unsigned const int exposureTimesValues[NUM_EXPOSURE_TIMES] = { 0x0030, 0x0080, 0x0300, 0x0800, 0x1100, 0x2C00, 0x5000, 0xF000, 0xFF00, };
+unsigned const int exposureTimesValues[NUM_EXPOSURE_TIMES] = { 0xFFFF, 0xF424, 0xC350, 0x927C, 0x7A12, 0x61A8, 0x493E, 0x3D09, 0x30D4, 0x2710, 0x1E85, 0x186A, 0x1388, 0x0EA6, 0x0C35, 0x09C4, 0x0753, 0x061B, 0x04A4, 0x03AA, 0x030D, 0x0271, 0x01F4, 0x0177, 0x0139, 0x00FA, 0x00BC, 0x009C, 0x007D, 0x005E, 0x004E, 0x003F, /* 0x0032, 0x0026, 0x001F, 0x0019, 0x0013, 0x000D, */ };
 
 const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
-  { 0, "+Sun", },
-  { 1, " Sun", },
-  { 2, "-Sun", },
-  { 3, "+Day", },
-  { 4, " Day", },
-  { 5, "-Day", },
-  { 6, "Nite", },
-  { 7, "Lon1", },
-  { 8, "Lon2", },
+  {  0, "1050", },
+  {  1, "1000", },
+  {  2, " 800", },
+  {  3, " 600", },
+  {  4, " 500", },
+  {  5, " 400", },
+  {  6, " 300", },
+  {  7, " 250", },
+  {  8, " 200", },
+  {  9, " 160", },
+  { 10, " 125", },
+  { 11, " 100", },
+  { 12, "  80", },
+  { 13, "  60", },
+  { 14, "  50", },
+  { 15, "  40", },
+  { 16, "  30", },
+  { 17, "  25", },
+  { 18, "  20", },
+  { 19, "  15", },
+  { 20, "12.5", },
+  { 21, "  10", },
+  { 22, "   8", },
+  { 23, "   6", },
+  { 24, "   5", },
+  { 25, "   4", },
+  { 26, "   3", },
+  { 27, " 2.5", },
+  { 28, "   2", },
+  { 29, " 1.5", },
+  { 30, "1.25", },
+  { 31, "   1", },
+//  { 32, " 0.8", },
+//  { 33, " 0.6", },
+//  { 34, " 0.5", },
+//  { 35, " 0.4", },
+//  { 36, " 0.3", },
+//  { 37, " 0.2", },
 };
 
 // Set 1 (High Light)

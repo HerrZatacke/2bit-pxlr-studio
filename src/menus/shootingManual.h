@@ -4,7 +4,7 @@
 #define MENU_ACTION_DITHER 1
 
 MenuItem gainsMenu =          {  1, 0, 0,  1,     NUM_GAIN_LEVELS,  4, "Gain", "   Sensor     Gain",          &gains[0], MENU_ACTION_NONE, };
-MenuItem exposureTimesMenu =  {  6, 0, 0,  2,  NUM_EXPOSURE_TIMES,  4, "ExpT", " Exposure     Time",  &exposureTimes[0], MENU_ACTION_NONE, };
+MenuItem exposureTimesMenu =  {  6, 0, 0,  2,  NUM_EXPOSURE_TIMES, 16, "ExpT", " ExposureTime (ms)",  &exposureTimes[0], MENU_ACTION_NONE, };
 MenuItem voltageRefsMenu =    { 11, 0, 0,  6,    NUM_VOLTAGE_REFS,  3, "vRef", "  VoltageReference",    &voltageRefs[0], MENU_ACTION_NONE, };
 MenuItem voltageOutsMenu =    { 16, 0, 0,  8,    NUM_VOLTAGE_OUTS, 40, "vOut", "  Voltage   Output",    &voltageOuts[0], MENU_ACTION_NONE, };
 MenuItem invertOutputsMenu =  {  1, 1, 0, 11,  NUM_INVERT_OUTPUTS,  0, "InvO", "   Invert   Output",  &invertOutputs[0], MENU_ACTION_NONE, };
