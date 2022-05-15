@@ -27,7 +27,7 @@ inline void disappearDialog() {
 
 unsigned char dialog(unsigned char *message) {
   fill_win_rect(0, 0, 20, 1, MENU_BORDER_TOP);
-  fill_win_rect(0, 1, 20, 5, OFFSET_BLANK);
+  fill_win_rect(0, 1, 20, 10, OFFSET_BLANK);
   set_win_based_tiles(1, 2, 16, 1, message, OFFSET_FONT - 32);
   set_win_based_tiles(14, 4, 5, 2, "Yes A No B", OFFSET_FONT - 32);
 

@@ -40,10 +40,11 @@
 #define MAIN_LOOP_DEBUG 254
 #define MAIN_LOOP_NOT_IMPLEMENTED 255
 
-#define IMAGE_MENU_DELETE 0
-#define IMAGE_MENU_PRINT 1
-#define IMAGE_MENU_BLEEP 2
-#define IMAGE_MENU_EXPOSE 3
+#define IMAGE_MENU_INFO 0
+#define IMAGE_MENU_DELETE 1
+#define IMAGE_MENU_PRINT 2
+#define IMAGE_MENU_BLEEP 3
+#define IMAGE_MENU_EXPOSE 4
 
 unsigned char mainLoopState = 0;
 void menuSelectMode(unsigned char loopState);

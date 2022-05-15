@@ -8,23 +8,33 @@ void loadAndShowGalleryImage();
 #include "./expose.h"
 #include "./printCmd.h"
 
-inline void appearImageMenu() {
-  HIDE_SPRITES;
-  while (SCX_REG < 90) {
-    SCX_REG += 5;
-    wait_vbl_done();
-  };
-  SHOW_SPRITES;
+void renderImageMenu() {
+  move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));
 }
 
-inline void disappearImageMenu() {
-  HIDE_SPRITES;
-  move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
-  while (SCX_REG > 0) {
-    SCX_REG -= 5;
+inline void appearImageMenu() {
+  move_win(168, 0);
+
+  for (unsigned char i = 0; i < 10; i += 1) {
+    scroll_win(-9, 0);
     wait_vbl_done();
-  };
-  SHOW_SPRITES;
+  }
+
+  renderImageMenu();
+}
+
+
+inline void disappearImageMenu() {
+  move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
+
+  waitRelease();
+
+  for (unsigned char i = 0; i < 10; i += 1) {
+    scroll_win(9, 0);
+    wait_vbl_done();
+  }
+
+  move_win(168, 0);
 }
 
 void loadAndShowGalleryImage() {
@@ -37,9 +47,9 @@ void loadAndShowGalleryImage() {
     LCDC_REG |= LCDCF_BG8000;
     set_bkg_data(0, 112, images[imageSlot]->tilesLower);
 
-    set_bkg_based_tiles(13, 16, 5, 2, "Image  /  ", OFFSET_FONT - 32);
-    writeNumber(12, 17, 2, imageIndex + 1);
-    writeNumber(15, 17, 2, numVisibleImages);
+    set_bkg_based_tiles(2, 16, 5, 2, "Image  /  ", OFFSET_FONT - 32);
+    writeNumber(1, 17, 2, imageIndex + 1);
+    writeNumber(4, 17, 2, numVisibleImages);
   //  writeNumber(2, 16, 3, findFirstFreeSlot());
   } else {
     LCDC_REG &= ~LCDCF_BG8000;
@@ -47,7 +57,7 @@ void loadAndShowGalleryImage() {
     LCDC_REG |= LCDCF_BG8000;
     set_bkg_data(0, 112, nope_tiles);
 
-    set_bkg_based_tiles(13, 16, 5, 2, "   NoImage", OFFSET_FONT - 32);
+    set_bkg_based_tiles(2, 16, 5, 2, "No   Image", OFFSET_FONT - 32);
   }
 }
 
@@ -59,22 +69,18 @@ void initGallery() {
   loadAndShowGalleryImage();
 }
 
-
-void renderImageMenu() {
-  move_sprite(SPRITE_MENU_INDICATOR, 87, yMenuSprite(imageMenuIndex));
-}
-
 void initImageMenu() {
-  set_bkg_tiles(20, 0, 12, 18, map_sideMenu);
   set_bkg_tiles(0, 0, 20, 18, map_normal);
 
+  fill_win_rect(0, 0, 1, 18, MENU_BORDER_LEFT);
+  fill_win_rect(1, 0, 11, 18, OFFSET_BLANK);
+
   for (unsigned char index = 0; index < NUM_IMAGE_MENU_OPTIONS; index += 1) {
-    set_bkg_based_tiles(22, yMenu(index), 8, 1, imageMenuItems[index].title, OFFSET_FONT - 32);
+    set_win_based_tiles(2, yMenu(index), 8, 1, imageMenuItems[index].title, OFFSET_FONT - 32);
   }
 
   appearImageMenu();
   loadAndShowGalleryImage();
-  renderImageMenu();
 }
 
 void galleryMenu() {
@@ -105,7 +111,9 @@ inline void imageMenuAction(unsigned char value) {
     return;
   }
 
-  if (value == IMAGE_MENU_DELETE) {
+  if (value == IMAGE_MENU_INFO) {
+    boop();
+  } else if (value == IMAGE_MENU_DELETE) {
     setImageSlot(address, 0xff);
     reduceIndexAfterDelete(imageIndex);
     sortImages();
