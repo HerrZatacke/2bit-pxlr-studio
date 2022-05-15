@@ -9,7 +9,7 @@ inline void joypadConsumed() {
 }
 
 void waitRelease() {
-  // Wait until all inputs has been released
+  // Wait until all inputs have been released
   while (jp != 0) {
     wait_vbl_done();
   }

@@ -155,6 +155,7 @@ inline void manualShootMenu() {
     beep();
     storeSettings();
     renderMenu();
+    waitRelease();
     joypadConsumed();
   } else if (jp == J_A) {
     saveImageDialog();
