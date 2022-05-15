@@ -45,22 +45,17 @@ void saveImageDialog() {
 
   dialogState = DIALOG_WAITING;
   while (dialogState == DIALOG_WAITING) {
-    jp = joypad();
-
-    switch(jp) {
-      case J_B:
-        dialogState = DIALOG_ANSWERED;
-        waitRelease();
-        jp = 0;
-        boop();
-        break;
-      case J_A:
-        dialogState = DIALOG_ANSWERED;
-        waitRelease();
-        saveImage();
-        storeSettings();
-        beep();
-        break;
+    if (jp == J_B) {
+      dialogState = DIALOG_ANSWERED;
+      waitRelease();
+      joypadConsumed();
+      boop();
+    } else if (jp == J_A) {
+      dialogState = DIALOG_ANSWERED;
+      waitRelease();
+      saveImage();
+      storeSettings();
+      beep();
     }
 
     wait_vbl_done();

@@ -78,26 +78,22 @@ void initImageMenu() {
 }
 
 void galleryMenu() {
-  captureJoypad();
 
   if (jp == J_RIGHT) {
     imageIndex = (imageIndex + 1) % numVisibleImages;
     loadAndShowGalleryImage();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_LEFT) {
     imageIndex = (imageIndex + numVisibleImages - 1) % numVisibleImages;
     loadAndShowGalleryImage();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_A) {
     menuSelectMode(MAIN_LOOP_IMAGE);
-    waitabit();
+    joypadConsumed();
   }
-
-
-  jp = 0;
 }
 
 
@@ -141,37 +137,35 @@ inline void imageMenuAction(unsigned char value) {
 }
 
 void imageMenu() {
-  captureJoypad();
 
   if (jp == J_UP) {
     imageMenuIndex = (imageMenuIndex + NUM_IMAGE_MENU_OPTIONS - 1) % NUM_IMAGE_MENU_OPTIONS;
     clonk();
     renderImageMenu();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_DOWN) {
     imageMenuIndex = (imageMenuIndex + 1) % NUM_IMAGE_MENU_OPTIONS;
     clonk();
     renderImageMenu();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_RIGHT) {
     imageIndex = (imageIndex + 1) % numVisibleImages;
     loadAndShowGalleryImage();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_LEFT) {
     imageIndex = (imageIndex + numVisibleImages - 1) % numVisibleImages;
     loadAndShowGalleryImage();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_A) {
     if (numVisibleImages > 0) {
       imageMenuAction(imageMenuItems[imageMenuIndex].value);
     } else {
       boop();
     }
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_IMAGE_GALLERY);
-    waitabit();
+    joypadConsumed();
   }
 
-  jp = 0;
 }

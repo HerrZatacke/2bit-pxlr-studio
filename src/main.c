@@ -88,6 +88,8 @@ void scanline_isr() {
   } else if (LYC_REG == 144) {
     LCDC_REG &= ~ LCDCF_BG8000;
     LYC_REG = 71;
+
+    captureJoypadISR();
   }
 }
 
@@ -131,10 +133,9 @@ void capture() {
 
   A000 = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
 
-  captureJoypad(); // this call is only for the emulator to get some joypad input
-
+  wait_vbl_done();
   while (A000 % 2) {
-    captureJoypad();
+    wait_vbl_done();
   }
 }
 
@@ -160,6 +161,12 @@ void menuSelectMode(unsigned char loopState) {
 }
 
 int main(void) {
+  CRITICAL {
+    STAT_REG |= STATF_LYC;
+    LYC_REG = 144;
+    add_LCD(scanline_isr);
+  }
+  set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
   init_gfx();
   init_sound();
@@ -174,7 +181,7 @@ int main(void) {
 
   HIDE_SPRITES;
   unsigned char splashPressed = splash();
-  waitRelease();
+
   SHOW_SPRITES;
   // ToDo: Fade-effect?
 
@@ -182,13 +189,6 @@ int main(void) {
   set_bkg_data(112, 16, upperLowerDoubleTiles);
   LCDC_REG |= LCDCF_BG8000;
   set_bkg_data(112, 16, upperLowerDoubleTiles);
-
-  CRITICAL {
-    STAT_REG |= STATF_LYC;
-    LYC_REG = 144;
-    add_LCD(scanline_isr);
-  }
-  set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
   if (splashPressed == J_A) {
     menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);
@@ -203,9 +203,6 @@ int main(void) {
       case MAIN_LOOP_SHOOT_MANUAL:
         fastLoadImageTiles();
         manualShootMenu();
-        if (joypad() == J_A) {
-          saveImageDialog();
-        }
         capture();
         break;
       case MAIN_LOOP_MENU:

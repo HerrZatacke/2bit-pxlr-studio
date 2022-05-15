@@ -21,22 +21,18 @@ inline void initMainMenu() {
 }
 
 inline void mainMenu() {
-  captureJoypad();
-
   if (jp == J_DOWN) {
     clonk();
     mainMenuPos = (mainMenuPos + 1) % NUM_MAIN_MENU_OPTIONS;
     mainMenuSprite();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_UP) {
     clonk();
     mainMenuPos = (mainMenuPos + NUM_MAIN_MENU_OPTIONS - 1) % NUM_MAIN_MENU_OPTIONS;
     mainMenuSprite();
-    waitabit();
+    joypadConsumed();
   } else if (jp == J_A) {
     menuSelectMode(mainMenuItems[mainMenuPos].value);
-    waitabit();
+    joypadConsumed();
   }
-
-  jp = 0;
 }

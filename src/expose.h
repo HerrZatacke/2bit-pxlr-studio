@@ -59,7 +59,8 @@ inline void expose() {
   loadImageTilesFlipped();
   waitRelease();
 
-  while (joypad() != J_B) {
+  while (jp != J_B) {
+
     BGP_REG = exposePalettes[exposeIndex];
     exposeIndex = (exposeIndex + 1) % 3;
 
@@ -71,6 +72,7 @@ inline void expose() {
     wait_vbl_done();
   }
 
+  joypadConsumed();
   waitRelease();
 
   BGP_REG = PALETTE_BLANK;

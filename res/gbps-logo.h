@@ -287,16 +287,24 @@ const unsigned char logo_map[360] = {
 };
 
 inline unsigned char splash() {
+
+  LCDC_REG &= ~LCDCF_BG8000;
   set_bkg_data(0, LOGO_TILE_COUNT, logo_tiles);
+  LCDC_REG |= LCDCF_BG8000;
+  set_bkg_data(0, LOGO_TILE_COUNT, logo_tiles);
+
   set_bkg_tiles(0, 0, 20, 18, logo_map);
   set_bkg_based_tiles(0, 16, sizeof(branch), 1, branch, OFFSET_FONT - 32);
   set_bkg_based_tiles(0, 17, sizeof(version), 1, version, OFFSET_FONT - 32);
   set_bkg_based_tiles(13, 16, 7, 2, "SHOOT A MENU B", OFFSET_FONT - 32);
 
   while (jp != J_A && jp != J_B) {
-    jp = joypad();
     wait_vbl_done();
   }
 
-  return jp;
+  unsigned char result = jp;
+
+  waitRelease(); // waitRelease() resets `jp`
+
+  return result;
 }

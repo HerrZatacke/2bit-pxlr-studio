@@ -15,15 +15,26 @@ inline void silence() {
 
 unsigned char breakBleep = 0;
 
+inline void loadWaveform() {
+  const uint8_t sinewave[16] = { 0x89, 0xbc, 0xde, 0xff, 0xff, 0xfe, 0xdb, 0xa8, 0x75, 0x42, 0x10, 0x00, 0x00, 0x12, 0x34, 0x67 };
+//  const uint8_t sinewavex2[16] = { 0x8b, 0xdf, 0xfe, 0xc9, 0x63, 0x10, 0x02, 0x47, 0xbd, 0xff, 0xec, 0x96, 0x31, 0x00, 0x24, 0x7b };
+//  const uint8_t randwave[16] = { 0x13, 0x08, 0xd2, 0x53, 0xa1, 0xa0, 0x4f, 0x4c, 0x99, 0xbc, 0xe8, 0x7f, 0x62, 0xe7, 0x5b, 0xd6 };
+//  const uint8_t sawtoothwave[16] = { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef };
+//  const uint8_t sawtoothwave2[16] = { 0x02, 0x46, 0x8a, 0xce, 0x02, 0x46, 0x8a, 0xce, 0x02, 0x46, 0x8a, 0xce, 0x02, 0x46, 0x8a, 0xce, };
+//  const uint8_t single[16] = { 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+  memcpy(_AUD3WAVERAM, sinewave, 16);
+}
+
 void breakSound(unsigned char times) {
   for(unsigned char i = 0; i < times; i++) {
-    if (joypad() == J_B) {
+    wait_vbl_done();
+    if (jp == J_B) {
       breakBleep = 1;
       move_sprite(SPRITE_BLEEP_CURSOR, 0, 0);
       silence();
       return;
     }
-    wait_vbl_done();
   }
 }
 
@@ -40,17 +51,22 @@ void playBeep(unsigned char r1, unsigned char r2) {
 }
 
 void bleep() {
+  breakBleep = 0;
+  loadWaveform();
   unsigned char imageAddress = getAddressForIndex(imageIndex);
   SWITCH_RAM(images[imageAddress]->bank);
   unsigned char i = 0;
 
   playBeep(freqLookupN33[17], freqLookupN34[17]);
 
-  for (i = 0; i < 16; ++i) {
-    playBeep(freqLookupN33[i], freqLookupN34[i]);
-  }
-  for (i = 0; i < 16; ++i) {
-    playBeep(freqLookupN33[i], freqLookupN34[i]);
+  for (i = 0; i < 32; i += 1) {
+    playBeep(freqLookupN33[i % 16], freqLookupN34[i % 16]);
+
+    if (breakBleep == 1) {
+      move_sprite(SPRITE_BLEEP_CURSOR, 0, 0);
+      joypadConsumed();
+      return;
+    }
   }
 
   // Loop upper part
@@ -63,14 +79,14 @@ void bleep() {
       unsigned char cursorY = tileIndex >> 4;
       move_sprite(SPRITE_BLEEP_CURSOR, (cursorX << 3) + 24, (cursorY << 3) + 32);
       playBeep(freqLookupN33[17], freqLookupN34[17]);
-//      breakSound(5);
     }
 
     playBeep(freqLookupN33[tileByte >> 4], freqLookupN34[tileByte >> 4]);
     playBeep(freqLookupN33[tileByte % 16], freqLookupN34[tileByte % 16]);
 
     if (breakBleep == 1) {
-      breakBleep = 0;
+      move_sprite(SPRITE_BLEEP_CURSOR, 0, 0);
+      joypadConsumed();
       return;
     }
   }
@@ -85,14 +101,14 @@ void bleep() {
       unsigned char cursorY = tileIndex >> 4;
       move_sprite(SPRITE_BLEEP_CURSOR, (cursorX << 3) + 24, (cursorY << 3) + 32 + 56);
       playBeep(freqLookupN33[17], freqLookupN34[17]);
-//      breakSound(5);
     }
 
     playBeep(freqLookupN33[tileByte >> 4], freqLookupN34[tileByte >> 4]);
     playBeep(freqLookupN33[tileByte % 16], freqLookupN34[tileByte % 16]);
 
     if (breakBleep == 1) {
-      breakBleep = 0;
+      move_sprite(SPRITE_BLEEP_CURSOR, 0, 0);
+      joypadConsumed();
       return;
     }
   }
@@ -100,4 +116,5 @@ void bleep() {
   playBeep(freqLookupN33[17], freqLookupN34[17]);
 
   move_sprite(SPRITE_BLEEP_CURSOR, 0, 0);
+  joypadConsumed();
 }

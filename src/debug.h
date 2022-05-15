@@ -1,6 +1,7 @@
 inline void debugMenu() {
-  if (joypad() == J_B) {
+  if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
+    joypadConsumed();
   }
 }
 

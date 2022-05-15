@@ -1,6 +1,8 @@
 
 unsigned char menuPos = 0;
 
+extern void saveImageDialog();
+
 #include "menus/shootingManual.h"
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
@@ -127,27 +129,35 @@ inline void manualShootMenu() {
   if (jp == J_RIGHT) {
     menuPos = (menuPos + 1) % NUM_MENU_ELEMENTS;
     renderMenu();
+    joypadConsumed();
   } else if (jp == J_LEFT) {
     menuPos = (menuPos + NUM_MENU_ELEMENTS - 1) % NUM_MENU_ELEMENTS;
     renderMenu();
+    joypadConsumed();
   } else if (jp == J_UP) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + 1) % menuItems[menuPos]->numOptions;
     menuAction();
     storeSettings();
     renderMenu();
+    joypadConsumed();
   } else if (jp == J_DOWN) {
+    joypadConsumed();
     menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
     menuAction();
     storeSettings();
     renderMenu();
+    joypadConsumed();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
+    joypadConsumed();
   } else if (jp == (J_SELECT | J_START)) {
     restoreDefaults();
     beep();
     storeSettings();
     renderMenu();
+    joypadConsumed();
+  } else if (jp == J_A) {
+    saveImageDialog();
+    joypadConsumed();
   }
-
-  jp = 0;
 }
