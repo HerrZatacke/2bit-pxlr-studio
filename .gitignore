@@ -4,3 +4,5 @@
 /branch.h
 /pxlr.zip
 /release
+/cmake-build-debug/
+/CMakeLists.txt
