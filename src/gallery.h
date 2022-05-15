@@ -78,7 +78,7 @@ void initImageMenu() {
 }
 
 void galleryMenu() {
-  captureMenuJp();
+  captureJoypad();
 
   if (jp == J_RIGHT) {
     imageIndex = (imageIndex + 1) % numVisibleImages;
@@ -141,7 +141,7 @@ inline void imageMenuAction(unsigned char value) {
 }
 
 void imageMenu() {
-  captureMenuJp();
+  captureJoypad();
 
   if (jp == J_UP) {
     imageMenuIndex = (imageMenuIndex + NUM_IMAGE_MENU_OPTIONS - 1) % NUM_IMAGE_MENU_OPTIONS;

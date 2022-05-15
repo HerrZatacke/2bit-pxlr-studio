@@ -21,7 +21,7 @@ inline void initMainMenu() {
 }
 
 inline void mainMenu() {
-  captureMenuJp();
+  captureJoypad();
 
   if (jp == J_DOWN) {
     clonk();

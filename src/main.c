@@ -57,6 +57,7 @@ void setDitherMatrix();
 #include "typedefs/MenuItem.h"
 #include "typedefs/Image.h"
 
+#include "./joypad.h"
 #include "./utils.h"
 #include "../res/frames/frame_pxlr.h"
 #include "../res/map.h"
@@ -130,10 +131,10 @@ void capture() {
 
   A000 = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
 
-  captureMenuJp(); // this call is only for the emulator to get some joypad input
+  captureJoypad(); // this call is only for the emulator to get some joypad input
 
   while (A000 % 2) {
-    captureMenuJp();
+    captureJoypad();
   }
 }
 
