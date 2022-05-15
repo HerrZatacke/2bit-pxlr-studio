@@ -153,7 +153,6 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
   // We need to print a border of 16x16 pixels (2x2 tiles)
   uint8_t x, y;
   uint16_t frameTileIndex = 0;
-  uint8_t border[16];
 
   uint8_t *image = upper;
   for (y = 0; y < 18; y++) {
@@ -162,8 +161,7 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
         image = lower;
       }
       if (x < 2 || y < 2 || x >= 18 || y >= 16) {
-        memcpy(border, &frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 16);
-        printTileData(border, TRUE, 9);
+        printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], TRUE, 9);
       } else {
         printTileData(image, TRUE, 9);
         image += 16;
