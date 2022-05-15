@@ -296,7 +296,7 @@ inline unsigned char splash() {
   set_bkg_tiles(0, 0, 20, 18, logo_map);
   set_bkg_based_tiles(0, 16, sizeof(branch), 1, branch, OFFSET_FONT - 32);
   set_bkg_based_tiles(0, 17, sizeof(version), 1, version, OFFSET_FONT - 32);
-  set_bkg_based_tiles(13, 16, 7, 2, "SHOOT A MENU B", OFFSET_FONT - 32);
+  set_bkg_based_tiles(13, 16, 7, 2, "Shoot A Menu B", OFFSET_FONT - 32);
 
   while (jp != J_A && jp != J_B) {
     wait_vbl_done();
