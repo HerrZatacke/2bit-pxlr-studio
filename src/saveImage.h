@@ -36,13 +36,11 @@ void saveImageDialog() {
     return;
   }
 
-  beep();
+  hideLowerManualModeSprites();
 
-  if (dialog("Save Image?")) {
+  if (dialog("Save Image?     ")) {
     saveImage();
-    storeSettings();
-    beep();
-  } else {
-    boop();
   }
+
+  showManualModeSprites();
 }

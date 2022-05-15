@@ -13,7 +13,7 @@ inline void initManualMode() {
   clearBkg();
   set_bkg_tiles(0, 0, 20, 18, map_normal);
   sortImages();
-  initManualModeSprites();
+  showManualModeSprites();
   renderMenu();
 }
 

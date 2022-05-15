@@ -2,14 +2,17 @@ inline void init_gfx() {
   ENABLE_RAM;
   SHOW_BKG;
   BGP_REG = PALETTE_NORMAL;
+
   OBP0_REG = OBP1_REG = PALETTE_SPRITES;
   SHOW_SPRITES;
   SPRITES_8x8;
+
+  SHOW_WIN;
+  move_win(7, 144);
+
   set_sprite_tile(SPRITE_MENU_INDICATOR, OFFSET_MENU_ARROW);
   set_sprite_tile(SPRITE_BLEEP_CURSOR, OFFSET_BLEEP_CURSOR);
-}
 
-inline void initManualModeSprites() {
   set_sprite_tile(SPRITE_BORDER_H_1, OFFSET_BORDER_H);
   set_sprite_tile(SPRITE_BORDER_H_2, OFFSET_BORDER_H);
   set_sprite_tile(SPRITE_BORDER_H_3, OFFSET_BORDER_H);
@@ -27,7 +30,9 @@ inline void initManualModeSprites() {
   set_sprite_tile(SPRITE_BORDER_V_6, OFFSET_BORDER_V);
   set_sprite_tile(SPRITE_BORDER_V_7, OFFSET_BORDER_V);
   set_sprite_tile(SPRITE_BORDER_V_8, OFFSET_BORDER_V);
+}
 
+inline void showManualModeSprites() {
   move_sprite(SPRITE_BORDER_H_1, 24, 25);
   move_sprite(SPRITE_BORDER_H_2, 32, 25);
   move_sprite(SPRITE_BORDER_H_3, 136, 25);
@@ -47,24 +52,28 @@ inline void initManualModeSprites() {
   move_sprite(SPRITE_BORDER_V_8, 147, 136);
 }
 
+inline void hideLowerManualModeSprites() {
+  move_sprite(SPRITE_BORDER_H_5, 0, 0);
+  move_sprite(SPRITE_BORDER_H_6, 0, 0);
+  move_sprite(SPRITE_BORDER_H_7, 0, 0);
+  move_sprite(SPRITE_BORDER_H_8, 0, 0);
+  move_sprite(SPRITE_BORDER_V_5, 0, 0);
+  move_sprite(SPRITE_BORDER_V_6, 0, 0);
+  move_sprite(SPRITE_BORDER_V_7, 0, 0);
+  move_sprite(SPRITE_BORDER_V_8, 0, 0);
+}
+
 inline void hideManualModeSprites() {
   move_sprite(SPRITE_BORDER_H_1, 0, 0);
   move_sprite(SPRITE_BORDER_H_2, 0, 0);
   move_sprite(SPRITE_BORDER_H_3, 0, 0);
   move_sprite(SPRITE_BORDER_H_4, 0, 0);
-  move_sprite(SPRITE_BORDER_H_5, 0, 0);
-  move_sprite(SPRITE_BORDER_H_6, 0, 0);
-  move_sprite(SPRITE_BORDER_H_7, 0, 0);
-  move_sprite(SPRITE_BORDER_H_8, 0, 0);
-
   move_sprite(SPRITE_BORDER_V_1, 0, 0);
   move_sprite(SPRITE_BORDER_V_2, 0, 0);
   move_sprite(SPRITE_BORDER_V_3, 0, 0);
   move_sprite(SPRITE_BORDER_V_4, 0, 0);
-  move_sprite(SPRITE_BORDER_V_5, 0, 0);
-  move_sprite(SPRITE_BORDER_V_6, 0, 0);
-  move_sprite(SPRITE_BORDER_V_7, 0, 0);
-  move_sprite(SPRITE_BORDER_V_8, 0, 0);
+
+  hideLowerManualModeSprites();
 }
 
 inline void init_sound() {
