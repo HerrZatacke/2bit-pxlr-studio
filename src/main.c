@@ -59,6 +59,7 @@ void setDitherMatrix();
 
 #include "./joypad.h"
 #include "./utils.h"
+#include "./dialog.h"
 #include "../res/frames/frame_pxlr.h"
 #include "../res/map.h"
 #include "../res/gbps-logo.h"
