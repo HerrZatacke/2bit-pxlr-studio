@@ -98,11 +98,17 @@ void scanline_isr() {
 
 void setDitherMatrix() {
   SWITCH_RAM(16);
+  unsigned char ditherSet = getMenuValue(ditherHighLowsMenu);
+
   for (unsigned int i = 0; i < 48; i += 1) {
-    if (getMenuValue(ditherHighLowsMenu) == DITHER_SET_HIGH) {
-      A006A035[i] = ditherHighLightValues[getMenuValue(ditherSetsMenu)][i];
-    } else {
-      A006A035[i] = ditherLowLightValues[getMenuValue(ditherSetsMenu)][i];
+    if (ditherSet == DITHER_SET_HIGH) {
+      memcpy(A006A035, ditherHighLightValues[getMenuValue(ditherSetsMenu)], 48);
+    } else if (ditherSet == DITHER_SET_LOW) {
+      memcpy(A006A035, ditherLowLightValues[getMenuValue(ditherSetsMenu)], 48);
+    } else if (ditherSet == DITHER_SET_NO_HIGH) {
+      memcpy(A006A035, ditherNoHighLightValues[getMenuValue(ditherSetsMenu)], 48);
+    } else if (ditherSet == DITHER_SET_NO_LOW) {
+      memcpy(A006A035, ditherNoLowLightValues[getMenuValue(ditherSetsMenu)], 48);
     }
   }
 }
