@@ -136,9 +136,9 @@ void capture() {
 
   A000 = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
 
-  wait_vbl_done();
+  captureJoypadISR();
   while (A000 % 2) {
-    wait_vbl_done();
+    captureJoypadISR();
   }
 }
 
