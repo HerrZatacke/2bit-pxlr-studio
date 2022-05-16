@@ -12,6 +12,7 @@ const unsigned char exposePalettes[3] = {
 
 unsigned char exposeIndex = 0;
 
+// ToDo: convert this to a "flipTiles" function and then use set_data() to write to vram
 void set_bkg_data_flipped(unsigned char from, unsigned char length, const unsigned char tiles[], const unsigned char vramHighLow) {
 
   unsigned char flippedTiles[HALF_IMAGE_SIZE];
