@@ -1,11 +1,3 @@
-#define THUMBNAIL_BYTE_CAPTURE       0x00
-#define THUMBNAIL_BYTE_EDGEGAINS     0x10
-#define THUMBNAIL_BYTE_EXPOSURE_HIGH 0x20
-#define THUMBNAIL_BYTE_EXPOSURE_LOW  0x30
-#define THUMBNAIL_BYTE_EDMOVOLT      0xC6
-#define THUMBNAIL_BYTE_VOUTZERO      0xD6
-#define THUMBNAIL_BYTE_DITHERHIGHLOW 0xE6
-#define THUMBNAIL_BYTE_DITHERSET     0xF6
 
 void saveImage() {
   unsigned char firstFreeSlot = findFirstFreeSlot();

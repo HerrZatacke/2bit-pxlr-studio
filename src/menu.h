@@ -57,42 +57,6 @@ inline unsigned char restoreSettings() {
   // 1 forces a reset to defaults
   return 1;
 }
-
-const unsigned char hexCharLUT[16] = { 0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x98, 0x99, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, };
-
-inline void showRegister(unsigned char y, unsigned char value) {
-  unsigned char chars[2] = {
-    hexCharLUT[(value >> 4) & 0b00001111],
-    hexCharLUT[value & 0b00001111],
-  };
-
-  set_bkg_tiles(0, y, 2, 1, chars);
-}
-
-
-// Registers A001-A005 in original ROM
-// 0xE4, 0x45, 0x00, 0x03, 0xA7 when getting lighter   // Gain:20.0 / EdOp:2d / EdEx:V-On // ExpT:-Dim // EdMo:50% / vRef:1.5v / InvO:Off // 0 Pt:pos / vOut:+224
-// 0xE8, 0x35, 0x00, 0x03, 0xA9 when getting darker    // Gain:xx.x / EdOp:2d / EdEx:V-On // ExpT:+Dim // EdMo:50% / vRef:1.5v / InvO:Off // 0 Pt:pos / vOut:+288
-
-inline void showRegisters() {
-  unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
-
-  // BitMask      01100000                        00011111                  10000000
-  showRegister(4, getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu));
-
-  // BitMask      11111111
-  showRegister(5, exposureTime >> 8);
-
-  // BitMask      11111111
-  showRegister(6, exposureTime);
-
-  // BitMask      01110000                      00000111                        00001000
-  showRegister(7, getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu));
-
-  // BitMask      00111111                        01000000
-  showRegister(8, getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu));
-}
-
 inline void renderMenu() {
   clonk();
   unsigned char currentPage = menuItems[menuPos]->page;

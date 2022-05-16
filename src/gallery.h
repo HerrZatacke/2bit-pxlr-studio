@@ -1,5 +1,3 @@
-unsigned char imageIndex = 0;
-unsigned char imageMenuIndex = 0;
 
 void loadAndShowGalleryImage();
 
@@ -66,17 +64,12 @@ void initGallery() {
 }
 
 void initImageMenu() {
-  set_bkg_tiles(0, 0, 20, 18, map_normal);
-
-  fill_win_rect(0, 0, 1, 18, MENU_BORDER_LEFT);
-  fill_win_rect(1, 0, 11, 18, OFFSET_BLANK);
+  fill_win_rect(0, 0, 1, 32, MENU_BORDER_LEFT);
+  fill_win_rect(1, 0, 31, 32, OFFSET_BLANK);
 
   for (unsigned char index = 0; index < NUM_IMAGE_MENU_OPTIONS; index += 1) {
     set_win_based_tiles(2, yMenu(index), 8, 1, imageMenuItems[index].title, OFFSET_FONT - 32);
   }
-
-  appearImageMenu();
-  loadAndShowGalleryImage();
 }
 
 void galleryMenu() {
@@ -108,7 +101,9 @@ inline void imageMenuAction(unsigned char value) {
   }
 
   if (value == IMAGE_MENU_INFO) {
-    boop();
+    displayImageInfo(imageIndex);
+    initImageMenu();
+    renderImageMenu();
   } else if (value == IMAGE_MENU_DELETE) {
     setImageSlot(address, 0xff);
     reduceIndexAfterDelete(imageIndex);
@@ -124,8 +119,7 @@ inline void imageMenuAction(unsigned char value) {
       boop();
     } else {
       disappearImageMenu();
-      unsigned char imageSlot = getImageSlot(imageIndex);
-      printImage(images[imageSlot]->tilesLower, images[imageSlot]->tilesUpper, images[imageSlot]->bank);
+      printImage(images[address]->tilesLower, images[address]->tilesUpper, images[address]->bank);
       beep();
       appearImageMenu();
     }

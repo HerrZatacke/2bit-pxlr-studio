@@ -51,8 +51,19 @@
 #define VRAM_9000 (unsigned char *)0x9000
 #define VRAM_8000 (unsigned char *)0x8000
 
+#define THUMBNAIL_BYTE_CAPTURE       0x00
+#define THUMBNAIL_BYTE_EDGEGAINS     0x10
+#define THUMBNAIL_BYTE_EXPOSURE_HIGH 0x20
+#define THUMBNAIL_BYTE_EXPOSURE_LOW  0x30
+#define THUMBNAIL_BYTE_EDMOVOLT      0xC6
+#define THUMBNAIL_BYTE_VOUTZERO      0xD6
+#define THUMBNAIL_BYTE_DITHERHIGHLOW 0xE6
+#define THUMBNAIL_BYTE_DITHERSET     0xF6
+
 unsigned char mainLoopState = 0;
 unsigned char isCapturing = 0;
+unsigned char imageIndex = 0;
+unsigned char imageMenuIndex = 0;
 
 void menuSelectMode(unsigned char loopState);
 void setDitherMatrix();
@@ -77,6 +88,7 @@ void setDitherMatrix();
 #include "./banks/banks.h"
 #include "./imageIndexing.h"
 #include "./values.h"
+#include "./imageInfo.h"
 #include "./mainMenu.h"
 #include "./debug.h"
 #include "./menu.h"
@@ -173,6 +185,8 @@ void menuSelectMode(unsigned char loopState) {
     initGallery();
   } else if (loopState == MAIN_LOOP_IMAGE) {
     initImageMenu();
+    appearImageMenu();
+    loadAndShowGalleryImage();
   } else if (loopState == MAIN_LOOP_DELETE_ALL) {
     deleteAllImages();
     mainLoopState = MAIN_LOOP_MENU;
@@ -205,6 +219,7 @@ int main(void) {
   set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
 
   cleanupIndexGaps();
+  sortImages();
 
   HIDE_SPRITES;
   unsigned char splashPressed = splash();
