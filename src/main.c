@@ -47,6 +47,8 @@
 #define IMAGE_MENU_EXPOSE 4
 
 unsigned char mainLoopState = 0;
+unsigned char isCapturing = 0;
+
 void menuSelectMode(unsigned char loopState);
 void setDitherMatrix();
 
@@ -92,7 +94,9 @@ void scanline_isr() {
     LCDC_REG &= ~ LCDCF_BG8000;
     LYC_REG = 71;
 
-    captureJoypadISR();
+    if (!isCapturing) {
+      captureJoypadISR();
+    }
   }
 }
 
@@ -140,12 +144,19 @@ void capture() {
   A004 = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   A005 = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
 
+  isCapturing = 1;
+
   A000 = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
 
   captureJoypadISR();
+
   while (A000 % 2) {
-    captureJoypadISR();
+    if (!jp) {
+      captureJoypadISR();
+    }
   }
+
+  isCapturing = 0;
 }
 
 void menuSelectMode(unsigned char loopState) {
@@ -211,8 +222,8 @@ int main(void) {
     switch (mainLoopState) {
       case MAIN_LOOP_SHOOT_MANUAL:
         fastLoadImageTiles();
-        manualShootMenu();
         capture();
+        manualShootMenu();
         break;
       case MAIN_LOOP_MENU:
         mainMenu();
