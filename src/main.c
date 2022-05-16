@@ -37,6 +37,7 @@
 #define MAIN_LOOP_SHOOT_MANUAL 1
 #define MAIN_LOOP_IMAGE_GALLERY 2
 #define MAIN_LOOP_IMAGE 3
+#define MAIN_LOOP_DELETE_ALL 4
 #define MAIN_LOOP_DEBUG 254
 #define MAIN_LOOP_NOT_IMPLEMENTED 255
 
@@ -171,6 +172,9 @@ void menuSelectMode(unsigned char loopState) {
     initGallery();
   } else if (loopState == MAIN_LOOP_IMAGE) {
     initImageMenu();
+  } else if (loopState == MAIN_LOOP_DELETE_ALL) {
+    deleteAllImages();
+    mainLoopState = MAIN_LOOP_MENU;
   } else if (loopState == MAIN_LOOP_DEBUG) {
     initDebug();
   } else { // fallback to main menu

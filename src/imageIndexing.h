@@ -133,3 +133,11 @@ inline unsigned char findFirstFreeSlot() {
 
   return NUM_IMAGES;
 }
+
+inline void deleteAllImages() {
+  for (unsigned char address = 0; address < 30; address += 1) {
+    setImageSlot(address, 0xff);
+  }
+  sortImages();
+  beep();
+}
