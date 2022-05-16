@@ -80,6 +80,5 @@ inline void expose() {
   set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
   set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
   set_bkg_tiles(0, 0, 20, 18, map_normal);
-  loadAndShowGalleryImage();
   BGP_REG = PALETTE_NORMAL;
 }

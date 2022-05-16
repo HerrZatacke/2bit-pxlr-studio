@@ -136,6 +136,7 @@ inline void imageMenuAction(unsigned char value) {
   } else if (value == IMAGE_MENU_EXPOSE) {
     disappearImageMenu();
     expose();
+    loadAndShowGalleryImage();
     appearImageMenu();
   }
 }
