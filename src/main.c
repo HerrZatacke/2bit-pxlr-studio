@@ -46,6 +46,8 @@
 #define IMAGE_MENU_BLEEP 3
 #define IMAGE_MENU_EXPOSE 4
 
+#define HALF_IMAGE_SIZE 1792
+
 unsigned char mainLoopState = 0;
 unsigned char isCapturing = 0;
 
@@ -80,10 +82,8 @@ void setDitherMatrix();
 
 void fastLoadImageTiles() {
   SWITCH_RAM(0);
-  LCDC_REG &= ~ LCDCF_BG8000;
-  set_bkg_data(0, 112, last_seen_upper);
-  LCDC_REG |= LCDCF_BG8000;
-  set_bkg_data(0, 112, last_seen_lower);
+  set_data(0x9000, last_seen_upper, HALF_IMAGE_SIZE);
+  set_data(0x8000, last_seen_lower, HALF_IMAGE_SIZE);
 }
 
 void scanline_isr() {
@@ -205,10 +205,8 @@ int main(void) {
   SHOW_SPRITES;
   // ToDo: Fade-effect?
 
-  LCDC_REG &= ~ LCDCF_BG8000;
-  set_bkg_data(112, 16, upperLowerDoubleTiles);
-  LCDC_REG |= LCDCF_BG8000;
-  set_bkg_data(112, 16, upperLowerDoubleTiles);
+  set_data(0x9700, upperLowerDoubleTiles, 256);
+  set_data(0x8700, upperLowerDoubleTiles, 256);
 
   if (splashPressed == J_A) {
     menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);

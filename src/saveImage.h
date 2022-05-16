@@ -1,6 +1,3 @@
-#define HALF_IMAGE_SIZE 1792
-
-unsigned char copyTemp[HALF_IMAGE_SIZE];
 
 void saveImage() {
   unsigned char firstFreeSlot = findFirstFreeSlot();
@@ -11,17 +8,9 @@ void saveImage() {
 
   sortImages();
 
-  SWITCH_RAM(0);
-  memcpy(copyTemp, last_seen_upper, HALF_IMAGE_SIZE);
-
   SWITCH_RAM(images[firstFreeSlot]->bank);
-  memcpy(images[firstFreeSlot]->tilesUpper, copyTemp, HALF_IMAGE_SIZE);
-
-  SWITCH_RAM(0);
-  memcpy(copyTemp, last_seen_lower, HALF_IMAGE_SIZE);
-
-  SWITCH_RAM(images[firstFreeSlot]->bank);
-  memcpy(images[firstFreeSlot]->tilesLower, copyTemp, HALF_IMAGE_SIZE);
+  get_data(images[firstFreeSlot]->tilesUpper, 0x9000, HALF_IMAGE_SIZE);
+  get_data(images[firstFreeSlot]->tilesLower, 0x8000, HALF_IMAGE_SIZE);
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 

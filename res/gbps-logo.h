@@ -287,11 +287,8 @@ const unsigned char logo_map[360] = {
 };
 
 inline unsigned char splash() {
-
-  LCDC_REG &= ~LCDCF_BG8000;
-  set_bkg_data(0, LOGO_TILE_COUNT, logo_tiles);
-  LCDC_REG |= LCDCF_BG8000;
-  set_bkg_data(0, LOGO_TILE_COUNT, logo_tiles);
+  set_data(0x9000, logo_tiles, LOGO_TILE_COUNT * 16);
+  set_data(0x8000, logo_tiles, LOGO_TILE_COUNT * 16);
 
   set_bkg_tiles(0, 0, 20, 18, logo_map);
   set_bkg_based_tiles(0, 16, sizeof(branch), 1, branch, OFFSET_FONT - 32);
