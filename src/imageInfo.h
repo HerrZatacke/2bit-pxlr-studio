@@ -188,6 +188,8 @@ inline void displayImageInfo(unsigned char imageIndex) {
 
   getImageInfo(imageIndex, imageInfo);
 
+  waitRelease();
+
   fill_win_rect(0, 0, 20, 18, OFFSET_BLANK);
   move_win(6, 0);
   set_win_based_tiles(0, 0, 20, 18, imageInfo, OFFSET_FONT - 32);
