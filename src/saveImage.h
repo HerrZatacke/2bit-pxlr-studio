@@ -9,8 +9,8 @@ void saveImage() {
   sortImages();
 
   SWITCH_RAM(images[firstFreeSlot]->bank);
-  get_data(images[firstFreeSlot]->tilesUpper, 0x9000, HALF_IMAGE_SIZE);
-  get_data(images[firstFreeSlot]->tilesLower, 0x8000, HALF_IMAGE_SIZE);
+  get_data(images[firstFreeSlot]->tilesUpper, VRAM_9000, HALF_IMAGE_SIZE);
+  get_data(images[firstFreeSlot]->tilesLower, VRAM_8000, HALF_IMAGE_SIZE);
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 

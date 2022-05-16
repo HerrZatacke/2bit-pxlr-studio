@@ -42,16 +42,16 @@ void loadAndShowGalleryImage() {
     unsigned char imageSlot = getImageSlot(imageIndex);
     SWITCH_RAM(images[imageSlot]->bank);
 
-    set_data(0x9000, images[imageSlot]->tilesUpper, HALF_IMAGE_SIZE);
-    set_data(0x8000, images[imageSlot]->tilesLower, HALF_IMAGE_SIZE);
+    set_data(VRAM_9000, images[imageSlot]->tilesUpper, HALF_IMAGE_SIZE);
+    set_data(VRAM_8000, images[imageSlot]->tilesLower, HALF_IMAGE_SIZE);
 
     set_bkg_based_tiles(2, 16, 5, 2, "Image  /  ", OFFSET_FONT - 32);
     writeNumber(1, 17, 2, imageIndex + 1);
     writeNumber(4, 17, 2, numVisibleImages);
   //  writeNumber(2, 16, 3, findFirstFreeSlot());
   } else {
-    set_data(0x9000, nope_tiles, HALF_IMAGE_SIZE);
-    set_data(0x8000, nope_tiles, HALF_IMAGE_SIZE);
+    set_data(VRAM_9000, nope_tiles, HALF_IMAGE_SIZE);
+    set_data(VRAM_8000, nope_tiles, HALF_IMAGE_SIZE);
 
     set_bkg_based_tiles(2, 16, 5, 2, "No   Image", OFFSET_FONT - 32);
   }

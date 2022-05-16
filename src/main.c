@@ -47,6 +47,8 @@
 #define IMAGE_MENU_EXPOSE 4
 
 #define HALF_IMAGE_SIZE 1792
+#define VRAM_9000 (unsigned char *)0x9000
+#define VRAM_8000 (unsigned char *)0x8000
 
 unsigned char mainLoopState = 0;
 unsigned char isCapturing = 0;
@@ -82,8 +84,8 @@ void setDitherMatrix();
 
 void fastLoadImageTiles() {
   SWITCH_RAM(0);
-  set_data(0x9000, last_seen_upper, HALF_IMAGE_SIZE);
-  set_data(0x8000, last_seen_lower, HALF_IMAGE_SIZE);
+  set_data(VRAM_9000, last_seen_upper, HALF_IMAGE_SIZE);
+  set_data(VRAM_8000, last_seen_lower, HALF_IMAGE_SIZE);
 }
 
 void scanline_isr() {
@@ -205,8 +207,8 @@ int main(void) {
   SHOW_SPRITES;
   // ToDo: Fade-effect?
 
-  set_data(0x9700, upperLowerDoubleTiles, 256);
-  set_data(0x8700, upperLowerDoubleTiles, 256);
+  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
+  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
 
   if (splashPressed == J_A) {
     menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);

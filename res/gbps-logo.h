@@ -287,8 +287,8 @@ const unsigned char logo_map[360] = {
 };
 
 inline unsigned char splash() {
-  set_data(0x9000, logo_tiles, LOGO_TILE_COUNT * 16);
-  set_data(0x8000, logo_tiles, LOGO_TILE_COUNT * 16);
+  set_data(VRAM_9000, logo_tiles, LOGO_TILE_COUNT * 16);
+  set_data(VRAM_8000, logo_tiles, LOGO_TILE_COUNT * 16);
 
   set_bkg_tiles(0, 0, 20, 18, logo_map);
   set_bkg_based_tiles(0, 16, sizeof(branch), 1, branch, OFFSET_FONT - 32);
