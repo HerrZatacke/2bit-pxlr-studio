@@ -105,17 +105,18 @@ void scanline_isr() {
 
 void setDitherMatrix() {
   SWITCH_RAM(16);
-  unsigned char ditherSet = getMenuValue(ditherHighLowsMenu);
+  unsigned char ditherHighLow = getMenuValue(ditherHighLowsMenu);
+  unsigned char ditherSet = getMenuValue(ditherSetsMenu);
 
   for (unsigned int i = 0; i < 48; i += 1) {
-    if (ditherSet == DITHER_SET_HIGH) {
-      memcpy(A006A035, ditherHighLightValues[getMenuValue(ditherSetsMenu)], 48);
-    } else if (ditherSet == DITHER_SET_LOW) {
-      memcpy(A006A035, ditherLowLightValues[getMenuValue(ditherSetsMenu)], 48);
-    } else if (ditherSet == DITHER_SET_NO_HIGH) {
-      memcpy(A006A035, ditherNoHighLightValues[getMenuValue(ditherSetsMenu)], 48);
-    } else if (ditherSet == DITHER_SET_NO_LOW) {
-      memcpy(A006A035, ditherNoLowLightValues[getMenuValue(ditherSetsMenu)], 48);
+    if (ditherHighLow == DITHER_SET_HIGH) {
+      memcpy(A006A035, ditherHighLightValues[ditherSet], 48);
+    } else if (ditherHighLow == DITHER_SET_LOW) {
+      memcpy(A006A035, ditherLowLightValues[ditherSet], 48);
+    } else if (ditherHighLow == DITHER_SET_NO_HIGH) {
+      memcpy(A006A035, ditherNoHighLightValues[ditherSet], 48);
+    } else if (ditherHighLow == DITHER_SET_NO_LOW) {
+      memcpy(A006A035, ditherNoLowLightValues[ditherSet], 48);
     }
   }
 }
@@ -142,8 +143,8 @@ void capture() {
   unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
   A001 = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
-  A002 = exposureTime >> 8;
-  A003 = exposureTime;
+  A002 = (char)(exposureTime >> 8);
+  A003 = (char)exposureTime;
   A004 = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   A005 = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
 
