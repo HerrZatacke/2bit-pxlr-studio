@@ -139,5 +139,6 @@ inline void deleteAllImages() {
     setImageSlot(address, 0xff);
   }
   sortImages();
+  imageIndex = 0;
   beep();
 }
