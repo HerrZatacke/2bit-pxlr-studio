@@ -192,7 +192,7 @@ inline void displayImageInfo(unsigned char imageIndex) {
   move_win(6, 0);
   set_win_based_tiles(0, 0, 20, 18, imageInfo, OFFSET_FONT - 32);
 
-  while (jp != J_B) {
+  while (jp != J_B && jp != J_A) {
     wait_vbl_done();
   }
 
