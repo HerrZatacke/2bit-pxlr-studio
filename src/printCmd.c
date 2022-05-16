@@ -171,3 +171,11 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
     }
   }
 }
+
+void printImageInfo(unsigned char *imageInfo, unsigned char *font) {
+  unsigned int index;
+
+  for (index = 0; index < 360; index++) {
+    printTileData(&font[(imageInfo[index] - 32) * 16], TRUE, 9);
+  }
+}

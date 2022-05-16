@@ -101,9 +101,16 @@ inline void imageMenuAction(unsigned char value) {
   }
 
   if (value == IMAGE_MENU_INFO) {
-    displayImageInfo(imageIndex);
-    initImageMenu();
-    renderImageMenu();
+    if (getPrinterStatus()) {
+      displayImageInfo(imageIndex);
+      initImageMenu();
+      renderImageMenu();
+    } else {
+
+      getImageInfo(imageIndex, imageInfo);
+      printImageInfo(imageInfo, font);
+      beep();
+    }
   } else if (value == IMAGE_MENU_DELETE) {
     setImageSlot(address, 0xff);
     reduceIndexAfterDelete(imageIndex);
@@ -118,10 +125,8 @@ inline void imageMenuAction(unsigned char value) {
     if (getPrinterStatus()) {
       boop();
     } else {
-      disappearImageMenu();
       printImage(images[address]->tilesLower, images[address]->tilesUpper, images[address]->bank);
       beep();
-      appearImageMenu();
     }
   } else if (value == IMAGE_MENU_BLEEP) {
     disappearImageMenu();

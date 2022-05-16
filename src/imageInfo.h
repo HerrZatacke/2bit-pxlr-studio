@@ -1,5 +1,4 @@
 const unsigned char hexCharLUT[] = "0123456789ABCDEF";
-unsigned char imageInfo[360];
 
 inline void hexChar(unsigned char *target, unsigned char value) {
   target[0] = hexCharLUT[(value >> 4) & 0b00001111];

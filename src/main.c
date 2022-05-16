@@ -64,6 +64,7 @@ unsigned char mainLoopState = 0;
 unsigned char isCapturing = 0;
 unsigned char imageIndex = 0;
 unsigned char imageMenuIndex = 0;
+unsigned char imageInfo[360];
 
 void menuSelectMode(unsigned char loopState);
 void setDitherMatrix();
