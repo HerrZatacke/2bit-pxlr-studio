@@ -36,6 +36,26 @@ unsigned char tile_num, packet_num;
 
 unsigned int CRC;
 
+//inline void beep() {
+//  NR21_REG=0x80;
+//  NR22_REG=0xA2;
+//  NR23_REG=0x60;
+//  NR24_REG=0x87;
+//}
+//
+//inline void boop() {
+//  NR21_REG=0x80;
+//  NR22_REG=0xA2;
+//  NR23_REG=0xD7;
+//  NR24_REG=0x86;
+//}
+//
+//inline void pause(unsigned char frames) {
+//  for (unsigned char i = 0; i < frames; i++) {
+//    wait_vbl_done();
+//  }
+//}
+
 unsigned char sendPrinterByte(unsigned char byte) {
   unsigned char result;
   disable_interrupts();
@@ -146,6 +166,19 @@ unsigned char printerBusy() {
   return (printerStatus[2] & STATUS_BUSY);
 }
 
+
+void waitPrinterReady() {
+  // Wait for max 30s to give the printer time to become ready.
+  // If not ready after 30s, return anyway to not hang the program
+  for (unsigned int wait = 0; wait < 1800; wait++) {
+    wait_vbl_done();
+    if (!printerBusy()) {
+      return;
+    }
+  }
+}
+
+
 void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) {
   unsigned char tileIndex;
 
@@ -178,13 +211,21 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
       sendByte(exposure, TRUE); // Exposure/Intensity (min=0x00, default=0x40, max=0x7F)
       sendChecksum();
 
-      sendPrinterCommand(PRINTER_STATUS);
-      sendChecksum();
+      // Wait for max 2s to give the printer time to become "busy".
+      // If not busy after 2s, return anyway to not hang the program
+      for (unsigned char wait = 0; wait < 120; wait++) {
+        wait_vbl_done();
+        if (printerBusy()) {
+          return;
+        }
+      }
+
     }
   }
 }
 
 void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) {
+  printerInit();
   SWITCH_RAM(bank);
   // We need to print a border of 16x16 pixels (2x2 tiles)
   unsigned char x, y;
@@ -197,7 +238,7 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
         image = lower;
       }
       if (x < 2 || y < 2 || x >= 18 || y >= 16) {
-        printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 9, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
+        printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 9, 0x02, PALETTE_NORMAL, EXPOSURE_DEFAULT);
       } else {
         printTileData(image, 9, 0x03, PALETTE_NORMAL, EXPOSURE_DEFAULT);
         image += 16;
@@ -208,40 +249,26 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
   }
 }
 
-inline void beep() {
-  NR21_REG=0x80;
-  NR22_REG=0xA2;
-  NR23_REG=0x60;
-  NR24_REG=0x87;
-}
-
-
-inline void pause(unsigned char frames) {
-  for (unsigned char i = 0; i < frames; i++) {
-    wait_vbl_done();
-  }
-}
-
 void printImageInfo(unsigned char *imageInfo, unsigned char *font) {
   unsigned int index;
+  printerInit();
 
   for (index = 0; index < 40; index++) {
     printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x00, PALETTE_INVERTED, EXPOSURE_DEFAULT);
   }
 
-  while (printerBusy()) {
-    pause(30);
-  }
+  waitPrinterReady();
+  printerInit();
 
   for (index = 0; index < 360; index++) {
-    printTileData(&font[(imageInfo[index] - 32) * 16], 9, 0x03, PALETTE_INVERTED, EXPOSURE_DARK);
+    printTileData(&font[(imageInfo[index] - 32) * 16], 9, 0x00, PALETTE_INVERTED, EXPOSURE_DARK);
   }
 
-  while (printerBusy()) {
-    pause(30);
-  }
+
+  waitPrinterReady();
+  printerInit();
 
   for (index = 320; index < 360; index++) {
-    printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x00, PALETTE_INVERTED, EXPOSURE_DEFAULT);
+    printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x03, PALETTE_INVERTED, EXPOSURE_DEFAULT);
   }
 }

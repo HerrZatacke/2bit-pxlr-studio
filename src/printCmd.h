@@ -20,3 +20,4 @@ extern void printTileData(unsigned char *tileData, unsigned char lf, unsigned ch
 extern unsigned char printerBusy();
 extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank);
 extern void printImageInfo(unsigned char *imageInfo, unsigned char *font);
+extern void waitPrinterReady();

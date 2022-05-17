@@ -109,6 +109,9 @@ inline void imageMenuAction(unsigned char value) {
 
       getImageInfo(imageIndex, imageInfo);
       printImageInfo(imageInfo, font);
+
+      waitPrinterReady();
+
       beep();
     }
   } else if (value == IMAGE_MENU_DELETE) {
@@ -126,6 +129,9 @@ inline void imageMenuAction(unsigned char value) {
       boop();
     } else {
       printImage(images[address]->tilesLower, images[address]->tilesUpper, images[address]->bank);
+
+      waitPrinterReady();
+
       beep();
     }
   } else if (value == IMAGE_MENU_BLEEP) {
