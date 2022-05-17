@@ -28,7 +28,7 @@ unsigned char printerStatus[3];
 
 const unsigned char PRINTER_INIT[] =   { 6, MAGIC_1, MAGIC_2, COMMAND_INIT,   0x00, 0x00, 0x00, };
 const unsigned char PRINTER_STATUS[] = { 6, MAGIC_1, MAGIC_2, COMMAND_STATUS, 0x00, 0x00, 0x00, };
-const unsigned char PRINTER_START[] =  { 7, MAGIC_1, MAGIC_2, COMMAND_PRINT,  0x00, 0x04, 0x00, 0x01, }; // 0x04, 0x00 = length 4 Bytes
+const unsigned char PRINTER_START[] =  { 6, MAGIC_1, MAGIC_2, COMMAND_PRINT,  0x00, 0x04, 0x00, }; // 0x04, 0x00 = length 4 Bytes
 const unsigned char PRINTER_EOF[] =    { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x00, 0x00, };
 const unsigned char PRINT_TILE[] =     { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x80, 0x02, }; // 0x80, 0x02 = length 640 Bytes
 
@@ -172,6 +172,7 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
       sendChecksum();
 
       sendPrinterCommand(PRINTER_START);
+      sendByte(0x01, TRUE); // Sheets
       sendByte(margins, TRUE); // Margin
       sendByte(palette, TRUE); // Palette (normal=0xE4, inverted=0x1B)
       sendByte(exposure, TRUE); // Exposure/Intensity (min=0x00, default=0x40, max=0x7F)
