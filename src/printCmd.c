@@ -9,33 +9,35 @@
 extern const unsigned char frame_pxlr_tiles[544];
 extern const unsigned char frame_pxlr_map[360];
 
-uint8_t printerStatus[3];
+unsigned char printerStatus[3];
 
-const uint8_t PRINTER_INIT[] = {
-  10, 0x88, 0x33, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00
-};
-const uint8_t PRINTER_STATUS[] = {
-  10, 0x88, 0x33, 0x0F, 0x00, 0x00, 0x00, 0x0F, 0x00, 0x00, 0x00
-};
-const uint8_t PRINTER_EOF[] = {
-  10, 0x88, 0x33, 0x04, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00
-};
-const uint8_t PRINTER_START[] = {
-  14, 0x88, 0x33, 0x02, 0x00, 0x04, 0x00, 0x01, 0x03, 0xE4, 0x7F, 0x6D, 0x01, 0x00, 0x00
-};
-const uint8_t PRINT_TILE[] = {
-  6, 0x88, 0x33, 0x04, 0x00, 0x80, 0x02
-};
-const uint8_t PRINTER_LINE[] = {
-  14, 0x88, 0x33, 0x02, 0x00, 0x04, 0x00, 0x01, 0x00, 0xE4, 0x7F, 0x6A, 0x01, 0x00, 0x00
-};
+#define PALETTE_NORMAL 0b11100100u
+#define PALETTE_INVERTED 0b00011011u
 
-uint8_t tile_num, packet_num;
+#define MAGIC_1 0x88
+#define MAGIC_2 0x33
 
-uint16_t CRC;
+#define COMMAND_INIT 0x01
+#define COMMAND_PRINT 0x02
+#define COMMAND_DATA 0x04
+#define COMMAND_STATUS 0x0F
 
-uint8_t sendPrinterByte(uint8_t byte) {
-  uint8_t result;
+#define EXPOSURE_LIGHT 0x00
+#define EXPOSURE_DEFAULT 0x40
+#define EXPOSURE_DARK 0x7F
+
+const unsigned char PRINTER_INIT[] =   { 6, MAGIC_1, MAGIC_2, COMMAND_INIT,   0x00, 0x00, 0x00, };
+const unsigned char PRINTER_STATUS[] = { 6, MAGIC_1, MAGIC_2, COMMAND_STATUS, 0x00, 0x00, 0x00, };
+const unsigned char PRINTER_START[] =  { 7, MAGIC_1, MAGIC_2, COMMAND_PRINT,  0x00, 0x04, 0x00, 0x01, }; // 0x04, 0x00 = length 4 Bytes
+const unsigned char PRINTER_EOF[] =    { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x00, 0x00, };
+const unsigned char PRINT_TILE[] =     { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x80, 0x02, }; // 0x80, 0x02 = length 640 Bytes
+
+unsigned char tile_num, packet_num;
+
+unsigned int CRC;
+
+unsigned char sendPrinterByte(unsigned char byte) {
+  unsigned char result;
   disable_interrupts();
   SB_REG = byte; //data to send
   SC_REG = 0x81; //1000 0001 - start, internal clock
@@ -45,33 +47,55 @@ uint8_t sendPrinterByte(uint8_t byte) {
   return result;
 }
 
-void sendByte(uint8_t byte) {
-  uint8_t result;
-  result = sendPrinterByte(byte);
+void sendByte(unsigned char dataByte, unsigned char addToChecksum) {
+  if (addToChecksum) {
+    CRC += dataByte;
+  }
+
+  unsigned char result;
+  result = sendPrinterByte(dataByte);
   printerStatus[0] = printerStatus[1];
   printerStatus[1] = printerStatus[2];
   printerStatus[2] = result;
 }
 
-void sendPrinterCommand(uint8_t *command) {
-  uint8_t length, index;
+void sendPrinterCommand(const unsigned char *command) {
+  unsigned char length, index;
   index = 0;
   length = *command;
+  CRC = 0;
+
   while (index < length) {
     index++;
-    sendByte(*(command + index));
+    sendByte(*(command + index), index > 2);
   }
 }
 
-void printerInit(void) {
-  tile_num = 0;
-  CRC = 0;
-  packet_num = 0;
 
-  sendPrinterCommand(PRINTER_INIT);
+inline unsigned char getHigh(unsigned int w) {
+  return (w & 0xFF00u) >> 8;
 }
 
-uint8_t checkLinkCable() {
+inline unsigned char getLow(unsigned int w) {
+  return (w & 0xFFu);
+}
+
+
+void sendChecksum() {
+  sendByte(getLow(CRC), FALSE);
+  sendByte(getHigh(CRC), FALSE);
+  sendByte(0x00, FALSE);
+  sendByte(0x00, FALSE);
+}
+
+void printerInit() {
+  tile_num = 0;
+  packet_num = 0;
+  sendPrinterCommand(PRINTER_INIT);
+  sendChecksum();
+}
+
+unsigned char checkLinkCable() {
   if (printerStatus[0] != 0) {
     return 2;
   }
@@ -81,89 +105,100 @@ uint8_t checkLinkCable() {
   return 0;
 }
 
-uint8_t getPrinterStatus() {
+unsigned char getPrinterStatus() {
   sendPrinterCommand(PRINTER_STATUS);
+  sendChecksum();
   return checkLinkCable();
 }
 
-uint8_t checkForErrors() {
-  if (printerStatus[2] & 128) {
+
+#define STATUS_LOWBAT 0x80
+#define STATUS_ER2    0x40
+#define STATUS_ER1    0x20
+#define STATUS_ER0    0x10
+#define STATUS_UNTRAN 0x08
+#define STATUS_FULL   0x04
+#define STATUS_BUSY   0x02
+#define STATUS_SUM    0x01
+
+unsigned char checkForErrors() {
+  if (printerStatus[2] & STATUS_LOWBAT) {
     return 1;
   }
-  if (printerStatus[2] & 64) {
+  if (printerStatus[2] & STATUS_ER2) {
+    return 2;
+  }
+  if (printerStatus[2] & STATUS_ER1) {
+    return 3;
+  }
+  if (printerStatus[2] & STATUS_ER0) {
     return 4;
   }
-  if (printerStatus[2] & 32) {
-    return 3;
+  if (printerStatus[2] & STATUS_SUM) {
+    return 5;
   }
   return 0;
 }
 
-uint8_t checkBusy() {
+unsigned char printerBusy() {
   sendPrinterCommand(PRINTER_STATUS);
-  return (printerStatus[2] & 0x02);
+  sendChecksum();
+  return (printerStatus[2] & STATUS_BUSY);
 }
 
-inline uint8_t getHigh(uint16_t w) {
-  return (w & 0xFF00u) >> 8;
-}
-
-inline uint8_t getLow(uint16_t w) {
-  return (w & 0xFFu);
-}
-
-void printTileData(uint8_t *tileData, uint8_t lf, uint8_t num_packets) {
-  uint8_t tileIndex;
+void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) {
+  unsigned char tileIndex;
 
   if (tile_num == 0) {
     sendPrinterCommand(PRINT_TILE);
-    CRC = 0x04 + 0x80 + 0x02;
   }
 
   tile_num++;
 
   for (tileIndex = 0; tileIndex < 16; tileIndex++) {
-    CRC += tileData[tileIndex];
-    sendByte(tileData[tileIndex]);
+    sendByte(tileData[tileIndex], TRUE);
   }
 
+  // two lines of 20 tiles each
   if (tile_num == 40) {
-    sendByte(getLow(CRC));
-    sendByte(getHigh(CRC));
-    sendByte(0x00);
-    sendByte(0x00);
+    sendChecksum();
+
     tile_num = 0;
-    CRC = 0;
     packet_num++;
 
     if (packet_num == num_packets) { // all done the page
-      sendPrinterCommand(PRINTER_EOF); // data end packet
-      if (lf)
-        sendPrinterCommand(PRINTER_START);
-      else
-        sendPrinterCommand(PRINTER_LINE);
       packet_num = 0;
+      sendPrinterCommand(PRINTER_EOF); // data end packet
+      sendChecksum();
+
+      sendPrinterCommand(PRINTER_START);
+      sendByte(margins, TRUE); // Margin
+      sendByte(palette, TRUE); // Palette (normal=0xE4, inverted=0x1B)
+      sendByte(exposure, TRUE); // Exposure/Intensity (min=0x00, default=0x40, max=0x7F)
+      sendChecksum();
+
       sendPrinterCommand(PRINTER_STATUS);
+      sendChecksum();
     }
   }
 }
 
-void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
+void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) {
   SWITCH_RAM(bank);
   // We need to print a border of 16x16 pixels (2x2 tiles)
-  uint8_t x, y;
-  uint16_t frameTileIndex = 0;
+  unsigned char x, y;
+  unsigned int frameTileIndex = 0;
 
-  uint8_t *image = upper;
+  unsigned char *image = upper;
   for (y = 0; y < 18; y++) {
     for (x = 0; x < 20; x++) {
       if (x == 0 && y == 9) {
         image = lower;
       }
       if (x < 2 || y < 2 || x >= 18 || y >= 16) {
-        printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], TRUE, 9);
+        printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 9, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
       } else {
-        printTileData(image, TRUE, 9);
+        printTileData(image, 9, 0x03, PALETTE_NORMAL, EXPOSURE_DEFAULT);
         image += 16;
       }
 
@@ -172,10 +207,40 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) {
   }
 }
 
+inline void beep() {
+  NR21_REG=0x80;
+  NR22_REG=0xA2;
+  NR23_REG=0x60;
+  NR24_REG=0x87;
+}
+
+
+inline void pause(unsigned char frames) {
+  for (unsigned char i = 0; i < frames; i++) {
+    wait_vbl_done();
+  }
+}
+
 void printImageInfo(unsigned char *imageInfo, unsigned char *font) {
   unsigned int index;
 
+  for (index = 0; index < 40; index++) {
+    printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x00, PALETTE_INVERTED, EXPOSURE_DEFAULT);
+  }
+
+  while (printerBusy()) {
+    pause(30);
+  }
+
   for (index = 0; index < 360; index++) {
-    printTileData(&font[(imageInfo[index] - 32) * 16], TRUE, 9);
+    printTileData(&font[(imageInfo[index] - 32) * 16], 9, 0x03, PALETTE_INVERTED, EXPOSURE_DARK);
+  }
+
+  while (printerBusy()) {
+    pause(30);
+  }
+
+  for (index = 320; index < 360; index++) {
+    printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x00, PALETTE_INVERTED, EXPOSURE_DEFAULT);
   }
 }
