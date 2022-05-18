@@ -14,20 +14,40 @@
 #define A000_CAPTURE_POSITIVE 0b00000010
 #define A000_START_CAPTURE    0b00000001
 
-#define A001_GAIN_140   0b00000000 // 14.0
+// The Game Boy Camera uses 0x00, 0x04, 0x08 and 0x0
+// They are 14.0dB, 20.0dB, 26.0dB and 32dB, which translate to a gain of 5.01, 10.00, 19.95 and 39.81.
+#define A001_GAIN_140   0b00000000 // 14.0 (gbcam gain:  5.01)
 #define A001_GAIN_155   0b00000001 // 15.5
 #define A001_GAIN_170   0b00000010 // 17.0
 #define A001_GAIN_185   0b00000010 // 18.5
-#define A001_GAIN_200   0b00000100 // 20.0
+#define A001_GAIN_200   0b00000100 // 20.0 (gbcam gain: 10.00)
 #define A001_GAIN_200_D 0b00010000 // 20.0 (d)
 #define A001_GAIN_215   0b00000101 // 21.5
 #define A001_GAIN_215_D 0b00010001 // 21.5 (d)
 #define A001_GAIN_230   0b00000110 // 23.0
 #define A001_GAIN_230_D 0b00010010 // 23.0 (d)
-#define A001_GAIN_245   0b00010010 // 24.5
-#define A001_GAIN_260   0b00010100 // 26.0
+#define A001_GAIN_245   0b00000111 // 24.5
+#define A001_GAIN_245_D 0b00010010 // 24.5 (d)
+#define A001_GAIN_260   0b00001000 // 26.0 (gbcam gain: 19.95)
+#define A001_GAIN_260_D 0b00010100 // 26.0 (d)
 #define A001_GAIN_275   0b00010101 // 27.5
-#define A001_GAIN_290   0b00010110 // 29.0
+#define A001_GAIN_290   0b00001001 // 29.0
+#define A001_GAIN_290_D 0b00010110 // 29.0 (d)
+#define A001_GAIN_305   0b00010111 // 30.5
+#define A001_GAIN_320   0b00001010 // 32.0 (gbcam gain: 39.81)
+#define A001_GAIN_320_D 0b00011000 // 32.0 (d)
+#define A001_GAIN_350   0b00001011 // 35.0
+#define A001_GAIN_350_D 0b00011001 // 35.0 (d)
+#define A001_GAIN_380   0b00001100 // 38.0
+#define A001_GAIN_380_D 0b00011010 // 38.0 (d)
+#define A001_GAIN_410   0b00001101 // 41.0
+#define A001_GAIN_410_D 0b00011011 // 41.0 (d)
+#define A001_GAIN_440   0b00011100 // 44.0
+#define A001_GAIN_455   0b00001110 // 45.5
+#define A001_GAIN_470   0b00011101 // 47.0
+#define A001_GAIN_515   0b00001111 // 51.5
+#define A001_GAIN_515_D 0b00011110 // 51.5 (d)
+#define A001_GAIN_575   0b00011111 // 57.5
 
 #define A001_EDGE_OP_MODE_NONE       0b00000000
 #define A001_EDGE_OP_MODE_HORIZONTAL 0b00100000
@@ -127,7 +147,7 @@
 #define A005_VOLTAGE_OUT_POS_960 0b00111110 //  0.960mV
 #define A005_VOLTAGE_OUT_POS_992 0b00111111 //  0.992mV
 
-#define NUM_GAIN_LEVELS 11
+#define NUM_GAIN_LEVELS 21
 #define NUM_EXPOSURE_TIMES 32
 #define NUM_DITHERS 16
 #define NUM_DITHER_HIGHLOWS 4
@@ -293,8 +313,6 @@ const MenuOption ditherSets[NUM_DITHERS] = {
    { 15, "  15"},
 };
 
-// The Game Boy Camera uses 00h, 04h, 08h and 0Ah.
-// They are 14.0dB, 20.0dB, 26.0dB and 32dB, which translate to a gain of 5.01, 10.00, 19.95 and 39.81.
 const MenuOption gains[NUM_GAIN_LEVELS] = {
   { A001_GAIN_140, "14.0", },
   { A001_GAIN_155, "15.5", },
@@ -307,6 +325,16 @@ const MenuOption gains[NUM_GAIN_LEVELS] = {
   { A001_GAIN_260, "26.0", },
   { A001_GAIN_275, "27.5", },
   { A001_GAIN_290, "29.0", },
+  { A001_GAIN_305, "30.5", },
+  { A001_GAIN_320, "32.0", },
+  { A001_GAIN_350, "35.0", },
+  { A001_GAIN_380, "38.0", },
+  { A001_GAIN_410, "41.0", },
+  { A001_GAIN_440, "44.0", },
+  { A001_GAIN_455, "45.5", },
+  { A001_GAIN_470, "47.0", },
+  { A001_GAIN_515, "51.5", },
+  { A001_GAIN_575, "57.5", },
 };
 
 const MenuOption edgeOpModes[NUM_EDGE_OP_MODES] = {
