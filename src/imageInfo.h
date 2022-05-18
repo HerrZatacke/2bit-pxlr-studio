@@ -79,11 +79,11 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     "Exposure Time ??????"
     "Sensor Gain   ??????"
     "Voltage Refer.??????"
+    "Dith. Contrast??????"
+    "Dither Set    ??????"
     "Voltage Output??????"
     "Invert Output ??????"
     "Zero Point    ??????"
-    "Dither Set    ??????"
-    "Dither Matrix ??????"
     "Edge Operation??????"
     "Edge Mode     ??????"
     "Edge Exclusive??????"
@@ -93,71 +93,81 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     " 0x?? 0x?? 0x?? 0x??",
   360);
 
+#define POS_01 74
+#define POS_02 94
+#define POS_03 114
+#define POS_04 134
+#define POS_05 154
+#define POS_06 174
+#define POS_07 194
+#define POS_08 214
+#define POS_09 234
+#define POS_10 254
+#define POS_11 274
+
   for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
     if (exposureTimes[i].value == exposureTime) {
-      memcpy(&tileMap[74], exposureTimes[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_01], exposureTimes[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_GAIN_LEVELS; i += 1) {
     if (gains[i].value == gain) {
-      memcpy(&tileMap[94], gains[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_02], gains[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_VOLTAGE_REFS; i += 1) {
     if (voltageRefs[i].value == vRef) {
-      memcpy(&tileMap[114], voltageRefs[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_03], voltageRefs[i].title, MENU_TEXT_LENGTH);
+    }
+  }
+
+  for (i = 0; i < NUM_CONTRASTS; i += 1) {
+    if (contrasts[i].value == contrast) {
+      memcpy(&tileMap[POS_04], contrasts[i].title, MENU_TEXT_LENGTH);
+    }
+  }
+
+  for (i = 0; i < NUM_DITHERSETS; i += 1) {
+    if (ditherSets[i].value == ditherSet) {
+      memcpy(&tileMap[POS_05], ditherSets[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_VOLTAGE_OUTS; i += 1) {
     if (voltageOuts[i].value == vOut) {
-      memcpy(&tileMap[134], voltageOuts[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_06], voltageOuts[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_INVERT_OUTPUTS; i += 1) {
     if (invertOutputs[i].value == invertOut) {
-      memcpy(&tileMap[154], invertOutputs[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_07], invertOutputs[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_ZERO_POINTS; i += 1) {
     if (zeroPoints[i].value == zeroPoint) {
-      memcpy(&tileMap[174], zeroPoints[i].title, MENU_TEXT_LENGTH);
-    }
-  }
-
-  // ToDo Rename to Dither Modes everywhere?
-  for (i = 0; i < NUM_DITHERSETS; i += 1) {
-    if (ditherSets[i].value == ditherSet) {
-      memcpy(&tileMap[194], ditherSets[i].title, MENU_TEXT_LENGTH);
-    }
-  }
-
-  // ToDo Rename to Dither Matrices everywhere?
-  for (i = 0; i < NUM_CONTRASTS; i += 1) {
-    if (contrasts[i].value == contrast) {
-      memcpy(&tileMap[214], contrasts[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_08], zeroPoints[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_EDGE_OP_MODES; i += 1) {
     if (edgeOpModes[i].value == edgeOperation) {
-      memcpy(&tileMap[234], edgeOpModes[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_09], edgeOpModes[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_EDGE_MODES; i += 1) {
     if (edgeModes[i].value == edgeMode) {
-      memcpy(&tileMap[254], edgeModes[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_10], edgeModes[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_EDGE_EXCLUSIVE; i += 1) {
     if (edgeExclusives[i].value == edgeExclusive) {
-      memcpy(&tileMap[274], edgeExclusives[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_11], edgeExclusives[i].title, MENU_TEXT_LENGTH);
     }
   }
 
