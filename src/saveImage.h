@@ -23,7 +23,7 @@ void saveImage() {
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT] = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO] = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_DITHERHIGHLOW] = getMenuValue(ditherHighLowsMenu);
-  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET] = getMenuValue(ditherSetsMenu);
+  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST] = getMenuValue(contrastsMenu);
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 

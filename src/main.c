@@ -58,7 +58,7 @@
 #define THUMBNAIL_BYTE_EDMOVOLT      0xC6
 #define THUMBNAIL_BYTE_VOUTZERO      0xD6
 #define THUMBNAIL_BYTE_DITHERHIGHLOW 0xE6
-#define THUMBNAIL_BYTE_DITHERSET     0xF6
+#define THUMBNAIL_BYTE_CONTRAST      0xF6
 
 unsigned char mainLoopState = 0;
 unsigned char isCapturing = 0;
@@ -122,17 +122,17 @@ void scanline_isr() {
 void setDitherMatrix() {
   SWITCH_RAM(16);
   unsigned char ditherHighLow = getMenuValue(ditherHighLowsMenu);
-  unsigned char ditherSet = getMenuValue(ditherSetsMenu);
+  unsigned char contrast = getMenuValue(contrastsMenu);
 
   for (unsigned int i = 0; i < 48; i += 1) {
     if (ditherHighLow == DITHER_SET_HIGH) {
-      memcpy(A006A035, ditherHighLightValues[ditherSet], 48);
+      memcpy(A006A035, ditherHighLightValues[contrast], 48);
     } else if (ditherHighLow == DITHER_SET_LOW) {
-      memcpy(A006A035, ditherLowLightValues[ditherSet], 48);
+      memcpy(A006A035, ditherLowLightValues[contrast], 48);
     } else if (ditherHighLow == DITHER_SET_NO_HIGH) {
-      memcpy(A006A035, ditherNoHighLightValues[ditherSet], 48);
+      memcpy(A006A035, ditherNoHighLightValues[contrast], 48);
     } else if (ditherHighLow == DITHER_SET_NO_LOW) {
-      memcpy(A006A035, ditherNoLowLightValues[ditherSet], 48);
+      memcpy(A006A035, ditherNoLowLightValues[contrast], 48);
     }
   }
 }

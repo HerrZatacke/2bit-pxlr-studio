@@ -19,7 +19,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   unsigned char edgeModeVolt = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT]; // getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   unsigned char voltageZeroPoint = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO]; // getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
   unsigned char ditherHighLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERHIGHLOW]; // getMenuValue(ditherHighLowsMenu);
-  unsigned char ditherMatrix = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET]; // getMenuValue(ditherSetsMenu);
+  unsigned char contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST]; // getMenuValue(contrastsMenu);
 
   unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
   unsigned char exposureTime = 0xFF;
@@ -46,7 +46,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     edgeModeVolt == 0xFF &&
     voltageZeroPoint == 0xFF &&
     ditherHighLow == 0xFF &&
-    ditherMatrix == 0xFF
+    contrast == 0xFF
   ) {
     memcpy(&tileMap[0],
      "                    "
@@ -137,9 +137,9 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   }
 
   // ToDo Rename to Dither Matrices everywhere?
-  for (i = 0; i < NUM_DITHERS; i += 1) {
-    if (ditherSets[i].value == ditherMatrix) {
-      memcpy(&tileMap[214], ditherSets[i].title, MENU_TEXT_LENGTH);
+  for (i = 0; i < NUM_CONTRASTS; i += 1) {
+    if (contrasts[i].value == contrast) {
+      memcpy(&tileMap[214], contrasts[i].title, MENU_TEXT_LENGTH);
     }
   }
 
@@ -179,7 +179,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   hexChar(&tileMap[343], edgeModeVolt);
   hexChar(&tileMap[348], voltageZeroPoint);
   hexChar(&tileMap[353], ditherHighLow);
-  hexChar(&tileMap[358], ditherMatrix);
+  hexChar(&tileMap[358], contrast);
 }
 
 inline void displayImageInfo(unsigned char imageIndex) {

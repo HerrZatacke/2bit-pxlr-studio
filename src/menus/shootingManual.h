@@ -9,7 +9,7 @@ MenuItem exposureTimesMenu =  {  0, 0, 0,  2,  NUM_EXPOSURE_TIMES, 15, "ExTime",
 MenuItem gainsMenu =          {  7, 0, 0,  1,     NUM_GAIN_LEVELS,  4, "  Gain", "   Sensor     Gain",          &gains[0], MENU_ACTION_NONE, };
 MenuItem voltageRefsMenu =    { 14, 0, 0,  6,    NUM_VOLTAGE_REFS,  3, " V-Ref", "  VoltageReference",    &voltageRefs[0], MENU_ACTION_NONE, };
 
-MenuItem ditherSetsMenu =     {  0, 1, 0,  3,         NUM_DITHERS,  7, "Cntrst", "   Dither Contrast",     &ditherSets[0], MENU_ACTION_DITHER, };
+MenuItem contrastsMenu =      {  0, 1, 0,  3,       NUM_CONTRASTS,  7, "Cntrst", "   Dither Contrast",      &contrasts[0], MENU_ACTION_DITHER, };
 MenuItem ditherHighLowsMenu = {  7, 1, 0,  4, NUM_DITHER_HIGHLOWS,  1, "Dither", "   Dither Matrices", &ditherHighLows[0], MENU_ACTION_DITHER, };
 MenuItem voltageOutsMenu =    { 14, 1, 0,  8,    NUM_VOLTAGE_OUTS, 40, " V-Out", "  Voltage   Output",    &voltageOuts[0], MENU_ACTION_NONE, };
 
@@ -25,7 +25,7 @@ MenuItem *menuItems[NUM_MENU_ELEMENTS] = {
   &gainsMenu,
   &voltageRefsMenu,
 
-  &ditherSetsMenu,
+  &contrastsMenu,
   &ditherHighLowsMenu,
   &voltageOutsMenu,
 
