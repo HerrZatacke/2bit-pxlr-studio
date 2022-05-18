@@ -361,10 +361,10 @@ const MenuOption edgeModes[NUM_EDGE_MODES] = {
 };
 
 const MenuOption ditherSets[NUM_DITHERSETS] = {
-  { DITHER_SET_HIGH,    " D-Hig", },
-  { DITHER_SET_LOW,     " D-Low", },
-  { DITHER_SET_NO_HIGH, " N-Hig", },
-  { DITHER_SET_NO_LOW,  " N-Low", },
+  { DITHER_SET_HIGH,    "  D-Hi", },
+  { DITHER_SET_LOW,     "  D-Lo", },
+  { DITHER_SET_NO_HIGH, " ND-Hi", },
+  { DITHER_SET_NO_LOW,  " ND-Lo", },
 };
 
 const MenuOption invertOutputs[NUM_INVERT_OUTPUTS] = {
