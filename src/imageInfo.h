@@ -18,7 +18,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   unsigned char exposureLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_LOW]; // (char)exposureTime;
   unsigned char edgeModeVolt = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT]; // getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   unsigned char voltageZeroPoint = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO]; // getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
-  unsigned char ditherHighLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERHIGHLOW]; // getMenuValue(ditherHighLowsMenu);
+  unsigned char ditherSet = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET]; // getMenuValue(ditherSetsMenu);
   unsigned char contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST]; // getMenuValue(contrastsMenu);
 
   unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
@@ -45,7 +45,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     exposureLow == 0xFF &&
     edgeModeVolt == 0xFF &&
     voltageZeroPoint == 0xFF &&
-    ditherHighLow == 0xFF &&
+    ditherSet == 0xFF &&
     contrast == 0xFF
   ) {
     memcpy(&tileMap[0],
@@ -130,9 +130,9 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   }
 
   // ToDo Rename to Dither Modes everywhere?
-  for (i = 0; i < NUM_DITHER_HIGHLOWS; i += 1) {
-    if (ditherHighLows[i].value == ditherHighLow) {
-      memcpy(&tileMap[194], ditherHighLows[i].title, MENU_TEXT_LENGTH);
+  for (i = 0; i < NUM_DITHERSETS; i += 1) {
+    if (ditherSets[i].value == ditherSet) {
+      memcpy(&tileMap[194], ditherSets[i].title, MENU_TEXT_LENGTH);
     }
   }
 
@@ -178,7 +178,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   hexChar(&tileMap[338], exposureLow);
   hexChar(&tileMap[343], edgeModeVolt);
   hexChar(&tileMap[348], voltageZeroPoint);
-  hexChar(&tileMap[353], ditherHighLow);
+  hexChar(&tileMap[353], ditherSet);
   hexChar(&tileMap[358], contrast);
 }
 

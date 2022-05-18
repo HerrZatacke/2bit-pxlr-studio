@@ -150,7 +150,7 @@
 #define NUM_GAIN_LEVELS 21
 #define NUM_EXPOSURE_TIMES 32
 #define NUM_CONTRASTS 16
-#define NUM_DITHER_HIGHLOWS 4
+#define NUM_DITHERSETS 4
 #define NUM_EDGE_MODES 8
 #define NUM_VOLTAGE_REFS 8
 #define NUM_ZERO_POINTS 3
@@ -360,7 +360,7 @@ const MenuOption edgeModes[NUM_EDGE_MODES] = {
     { A004_EDGE_RATIO_500, "  500%", },
 };
 
-const MenuOption ditherHighLows[NUM_DITHER_HIGHLOWS] = {
+const MenuOption ditherSets[NUM_DITHERSETS] = {
   { DITHER_SET_HIGH,    " D-Hig", },
   { DITHER_SET_LOW,     " D-Low", },
   { DITHER_SET_NO_HIGH, " N-Hig", },

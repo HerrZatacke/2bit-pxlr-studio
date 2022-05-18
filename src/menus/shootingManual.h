@@ -10,7 +10,7 @@ MenuItem gainsMenu =          {  7, 0, 0,  1,     NUM_GAIN_LEVELS,  4, "  Gain",
 MenuItem voltageRefsMenu =    { 14, 0, 0,  6,    NUM_VOLTAGE_REFS,  3, " V-Ref", "  VoltageReference",    &voltageRefs[0], MENU_ACTION_NONE, };
 
 MenuItem contrastsMenu =      {  0, 1, 0,  3,       NUM_CONTRASTS,  7, "Cntrst", "   Dither Contrast",      &contrasts[0], MENU_ACTION_DITHER, };
-MenuItem ditherHighLowsMenu = {  7, 1, 0,  4, NUM_DITHER_HIGHLOWS,  1, "Dither", "   Dither Matrices", &ditherHighLows[0], MENU_ACTION_DITHER, };
+MenuItem ditherSetsMenu =     {  7, 1, 0,  4,      NUM_DITHERSETS,  1, "Dither", "   Dither      Set",     &ditherSets[0], MENU_ACTION_DITHER, };
 MenuItem voltageOutsMenu =    { 14, 1, 0,  8,    NUM_VOLTAGE_OUTS, 40, " V-Out", "  Voltage   Output",    &voltageOuts[0], MENU_ACTION_NONE, };
 
 MenuItem invertOutputsMenu =  {  4, 2, 0, 11,  NUM_INVERT_OUTPUTS,  0, "InvOut", "   Invert   Output",  &invertOutputs[0], MENU_ACTION_NONE, };
@@ -26,7 +26,7 @@ MenuItem *menuItems[NUM_MENU_ELEMENTS] = {
   &voltageRefsMenu,
 
   &contrastsMenu,
-  &ditherHighLowsMenu,
+  &ditherSetsMenu,
   &voltageOutsMenu,
 
   &invertOutputsMenu,
