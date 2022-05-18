@@ -28,6 +28,8 @@ inline void restoreDefaults() {
   for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     menuItems[i]->value = menuItems[i]->defaultValue;
   }
+
+  setDitherMatrix();
 }
 
 inline unsigned char restoreSettings() {
