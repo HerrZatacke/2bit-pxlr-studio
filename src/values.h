@@ -1,4 +1,4 @@
-#define A000_MASK_CAPTURE_POSITIVE 0b00000010
+#define A000_MASK_CAPTURE          0b00000011
 
 #define A001_MASK_EDGE_EXCLUSIVE   0b10000000
 #define A001_MASK_EDGE_OP_MODE     0b01100000
@@ -11,8 +11,8 @@
 #define A005_MASK_ZERO             0b11000000
 #define A005_MASK_VOLTAGE_OUT      0b00111111
 
-#define A000_CAPTURE_POSITIVE 0b00000010
-#define A000_START_CAPTURE    0b00000001
+#define A000_START_CAPTURE_POSITIVE 0b00000011
+#define A000_START_CAPTURE_NEGATIVE 0b00000001
 
 // The Game Boy Camera uses 0x00, 0x04, 0x08 and 0x0
 // They are 14.0dB, 20.0dB, 26.0dB and 32dB, which translate to a gain of 5.01, 10.00, 19.95 and 39.81.
@@ -154,6 +154,7 @@
 #define NUM_EDGE_MODES 8
 #define NUM_VOLTAGE_REFS 8
 #define NUM_ZERO_POINTS 3
+#define NUM_CAPTURE_MODES 2
 #define NUM_VOLTAGE_OUTS 64
 #define NUM_EDGE_OP_MODES 4
 #define NUM_EDGE_EXCLUSIVE 2
@@ -378,6 +379,10 @@ const MenuOption zeroPoints[NUM_ZERO_POINTS] = {
   { A005_ZERO_NEGATIVE, " negtv", },
 };
 
+const MenuOption captureModes[NUM_CAPTURE_MODES] = {
+  { A000_START_CAPTURE_POSITIVE, " postv", },
+  { A000_START_CAPTURE_NEGATIVE, " negtv", },
+};
 
 const MenuOption voltageRefs[NUM_VOLTAGE_REFS] = {
   { A004_VOLTAGE_REF_00, "  0.0v", },

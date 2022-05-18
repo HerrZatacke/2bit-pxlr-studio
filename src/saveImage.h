@@ -16,7 +16,7 @@ void saveImage() {
 
   unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
-  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE] = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
+  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE] = getMenuValue(captureModesMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_EDGEGAINS] = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_HIGH] = (char)(exposureTime >> 8);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_LOW] = (char)exposureTime;

@@ -29,6 +29,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     }
   }
 
+  unsigned char captureMode   = capture          & A000_MASK_CAPTURE;
   unsigned char edgeExclusive = edgeGains        & A001_MASK_EDGE_EXCLUSIVE;
   unsigned char edgeOperation = edgeGains        & A001_MASK_EDGE_OP_MODE;
   unsigned char gain          = edgeGains        & A001_MASK_GAIN;
@@ -73,7 +74,6 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
 
 
   memcpy(&tileMap[0],
-    "                    "
     "Image #??? Slot #???"
     "                    "
     "Exposure Time ??????"
@@ -84,6 +84,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     "Voltage Output??????"
     "Invert Output ??????"
     "Zero Point    ??????"
+    "Capture Mode  ??????"
     "Edge Operation??????"
     "Edge Mode     ??????"
     "Edge Exclusive??????"
@@ -93,17 +94,20 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     " 0x?? 0x?? 0x?? 0x??",
   360);
 
-#define POS_01 74
-#define POS_02 94
-#define POS_03 114
-#define POS_04 134
-#define POS_05 154
-#define POS_06 174
-#define POS_07 194
-#define POS_08 214
-#define POS_09 234
-#define POS_10 254
-#define POS_11 274
+#define POS_IMG 7
+#define POS_SLOT 17
+#define POS_01 54
+#define POS_02 74
+#define POS_03 94
+#define POS_04 114
+#define POS_05 134
+#define POS_06 154
+#define POS_07 174
+#define POS_08 194
+#define POS_09 214
+#define POS_10 234
+#define POS_11 254
+#define POS_12 274
 
   for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
     if (exposureTimes[i].value == exposureTime) {
@@ -153,21 +157,27 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     }
   }
 
+  for (i = 0; i < NUM_CAPTURE_MODES; i += 1) {
+    if (captureModes[i].value == captureMode) {
+      memcpy(&tileMap[POS_09], captureModes[i].title, MENU_TEXT_LENGTH);
+    }
+  }
+
   for (i = 0; i < NUM_EDGE_OP_MODES; i += 1) {
     if (edgeOpModes[i].value == edgeOperation) {
-      memcpy(&tileMap[POS_09], edgeOpModes[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_10], edgeOpModes[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_EDGE_MODES; i += 1) {
     if (edgeModes[i].value == edgeMode) {
-      memcpy(&tileMap[POS_10], edgeModes[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_11], edgeModes[i].title, MENU_TEXT_LENGTH);
     }
   }
 
   for (i = 0; i < NUM_EDGE_EXCLUSIVE; i += 1) {
     if (edgeExclusives[i].value == edgeExclusive) {
-      memcpy(&tileMap[POS_11], edgeExclusives[i].title, MENU_TEXT_LENGTH);
+      memcpy(&tileMap[POS_12], edgeExclusives[i].title, MENU_TEXT_LENGTH);
     }
   }
 
@@ -176,11 +186,11 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
 
   uint2bcd(imageIndex, &bcd);
   bcd2text(&bcd, 48u, digits);
-  memcpy(&tileMap[27], &digits[5], 3);
+  memcpy(&tileMap[POS_IMG], &digits[5], 3);
 
   uint2bcd(imageSlot, &bcd);
   bcd2text(&bcd, 48u, digits);
-  memcpy(&tileMap[37], &digits[5], 3);
+  memcpy(&tileMap[POS_SLOT], &digits[5], 3);
 
   hexChar(&tileMap[323], capture);
   hexChar(&tileMap[328], edgeGains);

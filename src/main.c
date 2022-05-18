@@ -166,7 +166,7 @@ void capture() {
 
   isCapturing = 1;
 
-  A000 = A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
+  A000 = getMenuValue(captureModesMenu);
 
   captureJoypadISR();
 
