@@ -7,11 +7,11 @@
 
 MenuItem exposureTimesMenu =  {  0, 0, 0,  2,  NUM_EXPOSURE_TIMES, 15, "ExTime", " ExposureTime (ms)",  &exposureTimes[0], MENU_ACTION_NONE, };
 MenuItem gainsMenu =          {  7, 0, 0,  1,     NUM_GAIN_LEVELS,  4, "  Gain", "   Sensor     Gain",          &gains[0], MENU_ACTION_NONE, };
-MenuItem voltageRefsMenu =    { 14, 0, 0,  6,    NUM_VOLTAGE_REFS,  3, " V-Ref", "  VoltageReference",    &voltageRefs[0], MENU_ACTION_NONE, };
+MenuItem voltageOutsMenu =    { 14, 0, 0,  8,    NUM_VOLTAGE_OUTS, 40, " V-Out", "  Voltage   Output",    &voltageOuts[0], MENU_ACTION_NONE, };
 
 MenuItem contrastsMenu =      {  0, 1, 0,  3,       NUM_CONTRASTS,  7, "Cntrst", "   Dither Contrast",      &contrasts[0], MENU_ACTION_DITHER, };
 MenuItem ditherSetsMenu =     {  7, 1, 0,  4,      NUM_DITHERSETS,  1, "Dither", "   Dither      Set",     &ditherSets[0], MENU_ACTION_DITHER, };
-MenuItem voltageOutsMenu =    { 14, 1, 0,  8,    NUM_VOLTAGE_OUTS, 40, " V-Out", "  Voltage   Output",    &voltageOuts[0], MENU_ACTION_NONE, };
+MenuItem voltageRefsMenu =    { 14, 1, 0,  6,    NUM_VOLTAGE_REFS,  3, " V-Ref", "  VoltageReference",    &voltageRefs[0], MENU_ACTION_NONE, };
 
 MenuItem invertOutputsMenu =  {  0, 2, 0, 11,  NUM_INVERT_OUTPUTS,  0, "InvOut", "   Invert   Output",  &invertOutputs[0], MENU_ACTION_NONE, };
 MenuItem zeroPointsMenu =     {  7, 2, 0,  7,     NUM_ZERO_POINTS,  1, "0Point", "     Zero   Points",     &zeroPoints[0], MENU_ACTION_NONE, };
@@ -24,11 +24,11 @@ MenuItem edgeExclusivesMenu = { 14, 3, 0, 10,  NUM_EDGE_EXCLUSIVE,  1, "EdExcl",
 MenuItem *menuItems[NUM_MENU_ELEMENTS] = {
   &exposureTimesMenu,
   &gainsMenu,
-  &voltageRefsMenu,
+  &voltageOutsMenu,
 
   &contrastsMenu,
   &ditherSetsMenu,
-  &voltageOutsMenu,
+  &voltageRefsMenu,
 
   &invertOutputsMenu,
   &zeroPointsMenu,

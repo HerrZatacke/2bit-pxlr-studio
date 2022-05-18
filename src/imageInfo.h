@@ -78,10 +78,10 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     "                    "
     "Exposure Time ??????"
     "Sensor Gain   ??????"
-    "Voltage Refer.??????"
+    "Voltage Output??????"
     "Dith. Contrast??????"
     "Dither Set    ??????"
-    "Voltage Output??????"
+    "Voltage Ref   ??????"
     "Invert Output ??????"
     "Zero Point    ??????"
     "Capture Mode  ??????"
@@ -121,9 +121,9 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     }
   }
 
-  for (i = 0; i < NUM_VOLTAGE_REFS; i += 1) {
-    if (voltageRefs[i].value == vRef) {
-      memcpy(&tileMap[POS_03], voltageRefs[i].title, MENU_TEXT_LENGTH);
+  for (i = 0; i < NUM_VOLTAGE_OUTS; i += 1) {
+    if (voltageOuts[i].value == vOut) {
+      memcpy(&tileMap[POS_03], voltageOuts[i].title, MENU_TEXT_LENGTH);
     }
   }
 
@@ -139,9 +139,10 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
     }
   }
 
-  for (i = 0; i < NUM_VOLTAGE_OUTS; i += 1) {
-    if (voltageOuts[i].value == vOut) {
-      memcpy(&tileMap[POS_06], voltageOuts[i].title, MENU_TEXT_LENGTH);
+
+  for (i = 0; i < NUM_VOLTAGE_REFS; i += 1) {
+    if (voltageRefs[i].value == vRef) {
+      memcpy(&tileMap[POS_06], voltageRefs[i].title, MENU_TEXT_LENGTH);
     }
   }
 
