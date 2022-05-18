@@ -3,8 +3,6 @@ unsigned char menuPos = 0;
 
 extern void saveImageDialog();
 
-#include "menus/shootingManual.h"
-
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
 inline void renderMenu();
@@ -69,8 +67,8 @@ inline void renderMenu() {
 
     if (menuItems[i]->page == currentPage) {
       unsigned char value = menuItems[i]->value;
-      set_bkg_based_tiles(menuItems[i]->x, 0, 4, 1, menuItems[i]->title, OFFSET_FONT - 32);
-      set_bkg_based_tiles(menuItems[i]->x, 1, 4, 1, menuItems[i]->options[value].title, OFFSET_FONT - 32);
+      set_bkg_based_tiles(menuItems[i]->x, 0, MENU_TEXT_LENGTH, 1, menuItems[i]->title, OFFSET_FONT - 32);
+      set_bkg_based_tiles(menuItems[i]->x, 1, MENU_TEXT_LENGTH, 1, menuItems[i]->options[value].title, OFFSET_FONT - 32);
     }
   }
 
@@ -81,8 +79,8 @@ inline void renderMenu() {
 
 //  showRegisters();
 
-  unsigned char spriteX = (menuItems[menuPos]->x * 8) + 3;
-  move_sprite(SPRITE_MENU_INDICATOR, spriteX, 20);
+  unsigned char spriteX = (menuItems[menuPos]->x * 8) + 8;
+  move_sprite(SPRITE_MENU_INDICATOR, spriteX, 23);
 }
 
 inline void menuAction() {

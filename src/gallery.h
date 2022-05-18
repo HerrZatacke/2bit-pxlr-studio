@@ -1,7 +1,6 @@
 
 void loadAndShowGalleryImage();
 
-#include "menus/imageMenuItems.h"
 #include "./bleep.h"
 #include "./expose.h"
 #include "./printCmd.h"
