@@ -95,7 +95,7 @@ void setDitherMatrix();
 #include "./imageInfo.h"
 #include "./mainMenu.h"
 #include "./debug.h"
-#include "./menu.h"
+#include "./modeShootingManual.h"
 #include "./saveImage.h"
 #include "./gallery.h"
 
