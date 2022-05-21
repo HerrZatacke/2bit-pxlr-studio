@@ -32,7 +32,7 @@ inline void init_gfx() {
   set_sprite_tile(SPRITE_BORDER_V_8, OFFSET_BORDER_V);
 }
 
-inline void showManualModeSprites() {
+inline void showViewfinderSprites() {
   move_sprite(SPRITE_BORDER_H_1, 24, 25);
   move_sprite(SPRITE_BORDER_H_2, 32, 25);
   move_sprite(SPRITE_BORDER_H_3, 136, 25);
@@ -52,7 +52,7 @@ inline void showManualModeSprites() {
   move_sprite(SPRITE_BORDER_V_8, 147, 136);
 }
 
-inline void hideLowerManualModeSprites() {
+inline void hideLowerViewfinderSprites() {
   move_sprite(SPRITE_BORDER_H_5, 0, 0);
   move_sprite(SPRITE_BORDER_H_6, 0, 0);
   move_sprite(SPRITE_BORDER_H_7, 0, 0);
@@ -63,7 +63,7 @@ inline void hideLowerManualModeSprites() {
   move_sprite(SPRITE_BORDER_V_8, 0, 0);
 }
 
-inline void hideManualModeSprites() {
+inline void hideViewfinderSprites() {
   move_sprite(SPRITE_BORDER_H_1, 0, 0);
   move_sprite(SPRITE_BORDER_H_2, 0, 0);
   move_sprite(SPRITE_BORDER_H_3, 0, 0);
@@ -73,7 +73,7 @@ inline void hideManualModeSprites() {
   move_sprite(SPRITE_BORDER_V_3, 0, 0);
   move_sprite(SPRITE_BORDER_V_4, 0, 0);
 
-  hideLowerManualModeSprites();
+  hideLowerViewfinderSprites();
 }
 
 inline void init_sound() {

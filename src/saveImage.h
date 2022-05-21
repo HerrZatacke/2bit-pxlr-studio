@@ -42,11 +42,11 @@ void saveImageDialog() {
     return;
   }
 
-  hideLowerManualModeSprites();
+  hideLowerViewfinderSprites();
 
   if (dialog("Save Image?     ")) {
     saveImage();
   }
 
-  showManualModeSprites();
+  showViewfinderSprites();
 }

@@ -9,7 +9,7 @@ inline void mainMenuSprite() {
 
 inline void initMainMenu() {
   clearBkg();
-  hideManualModeSprites();
+  hideViewfinderSprites();
 
   for (unsigned char index = 0; index < NUM_MAIN_MENU_OPTIONS; index += 1) {
     set_bkg_based_tiles(2, yMenu(index), 16, 1, mainMenuItems[index].title, OFFSET_FONT - 32);

@@ -7,7 +7,7 @@ inline void debugMenu() {
 
 inline void initDebug() {
   clearBkg();
-  hideManualModeSprites();
+  hideViewfinderSprites();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
   SWITCH_RAM(0);
   writeNumber(0, 0, 3, game_data_meta_imageslots[0]);

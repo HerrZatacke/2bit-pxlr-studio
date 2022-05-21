@@ -204,7 +204,7 @@ void menuSelectMode(unsigned char loopState) {
     clearBkg();
     boop();
     mainLoopState = MAIN_LOOP_MENU;
-    hideManualModeSprites();
+    hideViewfinderSprites();
     initMainMenu();
   }
 }
