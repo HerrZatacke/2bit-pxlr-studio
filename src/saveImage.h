@@ -28,7 +28,11 @@ void saveImage() {
   setImageSlot(firstFreeSlot, numVisibleImages);
 
   sortImages();
-  renderMenu();
+  if (mainLoopState == MAIN_LOOP_SHOOT_MANUAL) {
+    renderManualMenu();
+  } else {
+    clonk();
+  }
 }
 
 void saveImageDialog() {

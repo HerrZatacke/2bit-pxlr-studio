@@ -1,8 +1,9 @@
-#define NUM_MAIN_MENU_OPTIONS 4
+#define NUM_MAIN_MENU_OPTIONS 5
 
 const MenuOption mainMenuItems[NUM_MAIN_MENU_OPTIONS] = {
 //  { MAIN_LOOP_NOT_IMPLEMENTED, "Automatic mode  ", },
   { MAIN_LOOP_SHOOT_MANUAL,    "Manual mode     ", },
+  { MAIN_LOOP_SHOOT_BURST,     "Burst mode      ", },
 //  { MAIN_LOOP_NOT_IMPLEMENTED, "Settings mode   ", },
 //  { MAIN_LOOP_NOT_IMPLEMENTED, "Continuous mode ", },
 //  { MAIN_LOOP_NOT_IMPLEMENTED, "Panorama mode   ", },

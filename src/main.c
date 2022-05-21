@@ -35,9 +35,10 @@
 
 #define MAIN_LOOP_MENU 0
 #define MAIN_LOOP_SHOOT_MANUAL 1
-#define MAIN_LOOP_IMAGE_GALLERY 2
-#define MAIN_LOOP_IMAGE 3
-#define MAIN_LOOP_DELETE_ALL 4
+#define MAIN_LOOP_SHOOT_BURST 2
+#define MAIN_LOOP_IMAGE_GALLERY 3
+#define MAIN_LOOP_IMAGE 4
+#define MAIN_LOOP_DELETE_ALL 5
 #define MAIN_LOOP_DEBUG 254
 #define MAIN_LOOP_NOT_IMPLEMENTED 255
 
@@ -96,6 +97,7 @@ void setDitherMatrix();
 #include "./mainMenu.h"
 #include "./debug.h"
 #include "./modeShootingManual.h"
+#include "./modeShootingBurst.h"
 #include "./saveImage.h"
 #include "./gallery.h"
 
@@ -183,6 +185,8 @@ void menuSelectMode(unsigned char loopState) {
   mainLoopState = loopState;
   if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
     initManualMode();
+  } else if (loopState == MAIN_LOOP_SHOOT_BURST) {
+    initBurstMode();
   } else if (loopState == MAIN_LOOP_MENU) {
     initMainMenu();
   } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
@@ -248,6 +252,11 @@ int main(void) {
         fastLoadImageTiles();
         capture();
         manualShootMenu();
+        break;
+      case MAIN_LOOP_SHOOT_BURST:
+        fastLoadImageTiles();
+        capture();
+        burstShootMenu();
         break;
       case MAIN_LOOP_MENU:
         mainMenu();

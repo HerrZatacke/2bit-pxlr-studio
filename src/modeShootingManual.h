@@ -2,17 +2,18 @@
 unsigned char menuPos = 0;
 
 extern void saveImageDialog();
+extern unsigned char numVisibleImages;
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
-inline void renderMenu();
+inline void renderManualMenu();
 
 inline void initManualMode() {
   clearBkg();
   set_bkg_tiles(0, 0, 20, 18, map_normal);
   sortImages();
   showManualModeSprites();
-  renderMenu();
+  renderManualMenu();
 }
 
 inline void storeSettings() {
@@ -57,7 +58,8 @@ inline unsigned char restoreSettings() {
   // 1 forces a reset to defaults
   return 1;
 }
-inline void renderMenu() {
+
+inline void renderManualMenu() {
   clonk();
   unsigned char currentPage = menuItems[menuPos]->page;
   fill_bkg_rect(0, 0, 20, 2, BLNK);
@@ -92,24 +94,24 @@ inline void menuAction() {
 inline void manualShootMenu() {
   if (jp == J_RIGHT) {
     menuPos = (menuPos + 1) % NUM_MENU_ELEMENTS;
-    renderMenu();
+    renderManualMenu();
     joypadConsumed();
   } else if (jp == J_LEFT) {
     menuPos = (menuPos + NUM_MENU_ELEMENTS - 1) % NUM_MENU_ELEMENTS;
-    renderMenu();
+    renderManualMenu();
     joypadConsumed();
   } else if (jp == J_UP) {
     menuItems[menuPos]->value = (menuItems[menuPos]->value + 1) % menuItems[menuPos]->numOptions;
     menuAction();
     storeSettings();
-    renderMenu();
+    renderManualMenu();
     joypadConsumed();
   } else if (jp == J_DOWN) {
     joypadConsumed();
     menuItems[menuPos]->value = (menuItems[menuPos]->value + menuItems[menuPos]->numOptions - 1) % menuItems[menuPos]->numOptions;
     menuAction();
     storeSettings();
-    renderMenu();
+    renderManualMenu();
     joypadConsumed();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
@@ -118,7 +120,7 @@ inline void manualShootMenu() {
     restoreDefaults();
     beep();
     storeSettings();
-    renderMenu();
+    renderManualMenu();
     waitRelease();
     joypadConsumed();
   } else if (jp == J_A) {
