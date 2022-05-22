@@ -48,14 +48,14 @@ const Overlay *outerBorder[NUM_OVERLAY_SPRITES] = {
   &outerBorderV5, &outerBorderV6, &outerBorderV7, &outerBorderV8,
 };
 
-const Overlay ruleOfThirdsH1 = { SPRITE_BORDER_H_1, 59,  70,  };
-const Overlay ruleOfThirdsH2 = { SPRITE_BORDER_H_2, 66,  70,  };
-const Overlay ruleOfThirdsH3 = { SPRITE_BORDER_H_3, 102, 70,  };
-const Overlay ruleOfThirdsH4 = { SPRITE_BORDER_H_4, 109, 70,  };
-const Overlay ruleOfThirdsH5 = { SPRITE_BORDER_H_5, 59,  107, };
-const Overlay ruleOfThirdsH6 = { SPRITE_BORDER_H_6, 66,  107, };
-const Overlay ruleOfThirdsH7 = { SPRITE_BORDER_H_7, 102, 107, };
-const Overlay ruleOfThirdsH8 = { SPRITE_BORDER_H_8, 109, 107, };
+const Overlay ruleOfThirdsH1 = { SPRITE_BORDER_H_1, 59,  69,  };
+const Overlay ruleOfThirdsH2 = { SPRITE_BORDER_H_2, 66,  69,  };
+const Overlay ruleOfThirdsH3 = { SPRITE_BORDER_H_3, 102, 69,  };
+const Overlay ruleOfThirdsH4 = { SPRITE_BORDER_H_4, 109, 69,  };
+const Overlay ruleOfThirdsH5 = { SPRITE_BORDER_H_5, 59,  106, };
+const Overlay ruleOfThirdsH6 = { SPRITE_BORDER_H_6, 66,  106, };
+const Overlay ruleOfThirdsH7 = { SPRITE_BORDER_H_7, 102, 106, };
+const Overlay ruleOfThirdsH8 = { SPRITE_BORDER_H_8, 109, 106, };
 const Overlay ruleOfThirdsV1 = { SPRITE_BORDER_V_1, 59,  62,  };
 const Overlay ruleOfThirdsV2 = { SPRITE_BORDER_V_2, 59,  69,  };
 const Overlay ruleOfThirdsV3 = { SPRITE_BORDER_V_3, 102, 62,  };
