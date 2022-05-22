@@ -29,13 +29,13 @@ inline void showOverlay() {
 inline void hideLowerOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (ruleOfThirds[ov]->y > 99) {
-      move_sprite(noOverlay[ov]->sprite, noOverlay[ov]->x, noOverlay[ov]->y);
+      move_sprite(noOverlay[ov]->sprite, 0, 0);
     }
   }
 }
 
 inline void hideOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
-    move_sprite(noOverlay[ov]->sprite, noOverlay[ov]->x, noOverlay[ov]->y);
+    move_sprite(noOverlay[ov]->sprite, 0, 0);
   }
 }
