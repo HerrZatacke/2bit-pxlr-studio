@@ -24,22 +24,22 @@ const Overlay *noOverlay[NUM_OVERLAY_SPRITES] = {
   &noOverlayV5, &noOverlayV6, &noOverlayV7, &noOverlayV8,
 };
 
-const Overlay outerBorderH1 = { SPRITE_BORDER_H_1, 24,  33,  };
-const Overlay outerBorderH2 = { SPRITE_BORDER_H_2, 32,  33,  };
-const Overlay outerBorderH3 = { SPRITE_BORDER_H_3, 136, 33,  };
-const Overlay outerBorderH4 = { SPRITE_BORDER_H_4, 144, 33,  };
-const Overlay outerBorderH5 = { SPRITE_BORDER_H_5, 24,  144, };
-const Overlay outerBorderH6 = { SPRITE_BORDER_H_6, 32,  144, };
-const Overlay outerBorderH7 = { SPRITE_BORDER_H_7, 136, 144, };
-const Overlay outerBorderH8 = { SPRITE_BORDER_H_8, 144, 144, };
-const Overlay outerBorderV1 = { SPRITE_BORDER_V_1, 17,  32,  };
-const Overlay outerBorderV2 = { SPRITE_BORDER_V_2, 17,  40,  };
-const Overlay outerBorderV3 = { SPRITE_BORDER_V_3, 144, 32,  };
-const Overlay outerBorderV4 = { SPRITE_BORDER_V_4, 144, 40,  };
-const Overlay outerBorderV5 = { SPRITE_BORDER_V_5, 17,  128, };
-const Overlay outerBorderV6 = { SPRITE_BORDER_V_6, 17,  136, };
-const Overlay outerBorderV7 = { SPRITE_BORDER_V_7, 144, 128, };
-const Overlay outerBorderV8 = { SPRITE_BORDER_V_8, 144, 136, };
+const Overlay outerBorderH1 = { SPRITE_BORDER_H_1, 24,  32,  };
+const Overlay outerBorderH2 = { SPRITE_BORDER_H_2, 32,  32,  };
+const Overlay outerBorderH3 = { SPRITE_BORDER_H_3, 136, 32,  };
+const Overlay outerBorderH4 = { SPRITE_BORDER_H_4, 144, 32,  };
+const Overlay outerBorderH5 = { SPRITE_BORDER_H_5, 24,  143, };
+const Overlay outerBorderH6 = { SPRITE_BORDER_H_6, 32,  143, };
+const Overlay outerBorderH7 = { SPRITE_BORDER_H_7, 136, 143, };
+const Overlay outerBorderH8 = { SPRITE_BORDER_H_8, 144, 143, };
+const Overlay outerBorderV1 = { SPRITE_BORDER_V_1, 17,  31,  };
+const Overlay outerBorderV2 = { SPRITE_BORDER_V_2, 17,  39,  };
+const Overlay outerBorderV3 = { SPRITE_BORDER_V_3, 144, 31,  };
+const Overlay outerBorderV4 = { SPRITE_BORDER_V_4, 144, 39,  };
+const Overlay outerBorderV5 = { SPRITE_BORDER_V_5, 17,  127, };
+const Overlay outerBorderV6 = { SPRITE_BORDER_V_6, 17,  135, };
+const Overlay outerBorderV7 = { SPRITE_BORDER_V_7, 144, 127, };
+const Overlay outerBorderV8 = { SPRITE_BORDER_V_8, 144, 135, };
 
 const Overlay *outerBorder[NUM_OVERLAY_SPRITES] = {
   &outerBorderH1, &outerBorderH2, &outerBorderH3, &outerBorderH4,
