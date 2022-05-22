@@ -1,5 +1,5 @@
 inline void appearDialog() {
-  move_win(7, 145);
+  move_win(7, 146);
 
   for (unsigned char i = 0; i < 8; i += 1) {
 
@@ -22,7 +22,7 @@ inline void disappearDialog() {
     wait_vbl_done();
   }
 
-  move_win(7, 145);
+  move_win(7, 146);
 }
 
 unsigned char dialog(unsigned char *message) {

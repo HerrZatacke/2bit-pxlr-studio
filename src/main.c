@@ -78,9 +78,11 @@ void setDitherMatrix();
 #include "typedefs/MenuOption.h"
 #include "typedefs/MenuItem.h"
 #include "typedefs/Image.h"
+#include "typedefs/Overlay.h"
 
 #include "./joypad.h"
 #include "./utils.h"
+#include "./overlays/overlays.h"
 #include "./dialog.h"
 #include "../res/frames/frame_pxlr.h"
 #include "../res/map.h"
@@ -204,7 +206,7 @@ void menuSelectMode(unsigned char loopState) {
     clearBkg();
     boop();
     mainLoopState = MAIN_LOOP_MENU;
-    hideViewfinderSprites();
+    hideOverlay();
     initMainMenu();
   }
 }
@@ -220,6 +222,8 @@ int main(void) {
   init_gfx();
   init_sound();
   init_cam();
+
+  initOverlays();
 
   fill_bkg_rect(0, 0, 20, 18, BLNK);
 

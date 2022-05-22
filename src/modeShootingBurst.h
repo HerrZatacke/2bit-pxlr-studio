@@ -12,7 +12,7 @@ inline void initBurstMode() {
   clearBkg();
   set_bkg_tiles(0, 0, 20, 18, map_normal);
   sortImages();
-  showViewfinderSprites();
+  showOverlay();
   renderBurstMenu();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
   burstActive = 0;

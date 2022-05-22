@@ -42,11 +42,11 @@ void saveImageDialog() {
     return;
   }
 
-  hideLowerViewfinderSprites();
+  hideLowerOverlay();
 
   if (dialog("Save Image?     ")) {
     saveImage();
   }
 
-  showViewfinderSprites();
+  showOverlay();
 }
