@@ -20,16 +20,34 @@ inline void initOverlays() {
   set_sprite_tile(SPRITE_BORDER_V_8, OFFSET_BORDER_V);
 }
 
+unsigned char currentOverlay = 1;
+
 inline void showOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
-    move_sprite(ruleOfThirds[ov]->sprite, ruleOfThirds[ov]->x, ruleOfThirds[ov]->y);
+    if (currentOverlay == 0) {
+      move_sprite(noOverlay[ov]->sprite, noOverlay[ov]->x, noOverlay[ov]->y);
+    } else if (currentOverlay == 1) {
+      move_sprite(outerBorder[ov]->sprite, outerBorder[ov]->x, outerBorder[ov]->y);
+    } else if (currentOverlay == 2) {
+      move_sprite(ruleOfThirds[ov]->sprite, ruleOfThirds[ov]->x, ruleOfThirds[ov]->y);
+    }
   }
 }
 
 inline void hideLowerOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
-    if (ruleOfThirds[ov]->y > 99) {
-      move_sprite(noOverlay[ov]->sprite, 0, 0);
+    if (currentOverlay == 0) {
+      if (noOverlay[ov]->y > 99) {
+        move_sprite(noOverlay[ov]->sprite, 0, 0);
+      }
+    } else if (currentOverlay == 1) {
+      if (outerBorder[ov]->y > 99) {
+        move_sprite(outerBorder[ov]->sprite, 0, 0);
+      }
+    } else if (currentOverlay == 2) {
+      if (ruleOfThirds[ov]->y > 99) {
+        move_sprite(ruleOfThirds[ov]->sprite, 0, 0);
+      }
     }
   }
 }

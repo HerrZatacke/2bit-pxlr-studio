@@ -126,5 +126,10 @@ inline void manualShootMenu() {
   } else if (jp == J_A) {
     saveImageDialog();
     joypadConsumed();
+  } else if (jp == J_SELECT) {
+    currentOverlay = (currentOverlay + 1) % 3;
+    clonk();
+    showOverlay();
+    joypadConsumed();
   }
 }
