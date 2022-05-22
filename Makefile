@@ -1,4 +1,5 @@
 CC	= $(GBDK_FOLDER)/bin/lcc -Wa-l -Wl-m -Wl-j
+RU	=  $(GBDK_FOLDER)/romusage/romusage
 
 BIN	= pxlr.gb
 
@@ -78,3 +79,6 @@ branch.h:
 
 $(BIN):	obj branch.h version.h obj/main.o obj/bank_00.o obj/bank_01.o obj/bank_02.o obj/bank_03.o obj/bank_04.o obj/bank_05.o obj/bank_06.o obj/bank_07.o obj/bank_08.o obj/bank_09.o obj/bank_10.o obj/bank_11.o obj/bank_12.o obj/bank_13.o obj/bank_14.o obj/bank_15.o obj/bank_16.o obj/pxlr.sav obj/printCmd.o
 	$(CC) -Wl-yt0xFC -Wl-yo4 -Wl-ya16 -Wm-yn"PXLR CAMERA" -o obj/$@ obj/main.o obj/bank_00.o obj/bank_01.o obj/bank_02.o obj/bank_03.o obj/bank_04.o obj/bank_05.o obj/bank_06.o obj/bank_07.o obj/bank_08.o obj/bank_09.o obj/bank_10.o obj/bank_11.o obj/bank_12.o obj/bank_13.o obj/bank_14.o obj/bank_15.o obj/bank_16.o obj/printCmd.o
+
+romusage:
+	$(RU) ./obj/pxlr.map
