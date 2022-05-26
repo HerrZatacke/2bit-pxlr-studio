@@ -1,7 +1,10 @@
-#include "../version.h"
-#include "../branch.h"
+#pragma bank 1
 
-inline void init_gfx() {
+#include <gb/gb.h>
+#include <gbdk/bcd.h>
+#include "defines.h"
+
+void init_gfx() BANKED {
   ENABLE_RAM;
   SHOW_BKG;
   BGP_REG = PALETTE_NORMAL;
@@ -17,68 +20,46 @@ inline void init_gfx() {
   set_sprite_tile(SPRITE_BLEEP_CURSOR, OFFSET_BLEEP_CURSOR);
 }
 
-inline void init_sound() {
+void init_sound() BANKED {
   // This enables sound, registers must be in this specific order!
   NR52_REG = 0x80;
   NR50_REG = 0x77;
   NR51_REG = 0xFF;
 }
 
-inline void beep() {
+void beep() BANKED {
   NR21_REG=0x80;
   NR22_REG=0xA2;
   NR23_REG=0x60;
   NR24_REG=0x87;
 }
 
-inline void boop() {
+void boop() BANKED {
   NR21_REG=0x80;
   NR22_REG=0xA2;
   NR23_REG=0xD7;
   NR24_REG=0x86;
 }
 
-inline void clonk() {
+void clonk() BANKED {
   NR41_REG=0x01;
   NR42_REG=0xC1;
   NR43_REG=0x70;
   NR44_REG=0xC0;
 }
 
-inline void clearBkg() {
+void clearBkg() BANKED {
   fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
 }
 
-inline void pause(unsigned char frames) {
+void pause(unsigned char frames) BANKED {
   for (unsigned char i = 0; i < frames; i++) {
     wait_vbl_done();
   }
 }
 
-unsigned char savedBank;
-void set_bkg_tiles_banked(unsigned char x, unsigned char y, unsigned char w, unsigned char h, unsigned char *map, unsigned char bank) {
-  savedBank = _current_bank;
-  SWITCH_ROM(bank);
-  set_bkg_tiles(x, y, w, h, map);
-  SWITCH_ROM(savedBank);
-}
-
-void set_bkg_data_banked(unsigned char offset, unsigned char length, unsigned char *data, unsigned char bank) {
-  savedBank = _current_bank;
-  SWITCH_ROM(bank);
-  set_bkg_data(offset, length, data);
-  SWITCH_ROM(savedBank);
-}
-
-void set_data_banked(unsigned int *address, unsigned char *data, unsigned int length, unsigned char bank) {
-  savedBank = _current_bank;
-  SWITCH_ROM(bank);
-  set_data(address, data, length);
-  SWITCH_ROM(savedBank);
-}
-
 unsigned char digits_map[10];
-void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) {
+void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) BANKED {
   BCD bcd = MAKE_BCD(0);
   uint2bcd(number, &bcd);
   bcd2text(&bcd, OFFSET_FONT + 16u, digits_map);
@@ -119,7 +100,7 @@ void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigne
 }
 
 // ToDo: add a "reason" for calling "dead"
-void dead(/*unsigned char reason*/) {
+void dead(/*unsigned char reason*/) BANKED {
   while (1) {
     boop();
     for(unsigned char i = 0; i < 120; i++) {
@@ -128,24 +109,3 @@ void dead(/*unsigned char reason*/) {
   }
 }
 
-inline unsigned char splash() {
-
-  set_data_banked(VRAM_9000, logo_tiles, LOGO_TILE_COUNT * 16, 1);
-  set_data_banked(VRAM_8000, logo_tiles, LOGO_TILE_COUNT * 16, 1);
-
-  set_bkg_tiles_banked(0, 0, 20, 18, logo_map, 1);
-
-  set_bkg_based_tiles(0, 16, sizeof(branch), 1, branch, OFFSET_FONT - 32);
-  set_bkg_based_tiles(0, 17, sizeof(version), 1, version, OFFSET_FONT - 32);
-  set_bkg_based_tiles(13, 16, 7, 2, "Shoot A Menu B", OFFSET_FONT - 32);
-
-  while (jp != J_A && jp != J_B) {
-    wait_vbl_done();
-  }
-
-  unsigned char result = jp;
-
-  waitRelease(); // waitRelease() resets `jp`
-
-  return result;
-}
