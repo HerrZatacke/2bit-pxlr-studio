@@ -6,8 +6,8 @@
 #include <gb/gb.h>
 #include <string.h>
 
-extern const unsigned char frame_pxlr_tiles[544];
 /*
+extern const unsigned char frame_pxlr_tiles[544];
 extern const unsigned char frame_pxlr_map[360];
 */
 
