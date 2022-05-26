@@ -54,10 +54,13 @@ void loadImageTilesFlipped() {
 inline void expose() {
   BGP_REG = PALETTE_BLANK;
 
+  // ToDo - Use functions in banked.h
+  savedBank = _current_bank;
+  SWITCH_ROM(1);
   set_bkg_data_flipped(OFFSET_FONT, FRAME_PXLR_TILE_COUNT, frame_pxlr_tiles, 1);
-/*
   set_flipped_map(frame_pxlr_map, OFFSET_FONT);
-*/
+  SWITCH_ROM(savedBank);
+
   loadImageTilesFlipped();
   waitRelease();
 
