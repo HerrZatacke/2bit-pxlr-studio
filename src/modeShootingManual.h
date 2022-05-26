@@ -10,10 +10,7 @@ inline void renderManualMenu();
 
 inline void initManualMode() {
   clearBkg();
-  set_bkg_tiles(0, 0, 1, 1, map_normal);
-/*
-  set_bkg_tiles(0, 0, 20, 18, map_normal);
-*/
+  set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
   sortImages();
   showOverlay();
   renderManualMenu();

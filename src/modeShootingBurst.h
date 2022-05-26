@@ -10,7 +10,7 @@ inline void renderBurstMenu() {
 
 inline void initBurstMode() {
   clearBkg();
-  set_bkg_tiles(0, 0, 20, 18, map_normal);
+  set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
   sortImages();
   showOverlay();
   renderBurstMenu();

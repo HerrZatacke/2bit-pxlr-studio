@@ -59,10 +59,9 @@ void loadAndShowGalleryImage() {
 }
 
 void initGallery() {
-  set_bkg_tiles(0, 0, 1, 1, map_normal);
-/*
-  set_bkg_tiles(0, 0, 20, 18, map_normal);
-*/
+  clearBkg();
+  set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
+
   disappearImageMenu();
   sortImages();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
@@ -113,7 +112,7 @@ inline void imageMenuAction(unsigned char value) {
       renderImageMenu();
     } else {
 
-      getImageInfo(imageIndex, imageInfo);
+//      getImageInfo(imageIndex, imageInfo);
       printImageInfo(imageInfo, font);
 
       waitPrinterReady();

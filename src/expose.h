@@ -47,10 +47,7 @@ void loadImageTilesFlipped() {
 
   set_bkg_data_flipped(0, 112, images[imageSlot]->tilesUpper, 1);
   set_bkg_data_flipped(0, 112, images[imageSlot]->tilesLower, 0);
-  set_bkg_tiles(0, 0, 1, 1, map_flipped);
-/*
-  set_bkg_tiles(2, 2, 16, 14, map_flipped);
-*/
+  set_bkg_tiles_banked(2, 2, 16, 14, map_flipped, 1);
 }
 
 
@@ -80,15 +77,13 @@ inline void expose() {
   joypadConsumed();
   waitRelease();
 
+
+  // Back to normal
   BGP_REG = PALETTE_BLANK;
-  unsigned char savedBank = _current_bank;
-  SWITCH_ROM(1);
-  set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
-  SWITCH_ROM(savedBank);
-  set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
-  set_bkg_tiles(0, 0, 1, 1, map_normal);
-/*
-  set_bkg_tiles(0, 0, 20, 18, map_normal);
-*/
+  clearBkg();
+  set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
+  set_bkg_data_banked(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles, 1);
+  set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
+
   BGP_REG = PALETTE_NORMAL;
 }
