@@ -9,6 +9,7 @@ inline void initDebug() {
   clearBkg();
   hideOverlay();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
+/*
   SWITCH_RAM(0);
   writeNumber(0, 0, 3, game_data_meta_imageslots[0]);
   writeNumber(4, 0, 3, game_data_meta_imageslots[1]);
@@ -84,4 +85,5 @@ inline void initDebug() {
   set_bkg_based_tiles(1, 16, 5, 1, game_data_meta_magic_echo, OFFSET_FONT - 32);
   writeNumber(7, 16, 3, game_data_meta_imageslots_echo_checksum[0]);
   writeNumber(11, 16, 3, game_data_meta_imageslots_echo_checksum[1]);
+*/
 }
