@@ -7,6 +7,7 @@ inline void hexChar(unsigned char *target, unsigned char value) {
 
 
 void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
+/*
   unsigned char imageSlot = getImageSlot(imageIndex);
   unsigned char i;
 
@@ -201,6 +202,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   hexChar(&tileMap[348], voltageZeroPoint);
   hexChar(&tileMap[353], ditherSet);
   hexChar(&tileMap[358], contrast);
+*/
 }
 
 inline void displayImageInfo(unsigned char imageIndex) {
