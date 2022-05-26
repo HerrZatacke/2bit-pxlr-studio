@@ -47,8 +47,10 @@ void loadImageTilesFlipped() {
 
   set_bkg_data_flipped(0, 112, images[imageSlot]->tilesUpper, 1);
   set_bkg_data_flipped(0, 112, images[imageSlot]->tilesLower, 0);
-
+  set_bkg_tiles(0, 0, 1, 1, map_flipped);
+/*
   set_bkg_tiles(2, 2, 16, 14, map_flipped);
+*/
 }
 
 
@@ -81,6 +83,9 @@ inline void expose() {
   BGP_REG = PALETTE_BLANK;
   set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
   set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
+  set_bkg_tiles(0, 0, 1, 1, map_normal);
+/*
   set_bkg_tiles(0, 0, 20, 18, map_normal);
+*/
   BGP_REG = PALETTE_NORMAL;
 }

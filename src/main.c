@@ -240,8 +240,12 @@ int main(void) {
   SHOW_SPRITES;
   // ToDo: Fade-effect?
 
+  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 16);
+  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 16);
+/*
   set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
   set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
+*/
 
   if (splashPressed == J_A) {
     menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);

@@ -59,7 +59,10 @@ void loadAndShowGalleryImage() {
 }
 
 void initGallery() {
+  set_bkg_tiles(0, 0, 1, 1, map_normal);
+/*
   set_bkg_tiles(0, 0, 20, 18, map_normal);
+*/
   disappearImageMenu();
   sortImages();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
