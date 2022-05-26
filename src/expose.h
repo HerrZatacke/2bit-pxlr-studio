@@ -56,7 +56,9 @@ inline void expose() {
   BGP_REG = PALETTE_BLANK;
 
   set_bkg_data_flipped(OFFSET_FONT, FRAME_PXLR_TILE_COUNT, frame_pxlr_tiles, 1);
+/*
   set_flipped_map(frame_pxlr_map, OFFSET_FONT);
+*/
   loadImageTilesFlipped();
   waitRelease();
 
