@@ -81,7 +81,10 @@ inline void expose() {
   waitRelease();
 
   BGP_REG = PALETTE_BLANK;
+  unsigned char savedBank = _current_bank;
+  SWITCH_ROM(1);
   set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
+  SWITCH_ROM(savedBank);
   set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
   set_bkg_tiles(0, 0, 1, 1, map_normal);
 /*

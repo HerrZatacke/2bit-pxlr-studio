@@ -229,7 +229,11 @@ int main(void) {
 
   fill_bkg_rect(0, 0, 20, 18, BLNK);
 
+  unsigned char savedBank = _current_bank;
+  SWITCH_ROM(1);
   set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
+  SWITCH_ROM(savedBank);
+
   set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
 
   cleanupIndexGaps();
