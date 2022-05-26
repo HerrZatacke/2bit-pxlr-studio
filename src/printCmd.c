@@ -266,9 +266,11 @@ void printImageInfo(unsigned char *imageInfo, unsigned char *font) {
   waitPrinterReady();
   printerInit();
 
+/*
   for (index = 0; index < 360; index++) {
     printTileData(&font[(imageInfo[index] - 32) * 16], 9, 0x00, PALETTE_INVERTED, EXPOSURE_DARK);
   }
+*/
 
 
   waitPrinterReady();
