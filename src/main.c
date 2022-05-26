@@ -82,6 +82,7 @@ void setDitherMatrix();
 
 #include "../res/frames/frame_pxlr.h"
 #include "../res/tiles.h"
+#include "../res/maps.h"
 #include "../res/pxlr-logo.h"
 #include "../res/font.h"
 #include "../res/nope.h"
