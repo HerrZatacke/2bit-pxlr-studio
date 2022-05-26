@@ -148,7 +148,10 @@
 #define A005_VOLTAGE_OUT_POS_992 0b00111111 //  0.992mV
 
 #define NUM_GAIN_LEVELS 21
+#define NUM_EXPOSURE_TIMES 3
+/*
 #define NUM_EXPOSURE_TIMES 32
+ */
 #define NUM_CONTRASTS 1
 /*
 #define NUM_CONTRASTS 16
@@ -182,6 +185,7 @@ unsigned const int exposureTimesValues[NUM_EXPOSURE_TIMES] = { 0xFFFF, 0xF424, 0
 
 const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
   { 31, "     1", },
+/*
   { 30, "  1.25", },
   { 29, "   1.5", },
   { 28, "     2", },
@@ -199,7 +203,9 @@ const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
   { 16, "    30", },
   { 15, "    40", },
   { 14, "    50", },
+*/
   { 13, "    60", },
+/*
   { 12, "    80", },
   { 11, "   100", },
   { 10, "   125", },
@@ -212,6 +218,7 @@ const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
   {  3, "   600", },
   {  2, "   800", },
   {  1, "  1000", },
+*/
   {  0, "  1050", },
 //  { 32, "   0.8", },
 //  { 33, "   0.6", },
