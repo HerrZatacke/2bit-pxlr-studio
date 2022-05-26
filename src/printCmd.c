@@ -3,6 +3,8 @@
 // Print Screen function added by Christianr
 // Print Screen (360 tile mode) added by T0biasCZe
 
+#pragma bank 1
+
 #include <gb/gb.h>
 #include <string.h>
 
@@ -28,6 +30,15 @@ unsigned char printerStatus[3];
 #define EXPOSURE_DEFAULT 0x40
 #define EXPOSURE_DARK 0x7F
 
+#define STATUS_LOWBAT 0x80
+#define STATUS_ER2    0x40
+#define STATUS_ER1    0x20
+#define STATUS_ER0    0x10
+#define STATUS_UNTRAN 0x08
+#define STATUS_FULL   0x04
+#define STATUS_BUSY   0x02
+#define STATUS_SUM    0x01
+
 const unsigned char PRINTER_INIT[] =   { 6, MAGIC_1, MAGIC_2, COMMAND_INIT,   0x00, 0x00, 0x00, };
 const unsigned char PRINTER_STATUS[] = { 6, MAGIC_1, MAGIC_2, COMMAND_STATUS, 0x00, 0x00, 0x00, };
 const unsigned char PRINTER_START[] =  { 6, MAGIC_1, MAGIC_2, COMMAND_PRINT,  0x00, 0x04, 0x00, }; // 0x04, 0x00 = length 4 Bytes
@@ -38,27 +49,7 @@ unsigned char tile_num, packet_num;
 
 unsigned int CRC;
 
-//inline void beep() {
-//  NR21_REG=0x80;
-//  NR22_REG=0xA2;
-//  NR23_REG=0x60;
-//  NR24_REG=0x87;
-//}
-//
-//inline void boop() {
-//  NR21_REG=0x80;
-//  NR22_REG=0xA2;
-//  NR23_REG=0xD7;
-//  NR24_REG=0x86;
-//}
-//
-//inline void pause(unsigned char frames) {
-//  for (unsigned char i = 0; i < frames; i++) {
-//    wait_vbl_done();
-//  }
-//}
-
-unsigned char sendPrinterByte(unsigned char byte) {
+unsigned char sendPrinterByte(unsigned char byte) BANKED {
   unsigned char result;
   disable_interrupts();
   SB_REG = byte; //data to send
@@ -69,7 +60,7 @@ unsigned char sendPrinterByte(unsigned char byte) {
   return result;
 }
 
-void sendByte(unsigned char dataByte, unsigned char addToChecksum) {
+void sendByte(unsigned char dataByte, unsigned char addToChecksum) BANKED {
   if (addToChecksum) {
     CRC += dataByte;
   }
@@ -81,7 +72,7 @@ void sendByte(unsigned char dataByte, unsigned char addToChecksum) {
   printerStatus[2] = result;
 }
 
-void sendPrinterCommand(const unsigned char *command) {
+void sendPrinterCommand(const unsigned char *command) BANKED {
   unsigned char length, index;
   index = 0;
   length = *command;
@@ -103,21 +94,21 @@ inline unsigned char getLow(unsigned int w) {
 }
 
 
-void sendChecksum() {
+void sendChecksum() BANKED {
   sendByte(getLow(CRC), FALSE);
   sendByte(getHigh(CRC), FALSE);
   sendByte(0x00, FALSE);
   sendByte(0x00, FALSE);
 }
 
-void printerInit() {
+void printerInit() BANKED {
   tile_num = 0;
   packet_num = 0;
   sendPrinterCommand(PRINTER_INIT);
   sendChecksum();
 }
 
-unsigned char checkLinkCable() {
+unsigned char checkLinkCable() BANKED {
   if (printerStatus[0] != 0) {
     return 2;
   }
@@ -127,23 +118,13 @@ unsigned char checkLinkCable() {
   return 0;
 }
 
-unsigned char getPrinterStatus() {
+unsigned char getPrinterStatus() BANKED {
   sendPrinterCommand(PRINTER_STATUS);
   sendChecksum();
   return checkLinkCable();
 }
 
-
-#define STATUS_LOWBAT 0x80
-#define STATUS_ER2    0x40
-#define STATUS_ER1    0x20
-#define STATUS_ER0    0x10
-#define STATUS_UNTRAN 0x08
-#define STATUS_FULL   0x04
-#define STATUS_BUSY   0x02
-#define STATUS_SUM    0x01
-
-unsigned char checkForErrors() {
+unsigned char checkForErrors() BANKED {
   if (printerStatus[2] & STATUS_LOWBAT) {
     return 1;
   }
@@ -162,14 +143,14 @@ unsigned char checkForErrors() {
   return 0;
 }
 
-unsigned char printerBusy() {
+unsigned char printerBusy() BANKED {
   sendPrinterCommand(PRINTER_STATUS);
   sendChecksum();
   return (printerStatus[2] & STATUS_BUSY);
 }
 
 
-void waitPrinterReady() {
+void waitPrinterReady() BANKED {
   // Wait for max 30s to give the printer time to become ready.
   // If not ready after 30s, return anyway to not hang the program
   for (unsigned int wait = 0; wait < 1800; wait++) {
@@ -181,7 +162,7 @@ void waitPrinterReady() {
 }
 
 
-void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) {
+void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) BANKED {
   unsigned char tileIndex;
 
   if (tile_num == 0) {
@@ -226,7 +207,7 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
   }
 }
 
-void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) {
+void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED {
   printerInit();
   SWITCH_RAM(bank);
   // We need to print a border of 16x16 pixels (2x2 tiles)
@@ -253,7 +234,7 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
   }
 }
 
-void printImageInfo(unsigned char *imageInfo, unsigned char *font) {
+void printImageInfo(unsigned char *imageInfo, unsigned char *font) BANKED {
   unsigned int index;
   printerInit();
 
