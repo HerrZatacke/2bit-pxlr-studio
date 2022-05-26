@@ -81,7 +81,7 @@ void setDitherMatrix();
 #include "typedefs/Overlay.h"
 
 #include "../res/frames/frame_pxlr.h"
-#include "../res/map.h"
+#include "../res/tiles.h"
 #include "../res/pxlr-logo.h"
 #include "../res/font.h"
 #include "../res/nope.h"
