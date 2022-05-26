@@ -47,8 +47,12 @@ void loadAndShowGalleryImage() {
     writeNumber(4, 17, 2, numVisibleImages);
   //  writeNumber(2, 16, 3, findFirstFreeSlot());
   } else {
+    set_data(VRAM_9000, nope_tiles, 16);
+    set_data(VRAM_8000, nope_tiles, 16);
+/*
     set_data(VRAM_9000, nope_tiles, HALF_IMAGE_SIZE);
     set_data(VRAM_8000, nope_tiles, HALF_IMAGE_SIZE);
+*/
 
     set_bkg_based_tiles(2, 16, 5, 2, "No   Image", OFFSET_FONT - 32);
   }
