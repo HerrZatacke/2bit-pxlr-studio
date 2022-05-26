@@ -7,11 +7,8 @@
 
 #include <gb/gb.h>
 #include <string.h>
-
-/*
-extern const unsigned char frame_pxlr_tiles[544];
-extern const unsigned char frame_pxlr_map[360];
-*/
+#include "../res/frames/frame_pxlr.h"
+#include "../res/font.h"
 
 unsigned char printerStatus[3];
 
@@ -210,7 +207,6 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
 void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED {
   printerInit();
   SWITCH_RAM(bank);
-  // We need to print a border of 16x16 pixels (2x2 tiles)
   unsigned char x, y;
   unsigned int frameTileIndex = 0;
 
@@ -221,9 +217,7 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
         image = lower;
       }
       if (x < 2 || y < 2 || x >= 18 || y >= 16) {
-/*
         printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 9, 0x02, PALETTE_NORMAL, EXPOSURE_DEFAULT);
-*/
       } else {
         printTileData(image, 9, 0x03, PALETTE_NORMAL, EXPOSURE_DEFAULT);
         image += 16;
@@ -234,32 +228,26 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
   }
 }
 
-void printImageInfo(unsigned char *imageInfo, unsigned char *font) BANKED {
+void printImageInfo(unsigned char *imageInfo) BANKED {
   unsigned int index;
   printerInit();
 
-/*
   for (index = 0; index < 40; index++) {
     printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x00, PALETTE_INVERTED, EXPOSURE_DEFAULT);
   }
-*/
 
   waitPrinterReady();
   printerInit();
 
-/*
   for (index = 0; index < 360; index++) {
     printTileData(&font[(imageInfo[index] - 32) * 16], 9, 0x00, PALETTE_INVERTED, EXPOSURE_DARK);
   }
-*/
 
 
   waitPrinterReady();
   printerInit();
 
-/*
   for (index = 320; index < 360; index++) {
     printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x03, PALETTE_INVERTED, EXPOSURE_DEFAULT);
   }
-*/
 }

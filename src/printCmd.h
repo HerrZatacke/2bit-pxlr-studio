@@ -6,10 +6,10 @@
 #ifndef PRINTCMD_H
 #define PRINTCMD_H
 
-extern void printerInit(void);
-extern unsigned char getPrinterStatus();
-extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank);
-extern void printImageInfo(unsigned char *imageInfo, unsigned char *font);
-extern void waitPrinterReady();
+extern void printerInit(void) BANKED;
+extern unsigned char getPrinterStatus() BANKED;
+extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED;
+extern void printImageInfo(unsigned char *imageInfo, unsigned char *font) BANKED;
+extern void waitPrinterReady() BANKED;
 
 #endif
