@@ -1,3 +1,5 @@
+#ifndef TYPEDEF_MENUITEM_H
+#define TYPEDEF_MENUITEM_H
 
 typedef struct {
   const unsigned char x;
@@ -11,3 +13,5 @@ typedef struct {
   const MenuOption* options;
   const unsigned char action;
 } MenuItem;
+
+#endif

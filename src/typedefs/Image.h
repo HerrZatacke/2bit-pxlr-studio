@@ -1,3 +1,5 @@
+#ifndef TYPEDEF_IMAGE_H
+#define TYPEDEF_IMAGE_H
 
 typedef struct {
   const unsigned char bank;
@@ -7,3 +9,5 @@ typedef struct {
   unsigned char* const meta;
   unsigned char* const metaEcho;
 } Image;
+
+#endif
