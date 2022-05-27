@@ -22,7 +22,7 @@ inline void initOverlays() {
 
 unsigned char currentOverlay = 1;
 
-inline void showOverlay() {
+void showOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (currentOverlay == 0) {
       move_sprite(noOverlay[ov]->sprite, noOverlay[ov]->x, noOverlay[ov]->y);
@@ -34,7 +34,7 @@ inline void showOverlay() {
   }
 }
 
-inline void hideLowerOverlay() {
+void hideLowerOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (currentOverlay == 0) {
       if (noOverlay[ov]->y > 99) {
@@ -52,7 +52,7 @@ inline void hideLowerOverlay() {
   }
 }
 
-inline void hideOverlay() {
+void hideOverlay() {
   for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     move_sprite(noOverlay[ov]->sprite, 0, 0);
   }
