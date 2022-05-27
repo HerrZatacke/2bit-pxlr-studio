@@ -1,9 +1,12 @@
+#pragma bank 1
+
+#include <gb/gb.h>
 
 // global joypad store variable
 unsigned char jp = 0;
 unsigned char jpCooldown = 0;
 
-inline void joypadConsumed() {
+void joypadConsumed() {
   jp = 0;
   jpCooldown = 15;
 }
@@ -17,7 +20,7 @@ void waitRelease() {
   joypadConsumed();
 }
 
-inline void captureJoypadISR() {
+void captureJoypadISR() {
   if (jpCooldown && joypad()) {
     jpCooldown--;
   } else {
