@@ -32,7 +32,7 @@ void setImageSlot(unsigned char address, unsigned char newValue) {
   game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldValue;
 }
 
-inline unsigned char getImageSlot(unsigned char index) {
+unsigned char getImageSlot(unsigned char index) {
   if (index >= NUM_IMAGES) {
     return NUM_IMAGES;
   }
@@ -42,7 +42,7 @@ inline unsigned char getImageSlot(unsigned char index) {
 
 
 
-inline unsigned char getAddressForIndex(unsigned char index) {
+unsigned char getAddressForIndex(unsigned char index) {
   SWITCH_RAM(0);
   for (unsigned char address = 0; address < NUM_IMAGES; address++) {
     if (game_data_meta_imageslots[address] == index) {
@@ -54,7 +54,7 @@ inline unsigned char getAddressForIndex(unsigned char index) {
 }
 
 
-inline unsigned char getNextHighestAddress(unsigned char searchIndex) {
+unsigned char getNextHighestAddress(unsigned char searchIndex) {
   SWITCH_RAM(0);
 
   while (searchIndex < NUM_IMAGES) {
@@ -70,7 +70,7 @@ inline unsigned char getNextHighestAddress(unsigned char searchIndex) {
   return NUM_IMAGES;
 }
 
-inline void reduceIndexAfterDelete(unsigned char deletedIndex) {
+void reduceIndexAfterDelete(unsigned char deletedIndex) {
   SWITCH_RAM(0);
   for (unsigned char address = 0; address < NUM_IMAGES; address++) {
     unsigned char index = game_data_meta_imageslots[address];
@@ -122,7 +122,7 @@ void sortImages() {
   }
 }
 
-inline unsigned char findFirstFreeSlot() {
+unsigned char findFirstFreeSlot() {
   SWITCH_RAM(0);
 
   for (unsigned char i = 0; i < NUM_IMAGES; i++) {
@@ -134,7 +134,7 @@ inline unsigned char findFirstFreeSlot() {
   return NUM_IMAGES;
 }
 
-inline void deleteAllImages() {
+void deleteAllImages() {
   for (unsigned char address = 0; address < 30; address += 1) {
     setImageSlot(address, 0xff);
   }
