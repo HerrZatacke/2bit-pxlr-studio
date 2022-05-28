@@ -1,3 +1,4 @@
+#include <gb/gb.h>
 
 unsigned char savedBank;
 void set_bkg_tiles_banked(unsigned char x, unsigned char y, unsigned char w, unsigned char h, unsigned char *map, unsigned char bank) {

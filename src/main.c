@@ -23,7 +23,7 @@ void setDitherMatrix();
 #include "../res/nope.h"
 
 #include "./joypad.h"
-#include "./banked.h"
+#include "./bankedData.h"
 #include "./utils.h"
 #include "./overlays/overlays.h"
 #include "./dialog.h"
