@@ -6,6 +6,8 @@
 #ifndef PRINTCMD_H
 #define PRINTCMD_H
 
+#include <gbdk/platform.h>
+
 extern void printerInit(void) BANKED OLDCALL;
 extern unsigned char getPrinterStatus() BANKED OLDCALL;
 extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED OLDCALL;

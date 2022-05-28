@@ -5,6 +5,7 @@ void menuSelectMode(unsigned char loopState);
 void setDitherMatrix();
 
 #include <gb/gb.h>
+#include <gbdk/platform.h>
 #include <stdint.h>
 #include <string.h>
 #include <gbdk/bcd.h>

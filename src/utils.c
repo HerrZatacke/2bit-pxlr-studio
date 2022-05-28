@@ -1,6 +1,7 @@
 #pragma bank 1
 
 #include <gb/gb.h>
+#include <gbdk/platform.h>
 #include <gbdk/bcd.h>
 #include "defines.h"
 

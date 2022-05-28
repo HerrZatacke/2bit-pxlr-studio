@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <gbdk/platform.h>
+
 extern void init_gfx() BANKED OLDCALL;
 extern void init_sound() BANKED OLDCALL;
 extern void beep() BANKED OLDCALL;

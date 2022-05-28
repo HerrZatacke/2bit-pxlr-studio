@@ -1,6 +1,7 @@
 #pragma bank 1
 
 #include <gb/gb.h>
+#include <gbdk/platform.h>
 #include "./defines.h"
 #include "./joypad.h"
 #include "./utils.h"

@@ -6,6 +6,7 @@
 #pragma bank 1
 
 #include <gb/gb.h>
+#include <gbdk/platform.h>
 #include <string.h>
 #include "../res/frames/frame_pxlr.h"
 #include "../res/font.h"
