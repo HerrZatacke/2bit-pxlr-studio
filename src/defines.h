@@ -1,3 +1,6 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
 #define OFFSET_FONT 128u
 #define OFFSET_BLANK 128u
 #define OFFSET_TILES 219u
@@ -60,3 +63,5 @@
 #define THUMBNAIL_BYTE_VOUTZERO      0xD6
 #define THUMBNAIL_BYTE_DITHERSET     0xE6
 #define THUMBNAIL_BYTE_CONTRAST      0xF6
+
+#endif
