@@ -4,6 +4,7 @@ void loadAndShowGalleryImage();
 #include "./bleep.h"
 #include "./expose.h"
 #include "./printCmd.h"
+#include "./globals.h"
 
 void renderImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));
