@@ -1,15 +1,16 @@
+#pragma bank 1
+
+#include <gb/gb.h>
+#include <gbdk/platform.h>
+#include "./banks/banks.h"
+#include "./utils.h"
+#include "./globals.h"
+
 #define NUM_IMAGES 30
 #define IMAGE_DELETED 0xFF
 #define IMAGE_UNDEFINED 0xFE
 
-unsigned char numVisibleImages = 0;
-unsigned char sortedIndices[NUM_IMAGES] = {
-    IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
-    IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
-    IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
-};
-
-void setImageSlot(unsigned char address, unsigned char newValue) {
+void setImageSlot(unsigned char address, unsigned char newValue) BANKED OLDCALL {
   SWITCH_RAM(0);
 
   if (address >= NUM_IMAGES) {
@@ -32,7 +33,7 @@ void setImageSlot(unsigned char address, unsigned char newValue) {
   game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldValue;
 }
 
-unsigned char getImageSlot(unsigned char index) {
+unsigned char getImageSlot(unsigned char index) BANKED OLDCALL {
   if (index >= NUM_IMAGES) {
     return NUM_IMAGES;
   }
@@ -42,7 +43,7 @@ unsigned char getImageSlot(unsigned char index) {
 
 
 
-unsigned char getAddressForIndex(unsigned char index) {
+unsigned char getAddressForIndex(unsigned char index) BANKED OLDCALL {
   SWITCH_RAM(0);
   for (unsigned char address = 0; address < NUM_IMAGES; address++) {
     if (game_data_meta_imageslots[address] == index) {
@@ -54,7 +55,7 @@ unsigned char getAddressForIndex(unsigned char index) {
 }
 
 
-unsigned char getNextHighestAddress(unsigned char searchIndex) {
+unsigned char getNextHighestAddress(unsigned char searchIndex) BANKED OLDCALL {
   SWITCH_RAM(0);
 
   while (searchIndex < NUM_IMAGES) {
@@ -70,7 +71,7 @@ unsigned char getNextHighestAddress(unsigned char searchIndex) {
   return NUM_IMAGES;
 }
 
-void reduceIndexAfterDelete(unsigned char deletedIndex) {
+void reduceIndexAfterDelete(unsigned char deletedIndex) BANKED OLDCALL {
   SWITCH_RAM(0);
   for (unsigned char address = 0; address < NUM_IMAGES; address++) {
     unsigned char index = game_data_meta_imageslots[address];
@@ -80,7 +81,7 @@ void reduceIndexAfterDelete(unsigned char deletedIndex) {
   }
 }
 
-void cleanupIndexGaps() {
+void cleanupIndexGaps() BANKED OLDCALL {
   SWITCH_RAM(0);
   for (unsigned char index = 0; index < NUM_IMAGES; index++) {
     // image number does not exist in list
@@ -93,7 +94,7 @@ void cleanupIndexGaps() {
   }
 }
 
-void sortImages() {
+void sortImages() BANKED OLDCALL {
   SWITCH_RAM(0);
 
   unsigned char deletedIndex = 0;
@@ -122,7 +123,7 @@ void sortImages() {
   }
 }
 
-unsigned char findFirstFreeSlot() {
+unsigned char findFirstFreeSlot() BANKED OLDCALL {
   SWITCH_RAM(0);
 
   for (unsigned char i = 0; i < NUM_IMAGES; i++) {
@@ -134,7 +135,7 @@ unsigned char findFirstFreeSlot() {
   return NUM_IMAGES;
 }
 
-void deleteAllImages() {
+void deleteAllImages() BANKED OLDCALL {
   for (unsigned char address = 0; address < 30; address += 1) {
     setImageSlot(address, 0xff);
   }
