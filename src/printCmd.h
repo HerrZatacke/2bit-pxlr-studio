@@ -8,10 +8,10 @@
 
 #include <gbdk/platform.h>
 
-extern void printerInit(void) BANKED OLDCALL;
-extern unsigned char getPrinterStatus() BANKED OLDCALL;
-extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED OLDCALL;
-extern void printImageInfo(unsigned char *imageInfo, unsigned char *font) BANKED OLDCALL;
-extern void waitPrinterReady() BANKED OLDCALL;
+extern void printerInit(void) BANKED;
+extern unsigned char getPrinterStatus() BANKED;
+extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED;
+extern void printImageInfo(unsigned char *imageInfo, unsigned char *font) BANKED;
+extern void waitPrinterReady() BANKED;
 
 #endif

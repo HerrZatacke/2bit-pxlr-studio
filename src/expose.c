@@ -30,7 +30,7 @@ const unsigned char exposePalettes[3] = {
 unsigned char exposeIndex = 0;
 
 // ToDo: convert this to a "flipTiles" function and then use set_data() to write to vram
-void set_bkg_data_flipped(unsigned char from, unsigned char length, const unsigned char tiles[], const unsigned char vramHighLow) BANKED OLDCALL {
+void set_bkg_data_flipped(unsigned char from, unsigned char length, const unsigned char tiles[], const unsigned char vramHighLow) BANKED {
 
   unsigned char flippedTiles[HALF_IMAGE_SIZE];
   memcpy(flippedTiles, tiles, HALF_IMAGE_SIZE);
@@ -48,7 +48,7 @@ void set_bkg_data_flipped(unsigned char from, unsigned char length, const unsign
   set_bkg_data(from, length, flippedTiles);
 }
 
-void set_flipped_map(const unsigned char map[], unsigned char offset) BANKED OLDCALL {
+void set_flipped_map(const unsigned char map[], unsigned char offset) BANKED {
   unsigned char flippedMap[360];
   for (uint16_t yc = 0; yc < 360; yc += 20) {
     for (unsigned char xc = 0; xc < 20; xc += 1) {
@@ -58,7 +58,7 @@ void set_flipped_map(const unsigned char map[], unsigned char offset) BANKED OLD
   set_bkg_based_tiles(0, 0, 20, 18, flippedMap, offset);
 }
 
-void loadImageTilesFlipped() BANKED OLDCALL {
+void loadImageTilesFlipped() BANKED {
   unsigned char imageSlot = getImageSlot(imageIndex);
   SWITCH_RAM(images[imageSlot]->bank);
 
@@ -68,7 +68,7 @@ void loadImageTilesFlipped() BANKED OLDCALL {
 }
 
 
-void expose() BANKED OLDCALL {
+void expose() BANKED {
   BGP_REG = PALETTE_BLANK;
 
   // ToDo - Use functions in banked.h

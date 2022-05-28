@@ -47,7 +47,7 @@ unsigned char tile_num, packet_num;
 
 unsigned int CRC;
 
-unsigned char sendPrinterByte(unsigned char byte) BANKED OLDCALL {
+unsigned char sendPrinterByte(unsigned char byte) BANKED {
   unsigned char result;
   disable_interrupts();
   SB_REG = byte; //data to send
@@ -58,7 +58,7 @@ unsigned char sendPrinterByte(unsigned char byte) BANKED OLDCALL {
   return result;
 }
 
-void sendByte(unsigned char dataByte, unsigned char addToChecksum) BANKED OLDCALL {
+void sendByte(unsigned char dataByte, unsigned char addToChecksum) BANKED {
   if (addToChecksum) {
     CRC += dataByte;
   }
@@ -70,7 +70,7 @@ void sendByte(unsigned char dataByte, unsigned char addToChecksum) BANKED OLDCAL
   printerStatus[2] = result;
 }
 
-void sendPrinterCommand(const unsigned char *command) BANKED OLDCALL {
+void sendPrinterCommand(const unsigned char *command) BANKED {
   unsigned char length, index;
   index = 0;
   length = *command;
@@ -92,21 +92,21 @@ inline unsigned char getLow(unsigned int w) {
 }
 
 
-void sendChecksum() BANKED OLDCALL {
+void sendChecksum() BANKED {
   sendByte(getLow(CRC), FALSE);
   sendByte(getHigh(CRC), FALSE);
   sendByte(0x00, FALSE);
   sendByte(0x00, FALSE);
 }
 
-void printerInit() BANKED OLDCALL {
+void printerInit() BANKED {
   tile_num = 0;
   packet_num = 0;
   sendPrinterCommand(PRINTER_INIT);
   sendChecksum();
 }
 
-unsigned char checkLinkCable() BANKED OLDCALL {
+unsigned char checkLinkCable() BANKED {
   if (printerStatus[0] != 0) {
     return 2;
   }
@@ -116,13 +116,13 @@ unsigned char checkLinkCable() BANKED OLDCALL {
   return 0;
 }
 
-unsigned char getPrinterStatus() BANKED OLDCALL {
+unsigned char getPrinterStatus() BANKED {
   sendPrinterCommand(PRINTER_STATUS);
   sendChecksum();
   return checkLinkCable();
 }
 
-unsigned char checkForErrors() BANKED OLDCALL {
+unsigned char checkForErrors() BANKED {
   if (printerStatus[2] & STATUS_LOWBAT) {
     return 1;
   }
@@ -141,14 +141,14 @@ unsigned char checkForErrors() BANKED OLDCALL {
   return 0;
 }
 
-unsigned char printerBusy() BANKED OLDCALL {
+unsigned char printerBusy() BANKED {
   sendPrinterCommand(PRINTER_STATUS);
   sendChecksum();
   return (printerStatus[2] & STATUS_BUSY);
 }
 
 
-void waitPrinterReady() BANKED OLDCALL {
+void waitPrinterReady() BANKED {
   // Wait for max 30s to give the printer time to become ready.
   // If not ready after 30s, return anyway to not hang the program
   for (unsigned int wait = 0; wait < 1800; wait++) {
@@ -160,7 +160,7 @@ void waitPrinterReady() BANKED OLDCALL {
 }
 
 
-void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) BANKED OLDCALL {
+void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) BANKED {
   unsigned char tileIndex;
 
   if (tile_num == 0) {
@@ -205,7 +205,7 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
   }
 }
 
-void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED OLDCALL {
+void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED {
   printerInit();
   SWITCH_RAM(bank);
   unsigned char x, y;
@@ -229,7 +229,7 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
   }
 }
 
-void printImageInfo(unsigned char *imageInfo) BANKED OLDCALL {
+void printImageInfo(unsigned char *imageInfo) BANKED {
   unsigned int index;
   printerInit();
 

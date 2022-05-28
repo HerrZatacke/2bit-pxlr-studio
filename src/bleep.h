@@ -3,6 +3,6 @@
 
 #include <gbdk/platform.h>
 
-extern void bleep() BANKED OLDCALL;
+extern void bleep() BANKED;
 
 #endif

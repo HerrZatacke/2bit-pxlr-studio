@@ -6,7 +6,7 @@
 #include "./joypad.h"
 #include "./utils.h"
 
-void appearDialog() BANKED OLDCALL {
+void appearDialog() BANKED {
   move_win(7, 146);
 
   for (unsigned char i = 0; i < 8; i += 1) {
@@ -22,7 +22,7 @@ void appearDialog() BANKED OLDCALL {
   waitRelease();
 }
 
-void disappearDialog() BANKED OLDCALL {
+void disappearDialog() BANKED {
   waitRelease();
 
   for (unsigned char i = 0; i < 8; i += 1) {
@@ -33,7 +33,7 @@ void disappearDialog() BANKED OLDCALL {
   move_win(7, 146);
 }
 
-unsigned char dialog(unsigned char *message) BANKED OLDCALL {
+unsigned char dialog(unsigned char *message) BANKED {
   fill_win_rect(0, 0, 20, 1, MENU_BORDER_TOP);
   fill_win_rect(0, 1, 20, 10, OFFSET_BLANK);
   set_win_based_tiles(1, 2, 16, 1, message, OFFSET_FONT - 32);

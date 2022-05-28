@@ -7,12 +7,12 @@
 unsigned char jp = 0;
 unsigned char jpCooldown = 0;
 
-void joypadConsumed() BANKED OLDCALL {
+void joypadConsumed() BANKED {
   jp = 0;
   jpCooldown = 15;
 }
 
-void waitRelease() BANKED OLDCALL {
+void waitRelease() BANKED {
   // Wait until all inputs have been released
   while (jp != 0) {
     wait_vbl_done();
@@ -21,7 +21,7 @@ void waitRelease() BANKED OLDCALL {
   joypadConsumed();
 }
 
-void captureJoypadISR() BANKED OLDCALL {
+void captureJoypadISR() BANKED {
   if (jpCooldown && joypad()) {
     jpCooldown--;
   } else {

@@ -3,8 +3,8 @@
 
 #include <gbdk/platform.h>
 
-void appearDialog() BANKED OLDCALL;
-void disappearDialog() BANKED OLDCALL;
-unsigned char dialog(unsigned char *message) BANKED OLDCALL;
+void appearDialog() BANKED;
+void disappearDialog() BANKED;
+unsigned char dialog(unsigned char *message) BANKED;
 
 #endif

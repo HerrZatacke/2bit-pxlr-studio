@@ -10,14 +10,14 @@
 extern void menuSelectMode(unsigned char loopState);
 extern void hideOverlay();
 
-void debugMenu() BANKED OLDCALL {
+void debugMenu() BANKED {
   if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
     joypadConsumed();
   }
 }
 
-void initDebug() BANKED OLDCALL {
+void initDebug() BANKED {
   clearBkg();
   hideOverlay();
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);

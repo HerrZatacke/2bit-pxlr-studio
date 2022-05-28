@@ -36,7 +36,7 @@ inline void loadWaveform() {
   memcpy(_AUD3WAVERAM, sinewave, 16);
 }
 
-void breakSound(unsigned char times) BANKED OLDCALL {
+void breakSound(unsigned char times) BANKED {
   for(unsigned char i = 0; i < times; i++) {
     wait_vbl_done();
     if (jp == J_B) {
@@ -48,7 +48,7 @@ void breakSound(unsigned char times) BANKED OLDCALL {
   }
 }
 
-void playBeep(unsigned char r1, unsigned char r2) BANKED OLDCALL {
+void playBeep(unsigned char r1, unsigned char r2) BANKED {
   NR30_REG=0x80;
   NR31_REG=0x00;
   NR32_REG=0x20;
@@ -60,7 +60,7 @@ void playBeep(unsigned char r1, unsigned char r2) BANKED OLDCALL {
   breakSound(1);
 }
 
-void bleep() BANKED OLDCALL {
+void bleep() BANKED {
   breakBleep = 0;
   loadWaveform();
   unsigned char imageAddress = getAddressForIndex(imageIndex);

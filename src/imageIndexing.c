@@ -10,7 +10,7 @@
 #define IMAGE_DELETED 0xFF
 #define IMAGE_UNDEFINED 0xFE
 
-void setImageSlot(unsigned char address, unsigned char newValue) BANKED OLDCALL {
+void setImageSlot(unsigned char address, unsigned char newValue) BANKED {
   SWITCH_RAM(0);
 
   if (address >= NUM_IMAGES) {
@@ -33,7 +33,7 @@ void setImageSlot(unsigned char address, unsigned char newValue) BANKED OLDCALL 
   game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldValue;
 }
 
-unsigned char getImageSlot(unsigned char index) BANKED OLDCALL {
+unsigned char getImageSlot(unsigned char index) BANKED {
   if (index >= NUM_IMAGES) {
     return NUM_IMAGES;
   }
@@ -43,7 +43,7 @@ unsigned char getImageSlot(unsigned char index) BANKED OLDCALL {
 
 
 
-unsigned char getAddressForIndex(unsigned char index) BANKED OLDCALL {
+unsigned char getAddressForIndex(unsigned char index) BANKED {
   SWITCH_RAM(0);
   for (unsigned char address = 0; address < NUM_IMAGES; address++) {
     if (game_data_meta_imageslots[address] == index) {
@@ -55,7 +55,7 @@ unsigned char getAddressForIndex(unsigned char index) BANKED OLDCALL {
 }
 
 
-unsigned char getNextHighestAddress(unsigned char searchIndex) BANKED OLDCALL {
+unsigned char getNextHighestAddress(unsigned char searchIndex) BANKED {
   SWITCH_RAM(0);
 
   while (searchIndex < NUM_IMAGES) {
@@ -71,7 +71,7 @@ unsigned char getNextHighestAddress(unsigned char searchIndex) BANKED OLDCALL {
   return NUM_IMAGES;
 }
 
-void reduceIndexAfterDelete(unsigned char deletedIndex) BANKED OLDCALL {
+void reduceIndexAfterDelete(unsigned char deletedIndex) BANKED {
   SWITCH_RAM(0);
   for (unsigned char address = 0; address < NUM_IMAGES; address++) {
     unsigned char index = game_data_meta_imageslots[address];
@@ -81,7 +81,7 @@ void reduceIndexAfterDelete(unsigned char deletedIndex) BANKED OLDCALL {
   }
 }
 
-void cleanupIndexGaps() BANKED OLDCALL {
+void cleanupIndexGaps() BANKED {
   SWITCH_RAM(0);
   for (unsigned char index = 0; index < NUM_IMAGES; index++) {
     // image number does not exist in list
@@ -94,7 +94,7 @@ void cleanupIndexGaps() BANKED OLDCALL {
   }
 }
 
-void sortImages() BANKED OLDCALL {
+void sortImages() BANKED {
   SWITCH_RAM(0);
 
   unsigned char deletedIndex = 0;
@@ -123,7 +123,7 @@ void sortImages() BANKED OLDCALL {
   }
 }
 
-unsigned char findFirstFreeSlot() BANKED OLDCALL {
+unsigned char findFirstFreeSlot() BANKED {
   SWITCH_RAM(0);
 
   for (unsigned char i = 0; i < NUM_IMAGES; i++) {
@@ -135,7 +135,7 @@ unsigned char findFirstFreeSlot() BANKED OLDCALL {
   return NUM_IMAGES;
 }
 
-void deleteAllImages() BANKED OLDCALL {
+void deleteAllImages() BANKED {
   for (unsigned char address = 0; address < 30; address += 1) {
     setImageSlot(address, 0xff);
   }
