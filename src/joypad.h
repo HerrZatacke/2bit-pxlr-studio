@@ -5,8 +5,8 @@
 extern unsigned char jp;
 extern unsigned char jpCooldown;
 
-extern void joypadConsumed() BANKED;
-extern void waitRelease() BANKED;
-extern void captureJoypadISR() BANKED;
+extern void joypadConsumed() BANKED OLDCALL;
+extern void waitRelease() BANKED OLDCALL;
+extern void captureJoypadISR() BANKED OLDCALL;
 
 #endif

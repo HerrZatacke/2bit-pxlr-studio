@@ -4,7 +4,7 @@
 #include <gbdk/bcd.h>
 #include "defines.h"
 
-void init_gfx() BANKED {
+void init_gfx() BANKED OLDCALL {
   ENABLE_RAM;
   SHOW_BKG;
   BGP_REG = PALETTE_NORMAL;
@@ -20,46 +20,46 @@ void init_gfx() BANKED {
   set_sprite_tile(SPRITE_BLEEP_CURSOR, OFFSET_BLEEP_CURSOR);
 }
 
-void init_sound() BANKED {
+void init_sound() BANKED OLDCALL {
   // This enables sound, registers must be in this specific order!
   NR52_REG = 0x80;
   NR50_REG = 0x77;
   NR51_REG = 0xFF;
 }
 
-void beep() BANKED {
+void beep() BANKED OLDCALL {
   NR21_REG=0x80;
   NR22_REG=0xA2;
   NR23_REG=0x60;
   NR24_REG=0x87;
 }
 
-void boop() BANKED {
+void boop() BANKED OLDCALL {
   NR21_REG=0x80;
   NR22_REG=0xA2;
   NR23_REG=0xD7;
   NR24_REG=0x86;
 }
 
-void clonk() BANKED {
+void clonk() BANKED OLDCALL {
   NR41_REG=0x01;
   NR42_REG=0xC1;
   NR43_REG=0x70;
   NR44_REG=0xC0;
 }
 
-void clearBkg() BANKED {
+void clearBkg() BANKED OLDCALL {
   fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
 }
 
-void pause(unsigned char frames) BANKED {
+void pause(unsigned char frames) BANKED OLDCALL {
   for (unsigned char i = 0; i < frames; i++) {
     wait_vbl_done();
   }
 }
 
 unsigned char digits_map[10];
-void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) BANKED {
+void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) BANKED OLDCALL {
   BCD bcd = MAKE_BCD(0);
   uint2bcd(number, &bcd);
   bcd2text(&bcd, OFFSET_FONT + 16u, digits_map);
@@ -100,7 +100,7 @@ void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigne
 }
 
 // ToDo: add a "reason" for calling "dead"
-void dead(/*unsigned char reason*/) BANKED {
+void dead(/*unsigned char reason*/) BANKED OLDCALL {
   while (1) {
     boop();
     for(unsigned char i = 0; i < 120; i++) {
