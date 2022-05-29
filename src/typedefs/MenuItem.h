@@ -10,8 +10,8 @@ typedef struct {
   const unsigned char storeOffset;
   const unsigned char numOptions;
   const unsigned char defaultValue;
-  const unsigned char* title;
-  const unsigned char* description;
+  const char* title;
+  const char* description;
   const MenuOption* options;
   const unsigned char action;
 } MenuItem;

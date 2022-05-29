@@ -63,10 +63,11 @@ void scanline_isr() {
 void setDitherMatrix() {
   SWITCH_RAM(16);
   savedBank = _current_bank;
-  SWITCH_ROM(2);
 
   unsigned char ditherSet = getMenuValue(ditherSetsMenu);
   unsigned char contrast = getMenuValue(contrastsMenu);
+
+  SWITCH_ROM(2);
 
   for (unsigned int i = 0; i < 48; i += 1) {
     if (ditherSet == DITHER_SET_HIGH) {
