@@ -1,50 +1,26 @@
-#include "./defines.h"
-#include "./globals.h"
-
-void menuSelectMode(unsigned char loopState);
-void setDitherMatrix();
-
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <stdint.h>
 #include <string.h>
 #include <gbdk/bcd.h>
 
-#include "typedefs/MenuItem.h"
-#include "typedefs/Image.h"
-#include "typedefs/Overlay.h"
-
-#include "../res/frames/frame_pxlr.h"
-#include "../res/tiles.h"
-#include "../res/maps.h"
 #include "../res/font.h"
-#include "../res/nope.h"
-
-#include "./splash.h"
-#include "./joypad.h"
+#include "../res/tiles.h"
 #include "./bankedData.h"
-#include "./utils.h"
-#include "./overlays/overlays.h"
-#include "./dialog.h"
-#include "./banks/banks.h"
-#include "./imageIndexing.h"
-#include "./values.h"
-#include "./menus/mainMenuItems.h"
-#include "./menus/imageMenuItems.h"
-#include "./menus/shootingManualMenuItems.h"
-#include "./imageInfo.h"
-#include "./mainMenu.h"
+#include "./camera.h"
 #include "./debug.h"
-#include "./modeShootingManual.h"
-#include "./modeShootingBurst.h"
-#include "./saveImage.h"
+#include "./defines.h"
 #include "./gallery.h"
-
-void fastLoadImageTiles() {
-  SWITCH_RAM(0);
-  set_data(VRAM_9000, last_seen_upper, HALF_IMAGE_SIZE);
-  set_data(VRAM_8000, last_seen_lower, HALF_IMAGE_SIZE);
-}
+#include "./globals.h"
+#include "./imageIndexing.h"
+#include "./joypad.h"
+#include "./mainLoop.h"
+#include "./mainMenu.h"
+#include "./modeShootingBurst.h"
+#include "./modeShootingManual.h"
+#include "./overlays/overlays.h"
+#include "./splash.h"
+#include "./utils.h"
 
 void scanline_isr() {
   if (LYC_REG == 71) {
@@ -120,34 +96,7 @@ int main(void) {
     menuSelectMode(MAIN_LOOP_MENU);
   }
 
-  // Loop forever
-  while (1) {
+  mainLoop();
 
-    switch (mainLoopState) {
-      case MAIN_LOOP_SHOOT_MANUAL:
-        fastLoadImageTiles();
-        capture();
-        manualShootMenu();
-        break;
-      case MAIN_LOOP_SHOOT_BURST:
-        fastLoadImageTiles();
-        capture();
-        burstShootMenu();
-        break;
-      case MAIN_LOOP_MENU:
-        mainMenu();
-        break;
-      case MAIN_LOOP_DEBUG:
-        debugMenu();
-        break;
-      case MAIN_LOOP_IMAGE_GALLERY:
-        galleryMenu();
-        break;
-      case MAIN_LOOP_IMAGE:
-        imageMenu();
-        break;
-    }
-
-    wait_vbl_done();
-  }
+  return 1;
 }
