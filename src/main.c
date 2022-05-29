@@ -175,10 +175,7 @@ int main(void) {
 
   fill_bkg_rect(0, 0, 20, 18, BLNK);
 
-  savedBank = _current_bank;
-  SWITCH_ROM(1);
-  set_bkg_data(OFFSET_FONT, NUM_FONT_CHARS, font);
-  SWITCH_ROM(savedBank);
+  set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
 
   set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
 
