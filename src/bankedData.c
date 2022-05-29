@@ -1,6 +1,6 @@
 #include <gb/gb.h>
+#include "./globals.h"
 
-unsigned char savedBank;
 void set_bkg_tiles_banked(unsigned char x, unsigned char y, unsigned char w, unsigned char h, unsigned char *map, unsigned char bank) {
   savedBank = _current_bank;
   SWITCH_ROM(bank);

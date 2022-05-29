@@ -4,7 +4,7 @@ unsigned char mainLoopState = 0;
 unsigned char isCapturing = 0;
 unsigned char imageMenuIndex = 0;
 unsigned char imageInfo[360];
-
+unsigned char savedBank = 0;
 unsigned char imageIndex = 0;
 unsigned char numVisibleImages = 0;
 unsigned char sortedIndices[NUM_IMAGES] = {
