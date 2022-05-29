@@ -1,4 +1,3 @@
-/*
 const unsigned char hexCharLUT[] = "0123456789ABCDEF";
 
 inline void hexChar(unsigned char *target, unsigned char value) {
@@ -203,23 +202,22 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   hexChar(&tileMap[353], ditherSet);
   hexChar(&tileMap[358], contrast);
 }
-*/
 
 inline void displayImageInfo(unsigned char imageIndex) {
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
 
-//  getImageInfo(imageIndex, imageInfo);
+  getImageInfo(imageIndex, imageInfo);
 
   waitRelease();
 
   fill_win_rect(0, 0, 20, 18, OFFSET_BLANK);
-//  move_win(6, 0);
-//  set_win_based_tiles(0, 0, 20, 18, imageInfo, OFFSET_FONT - 32);
+  move_win(6, 0);
+  set_win_based_tiles(0, 0, 20, 18, imageInfo, OFFSET_FONT - 32);
 
   while (jp != J_B && jp != J_A) {
     wait_vbl_done();
   }
 
-//  fill_win_rect(0, 0, 20, 18, OFFSET_BLANK);
+  fill_win_rect(0, 0, 20, 18, OFFSET_BLANK);
   move_win(78, 0);
 }
