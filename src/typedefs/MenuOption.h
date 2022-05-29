@@ -3,7 +3,7 @@
 
 typedef struct {
   const unsigned char value;
-  const unsigned char* title;
+  const char* title;
 } MenuOption;
 
 #endif
