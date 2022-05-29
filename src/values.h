@@ -7,10 +7,10 @@
 extern unsigned const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES];
 extern const MenuOption exposureTimes[NUM_EXPOSURE_TIMES];
 
-extern unsigned const char ditherHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
-extern unsigned const char ditherLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
-extern unsigned const char ditherNoHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
-extern unsigned const char ditherNoLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern unsigned const uint8_t ditherHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern unsigned const uint8_t ditherLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern unsigned const uint8_t ditherNoHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern unsigned const uint8_t ditherNoLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
 extern const MenuOption contrasts[NUM_CONTRASTS];
 
 extern const MenuOption gains[NUM_GAIN_LEVELS];
