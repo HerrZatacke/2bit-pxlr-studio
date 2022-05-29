@@ -12,5 +12,6 @@ extern void clearBkg() BANKED;
 extern void pause(unsigned char frames) BANKED;
 extern void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) BANKED;
 extern void dead() BANKED;
+extern void hexChar(unsigned char *target, unsigned char value) BANKED;
 
 #endif

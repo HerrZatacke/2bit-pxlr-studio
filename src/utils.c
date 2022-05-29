@@ -110,3 +110,9 @@ void dead(/*unsigned char reason*/) BANKED {
   }
 }
 
+const unsigned char hexCharLUT[] = "0123456789ABCDEF";
+
+void hexChar(unsigned char *target, unsigned char value) BANKED {
+  target[0] = hexCharLUT[(value >> 4) & 0b00001111];
+  target[1] = hexCharLUT[value & 0b00001111];
+}
