@@ -12,8 +12,7 @@
 #include "./overlays/overlays.h"
 #include "./values.h"
 #include "./menus/shootingManualMenuItems.h"
-
-extern void renderManualMenu();
+#include "./modeShootingManual.h"
 
 void saveImage() BANKED {
   unsigned char firstFreeSlot = findFirstFreeSlot();
