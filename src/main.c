@@ -31,7 +31,7 @@ void setDitherMatrix();
 #include "./values.h"
 #include "./menus/mainMenuItems.h"
 #include "./menus/imageMenuItems.h"
-#include "./menus/shootingManual.h"
+#include "./menus/shootingManualMenuItems.h"
 #include "./imageInfo.h"
 #include "./mainMenu.h"
 #include "./debug.h"

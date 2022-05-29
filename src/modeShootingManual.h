@@ -10,26 +10,6 @@ extern unsigned char numVisibleImages;
 
 void renderManualMenu();
 
-//void getMenuItem(MenuItem *menuItem, unsigned char index) {
-//  savedBank = _current_bank;
-//  SWITCH_ROM(2);
-//  menuItem->x = menuItems[index]->x;
-//  menuItem->page = menuItems[index]->page;
-//  menuItem->value = menuItems[index]->value;
-//  menuItem->storeOffset = menuItems[index]->storeOffset;
-//  menuItem->numOptions = menuItems[index]->numOptions;
-//  menuItem->defaultValue = menuItems[index]->defaultValue;
-//  menuItem->title = menuItems[index]->title;
-//  menuItem->description = menuItems[index]->description;
-//  menuItem->options = menuItems[index]->options;
-//  menuItem->action = menuItems[index]->action;
-//  SWITCH_ROM(savedBank);
-//}
-
-// savedBank = _current_bank;
-// SWITCH_ROM(2);
-// SWITCH_ROM(savedBank);
-
 void initManualMode() {
   clearBkg();
   set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
