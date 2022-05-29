@@ -6,9 +6,9 @@ extern unsigned char numVisibleImages;
 
 #define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
-inline void renderManualMenu();
+void renderManualMenu();
 
-inline void initManualMode() {
+void initManualMode() {
   clearBkg();
   set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
   sortImages();
@@ -16,14 +16,14 @@ inline void initManualMode() {
   renderManualMenu();
 }
 
-inline void storeSettings() {
+void storeSettings() {
   SWITCH_RAM(1);
   for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     image_01_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
 }
 
-inline void restoreDefaults() {
+void restoreDefaults() {
   for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     menuItems[i]->value = menuItems[i]->defaultValue;
   }
@@ -31,7 +31,7 @@ inline void restoreDefaults() {
   setDitherMatrix();
 }
 
-inline unsigned char restoreSettings() {
+unsigned char restoreSettings() {
   SWITCH_RAM(1);
 
   unsigned char i = 0;
@@ -59,7 +59,7 @@ inline unsigned char restoreSettings() {
   return 1;
 }
 
-inline void renderManualMenu() {
+void renderManualMenu() {
   clonk();
   unsigned char currentPage = menuItems[menuPos]->page;
   fill_bkg_rect(0, 0, 20, 2, BLNK);
@@ -83,13 +83,13 @@ inline void renderManualMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 23);
 }
 
-inline void menuAction() {
+void menuAction() {
   if (menuItems[menuPos]->action == MENU_ACTION_DITHER) {
     setDitherMatrix();
   }
 }
 
-inline void manualShootMenu() {
+void manualShootMenu() {
   if (jp == J_RIGHT) {
     menuPos = (menuPos + 1) % NUM_MENU_ELEMENTS;
     renderManualMenu();
