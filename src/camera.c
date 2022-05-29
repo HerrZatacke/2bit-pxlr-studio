@@ -34,7 +34,7 @@ void setDitherMatrix() {
   SWITCH_ROM(savedBank);
 }
 
-void init_cam() {
+void initCam() {
   if (
       loadSettingsFromRAM() ||
       (joypad() == (J_START | J_SELECT)) // "factory" reset

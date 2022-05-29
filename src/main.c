@@ -12,7 +12,7 @@
 #include "./splash.h"
 #include "./utils.h"
 
-void scanline_isr() {
+void scanlineIsr() {
   if (LYC_REG == 71) {
     LCDC_REG |= LCDCF_BG8000;
     LYC_REG = 144;
@@ -30,13 +30,13 @@ int main(void) {
   CRITICAL {
     STAT_REG |= STATF_LYC;
     LYC_REG = 144;
-    add_LCD(scanline_isr);
+    add_LCD(scanlineIsr);
   }
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
-  init_gfx();
-  init_sound();
-  init_cam();
+  initGfx();
+  initSound();
+  initCam();
   initOverlays();
   cleanupIndexGaps();
   sortImages();

@@ -12,7 +12,7 @@ void clearBkg() BANKED {
   fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
 }
 
-void init_gfx() BANKED {
+void initGfx() BANKED {
   ENABLE_RAM;
   SHOW_BKG;
   BGP_REG = PALETTE_NORMAL;
@@ -34,7 +34,7 @@ void init_gfx() BANKED {
   set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
 }
 
-void init_sound() BANKED {
+void initSound() BANKED {
   // This enables sound, registers must be in this specific order!
   NR52_REG = 0x80;
   NR50_REG = 0x77;

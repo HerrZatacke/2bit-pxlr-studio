@@ -3,8 +3,8 @@
 
 #include <gbdk/platform.h>
 
-extern void init_gfx() BANKED;
-extern void init_sound() BANKED;
+extern void initGfx() BANKED;
+extern void initSound() BANKED;
 extern void beep() BANKED;
 extern void boop() BANKED;
 extern void clonk() BANKED;
