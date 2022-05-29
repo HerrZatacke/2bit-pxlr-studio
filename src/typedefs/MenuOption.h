@@ -5,7 +5,7 @@
 
 typedef struct {
   const uint8_t value;
-  const char* title;
+  const int8_t* title;
 } MenuOption;
 
 #endif

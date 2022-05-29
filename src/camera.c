@@ -57,8 +57,8 @@ void capture() {
   uint16_t exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
   A001 = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
-  A002 = (char)(exposureTime >> 8);
-  A003 = (char)exposureTime;
+  A002 = (int8_t)(exposureTime >> 8);
+  A003 = (int8_t)exposureTime;
   A004 = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
   A005 = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
 

@@ -11,8 +11,8 @@ typedef struct {
   const uint8_t storeOffset;
   const uint8_t numOptions;
   const uint8_t defaultValue;
-  const char* title;
-  const char* description;
+  const int8_t* title;
+  const int8_t* description;
   const MenuOption* options;
   const uint8_t action;
 } MenuItem;
