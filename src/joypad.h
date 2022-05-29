@@ -4,8 +4,8 @@
 #include <gbdk/platform.h>
 
 // global joypad store variable
-extern unsigned char jp;
-extern unsigned char jpCooldown;
+extern uint8_t jp;
+extern uint8_t jpCooldown;
 
 extern void joypadConsumed() BANKED;
 extern void waitRelease() BANKED;

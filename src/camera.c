@@ -16,8 +16,8 @@ void setDitherMatrix() {
   SWITCH_ROM(2);
   SWITCH_RAM(16);
 
-  unsigned char ditherSet = getMenuValue(ditherSetsMenu);
-  unsigned char contrast = getMenuValue(contrastsMenu);
+  uint8_t ditherSet = getMenuValue(ditherSetsMenu);
+  uint8_t contrast = getMenuValue(contrastsMenu);
 
   for (unsigned int i = 0; i < 48; i += 1) {
     if (ditherSet == DITHER_SET_HIGH) {

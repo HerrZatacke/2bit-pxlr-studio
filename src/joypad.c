@@ -4,8 +4,8 @@
 #include <gbdk/platform.h>
 
 // global joypad store variable
-unsigned char jp = 0;
-unsigned char jpCooldown = 0;
+uint8_t jp = 0;
+uint8_t jpCooldown = 0;
 
 void joypadConsumed() BANKED {
   jp = 0;

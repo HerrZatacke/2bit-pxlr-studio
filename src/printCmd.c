@@ -11,7 +11,7 @@
 #include "../res/frames/frame_pxlr.h"
 #include "../res/font.h"
 
-unsigned char printerStatus[3];
+uint8_t printerStatus[3];
 
 #define PALETTE_NORMAL 0b11100100u
 #define PALETTE_INVERTED 0b00011011u
@@ -37,18 +37,18 @@ unsigned char printerStatus[3];
 #define STATUS_BUSY   0x02
 #define STATUS_SUM    0x01
 
-const unsigned char PRINTER_INIT[] =   { 6, MAGIC_1, MAGIC_2, COMMAND_INIT,   0x00, 0x00, 0x00, };
-const unsigned char PRINTER_STATUS[] = { 6, MAGIC_1, MAGIC_2, COMMAND_STATUS, 0x00, 0x00, 0x00, };
-const unsigned char PRINTER_START[] =  { 6, MAGIC_1, MAGIC_2, COMMAND_PRINT,  0x00, 0x04, 0x00, }; // 0x04, 0x00 = length 4 Bytes
-const unsigned char PRINTER_EOF[] =    { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x00, 0x00, };
-const unsigned char PRINT_TILE[] =     { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x80, 0x02, }; // 0x80, 0x02 = length 640 Bytes
+const uint8_t PRINTER_INIT[] =   { 6, MAGIC_1, MAGIC_2, COMMAND_INIT,   0x00, 0x00, 0x00, };
+const uint8_t PRINTER_STATUS[] = { 6, MAGIC_1, MAGIC_2, COMMAND_STATUS, 0x00, 0x00, 0x00, };
+const uint8_t PRINTER_START[] =  { 6, MAGIC_1, MAGIC_2, COMMAND_PRINT,  0x00, 0x04, 0x00, }; // 0x04, 0x00 = length 4 Bytes
+const uint8_t PRINTER_EOF[] =    { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x00, 0x00, };
+const uint8_t PRINT_TILE[] =     { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x80, 0x02, }; // 0x80, 0x02 = length 640 Bytes
 
-unsigned char tile_num, packet_num;
+uint8_t tile_num, packet_num;
 
 unsigned int CRC;
 
-unsigned char sendPrinterByte(unsigned char byte) BANKED {
-  unsigned char result;
+uint8_t sendPrinterByte(uint8_t byte) BANKED {
+  uint8_t result;
   disable_interrupts();
   SB_REG = byte; //data to send
   SC_REG = 0x81; //1000 0001 - start, internal clock
@@ -58,20 +58,20 @@ unsigned char sendPrinterByte(unsigned char byte) BANKED {
   return result;
 }
 
-void sendByte(unsigned char dataByte, unsigned char addToChecksum) BANKED {
+void sendByte(uint8_t dataByte, uint8_t addToChecksum) BANKED {
   if (addToChecksum) {
     CRC += dataByte;
   }
 
-  unsigned char result;
+  uint8_t result;
   result = sendPrinterByte(dataByte);
   printerStatus[0] = printerStatus[1];
   printerStatus[1] = printerStatus[2];
   printerStatus[2] = result;
 }
 
-void sendPrinterCommand(const unsigned char *command) BANKED {
-  unsigned char length, index;
+void sendPrinterCommand(const uint8_t *command) BANKED {
+  uint8_t length, index;
   index = 0;
   length = *command;
   CRC = 0;
@@ -83,11 +83,11 @@ void sendPrinterCommand(const unsigned char *command) BANKED {
 }
 
 
-inline unsigned char getHigh(unsigned int w) {
+inline uint8_t getHigh(unsigned int w) {
   return (w & 0xFF00u) >> 8;
 }
 
-inline unsigned char getLow(unsigned int w) {
+inline uint8_t getLow(unsigned int w) {
   return (w & 0xFFu);
 }
 
@@ -106,7 +106,7 @@ void printerInit() BANKED {
   sendChecksum();
 }
 
-unsigned char checkLinkCable() BANKED {
+uint8_t checkLinkCable() BANKED {
   if (printerStatus[0] != 0) {
     return 2;
   }
@@ -116,13 +116,13 @@ unsigned char checkLinkCable() BANKED {
   return 0;
 }
 
-unsigned char getPrinterStatus() BANKED {
+uint8_t getPrinterStatus() BANKED {
   sendPrinterCommand(PRINTER_STATUS);
   sendChecksum();
   return checkLinkCable();
 }
 
-unsigned char checkForErrors() BANKED {
+uint8_t checkForErrors() BANKED {
   if (printerStatus[2] & STATUS_LOWBAT) {
     return 1;
   }
@@ -141,7 +141,7 @@ unsigned char checkForErrors() BANKED {
   return 0;
 }
 
-unsigned char printerBusy() BANKED {
+uint8_t printerBusy() BANKED {
   sendPrinterCommand(PRINTER_STATUS);
   sendChecksum();
   return (printerStatus[2] & STATUS_BUSY);
@@ -160,8 +160,8 @@ void waitPrinterReady() BANKED {
 }
 
 
-void printTileData(const unsigned char *tileData, unsigned char num_packets, unsigned char margins, unsigned char palette, unsigned char exposure) BANKED {
-  unsigned char tileIndex;
+void printTileData(const uint8_t *tileData, uint8_t num_packets, uint8_t margins, uint8_t palette, uint8_t exposure) BANKED {
+  uint8_t tileIndex;
 
   if (tile_num == 0) {
     sendPrinterCommand(PRINT_TILE);
@@ -194,7 +194,7 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
 
       // Wait for max 2s to give the printer time to become "busy".
       // If not busy after 2s, return anyway to not hang the program
-      for (unsigned char wait = 0; wait < 120; wait++) {
+      for (uint8_t wait = 0; wait < 120; wait++) {
         wait_vbl_done();
         if (printerBusy()) {
           return;
@@ -205,13 +205,13 @@ void printTileData(const unsigned char *tileData, unsigned char num_packets, uns
   }
 }
 
-void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED {
+void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) BANKED {
   printerInit();
   SWITCH_RAM(bank);
-  unsigned char x, y;
+  uint8_t x, y;
   unsigned int frameTileIndex = 0;
 
-  unsigned char *image = upper;
+  uint8_t *image = upper;
   for (y = 0; y < 18; y++) {
     for (x = 0; x < 20; x++) {
       if (x == 0 && y == 9) {
@@ -229,7 +229,7 @@ void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) 
   }
 }
 
-void printImageInfo(unsigned char *imageInfo) BANKED {
+void printImageInfo(uint8_t *imageInfo) BANKED {
   unsigned int index;
   printerInit();
 

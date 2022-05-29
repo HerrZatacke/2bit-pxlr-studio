@@ -1,8 +1,10 @@
 #ifndef TYPEDEF_MENUOPTION_H
 #define TYPEDEF_MENUOPTION_H
 
+#include <gbdk/platform.h>
+
 typedef struct {
-  const unsigned char value;
+  const uint8_t value;
   const char* title;
 } MenuOption;
 

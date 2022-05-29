@@ -1,7 +1,9 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-extern void menuSelectMode(unsigned char loopState);
+#include <gbdk/platform.h>
+
+extern void menuSelectMode(uint8_t loopState);
 extern void mainMenuSprite();
 extern void initMainMenu();
 extern void mainMenu();

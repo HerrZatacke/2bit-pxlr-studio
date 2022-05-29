@@ -9,10 +9,10 @@ extern void beep() BANKED;
 extern void boop() BANKED;
 extern void clonk() BANKED;
 extern void clearBkg() BANKED;
-extern void pause(unsigned char frames) BANKED;
-extern void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) BANKED;
+extern void pause(uint8_t frames) BANKED;
+extern void writeNumber(uint8_t x, uint8_t y, uint8_t length, uint8_t number) BANKED;
 extern void dead() BANKED;
-extern void hexChar(unsigned char *target, unsigned char value) BANKED;
+extern void hexChar(uint8_t *target, uint8_t value) BANKED;
 extern void fadeIn() BANKED;
 extern void fadeOut() BANKED;
 

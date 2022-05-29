@@ -165,10 +165,10 @@ obj/pxlr.sav:
 	cp assets/pxlr.sav obj/pxlr.sav
 
 version.h: version
-	tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const unsigned char version[] = {\n/g; s/$$/};\n/g' > $@
+	tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t version[] = {\n/g; s/$$/};\n/g' > $@
 
 branch.h:
-	git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const unsigned char branch[] = {\n/g; s/$$/};\n/g' > $@
+	git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t branch[] = {\n/g; s/$$/};\n/g' > $@
 
 $(BIN):	obj branch.h version.h obj/main.o obj/bank_00.o obj/bank_01.o obj/bank_02.o obj/bank_03.o obj/bank_04.o obj/bank_05.o obj/bank_06.o obj/bank_07.o obj/bank_08.o obj/bank_09.o obj/bank_10.o obj/bank_11.o obj/bank_12.o obj/bank_13.o obj/bank_14.o obj/bank_15.o obj/bank_16.o obj/pxlr.sav obj/printCmd.o obj/pxlr-logo.o obj/font.o obj/maps.o obj/tiles.o obj/nope.o obj/utils.o obj/frame_pxlr.o obj/joypad.o obj/banks.o obj/imageIndexing.o obj/debug.o obj/globals.o obj/bleep.o obj/bankedData.o obj/dialog.o obj/expose.o obj/overlayDefs.o obj/overlays.o obj/values.o obj/shootingManualMenuItems.o obj/saveImage.o obj/imageInfo.o obj/mainMenuItems.o obj/imageMenuItems.o obj/gallery.o obj/mainMenu.o obj/modeShootingManual.o obj/modeShootingBurst.o obj/splash.o obj/camera.o obj/mainLoop.o
 	$(CC) -Wl-yt0xFC -Wl-yo16 -Wl-ya16 -Wm-yn"PXLR CAMERA" -o obj/$@ obj/*.o

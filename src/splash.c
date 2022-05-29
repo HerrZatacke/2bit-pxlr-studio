@@ -9,7 +9,7 @@
 #include "../branch.h"
 #include "../res/pxlr-logo.h"
 
-unsigned char splash() {
+uint8_t splash() {
   HIDE_SPRITES;
   BGP_REG = PALETTE_BLANK;
 
@@ -28,7 +28,7 @@ unsigned char splash() {
     wait_vbl_done();
   }
 
-  unsigned char result = jp;
+  uint8_t result = jp;
 
   waitRelease(); // waitRelease() resets `jp`
 

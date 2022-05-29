@@ -10,14 +10,14 @@
 #define IMAGE_DELETED 0xFF
 #define IMAGE_UNDEFINED 0xFE
 
-void setImageSlot(unsigned char address, unsigned char newValue) BANKED {
+void setImageSlot(uint8_t address, uint8_t newValue) BANKED {
   SWITCH_RAM(0);
 
   if (address >= NUM_IMAGES) {
     dead();
   }
 
-  unsigned char oldValue = game_data_meta_imageslots[address];
+  uint8_t oldValue = game_data_meta_imageslots[address];
 
   if (newValue == oldValue) {
     return;
@@ -33,7 +33,7 @@ void setImageSlot(unsigned char address, unsigned char newValue) BANKED {
   game_data_meta_imageslots_echo_checksum[1] = game_data_meta_imageslots_checksum[1] = game_data_meta_imageslots_checksum[1] ^ newValue ^ oldValue;
 }
 
-unsigned char getImageSlot(unsigned char index) BANKED {
+uint8_t getImageSlot(uint8_t index) BANKED {
   if (index >= NUM_IMAGES) {
     return NUM_IMAGES;
   }
@@ -43,9 +43,9 @@ unsigned char getImageSlot(unsigned char index) BANKED {
 
 
 
-unsigned char getAddressForIndex(unsigned char index) BANKED {
+uint8_t getAddressForIndex(uint8_t index) BANKED {
   SWITCH_RAM(0);
-  for (unsigned char address = 0; address < NUM_IMAGES; address++) {
+  for (uint8_t address = 0; address < NUM_IMAGES; address++) {
     if (game_data_meta_imageslots[address] == index) {
       return address;
     }
@@ -55,11 +55,11 @@ unsigned char getAddressForIndex(unsigned char index) BANKED {
 }
 
 
-unsigned char getNextHighestAddress(unsigned char searchIndex) BANKED {
+uint8_t getNextHighestAddress(uint8_t searchIndex) BANKED {
   SWITCH_RAM(0);
 
   while (searchIndex < NUM_IMAGES) {
-    for (unsigned char address = 0; address < NUM_IMAGES; address++) {
+    for (uint8_t address = 0; address < NUM_IMAGES; address++) {
       if (game_data_meta_imageslots[address] == searchIndex) {
         return address;
       }
@@ -71,10 +71,10 @@ unsigned char getNextHighestAddress(unsigned char searchIndex) BANKED {
   return NUM_IMAGES;
 }
 
-void reduceIndexAfterDelete(unsigned char deletedIndex) BANKED {
+void reduceIndexAfterDelete(uint8_t deletedIndex) BANKED {
   SWITCH_RAM(0);
-  for (unsigned char address = 0; address < NUM_IMAGES; address++) {
-    unsigned char index = game_data_meta_imageslots[address];
+  for (uint8_t address = 0; address < NUM_IMAGES; address++) {
+    uint8_t index = game_data_meta_imageslots[address];
     if (index > deletedIndex && index < NUM_IMAGES) {
       setImageSlot(address, index - 1);
     }
@@ -83,10 +83,10 @@ void reduceIndexAfterDelete(unsigned char deletedIndex) BANKED {
 
 void cleanupIndexGaps() BANKED {
   SWITCH_RAM(0);
-  for (unsigned char index = 0; index < NUM_IMAGES; index++) {
+  for (uint8_t index = 0; index < NUM_IMAGES; index++) {
     // image number does not exist in list
     if (getAddressForIndex(index) >= NUM_IMAGES) {
-      unsigned char address = getNextHighestAddress(index);
+      uint8_t address = getNextHighestAddress(index);
       if (address < NUM_IMAGES) {
         setImageSlot(address, index);
       }
@@ -97,13 +97,13 @@ void cleanupIndexGaps() BANKED {
 void sortImages() BANKED {
   SWITCH_RAM(0);
 
-  unsigned char deletedIndex = 0;
+  uint8_t deletedIndex = 0;
   numVisibleImages = 0;
-  unsigned char sortedDeletedIndices[NUM_IMAGES];
-  unsigned char i = 0;
+  uint8_t sortedDeletedIndices[NUM_IMAGES];
+  uint8_t i = 0;
 
   for (i = 0; i < NUM_IMAGES; i++) {
-    unsigned char current = game_data_meta_imageslots[i];
+    uint8_t current = game_data_meta_imageslots[i];
 
     if (current == IMAGE_DELETED) {
       sortedDeletedIndices[deletedIndex] = i;
@@ -123,10 +123,10 @@ void sortImages() BANKED {
   }
 }
 
-unsigned char findFirstFreeSlot() BANKED {
+uint8_t findFirstFreeSlot() BANKED {
   SWITCH_RAM(0);
 
-  for (unsigned char i = 0; i < NUM_IMAGES; i++) {
+  for (uint8_t i = 0; i < NUM_IMAGES; i++) {
     if (game_data_meta_imageslots[i] == IMAGE_DELETED) {
       return i;
     }
@@ -136,7 +136,7 @@ unsigned char findFirstFreeSlot() BANKED {
 }
 
 void deleteAllImages() BANKED {
-  for (unsigned char address = 0; address < 30; address += 1) {
+  for (uint8_t address = 0; address < 30; address += 1) {
     setImageSlot(address, 0xff);
   }
   sortImages();

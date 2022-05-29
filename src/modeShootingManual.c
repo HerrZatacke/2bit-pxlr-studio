@@ -15,7 +15,7 @@
 #include "./mainMenu.h"
 #include "./camera.h"
 
-unsigned char manualMenuPos = 0;
+uint8_t manualMenuPos = 0;
 
 void renderManualMenu() {
   clonk();
@@ -25,15 +25,15 @@ void renderManualMenu() {
   savedBank = _current_bank;
   SWITCH_ROM(2);
 
-  unsigned char currentPage = menuItems[manualMenuPos]->page;
-  unsigned char spriteX = (menuItems[manualMenuPos]->x * 8) + 8;
+  uint8_t currentPage = menuItems[manualMenuPos]->page;
+  uint8_t spriteX = (menuItems[manualMenuPos]->x * 8) + 8;
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 23);
 
-  for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+  for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
 
     if (menuItems[i]->page == currentPage) {
 
-      unsigned char value = menuItems[i]->value;
+      uint8_t value = menuItems[i]->value;
       set_bkg_based_tiles(menuItems[i]->x, 0, MENU_TEXT_LENGTH, 1, menuItems[i]->title, OFFSET_FONT - 32);
       set_bkg_based_tiles(menuItems[i]->x, 1, MENU_TEXT_LENGTH, 1, menuItems[i]->options[value].title, OFFSET_FONT - 32);
 
@@ -60,7 +60,7 @@ void storeSettings() {
   SWITCH_RAM(1);
   savedBank = _current_bank;
   SWITCH_ROM(2);
-  for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+  for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     image_01_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
   SWITCH_ROM(savedBank);
@@ -69,7 +69,7 @@ void storeSettings() {
 void restoreDefaults() {
   savedBank = _current_bank;
   SWITCH_ROM(2);
-  for (unsigned char i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
+  for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     menuItems[i]->value = menuItems[i]->defaultValue;
   }
   SWITCH_ROM(savedBank);
@@ -77,11 +77,11 @@ void restoreDefaults() {
   storeSettings();
 }
 
-unsigned char loadSettingsFromRAM() {
+uint8_t loadSettingsFromRAM() {
   SWITCH_RAM(1);
 
-  unsigned char i = 0;
-  unsigned char noAA = 0;
+  uint8_t i = 0;
+  uint8_t noAA = 0;
 
   savedBank = _current_bank;
   SWITCH_ROM(2);

@@ -5,6 +5,6 @@
 
 void appearDialog() BANKED;
 void disappearDialog() BANKED;
-unsigned char dialog(unsigned char *message) BANKED;
+uint8_t dialog(uint8_t *message) BANKED;
 
 #endif

@@ -1,13 +1,14 @@
+#include <gbdk/platform.h>
 #include "./imageIndexing.h"
 
-unsigned char mainLoopState = 0;
-unsigned char isCapturing = 0;
-unsigned char imageMenuIndex = 0;
-unsigned char imageInfo[360];
-unsigned char savedBank = 0;
-unsigned char imageIndex = 0;
-unsigned char numVisibleImages = 0;
-unsigned char sortedIndices[NUM_IMAGES] = {
+uint8_t mainLoopState = 0;
+uint8_t isCapturing = 0;
+uint8_t imageMenuIndex = 0;
+uint8_t imageInfo[360];
+uint8_t savedBank = 0;
+uint8_t imageIndex = 0;
+uint8_t numVisibleImages = 0;
+uint8_t sortedIndices[NUM_IMAGES] = {
     IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
     IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,
     IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED, IMAGE_UNDEFINED,

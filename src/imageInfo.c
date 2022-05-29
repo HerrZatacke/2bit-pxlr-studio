@@ -12,30 +12,30 @@
 #include "./banks/banks.h"
 #include "./menus/shootingManualMenuItems.h"
 
-void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) BANKED {
-  unsigned char imageSlot = getImageSlot(imageIndex);
-  unsigned char i;
+void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
+  uint8_t imageSlot = getImageSlot(imageIndex);
+  uint8_t i;
 
   SWITCH_RAM(images[imageSlot]->bank);
 
-  unsigned char capture = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE];
-  unsigned char edgeGains = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDGEGAINS];
-  unsigned char exposureHigh = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_HIGH];
-  unsigned char exposureLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_LOW];
-  unsigned char edgeModeVolt = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT];
-  unsigned char voltageZeroPoint = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO];
-  unsigned char ditherSet = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET];
-  unsigned char contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST];
+  uint8_t capture = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE];
+  uint8_t edgeGains = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDGEGAINS];
+  uint8_t exposureHigh = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_HIGH];
+  uint8_t exposureLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_LOW];
+  uint8_t edgeModeVolt = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT];
+  uint8_t voltageZeroPoint = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO];
+  uint8_t ditherSet = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET];
+  uint8_t contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST];
 
-  unsigned char captureMode   = capture          & A000_MASK_CAPTURE;
-  unsigned char edgeExclusive = edgeGains        & A001_MASK_EDGE_EXCLUSIVE;
-  unsigned char edgeOperation = edgeGains        & A001_MASK_EDGE_OP_MODE;
-  unsigned char gain          = edgeGains        & A001_MASK_GAIN;
-  unsigned char edgeMode      = edgeModeVolt     & A004_MASK_EDGE_RATIO;
-  unsigned char invertOut     = edgeModeVolt     & A004_MASK_INVERT_OUTPUT;
-  unsigned char vRef          = edgeModeVolt     & A004_MASK_VOLTAGE_REF;
-  unsigned char zeroPoint     = voltageZeroPoint & A005_MASK_ZERO;
-  unsigned char vOut          = voltageZeroPoint & A005_MASK_VOLTAGE_OUT;
+  uint8_t captureMode   = capture          & A000_MASK_CAPTURE;
+  uint8_t edgeExclusive = edgeGains        & A001_MASK_EDGE_EXCLUSIVE;
+  uint8_t edgeOperation = edgeGains        & A001_MASK_EDGE_OP_MODE;
+  uint8_t gain          = edgeGains        & A001_MASK_GAIN;
+  uint8_t edgeMode      = edgeModeVolt     & A004_MASK_EDGE_RATIO;
+  uint8_t invertOut     = edgeModeVolt     & A004_MASK_INVERT_OUTPUT;
+  uint8_t vRef          = edgeModeVolt     & A004_MASK_VOLTAGE_REF;
+  uint8_t zeroPoint     = voltageZeroPoint & A005_MASK_ZERO;
+  uint8_t vOut          = voltageZeroPoint & A005_MASK_VOLTAGE_OUT;
 
   if (
       capture == 0xFF &&
@@ -111,7 +111,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) BANKED {
   SWITCH_ROM(2);
 
   unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
-  unsigned char exposureTime = 0xFF;
+  uint8_t exposureTime = 0xFF;
   for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
     if (exposureTimesValues[i] == exposureTimeInt) {
       exposureTime = i;
@@ -193,7 +193,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) BANKED {
 
   SWITCH_ROM(savedBank);
 
-  unsigned char digits[10];
+  uint8_t digits[10];
   BCD bcd = MAKE_BCD(0);
 
   uint2bcd(imageIndex, &bcd);
@@ -214,7 +214,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) BANKED {
   hexChar(&tileMap[358], contrast);
 }
 
-void displayImageInfo(unsigned char imageIndex) BANKED {
+void displayImageInfo(uint8_t imageIndex) BANKED {
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
 
   getImageInfo(imageIndex, imageInfo);

@@ -30,8 +30,8 @@ void initGfx() BANKED {
   clearBkg();
   set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
   set_bkg_data_banked(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles, 1);
-  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
-  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
+  set_data((uint8_t *)0x9700, upperLowerDoubleTiles, 256);
+  set_data((uint8_t *)0x8700, upperLowerDoubleTiles, 256);
 }
 
 void initSound() BANKED {
@@ -62,19 +62,19 @@ void clonk() BANKED {
   NR44_REG=0xC0;
 }
 
-void pause(unsigned char frames) BANKED {
-  for (unsigned char i = 0; i < frames; i++) {
+void pause(uint8_t frames) BANKED {
+  for (uint8_t i = 0; i < frames; i++) {
     wait_vbl_done();
   }
 }
 
-unsigned char digits_map[10];
-void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigned char number) BANKED {
+uint8_t digits_map[10];
+void writeNumber(uint8_t x, uint8_t y, uint8_t length, uint8_t number) BANKED {
   BCD bcd = MAKE_BCD(0);
   uint2bcd(number, &bcd);
   bcd2text(&bcd, OFFSET_FONT + 16u, digits_map);
 
-  unsigned char digits[3] = { 0x80, 0x80 , 0x80, };
+  uint8_t digits[3] = { 0x80, 0x80 , 0x80, };
 
   if (length == 1) {
     digits[0] = digits_map[7];
@@ -110,18 +110,18 @@ void writeNumber(unsigned char x, unsigned char y, unsigned char length, unsigne
 }
 
 // ToDo: add a "reason" for calling "dead"
-void dead(/*unsigned char reason*/) BANKED {
+void dead(/*uint8_t reason*/) BANKED {
   while (1) {
     boop();
-    for(unsigned char i = 0; i < 120; i++) {
+    for(uint8_t i = 0; i < 120; i++) {
       wait_vbl_done();
     }
   }
 }
 
-const unsigned char hexCharLUT[] = "0123456789ABCDEF";
+const uint8_t hexCharLUT[] = "0123456789ABCDEF";
 
-void hexChar(unsigned char *target, unsigned char value) BANKED {
+void hexChar(uint8_t *target, uint8_t value) BANKED {
   target[0] = hexCharLUT[(value >> 4) & 0b00001111];
   target[1] = hexCharLUT[value & 0b00001111];
 }

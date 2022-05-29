@@ -25,7 +25,7 @@ void renderImageMenu() {
 void appearImageMenu() {
   move_win(168, 0);
 
-  for (unsigned char i = 0; i < 10; i += 1) {
+  for (uint8_t i = 0; i < 10; i += 1) {
     scroll_win(-9, 0);
     wait_vbl_done();
   }
@@ -39,7 +39,7 @@ void disappearImageMenu() {
 
   waitRelease();
 
-  for (unsigned char i = 0; i < 10; i += 1) {
+  for (uint8_t i = 0; i < 10; i += 1) {
     scroll_win(9, 0);
     wait_vbl_done();
   }
@@ -49,7 +49,7 @@ void disappearImageMenu() {
 
 void loadAndShowGalleryImage() {
   if (numVisibleImages > 0) {
-    unsigned char imageSlot = getImageSlot(imageIndex);
+    uint8_t imageSlot = getImageSlot(imageIndex);
     SWITCH_RAM(images[imageSlot]->bank);
 
     set_data(VRAM_9000, images[imageSlot]->tilesUpper, HALF_IMAGE_SIZE);
@@ -81,7 +81,7 @@ void initImageMenu() {
   fill_win_rect(0, 0, 1, 32, MENU_BORDER_LEFT);
   fill_win_rect(1, 0, 31, 32, OFFSET_BLANK);
 
-  for (unsigned char index = 0; index < NUM_IMAGE_MENU_OPTIONS; index += 1) {
+  for (uint8_t index = 0; index < NUM_IMAGE_MENU_OPTIONS; index += 1) {
     set_win_based_tiles(2, yMenu(index), 8, 1, imageMenuItems[index].title, OFFSET_FONT - 32);
   }
 }
@@ -106,8 +106,8 @@ void galleryMenu() {
 }
 
 
-void imageMenuAction(unsigned char value) {
-  unsigned char address = getImageSlot(imageIndex);
+void imageMenuAction(uint8_t value) {
+  uint8_t address = getImageSlot(imageIndex);
 
   if (address >= NUM_IMAGES) {
     boop();

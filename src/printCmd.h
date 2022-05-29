@@ -9,9 +9,9 @@
 #include <gbdk/platform.h>
 
 extern void printerInit(void) BANKED;
-extern unsigned char getPrinterStatus() BANKED;
-extern void printImage(unsigned char *lower, unsigned char *upper, unsigned char bank) BANKED;
-extern void printImageInfo(unsigned char *imageInfo, unsigned char *font) BANKED;
+extern uint8_t getPrinterStatus() BANKED;
+extern void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) BANKED;
+extern void printImageInfo(uint8_t *imageInfo, uint8_t *font) BANKED;
 extern void waitPrinterReady() BANKED;
 
 #endif

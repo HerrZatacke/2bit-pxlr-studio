@@ -41,7 +41,7 @@ int main(void) {
   cleanupIndexGaps();
   sortImages();
 
-  unsigned char splashPressed = splash();
+  uint8_t splashPressed = splash();
   clearBkg();
   BGP_REG = PALETTE_NORMAL;
 

@@ -10,20 +10,20 @@
 #include "./imageIndexing.h"
 
 // Manual selection of tones
-//const unsigned char freqLookupN33[] = { 0x00, 0x44, 0x70, 0x90, 0xa4, 0xb4, 0xc2, 0xcd, 0xd7, 0xde, 0xe4, 0xe8, 0xed, 0xf0, 0xf2, 0xf4, };
-//const unsigned char freqLookupN34[] = { 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7,  };
+//const uint8_t freqLookupN33[] = { 0x00, 0x44, 0x70, 0x90, 0xa4, 0xb4, 0xc2, 0xcd, 0xd7, 0xde, 0xe4, 0xe8, 0xed, 0xf0, 0xf2, 0xf4, };
+//const uint8_t freqLookupN34[] = { 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7,  };
 
 
 // Manual selection of tones ~ 100Hz steps
 // 809, 910, 1024, 1130, 1214, 1338, 1425, 1489, 1560, 1638, 1771, 1928, 2114, 2260, 2427, 2521 | 2979, 3449
-const unsigned char freqLookupN33[] = { 0xaf, 0xb8, 0xc0, 0xc6, 0xca, 0xcf, 0xd2, 0xd4, 0xd6, 0xd8, 0xdb, 0xde, 0xe1, 0xe3, 0xe5, 0xe6, 0xea, 0xed, };
-const unsigned char freqLookupN34[] = { 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, };
+const uint8_t freqLookupN33[] = { 0xaf, 0xb8, 0xc0, 0xc6, 0xca, 0xcf, 0xd2, 0xd4, 0xd6, 0xd8, 0xdb, 0xde, 0xe1, 0xe3, 0xe5, 0xe6, 0xea, 0xed, };
+const uint8_t freqLookupN34[] = { 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, 0xC7, };
 
 inline void silence() {
   NR30_REG=0x00;
 }
 
-unsigned char breakBleep = 0;
+uint8_t breakBleep = 0;
 
 inline void loadWaveform() {
   const uint8_t sinewave[16] = { 0x89, 0xbc, 0xde, 0xff, 0xff, 0xfe, 0xdb, 0xa8, 0x75, 0x42, 0x10, 0x00, 0x00, 0x12, 0x34, 0x67 };
@@ -36,8 +36,8 @@ inline void loadWaveform() {
   memcpy(_AUD3WAVERAM, sinewave, 16);
 }
 
-void breakSound(unsigned char times) BANKED {
-  for(unsigned char i = 0; i < times; i++) {
+void breakSound(uint8_t times) BANKED {
+  for(uint8_t i = 0; i < times; i++) {
     wait_vbl_done();
     if (jp == J_B) {
       breakBleep = 1;
@@ -48,7 +48,7 @@ void breakSound(unsigned char times) BANKED {
   }
 }
 
-void playBeep(unsigned char r1, unsigned char r2) BANKED {
+void playBeep(uint8_t r1, uint8_t r2) BANKED {
   NR30_REG=0x80;
   NR31_REG=0x00;
   NR32_REG=0x20;
@@ -63,9 +63,9 @@ void playBeep(unsigned char r1, unsigned char r2) BANKED {
 void bleep() BANKED {
   breakBleep = 0;
   loadWaveform();
-  unsigned char imageAddress = getAddressForIndex(imageIndex);
+  uint8_t imageAddress = getAddressForIndex(imageIndex);
   SWITCH_RAM(images[imageAddress]->bank);
-  unsigned char i = 0;
+  uint8_t i = 0;
 
   playBeep(freqLookupN33[17], freqLookupN34[17]);
 
@@ -81,12 +81,12 @@ void bleep() BANKED {
 
   // Loop upper part
   for (unsigned int i = 0; i < HALF_IMAGE_SIZE; i++) {
-    unsigned char tileByte = images[imageAddress]->tilesUpper[i];
+    uint8_t tileByte = images[imageAddress]->tilesUpper[i];
 
     if (i % 16 == 0) {
-      unsigned char tileIndex = i >> 4;
-      unsigned char cursorX = tileIndex % 16;
-      unsigned char cursorY = tileIndex >> 4;
+      uint8_t tileIndex = i >> 4;
+      uint8_t cursorX = tileIndex % 16;
+      uint8_t cursorY = tileIndex >> 4;
       move_sprite(SPRITE_BLEEP_CURSOR, (cursorX << 3) + 24, (cursorY << 3) + 32);
       playBeep(freqLookupN33[17], freqLookupN34[17]);
     }
@@ -103,12 +103,12 @@ void bleep() BANKED {
 
   // Loop lower part
   for (unsigned int i = 0; i < HALF_IMAGE_SIZE; i++) {
-    unsigned char tileByte = images[imageAddress]->tilesLower[i];
+    uint8_t tileByte = images[imageAddress]->tilesLower[i];
 
     if (i % 16 == 0) {
-      unsigned char tileIndex = i >> 4;
-      unsigned char cursorX = tileIndex % 16;
-      unsigned char cursorY = tileIndex >> 4;
+      uint8_t tileIndex = i >> 4;
+      uint8_t cursorX = tileIndex % 16;
+      uint8_t cursorY = tileIndex >> 4;
       move_sprite(SPRITE_BLEEP_CURSOR, (cursorX << 3) + 24, (cursorY << 3) + 32 + 56);
       playBeep(freqLookupN33[17], freqLookupN34[17]);
     }

@@ -14,7 +14,7 @@
 #include "./modeShootingManual.h"
 #include "./imageIndexing.h"
 
-unsigned char mainMenuPos = 0;
+uint8_t mainMenuPos = 0;
 
 void mainMenuSprite() {
   move_sprite(SPRITE_MENU_INDICATOR, 16, yMenuSprite(mainMenuPos));
@@ -24,14 +24,14 @@ void initMainMenu() {
   clearBkg();
   hideOverlay();
 
-  for (unsigned char index = 0; index < NUM_MAIN_MENU_OPTIONS; index += 1) {
+  for (uint8_t index = 0; index < NUM_MAIN_MENU_OPTIONS; index += 1) {
     set_bkg_based_tiles(2, yMenu(index), 16, 1, mainMenuItems[index].title, OFFSET_FONT - 32);
   }
 
   mainMenuSprite();
 }
 
-void menuSelectMode(unsigned char loopState) {
+void menuSelectMode(uint8_t loopState) {
   mainLoopState = loopState;
   if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
     initManualMode();

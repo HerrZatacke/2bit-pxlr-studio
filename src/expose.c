@@ -21,18 +21,18 @@
 
 #define MSB2LSB(b) (((b)&1?128:0)|((b)&2?64:0)|((b)&4?32:0)|((b)&8?16:0)|((b)&16?8:0)|((b)&32?4:0)|((b)&64?2:0)|((b)&128?1:0))
 
-const unsigned char exposePalettes[3] = {
+const uint8_t exposePalettes[3] = {
   PALETTE_EXPOSE_0,
   PALETTE_EXPOSE_1,
   PALETTE_EXPOSE_2,
 };
 
-unsigned char exposeIndex = 0;
+uint8_t exposeIndex = 0;
 
 // ToDo: convert this to a "flipTiles" function and then use set_data() to write to vram
-void set_bkg_data_flipped(unsigned char from, unsigned char length, const unsigned char tiles[], const unsigned char vramHighLow) BANKED {
+void set_bkg_data_flipped(uint8_t from, uint8_t length, const uint8_t tiles[], const uint8_t vramHighLow) BANKED {
 
-  unsigned char flippedTiles[HALF_IMAGE_SIZE];
+  uint8_t flippedTiles[HALF_IMAGE_SIZE];
   memcpy(flippedTiles, tiles, HALF_IMAGE_SIZE);
 
   for (uint16_t i = 0; i < 1792; i += 1) {
@@ -48,10 +48,10 @@ void set_bkg_data_flipped(unsigned char from, unsigned char length, const unsign
   set_bkg_data(from, length, flippedTiles);
 }
 
-void set_flipped_map(const unsigned char map[], unsigned char offset) BANKED {
-  unsigned char flippedMap[360];
+void set_flipped_map(const uint8_t map[], uint8_t offset) BANKED {
+  uint8_t flippedMap[360];
   for (uint16_t yc = 0; yc < 360; yc += 20) {
-    for (unsigned char xc = 0; xc < 20; xc += 1) {
+    for (uint8_t xc = 0; xc < 20; xc += 1) {
       flippedMap[xc + yc] = map[yc + 19 - xc];
     }
   }
@@ -59,7 +59,7 @@ void set_flipped_map(const unsigned char map[], unsigned char offset) BANKED {
 }
 
 void loadImageTilesFlipped() BANKED {
-  unsigned char imageSlot = getImageSlot(imageIndex);
+  uint8_t imageSlot = getImageSlot(imageIndex);
   SWITCH_RAM(images[imageSlot]->bank);
 
   set_bkg_data_flipped(0, 112, images[imageSlot]->tilesUpper, 1);

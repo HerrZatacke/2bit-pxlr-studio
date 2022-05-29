@@ -1,6 +1,8 @@
 #ifndef NOPE_H
 #define NOPE_H
 
-extern const unsigned char nope_tiles[1792];
+#include <gbdk/platform.h>
+
+extern const uint8_t nope_tiles[1792];
 
 #endif

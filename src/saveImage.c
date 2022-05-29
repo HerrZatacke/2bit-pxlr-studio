@@ -15,7 +15,7 @@
 #include "./modeShootingManual.h"
 
 void saveImage() BANKED {
-  unsigned char firstFreeSlot = findFirstFreeSlot();
+  uint8_t firstFreeSlot = findFirstFreeSlot();
 
   if (firstFreeSlot >= NUM_IMAGES) {
     return;

@@ -26,13 +26,13 @@ void initOverlays() BANKED {
   set_sprite_tile(SPRITE_BORDER_V_8, OFFSET_BORDER_V);
 }
 
-unsigned char currentOverlay = 1;
+uint8_t currentOverlay = 1;
 
 void showOverlay() BANKED {
   savedBank = _current_bank;
   SWITCH_ROM(1);
 
-  for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
+  for (uint8_t ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (currentOverlay == 0) {
       move_sprite(noOverlay[ov]->sprite, noOverlay[ov]->x, noOverlay[ov]->y);
     } else if (currentOverlay == 1) {
@@ -49,7 +49,7 @@ void hideLowerOverlay() BANKED {
   savedBank = _current_bank;
   SWITCH_ROM(1);
 
-  for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
+  for (uint8_t ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (currentOverlay == 0) {
       if (noOverlay[ov]->y > 99) {
         move_sprite(noOverlay[ov]->sprite, 0, 0);
@@ -72,7 +72,7 @@ void hideOverlay() BANKED {
   savedBank = _current_bank;
   SWITCH_ROM(1);
 
-  for (unsigned char ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
+  for (uint8_t ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     move_sprite(noOverlay[ov]->sprite, 0, 0);
   }
 

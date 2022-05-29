@@ -1,21 +1,22 @@
+#include <gbdk/platform.h>
 #include <gb/gb.h>
 #include "./globals.h"
 
-void set_bkg_tiles_banked(unsigned char x, unsigned char y, unsigned char w, unsigned char h, unsigned char *map, unsigned char bank) {
+void set_bkg_tiles_banked(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t *map, uint8_t bank) {
   savedBank = _current_bank;
   SWITCH_ROM(bank);
   set_bkg_tiles(x, y, w, h, map);
   SWITCH_ROM(savedBank);
 }
 
-void set_bkg_data_banked(unsigned char offset, unsigned char length, unsigned char *data, unsigned char bank) {
+void set_bkg_data_banked(uint8_t offset, uint8_t length, uint8_t *data, uint8_t bank) {
   savedBank = _current_bank;
   SWITCH_ROM(bank);
   set_bkg_data(offset, length, data);
   SWITCH_ROM(savedBank);
 }
 
-void set_data_banked(unsigned int *address, unsigned char *data, unsigned int length, unsigned char bank) {
+void set_data_banked(unsigned int *address, uint8_t *data, unsigned int length, uint8_t bank) {
   savedBank = _current_bank;
   SWITCH_ROM(bank);
   set_data(address, data, length);

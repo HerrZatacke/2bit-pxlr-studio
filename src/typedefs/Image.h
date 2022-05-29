@@ -1,13 +1,15 @@
 #ifndef TYPEDEF_IMAGE_H
 #define TYPEDEF_IMAGE_H
 
+#include <gbdk/platform.h>
+
 typedef struct {
-  const unsigned char bank;
-  unsigned char* const tilesUpper;
-  unsigned char* const tilesLower;
-  unsigned char* const thumbnail;
-  unsigned char* const meta;
-  unsigned char* const metaEcho;
+  const uint8_t bank;
+  uint8_t* const tilesUpper;
+  uint8_t* const tilesLower;
+  uint8_t* const thumbnail;
+  uint8_t* const meta;
+  uint8_t* const metaEcho;
 } Image;
 
 #endif

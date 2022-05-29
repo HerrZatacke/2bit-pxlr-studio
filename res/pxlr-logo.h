@@ -5,7 +5,7 @@
 
 #include <gbdk/platform.h>
 
-extern const unsigned char logo_tiles[];
-extern const unsigned char logo_map[];
+extern const uint8_t logo_tiles[];
+extern const uint8_t logo_map[];
 
 #endif

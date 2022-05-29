@@ -12,7 +12,7 @@
 #include "./bankedData.h"
 #include "./mainMenu.h"
 
-unsigned char burstActive = 0;
+uint8_t burstActive = 0;
 
 void renderBurstMenu() {
   set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);

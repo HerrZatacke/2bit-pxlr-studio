@@ -1,7 +1,9 @@
 #ifndef IMAGEINFO_H
 #define IMAGEINFO_H
 
-void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) BANKED;
-void displayImageInfo(unsigned char imageIndex) BANKED;
+#include <gbdk/platform.h>
+
+void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED;
+void displayImageInfo(uint8_t imageIndex) BANKED;
 
 #endif
