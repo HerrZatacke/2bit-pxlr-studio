@@ -160,6 +160,8 @@ void menuSelectMode(unsigned char loopState) {
 }
 
 int main(void) {
+  init_gfx();
+
   CRITICAL {
     STAT_REG |= STATF_LYC;
     LYC_REG = 144;
@@ -167,33 +169,19 @@ int main(void) {
   }
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
-  init_gfx();
+  clearBkg();
+  set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
+  set_bkg_data_banked(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles, 1);
+  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
+  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
+
   init_sound();
   init_cam();
-
   initOverlays();
-
-  fill_bkg_rect(0, 0, 20, 18, BLNK);
-
-  set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
-
-  set_bkg_data(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles);
-
   cleanupIndexGaps();
   sortImages();
 
-  HIDE_SPRITES;
   unsigned char splashPressed = splash();
-
-  SHOW_SPRITES;
-  // ToDo: Fade-effect?
-
-  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 16);
-  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 16);
-/*
-  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
-  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
-*/
 
   if (splashPressed == J_A) {
     menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);

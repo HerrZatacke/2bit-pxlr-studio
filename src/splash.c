@@ -9,6 +9,7 @@
 #include "../res/pxlr-logo.h"
 
 unsigned char splash() {
+  HIDE_SPRITES;
 
   set_data_banked(VRAM_9000, logo_tiles, LOGO_TILE_COUNT * 16, 1);
   set_data_banked(VRAM_8000, logo_tiles, LOGO_TILE_COUNT * 16, 1);
@@ -27,5 +28,6 @@ unsigned char splash() {
 
   waitRelease(); // waitRelease() resets `jp`
 
+  SHOW_SPRITES;
   return result;
 }
