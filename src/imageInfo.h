@@ -12,14 +12,14 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
 
   SWITCH_RAM(images[imageSlot]->bank);
 
-  unsigned char capture = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE]; // A000_CAPTURE_POSITIVE | A000_START_CAPTURE;
-  unsigned char edgeGains = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDGEGAINS]; // getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
-  unsigned char exposureHigh = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_HIGH]; // (char)(exposureTime >> 8);
-  unsigned char exposureLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_LOW]; // (char)exposureTime;
-  unsigned char edgeModeVolt = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT]; // getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
-  unsigned char voltageZeroPoint = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO]; // getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
-  unsigned char ditherSet = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET]; // getMenuValue(ditherSetsMenu);
-  unsigned char contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST]; // getMenuValue(contrastsMenu);
+  unsigned char capture = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE];
+  unsigned char edgeGains = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDGEGAINS];
+  unsigned char exposureHigh = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_HIGH];
+  unsigned char exposureLow = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EXPOSURE_LOW];
+  unsigned char edgeModeVolt = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT];
+  unsigned char voltageZeroPoint = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO];
+  unsigned char ditherSet = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET];
+  unsigned char contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST];
 
   unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
   unsigned char exposureTime = 0xFF;
