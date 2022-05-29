@@ -1,6 +1,8 @@
 #ifndef TYPEDEF_MENUITEM_H
 #define TYPEDEF_MENUITEM_H
 
+#include "./MenuOption.h"
+
 typedef struct {
   const unsigned char x;
   const unsigned char page;

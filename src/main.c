@@ -63,7 +63,7 @@ void scanline_isr() {
 void setDitherMatrix() {
   SWITCH_RAM(16);
   savedBank = _current_bank;
-  SWITCH_ROM(2)
+  SWITCH_ROM(2);
 
   unsigned char ditherSet = getMenuValue(ditherSetsMenu);
   unsigned char contrast = getMenuValue(contrastsMenu);
@@ -128,7 +128,7 @@ void capture() {
   SWITCH_RAM(16);
 
   savedBank = _current_bank;
-  SWITCH_ROM(2)
+  SWITCH_ROM(2);
 
   unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
