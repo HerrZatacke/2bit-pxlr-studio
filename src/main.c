@@ -62,6 +62,9 @@ void scanline_isr() {
 
 void setDitherMatrix() {
   SWITCH_RAM(16);
+  savedBank = _current_bank;
+  SWITCH_ROM(2)
+
   unsigned char ditherSet = getMenuValue(ditherSetsMenu);
   unsigned char contrast = getMenuValue(contrastsMenu);
 
@@ -76,6 +79,8 @@ void setDitherMatrix() {
       memcpy(A006A035, ditherNoLowLightValues[contrast], 48);
     }
   }
+
+  SWITCH_ROM(savedBank);
 }
 
 #include "../version.h"
@@ -122,6 +127,9 @@ void init_cam() {
 void capture() {
   SWITCH_RAM(16);
 
+  savedBank = _current_bank;
+  SWITCH_ROM(2)
+
   unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
   A001 = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
@@ -133,6 +141,8 @@ void capture() {
   isCapturing = 1;
 
   A000 = getMenuValue(captureModesMenu);
+
+  SWITCH_ROM(savedBank);
 
   captureJoypadISR();
 

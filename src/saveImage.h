@@ -13,6 +13,9 @@ void saveImage() {
   get_data(images[firstFreeSlot]->tilesLower, VRAM_8000, HALF_IMAGE_SIZE);
 
 /*
+  savedBank = _current_bank;
+  SWITCH_ROM(2)
+
   memcpy(images[firstFreeSlot]->thumbnail, tiles_thumbnail, 256);
 
   unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
@@ -25,6 +28,8 @@ void saveImage() {
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO] = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET] = getMenuValue(ditherSetsMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST] = getMenuValue(contrastsMenu);
+
+  SWITCH_ROM(savedBank);
 */
 
   setImageSlot(firstFreeSlot, numVisibleImages);
