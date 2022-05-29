@@ -10,7 +10,6 @@ void setDitherMatrix();
 #include <string.h>
 #include <gbdk/bcd.h>
 
-#include "typedefs/MenuOption.h"
 #include "typedefs/MenuItem.h"
 #include "typedefs/Image.h"
 #include "typedefs/Overlay.h"

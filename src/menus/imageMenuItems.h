@@ -1,5 +1,7 @@
 #define NUM_IMAGE_MENU_OPTIONS 5
 
+#include "typedefs/MenuOption.h"
+
 const MenuOption imageMenuItems[NUM_IMAGE_MENU_OPTIONS] = {
   { IMAGE_MENU_INFO,   "Info    ", },
   { IMAGE_MENU_DELETE, "Delete  ", },
