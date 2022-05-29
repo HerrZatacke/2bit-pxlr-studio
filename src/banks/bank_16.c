@@ -1,4 +1,4 @@
-unsigned char A000;
+volatile unsigned char A000;
 unsigned char A001; // output gain and the edge operation mode.
 unsigned char A002; // register 2 of M64282FP - exposure time MSB
 unsigned char A003; // register 3 of M64282FP - exposure time LSB

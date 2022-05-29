@@ -16,7 +16,7 @@ extern unsigned char game_data_meta[];
 
 extern const Image *images[30];
 
-extern unsigned char A000;
+extern volatile unsigned char A000;
 extern unsigned char A001;
 extern unsigned char A002;
 extern unsigned char A003;
