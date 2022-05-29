@@ -75,10 +75,10 @@ void restoreDefaults() {
   }
   SWITCH_ROM(savedBank);
 
-  setDitherMatrix();
+  storeSettings();
 }
 
-unsigned char restoreSettings() {
+unsigned char loadSettingsFromRAM() {
   SWITCH_RAM(1);
 
   unsigned char i = 0;
@@ -157,8 +157,8 @@ void manualShootMenu() {
     joypadConsumed();
   } else if (jp == (J_SELECT | J_START)) {
     restoreDefaults();
+    setDitherMatrix();
     beep();
-    storeSettings();
     renderManualMenu();
     waitRelease();
     joypadConsumed();
