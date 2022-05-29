@@ -1,3 +1,5 @@
+#pragma bank 2
+
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
@@ -10,7 +12,7 @@
 #include "./banks/banks.h"
 #include "./menus/shootingManualMenuItems.h"
 
-void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
+void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) BANKED {
   unsigned char imageSlot = getImageSlot(imageIndex);
   unsigned char i;
 
@@ -212,7 +214,7 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   hexChar(&tileMap[358], contrast);
 }
 
-void displayImageInfo(unsigned char imageIndex) {
+void displayImageInfo(unsigned char imageIndex) BANKED {
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
 
   getImageInfo(imageIndex, imageInfo);
