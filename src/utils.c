@@ -116,3 +116,21 @@ void hexChar(unsigned char *target, unsigned char value) BANKED {
   target[0] = hexCharLUT[(value >> 4) & 0b00001111];
   target[1] = hexCharLUT[value & 0b00001111];
 }
+
+void fadeIn() BANKED {
+  pause(8);
+  BGP_REG = PALETTE_FADE_2;
+  pause(8);
+  BGP_REG = PALETTE_FADE_1;
+  pause(8);
+  BGP_REG = PALETTE_NORMAL;
+}
+
+void fadeOut() BANKED {
+  pause(8);
+  BGP_REG = PALETTE_FADE_1;
+  pause(8);
+  BGP_REG = PALETTE_FADE_2;
+  pause(8);
+  BGP_REG = PALETTE_BLANK;
+}

@@ -111,6 +111,8 @@ int main(void) {
   sortImages();
 
   unsigned char splashPressed = splash();
+  clearBkg();
+  BGP_REG = PALETTE_NORMAL;
 
   if (splashPressed == J_A) {
     menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);
