@@ -16,7 +16,7 @@ void set_bkg_data_banked(uint8_t offset, uint8_t length, uint8_t *data, uint8_t 
   SWITCH_ROM(savedBank);
 }
 
-void set_data_banked(unsigned int *address, uint8_t *data, unsigned int length, uint8_t bank) {
+void set_data_banked(uint16_t *address, uint8_t *data, uint16_t length, uint8_t bank) {
   savedBank = _current_bank;
   SWITCH_ROM(bank);
   set_data(address, data, length);

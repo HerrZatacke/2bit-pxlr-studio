@@ -80,7 +80,7 @@ void bleep() BANKED {
   }
 
   // Loop upper part
-  for (unsigned int i = 0; i < HALF_IMAGE_SIZE; i++) {
+  for (uint16_t i = 0; i < HALF_IMAGE_SIZE; i++) {
     uint8_t tileByte = images[imageAddress]->tilesUpper[i];
 
     if (i % 16 == 0) {
@@ -102,7 +102,7 @@ void bleep() BANKED {
   }
 
   // Loop lower part
-  for (unsigned int i = 0; i < HALF_IMAGE_SIZE; i++) {
+  for (uint16_t i = 0; i < HALF_IMAGE_SIZE; i++) {
     uint8_t tileByte = images[imageAddress]->tilesLower[i];
 
     if (i % 16 == 0) {

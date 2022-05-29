@@ -4,7 +4,7 @@
 #include "./valuesDefs.h"
 #include "./typedefs/MenuOption.h"
 
-extern unsigned const int exposureTimesValues[NUM_EXPOSURE_TIMES];
+extern unsigned const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES];
 extern const MenuOption exposureTimes[NUM_EXPOSURE_TIMES];
 
 extern unsigned const char ditherHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];

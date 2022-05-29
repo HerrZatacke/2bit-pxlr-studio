@@ -45,7 +45,7 @@ const uint8_t PRINT_TILE[] =     { 6, MAGIC_1, MAGIC_2, COMMAND_DATA,   0x00, 0x
 
 uint8_t tile_num, packet_num;
 
-unsigned int CRC;
+uint16_t CRC;
 
 uint8_t sendPrinterByte(uint8_t byte) BANKED {
   uint8_t result;
@@ -83,11 +83,11 @@ void sendPrinterCommand(const uint8_t *command) BANKED {
 }
 
 
-inline uint8_t getHigh(unsigned int w) {
+inline uint8_t getHigh(uint16_t w) {
   return (w & 0xFF00u) >> 8;
 }
 
-inline uint8_t getLow(unsigned int w) {
+inline uint8_t getLow(uint16_t w) {
   return (w & 0xFFu);
 }
 
@@ -151,7 +151,7 @@ uint8_t printerBusy() BANKED {
 void waitPrinterReady() BANKED {
   // Wait for max 30s to give the printer time to become ready.
   // If not ready after 30s, return anyway to not hang the program
-  for (unsigned int wait = 0; wait < 1800; wait++) {
+  for (uint16_t wait = 0; wait < 1800; wait++) {
     wait_vbl_done();
     if (!printerBusy()) {
       return;
@@ -209,7 +209,7 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) BANKED {
   printerInit();
   SWITCH_RAM(bank);
   uint8_t x, y;
-  unsigned int frameTileIndex = 0;
+  uint16_t frameTileIndex = 0;
 
   uint8_t *image = upper;
   for (y = 0; y < 18; y++) {
@@ -230,7 +230,7 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) BANKED {
 }
 
 void printImageInfo(uint8_t *imageInfo) BANKED {
-  unsigned int index;
+  uint16_t index;
   printerInit();
 
   for (index = 0; index < 40; index++) {

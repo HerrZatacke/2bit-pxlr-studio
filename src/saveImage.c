@@ -34,7 +34,7 @@ void saveImage() BANKED {
 
   memcpy(images[firstFreeSlot]->thumbnail, tiles_thumbnail, 256);
 
-  unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
+  uint16_t exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CAPTURE] = getMenuValue(captureModesMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_EDGEGAINS] = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);

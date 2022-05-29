@@ -110,7 +110,7 @@ void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
   savedBank = _current_bank;
   SWITCH_ROM(2);
 
-  unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
+  uint16_t exposureTimeInt = (exposureHigh << 8) + exposureLow;
   uint8_t exposureTime = 0xFF;
   for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
     if (exposureTimesValues[i] == exposureTimeInt) {

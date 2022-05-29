@@ -54,8 +54,8 @@
 #define IMAGE_MENU_EXPOSE 4
 
 #define HALF_IMAGE_SIZE 1792
-#define VRAM_9000 (unsigned int *)0x9000
-#define VRAM_8000 (unsigned int *)0x8000
+#define VRAM_9000 (uint16_t *)0x9000
+#define VRAM_8000 (uint16_t *)0x8000
 
 #define THUMBNAIL_BYTE_CAPTURE       0x00
 #define THUMBNAIL_BYTE_EDGEGAINS     0x10

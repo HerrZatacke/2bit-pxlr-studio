@@ -26,7 +26,7 @@ void scanlineIsr() {
   }
 }
 
-int main(void) {
+uint16_t main() {
   CRITICAL {
     STAT_REG |= STATF_LYC;
     LYC_REG = 144;

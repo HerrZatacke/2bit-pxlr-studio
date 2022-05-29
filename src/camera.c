@@ -19,7 +19,7 @@ void setDitherMatrix() {
   uint8_t ditherSet = getMenuValue(ditherSetsMenu);
   uint8_t contrast = getMenuValue(contrastsMenu);
 
-  for (unsigned int i = 0; i < 48; i += 1) {
+  for (uint16_t i = 0; i < 48; i += 1) {
     if (ditherSet == DITHER_SET_HIGH) {
       memcpy(A006A035, ditherHighLightValues[contrast], 48);
     } else if (ditherSet == DITHER_SET_LOW) {
@@ -54,7 +54,7 @@ void capture() {
   savedBank = _current_bank;
   SWITCH_ROM(2);
 
-  unsigned int exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
+  uint16_t exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
 
   A001 = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
   A002 = (char)(exposureTime >> 8);
