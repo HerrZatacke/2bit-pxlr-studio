@@ -1,16 +1,17 @@
 #ifndef VALUES_H
 #define VALUES_H
 
+#include <gbdk/platform.h>
 #include "./valuesDefs.h"
 #include "./typedefs/MenuOption.h"
 
-extern unsigned const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES];
+extern const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES];
 extern const MenuOption exposureTimes[NUM_EXPOSURE_TIMES];
 
-extern unsigned const uint8_t ditherHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
-extern unsigned const uint8_t ditherLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
-extern unsigned const uint8_t ditherNoHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
-extern unsigned const uint8_t ditherNoLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern const uint8_t ditherHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern const uint8_t ditherLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern const uint8_t ditherNoHighLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
+extern const uint8_t ditherNoLowLightValues[NUM_CONTRASTS][NUM_CONTRAST_SIZE];
 extern const MenuOption contrasts[NUM_CONTRASTS];
 
 extern const MenuOption gains[NUM_GAIN_LEVELS];
