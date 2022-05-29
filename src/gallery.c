@@ -18,8 +18,6 @@
 #include "../res/nope.h"
 #include "../res/maps.h"
 
-extern void menuSelectMode(unsigned char loopState);
-
 void renderImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));
 }

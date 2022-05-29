@@ -12,9 +12,8 @@
 #include "./overlays/overlays.h"
 #include "./banks/banks.h"
 #include "./bankedData.h"
-
-extern void menuSelectMode(unsigned char loopState);
-extern void setDitherMatrix();
+#include "./mainMenu.h"
+#include "./camera.h"
 
 unsigned char manualMenuPos = 0;
 

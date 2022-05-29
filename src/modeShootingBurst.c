@@ -10,8 +10,7 @@
 #include "./overlays/overlays.h"
 #include "./imageIndexing.h"
 #include "./bankedData.h"
-
-extern void menuSelectMode(unsigned char loopState);
+#include "./mainMenu.h"
 
 unsigned char burstActive = 0;
 

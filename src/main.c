@@ -8,16 +8,12 @@
 #include "../res/tiles.h"
 #include "./bankedData.h"
 #include "./camera.h"
-#include "./debug.h"
 #include "./defines.h"
-#include "./gallery.h"
 #include "./globals.h"
 #include "./imageIndexing.h"
 #include "./joypad.h"
 #include "./mainLoop.h"
 #include "./mainMenu.h"
-#include "./modeShootingBurst.h"
-#include "./modeShootingManual.h"
 #include "./overlays/overlays.h"
 #include "./splash.h"
 #include "./utils.h"
@@ -33,34 +29,6 @@ void scanline_isr() {
     if (!isCapturing) {
       captureJoypadISR();
     }
-  }
-}
-
-void menuSelectMode(unsigned char loopState) {
-  mainLoopState = loopState;
-  if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
-    initManualMode();
-  } else if (loopState == MAIN_LOOP_SHOOT_BURST) {
-    initBurstMode();
-  } else if (loopState == MAIN_LOOP_MENU) {
-    initMainMenu();
-  } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
-    initGallery();
-  } else if (loopState == MAIN_LOOP_IMAGE) {
-    initImageMenu();
-    appearImageMenu();
-    loadAndShowGalleryImage();
-  } else if (loopState == MAIN_LOOP_DELETE_ALL) {
-    deleteAllImages();
-    mainLoopState = MAIN_LOOP_MENU;
-  } else if (loopState == MAIN_LOOP_DEBUG) {
-    initDebug();
-  } else { // fallback to main menu
-    clearBkg();
-    boop();
-    mainLoopState = MAIN_LOOP_MENU;
-    hideOverlay();
-    initMainMenu();
   }
 }
 

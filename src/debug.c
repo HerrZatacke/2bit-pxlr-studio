@@ -6,9 +6,8 @@
 #include "./joypad.h"
 #include "./utils.h"
 #include "./banks/banks.h"
-
-extern void menuSelectMode(unsigned char loopState);
-extern void hideOverlay();
+#include "./mainMenu.h"
+#include "./overlays/overlays.h"
 
 void debugMenu() BANKED {
   if (jp == J_B) {

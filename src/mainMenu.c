@@ -3,12 +3,16 @@
 #include <gbdk/platform.h>
 
 #include "./menus/mainMenuItems.h"
+#include "./globals.h"
 #include "./joypad.h"
 #include "./utils.h"
 #include "./defines.h"
 #include "./overlays/overlays.h"
-
-extern void menuSelectMode(unsigned char loopState);
+#include "./debug.h"
+#include "./gallery.h"
+#include "./modeShootingBurst.h"
+#include "./modeShootingManual.h"
+#include "./imageIndexing.h"
 
 unsigned char mainMenuPos = 0;
 
@@ -25,6 +29,34 @@ void initMainMenu() {
   }
 
   mainMenuSprite();
+}
+
+void menuSelectMode(unsigned char loopState) {
+  mainLoopState = loopState;
+  if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
+    initManualMode();
+  } else if (loopState == MAIN_LOOP_SHOOT_BURST) {
+    initBurstMode();
+  } else if (loopState == MAIN_LOOP_MENU) {
+    initMainMenu();
+  } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
+    initGallery();
+  } else if (loopState == MAIN_LOOP_IMAGE) {
+    initImageMenu();
+    appearImageMenu();
+    loadAndShowGalleryImage();
+  } else if (loopState == MAIN_LOOP_DELETE_ALL) {
+    deleteAllImages();
+    mainLoopState = MAIN_LOOP_MENU;
+  } else if (loopState == MAIN_LOOP_DEBUG) {
+    initDebug();
+  } else { // fallback to main menu
+    clearBkg();
+    boop();
+    mainLoopState = MAIN_LOOP_MENU;
+    hideOverlay();
+    initMainMenu();
+  }
 }
 
 void mainMenu() {
