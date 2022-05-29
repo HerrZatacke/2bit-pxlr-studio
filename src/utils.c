@@ -4,6 +4,13 @@
 #include <gbdk/platform.h>
 #include <gbdk/bcd.h>
 #include "defines.h"
+#include "../res/font.h"
+#include "../res/tiles.h"
+#include "./bankedData.h"
+
+void clearBkg() BANKED {
+  fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
+}
 
 void init_gfx() BANKED {
   ENABLE_RAM;
@@ -19,6 +26,12 @@ void init_gfx() BANKED {
 
   set_sprite_tile(SPRITE_MENU_INDICATOR, OFFSET_MENU_ARROW);
   set_sprite_tile(SPRITE_BLEEP_CURSOR, OFFSET_BLEEP_CURSOR);
+
+  clearBkg();
+  set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
+  set_bkg_data_banked(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles, 1);
+  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
+  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
 }
 
 void init_sound() BANKED {
@@ -47,10 +60,6 @@ void clonk() BANKED {
   NR42_REG=0xC1;
   NR43_REG=0x70;
   NR44_REG=0xC0;
-}
-
-void clearBkg() BANKED {
-  fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
 }
 
 void pause(unsigned char frames) BANKED {

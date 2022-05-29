@@ -1,12 +1,6 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
-#include <stdint.h>
-#include <string.h>
-#include <gbdk/bcd.h>
 
-#include "../res/font.h"
-#include "../res/tiles.h"
-#include "./bankedData.h"
 #include "./camera.h"
 #include "./defines.h"
 #include "./globals.h"
@@ -33,8 +27,6 @@ void scanline_isr() {
 }
 
 int main(void) {
-  init_gfx();
-
   CRITICAL {
     STAT_REG |= STATF_LYC;
     LYC_REG = 144;
@@ -42,12 +34,7 @@ int main(void) {
   }
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
-  clearBkg();
-  set_bkg_data_banked(OFFSET_FONT, NUM_FONT_CHARS, font, 1);
-  set_bkg_data_banked(OFFSET_TILES, NUM_CONSTANT_TILES, constantTiles, 1);
-  set_data((unsigned char *)0x9700, upperLowerDoubleTiles, 256);
-  set_data((unsigned char *)0x8700, upperLowerDoubleTiles, 256);
-
+  init_gfx();
   init_sound();
   init_cam();
   initOverlays();
