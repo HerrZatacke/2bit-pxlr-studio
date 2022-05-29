@@ -1,5 +1,7 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
+#include <string.h>
+#include "../res/tiles.h"
 #include "./imageIndexing.h"
 #include "./defines.h"
 #include "./globals.h"
@@ -8,6 +10,8 @@
 #include "./dialog.h"
 #include "./banks/banks.h"
 #include "./overlays/overlays.h"
+#include "./values.h"
+#include "./menus/shootingManualMenuItems.h"
 
 extern void renderManualMenu();
 
@@ -24,9 +28,10 @@ void saveImage() BANKED {
   get_data(images[firstFreeSlot]->tilesUpper, VRAM_9000, HALF_IMAGE_SIZE);
   get_data(images[firstFreeSlot]->tilesLower, VRAM_8000, HALF_IMAGE_SIZE);
 
-/*
+  // ToDo:
+  // This crashes if this .c file is in a #pragma bank 2
   savedBank = _current_bank;
-  SWITCH_ROM(2)
+  SWITCH_ROM(2);
 
   memcpy(images[firstFreeSlot]->thumbnail, tiles_thumbnail, 256);
 
@@ -42,7 +47,6 @@ void saveImage() BANKED {
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST] = getMenuValue(contrastsMenu);
 
   SWITCH_ROM(savedBank);
-*/
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 

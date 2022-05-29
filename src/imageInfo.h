@@ -21,14 +21,6 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
   unsigned char ditherSet = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET];
   unsigned char contrast = images[imageSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST];
 
-  unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
-  unsigned char exposureTime = 0xFF;
-  for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
-    if (exposureTimesValues[i] == exposureTimeInt) {
-      exposureTime = i;
-    }
-  }
-
   unsigned char captureMode   = capture          & A000_MASK_CAPTURE;
   unsigned char edgeExclusive = edgeGains        & A001_MASK_EDGE_EXCLUSIVE;
   unsigned char edgeOperation = edgeGains        & A001_MASK_EDGE_OP_MODE;
@@ -109,6 +101,17 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
 #define POS_11 254
 #define POS_12 274
 
+  savedBank = _current_bank;
+  SWITCH_ROM(2);
+
+  unsigned int exposureTimeInt = (exposureHigh << 8) + exposureLow;
+  unsigned char exposureTime = 0xFF;
+  for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
+    if (exposureTimesValues[i] == exposureTimeInt) {
+      exposureTime = i;
+    }
+  }
+
   for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
     if (exposureTimes[i].value == exposureTime) {
       memcpy(&tileMap[POS_01], exposureTimes[i].title, MENU_TEXT_LENGTH);
@@ -181,6 +184,8 @@ void getImageInfo(unsigned char imageIndex, unsigned char *tileMap) {
       memcpy(&tileMap[POS_12], edgeExclusives[i].title, MENU_TEXT_LENGTH);
     }
   }
+
+  SWITCH_ROM(savedBank);
 
   unsigned char digits[10];
   BCD bcd = MAKE_BCD(0);

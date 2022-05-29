@@ -1,12 +1,11 @@
 #include "./typedefs/MenuItem.h"
 #include "./globals.h"
+#include "./defines.h"
 
 unsigned char menuPos = 0;
 MenuItem tmpMenuItem;
 extern void saveImageDialog();
 extern unsigned char numVisibleImages;
-
-#define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 
 void renderManualMenu();
 

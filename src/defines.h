@@ -64,4 +64,6 @@
 #define THUMBNAIL_BYTE_DITHERSET     0xE6
 #define THUMBNAIL_BYTE_CONTRAST      0xF6
 
+#define getMenuValue(menuItem) menuItem.options[menuItem.value].value
+
 #endif
