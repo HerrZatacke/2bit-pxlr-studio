@@ -13,6 +13,7 @@
 #include "./modeShootingBurst.h"
 #include "./modeShootingManual.h"
 #include "./imageIndexing.h"
+#include "./dialog.h"
 
 uint8_t mainMenuPos = 0;
 
@@ -46,7 +47,9 @@ void menuSelectMode(uint8_t loopState) {
     appearImageMenu();
     loadAndShowGalleryImage();
   } else if (loopState == MAIN_LOOP_DELETE_ALL) {
-    deleteAllImages();
+    if (dialog("Delete all?     ", 0)) {
+      deleteAllImages();
+    }
     mainLoopState = MAIN_LOOP_MENU;
   } else if (loopState == MAIN_LOOP_DEBUG) {
     initDebug();

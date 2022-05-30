@@ -156,7 +156,7 @@ void manualShootMenu() {
     menuSelectMode(MAIN_LOOP_MENU);
     joypadConsumed();
   } else if (jp == J_SELECT) {
-    if (dialog("Reset settings? ")) {
+    if (dialog("Reset settings? ", 1)) {
       restoreDefaults();
       setDitherMatrix();
       renderManualMenu();

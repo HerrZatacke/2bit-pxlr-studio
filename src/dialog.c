@@ -38,8 +38,10 @@ void disappearDialog() BANKED {
   move_win(7, 146);
 }
 
-uint8_t dialog(uint8_t *message) BANKED {
-  hideLowerOverlay();
+uint8_t dialog(uint8_t *message, uint8_t handleOverlays) BANKED {
+  if (handleOverlays) {
+    hideLowerOverlay();
+  }
 
   fill_win_rect(0, 0, 20, 1, MENU_BORDER_TOP);
   fill_win_rect(0, 1, 20, 10, OFFSET_BLANK);
@@ -64,6 +66,9 @@ uint8_t dialog(uint8_t *message) BANKED {
     }
   }
 
-  showOverlay();
+  if (handleOverlays) {
+    showOverlay();
+  }
+
   return answer;
 }

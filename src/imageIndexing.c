@@ -141,5 +141,4 @@ void deleteAllImages() BANKED {
   }
   sortImages();
   imageIndex = 0;
-  beep();
 }

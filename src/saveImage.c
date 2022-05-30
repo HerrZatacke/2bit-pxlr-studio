@@ -63,7 +63,7 @@ void saveImageDialog() BANKED {
     return;
   }
 
-  if (dialog("Save Image?     ")) {
+  if (dialog("Save Image?     ", 1)) {
     saveImage();
   }
 }
