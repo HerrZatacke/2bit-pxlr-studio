@@ -4,18 +4,29 @@
 #include <gbdk/platform.h>
 #include "../typedefs/Image.h"
 
-extern uint8_t last_seen_upper[];
-extern uint8_t last_seen_lower[];
+/*
+ * Area 0x0000 to 0x2000 in RAM
+ * Containing Last seen image, gameface data etc.
+ */
 
-extern uint8_t game_data_meta_imageslots[30];
-extern uint8_t game_data_meta_magic[5];
-extern uint8_t game_data_meta_imageslots_checksum[2];
-extern uint8_t game_data_meta_imageslots_echo[30];
-extern uint8_t game_data_meta_magic_echo[5];
-extern uint8_t game_data_meta_imageslots_echo_checksum[2];
-extern uint8_t game_data_meta[];
+//static uint8_t __at(0xA000) last_seen_upper_unused[256];
+static uint8_t __at(0xA100) last_seen_upper[1792];
+static uint8_t __at(0xA800) last_seen_lower[1792];
+//static uint8_t __at(0xAF00) last_seen_padding[256];
+//static uint8_t __at(0xB000) game_data_meta_pad_0[434];
+static uint8_t __at(0xB1B2) game_data_meta_imageslots[30];
+static uint8_t __at(0xB1D0) game_data_meta_magic[5];
+static uint8_t __at(0xB1D5) game_data_meta_imageslots_checksum[2];
+static uint8_t __at(0xB1D7) game_data_meta_imageslots_echo[30];
+static uint8_t __at(0xB1F5) game_data_meta_magic_echo[5];
+static uint8_t __at(0xB1FA) game_data_meta_imageslots_echo_checksum[2];
+//static uint8_t __at(0xB1FC) game_data_meta[3588];
 
-extern const Image *images[30];
+
+/*
+ * 0x0000 to 0x0035
+ * Must be written to RAM bank 16 to control the camera's sensor
+ */
 
 // Camera hardware register: Capture
 static volatile uint8_t __at(0xA000) CAM_REG_CAPTURE;
@@ -30,6 +41,9 @@ static uint8_t __at(0xA005) CAM_REG_ZEROVOUT;
 // Camera hardware register: Dither Pattern (48 bytes)
 static uint8_t __at(0xA006) CAM_REG_DITHERPATTERN[48];
 
+
+
+extern const Image *images[30];
 extern uint8_t image_01_unused[];
 extern uint8_t image_02_unused[];
 
