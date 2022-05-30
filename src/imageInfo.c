@@ -9,7 +9,7 @@
 #include "./globals.h"
 #include "./utils.h"
 #include "./joypad.h"
-#include "./banks/banks.h"
+#include "./banks.h"
 #include "./menus/shootingManualMenuItems.h"
 
 void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {

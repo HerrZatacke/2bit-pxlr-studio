@@ -1,8 +1,8 @@
-#include "./banks/banks.h"
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
 
+#include "./banks.h"
 #include "./globals.h"
 #include "./defines.h"
 #include "./menus/shootingManualMenuItems.h"

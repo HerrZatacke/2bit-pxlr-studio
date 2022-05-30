@@ -10,7 +10,7 @@
 #include "../res/maps.h"
 #include "./menus/shootingManualMenuItems.h"
 #include "./overlays/overlays.h"
-#include "./banks/banks.h"
+#include "./banks.h"
 #include "./bankedData.h"
 #include "./mainMenu.h"
 #include "./camera.h"
@@ -62,7 +62,7 @@ void storeSettings() {
   savedBank = _current_bank;
   SWITCH_ROM(2);
   for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
-    image_01_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
+    image_first_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
   SWITCH_ROM(savedBank);
 }
@@ -89,7 +89,7 @@ uint8_t loadSettingsFromRAM() {
   // check if any of the storage cells already has a valid value
   // the initial value which is never changes on an original cart is 0xAA
   for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
-    if (image_01_unused[menuItems[i]->storeOffset] != 0xAA) {
+    if (image_first_unused[menuItems[i]->storeOffset] != 0xAA) {
       noAA = 1;
     }
   }
@@ -101,7 +101,7 @@ uint8_t loadSettingsFromRAM() {
     savedBank = _current_bank;
     SWITCH_ROM(2);
     for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
-      menuItems[i]->value = image_01_unused[menuItems[i]->storeOffset];
+      menuItems[i]->value = image_first_unused[menuItems[i]->storeOffset];
     }
     SWITCH_ROM(savedBank);
 

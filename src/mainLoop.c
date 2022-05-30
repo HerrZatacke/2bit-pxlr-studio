@@ -4,7 +4,7 @@
 
 #include "./defines.h"
 #include "./globals.h"
-#include "./banks/banks.h"
+#include "./banks.h"
 #include "./camera.h"
 #include "./modeShootingManual.h"
 #include "./modeShootingBurst.h"

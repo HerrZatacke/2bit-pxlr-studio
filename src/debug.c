@@ -5,7 +5,7 @@
 #include "./defines.h"
 #include "./joypad.h"
 #include "./utils.h"
-#include "./banks/banks.h"
+#include "./banks.h"
 #include "./mainMenu.h"
 #include "./overlays/overlays.h"
 
