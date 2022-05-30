@@ -1,89 +1,89 @@
-CC	= $(GBDK_FOLDER)/bin/lcc -Wa-l -Wl-m -Wl-j
-RU	=  $(GBDK_FOLDER)/romusage/romusage
+CC = $(GBDK_FOLDER)/bin/lcc -Wa-l -Wl-m -Wl-j
+RU = $(GBDK_FOLDER)/romusage/romusage
 
-BIN	= pxlr.gb
+BIN = pxlr.gb
 
 all: $(BIN) romusage
 
-obj/banks.o:	src/images.c
+obj/banks.o: src/images.c
 	$(CC) -c -o $@ $<
 
-obj/globals.o:	src/globals.c
+obj/globals.o: src/globals.c
 	$(CC) -c -o $@ $<
 
-obj/values.o:	src/values.c
+obj/values.o: src/values.c
 	$(CC) -c -o $@ $<
 
-obj/main.o:	src/main.c
+obj/main.o: src/main.c
 	$(CC) -c -o $@ $<
 
-obj/camera.o:	src/camera.c
+obj/camera.o: src/camera.c
 	$(CC) -c -o $@ $<
 
-obj/splash.o:	src/splash.c
+obj/splash.o: src/splash.c
 	$(CC) -c -o $@ $<
 
-obj/expose.o:	src/expose.c
+obj/expose.o: src/expose.c
 	$(CC) -c -o $@ $<
 
-obj/gallery.o:	src/gallery.c
+obj/gallery.o: src/gallery.c
 	$(CC) -c -o $@ $<
 
-obj/mainMenu.o:	src/mainMenu.c
+obj/mainMenu.o: src/mainMenu.c
 	$(CC) -c -o $@ $<
 
-obj/mainLoop.o:	src/mainLoop.c
+obj/mainLoop.o: src/mainLoop.c
 	$(CC) -c -o $@ $<
 
-obj/modeShootingManual.o:	src/modeShootingManual.c
+obj/modeShootingManual.o: src/modeShootingManual.c
 	$(CC) -c -o $@ $<
 
-obj/modeShootingBurst.o:	src/modeShootingBurst.c
+obj/modeShootingBurst.o: src/modeShootingBurst.c
 	$(CC) -c -o $@ $<
 
-obj/dialog.o:	src/dialog.c
+obj/dialog.o: src/dialog.c
 	$(CC) -c -o $@ $<
 
-obj/overlayDefs.o:	src/overlays/overlayDefs.c
+obj/overlayDefs.o: src/overlays/overlayDefs.c
 	$(CC) -c -o $@ $<
 
-obj/shootingManualMenuItems.o:	src/menus/shootingManualMenuItems.c
+obj/shootingManualMenuItems.o: src/menus/shootingManualMenuItems.c
 	$(CC) -c -o $@ $<
 
-obj/mainMenuItems.o:	src/menus/mainMenuItems.c
+obj/mainMenuItems.o: src/menus/mainMenuItems.c
 	$(CC) -c -o $@ $<
 
-obj/imageMenuItems.o:	src/menus/imageMenuItems.c
+obj/imageMenuItems.o: src/menus/imageMenuItems.c
 	$(CC) -c -o $@ $<
 
-obj/overlays.o:	src/overlays/overlays.c
+obj/overlays.o: src/overlays/overlays.c
 	$(CC) -c -o $@ $<
 
-obj/bleep.o:	src/bleep.c
+obj/bleep.o: src/bleep.c
 	$(CC) -c -o $@ $<
 
-obj/debug.o:	src/debug.c
+obj/debug.o: src/debug.c
 	$(CC) -c -o $@ $<
 
-obj/utils.o:	src/utils.c
+obj/utils.o: src/utils.c
 	$(CC) -c -o $@ $<
 
-obj/bankedData.o:	src/bankedData.c
+obj/bankedData.o: src/bankedData.c
 	$(CC) -c -o $@ $<
 
-obj/joypad.o:	src/joypad.c
+obj/joypad.o: src/joypad.c
 	$(CC) -c -o $@ $<
 
-obj/imageIndexing.o:	src/imageIndexing.c
+obj/imageIndexing.o: src/imageIndexing.c
 	$(CC) -c -o $@ $<
 
-obj/saveImage.o:	src/saveImage.c
+obj/saveImage.o: src/saveImage.c
 	$(CC) -c -o $@ $<
 
-obj/printCmd.o:	src/printCmd.c
+obj/printCmd.o: src/printCmd.c
 	$(CC) -c -o $@ $<
 
-obj/imageInfo.o:	src/imageInfo.c
+obj/imageInfo.o: src/imageInfo.c
 	$(CC) -c -o $@ $<
 
 obj/frame_pxlr.o: res/frames/frame_pxlr.c
@@ -119,7 +119,7 @@ version.h: version
 branch.h:
 	git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t branch[] = {\n/g; s/$$/};\n/g' > $@
 
-$(BIN):	obj branch.h version.h obj/pxlr.sav obj/printCmd.o obj/pxlr-logo.o obj/font.o obj/maps.o obj/tiles.o obj/nope.o obj/utils.o obj/frame_pxlr.o obj/joypad.o obj/banks.o obj/imageIndexing.o obj/debug.o obj/globals.o obj/bleep.o obj/bankedData.o obj/dialog.o obj/expose.o obj/overlayDefs.o obj/overlays.o obj/values.o obj/shootingManualMenuItems.o obj/saveImage.o obj/imageInfo.o obj/mainMenuItems.o obj/imageMenuItems.o obj/gallery.o obj/mainMenu.o obj/modeShootingManual.o obj/modeShootingBurst.o obj/splash.o obj/camera.o obj/mainLoop.o obj/main.o
+$(BIN): obj branch.h version.h obj/pxlr.sav obj/printCmd.o obj/pxlr-logo.o obj/font.o obj/maps.o obj/tiles.o obj/nope.o obj/utils.o obj/frame_pxlr.o obj/joypad.o obj/banks.o obj/imageIndexing.o obj/debug.o obj/globals.o obj/bleep.o obj/bankedData.o obj/dialog.o obj/expose.o obj/overlayDefs.o obj/overlays.o obj/values.o obj/shootingManualMenuItems.o obj/saveImage.o obj/imageInfo.o obj/mainMenuItems.o obj/imageMenuItems.o obj/gallery.o obj/mainMenu.o obj/modeShootingManual.o obj/modeShootingBurst.o obj/splash.o obj/camera.o obj/mainLoop.o obj/main.o
 	$(CC) -Wl-yt0xFC -Wl-yo16 -Wl-ya16 -Wm-yn"PXLR CAMERA" -o obj/$@ obj/*.o
 
 romusage:
