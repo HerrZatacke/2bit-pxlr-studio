@@ -9,7 +9,6 @@
 #include "./joypad.h"
 #include "./dialog.h"
 #include "./banks/banks.h"
-#include "./overlays/overlays.h"
 #include "./values.h"
 #include "./menus/shootingManualMenuItems.h"
 #include "./modeShootingManual.h"
@@ -64,11 +63,7 @@ void saveImageDialog() BANKED {
     return;
   }
 
-  hideLowerOverlay();
-
   if (dialog("Save Image?     ")) {
     saveImage();
   }
-
-  showOverlay();
 }

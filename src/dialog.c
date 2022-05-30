@@ -5,6 +5,11 @@
 #include "./defines.h"
 #include "./joypad.h"
 #include "./utils.h"
+#include "./overlays/overlays.h"
+
+#define ANSWER_YES 0x01
+#define ANSWER_NO 0x00
+#define ANSWER_PENDING 0xFF
 
 void appearDialog() BANKED {
   move_win(7, 146);
@@ -34,6 +39,8 @@ void disappearDialog() BANKED {
 }
 
 uint8_t dialog(uint8_t *message) BANKED {
+  hideLowerOverlay();
+
   fill_win_rect(0, 0, 20, 1, MENU_BORDER_TOP);
   fill_win_rect(0, 1, 20, 10, OFFSET_BLANK);
   set_win_based_tiles(1, 2, 16, 1, message, OFFSET_FONT - 32);
@@ -41,17 +48,22 @@ uint8_t dialog(uint8_t *message) BANKED {
 
   appearDialog();
 
-  while (1) {
+  uint8_t answer = ANSWER_PENDING;
+
+  while (answer == ANSWER_PENDING) {
     wait_vbl_done();
 
     if (jp == J_B) {
       boop();
       disappearDialog();
-      return 0;
+      answer = ANSWER_NO;
     } else if (jp == J_A) {
       beep();
       disappearDialog();
-      return 1;
+      answer = ANSWER_YES;
     }
   }
+
+  showOverlay();
+  return answer;
 }

@@ -14,6 +14,7 @@
 #include "./bankedData.h"
 #include "./mainMenu.h"
 #include "./camera.h"
+#include "./dialog.h"
 
 uint8_t manualMenuPos = 0;
 
@@ -154,17 +155,18 @@ void manualShootMenu() {
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
     joypadConsumed();
-  } else if (jp == (J_SELECT | J_START)) {
-    restoreDefaults();
-    setDitherMatrix();
-    beep();
-    renderManualMenu();
-    waitRelease();
+  } else if (jp == J_SELECT) {
+    if (dialog("Reset settings? ")) {
+      restoreDefaults();
+      setDitherMatrix();
+      renderManualMenu();
+    }
+
     joypadConsumed();
   } else if (jp == J_A) {
     saveImageDialog();
     joypadConsumed();
-  } else if (jp == J_SELECT) {
+  } else if (jp == J_START) {
     nextOverlay();
     clonk();
     showOverlay();
