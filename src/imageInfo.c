@@ -107,9 +107,6 @@ void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
 #define POS_11 254
 #define POS_12 274
 
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
-
   uint16_t exposureTimeInt = (exposureHigh << 8) + exposureLow;
   uint8_t exposureTime = 0xFF;
   for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
@@ -190,8 +187,6 @@ void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
       memcpy(&tileMap[POS_12], edgeExclusives[i].title, MENU_TEXT_LENGTH);
     }
   }
-
-  SWITCH_ROM(savedBank);
 
   uint8_t digits[10];
   BCD bcd = MAKE_BCD(0);
