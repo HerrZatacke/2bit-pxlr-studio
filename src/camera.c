@@ -21,13 +21,13 @@ void setDitherMatrix() {
 
   for (uint16_t i = 0; i < 48; i += 1) {
     if (ditherSet == DITHER_SET_HIGH) {
-      memcpy(A006A035, ditherHighLightValues[contrast], 48);
+      memcpy(CAM_REG_DITHERPATTERN, ditherHighLightValues[contrast], 48);
     } else if (ditherSet == DITHER_SET_LOW) {
-      memcpy(A006A035, ditherLowLightValues[contrast], 48);
+      memcpy(CAM_REG_DITHERPATTERN, ditherLowLightValues[contrast], 48);
     } else if (ditherSet == DITHER_SET_NO_HIGH) {
-      memcpy(A006A035, ditherNoHighLightValues[contrast], 48);
+      memcpy(CAM_REG_DITHERPATTERN, ditherNoHighLightValues[contrast], 48);
     } else if (ditherSet == DITHER_SET_NO_LOW) {
-      memcpy(A006A035, ditherNoLowLightValues[contrast], 48);
+      memcpy(CAM_REG_DITHERPATTERN, ditherNoLowLightValues[contrast], 48);
     }
   }
 
@@ -54,23 +54,20 @@ void capture() {
   savedBank = _current_bank;
   SWITCH_ROM(2);
 
-  uint16_t exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
-
-  A001 = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
-  A002 = (int8_t)(exposureTime >> 8);
-  A003 = (int8_t)exposureTime;
-  A004 = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
-  A005 = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
+  CAM_REG_EDEXOPGAIN = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
+  CAM_REG_EXPTIME = exposureTimesValues[getMenuValue(exposureTimesMenu)];
+  CAM_REG_EDRAINVVREF = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
+  CAM_REG_ZEROVOUT = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
 
   isCapturing = 1;
 
-  A000 = getMenuValue(captureModesMenu);
+  CAM_REG_CAPTURE = getMenuValue(captureModesMenu);
 
   SWITCH_ROM(savedBank);
 
   captureJoypadISR();
 
-  while (A000 % 2) {
+  while (CAM_REG_CAPTURE % 2) {
     if (!jp) {
       captureJoypadISR();
     }

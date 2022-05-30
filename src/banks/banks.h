@@ -17,13 +17,18 @@ extern uint8_t game_data_meta[];
 
 extern const Image *images[30];
 
-static volatile uint8_t __at(0xA000) A000;
-static uint8_t __at(0xA001) A001;
-static uint8_t __at(0xA002) A002;
-static uint8_t __at(0xA003) A003;
-static uint8_t __at(0xA004) A004;
-static uint8_t __at(0xA005) A005;
-static uint8_t __at(0xA006) A006A035[48];
+// Camera hardware register: Capture
+static volatile uint8_t __at(0xA000) CAM_REG_CAPTURE;
+// Camera hardware register: EdgeExclusive, EdgeOperation, Gain
+static uint8_t __at(0xA001) CAM_REG_EDEXOPGAIN;
+// Camera hardware register: Exposure Time
+static uint16_t __at(0xA002) CAM_REG_EXPTIME;
+// Camera hardware register: Edge Ratio, Invert Output, Voltage Ref
+static uint8_t __at(0xA004) CAM_REG_EDRAINVVREF;
+// Camera hardware register: Zero Points, Voltage Out
+static uint8_t __at(0xA005) CAM_REG_ZEROVOUT;
+// Camera hardware register: Dither Pattern (48 bytes)
+static uint8_t __at(0xA006) CAM_REG_DITHERPATTERN[48];
 
 extern uint8_t image_01_unused[];
 extern uint8_t image_02_unused[];
