@@ -29,9 +29,6 @@ void initOverlays() BANKED {
 uint8_t currentOverlay = 1;
 
 void showOverlay() BANKED {
-  savedBank = _current_bank;
-  SWITCH_ROM(1);
-
   for (uint8_t ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (currentOverlay == 0) {
       move_sprite(noOverlay[ov]->sprite, noOverlay[ov]->x, noOverlay[ov]->y);
@@ -41,14 +38,9 @@ void showOverlay() BANKED {
       move_sprite(ruleOfThirds[ov]->sprite, ruleOfThirds[ov]->x, ruleOfThirds[ov]->y);
     }
   }
-
-  SWITCH_ROM(savedBank);
 }
 
 void hideLowerOverlay() BANKED {
-  savedBank = _current_bank;
-  SWITCH_ROM(1);
-
   for (uint8_t ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     if (currentOverlay == 0) {
       if (noOverlay[ov]->y > 99) {
@@ -64,26 +56,14 @@ void hideLowerOverlay() BANKED {
       }
     }
   }
-
-  SWITCH_ROM(savedBank);
 }
 
 void hideOverlay() BANKED {
-  savedBank = _current_bank;
-  SWITCH_ROM(1);
-
   for (uint8_t ov = 0; ov < NUM_OVERLAY_SPRITES; ov++) {
     move_sprite(noOverlay[ov]->sprite, 0, 0);
   }
-
-  SWITCH_ROM(savedBank);
 }
 
 void nextOverlay() BANKED {
-  savedBank = _current_bank;
-  SWITCH_ROM(1);
-
   currentOverlay = (currentOverlay + 1) % NUM_OVERLAYS;
-
-  SWITCH_ROM(savedBank);
 }
