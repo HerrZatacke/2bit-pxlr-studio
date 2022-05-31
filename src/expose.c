@@ -31,7 +31,7 @@ const uint8_t exposePalettes[3] = {
 uint8_t exposeIndex = 0;
 
 // ToDo: convert this to a "flipTiles" function and then use set_data() to write to vram
-void set_bkg_data_flipped(uint8_t from, uint8_t length, const uint8_t tiles[], const uint8_t vramHighLow) BANKED {
+void set_bkg_data_flipped(uint8_t from, uint8_t length, const uint8_t tiles[], const uint8_t vramHighLow) NONBANKED {
 
   uint8_t flippedTiles[HALF_IMAGE_SIZE];
   memcpy(flippedTiles, tiles, HALF_IMAGE_SIZE);
