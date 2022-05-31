@@ -26,6 +26,7 @@ E.g. on wsl for windows add `export GBDK_FOLDER="/mnt/c/path_to_gbdk"` to your `
 
 # Credits
 Thanks to the following people for direct and indirect help with this project:
+* [untoxa](https://github.com/untoxa) for a lot of help while refactoring, and for the GBDK in general. 
 * [@rembrandx](https://www.instagram.com/rembrandx/) for the Logo/Splashcreen 
 * [Raphaël Boichot](https://github.com/Raphael-Boichot/) for the in-depth analysis of the [Game Boy Camera's RAM structure](https://funtography.online/wiki/Cartridge_RAM)
 * [AntonioND](https://github.com/AntonioND) for the outstanding [Documentation regarding the camera's sensor](https://github.com/AntonioND/gbcam-rev-engineer) / [PDF](https://github.com/AntonioND/gbcam-rev-engineer/blob/master/doc/gb_camera_doc_v1_1_1.pdf)
