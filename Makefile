@@ -22,9 +22,9 @@ TARGETS = gb
 LIBRARIES =
 
 # Configure platform specific LCC flags here:
-LCCFLAGS_gb      = $(LIBRARIES) -Wl-yt0x1A -Wm-yn"$(PROJECTNAME)"
-LCCFLAGS_pocket  = $(LIBRARIES) -Wl-yt0x1A -Wm-yn"$(PROJECTNAME)"
-LCCFLAGS_gbc     = $(LIBRARIES) -Wl-yt0x1A -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_gb      = $(LIBRARIES) -Wl-yt0xFC -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_pocket  = $(LIBRARIES) -Wl-yt0xFC -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_gbc     = $(LIBRARIES) -Wl-yt0xFC -Wm-yn"$(PROJECTNAME)"
 LCCFLAGS_sms     =
 LCCFLAGS_gg      =
 

@@ -12,6 +12,7 @@
 #include "values.h"
 #include "menus/shootingManualMenuItems.h"
 #include "modeShootingManual.h"
+#include "images.h"
 
 void saveImage() BANKED {
   uint8_t firstFreeSlot = findFirstFreeSlot();

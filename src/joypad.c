@@ -4,8 +4,8 @@
 #include <gbdk/platform.h>
 
 // global joypad store variable
-uint8_t jp = 0;
-uint8_t jpCooldown = 0;
+volatile uint8_t jp = 0;
+static uint8_t jpCooldown = 0;
 
 void joypadConsumed() BANKED {
   jp = 0;

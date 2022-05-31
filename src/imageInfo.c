@@ -11,6 +11,7 @@
 #include "joypad.h"
 #include "banks.h"
 #include "menus/shootingManualMenuItems.h"
+#include "images.h"
 
 void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
   uint8_t imageSlot = getImageSlot(imageIndex);

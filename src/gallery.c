@@ -17,6 +17,7 @@
 #include "font.h"
 #include "nope.h"
 #include "maps.h"
+#include "images.h"
 
 void renderImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));

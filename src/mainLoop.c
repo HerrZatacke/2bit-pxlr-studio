@@ -11,6 +11,7 @@
 #include "mainMenu.h"
 #include "debug.h"
 #include "gallery.h"
+#include "images.h"
 
 void fastLoadImageTiles() {
   SWITCH_RAM(0);

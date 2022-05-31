@@ -3,6 +3,6 @@
 
 #include <gbdk/platform.h>
 
-extern const Image *images[30];
+extern const Image * const images[30];
 
 #endif
