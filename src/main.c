@@ -26,7 +26,9 @@ void scanlineIsr() {
   }
 }
 
-uint16_t main() {
+void main() {
+  ENABLE_RAM;
+
   CRITICAL {
     STAT_REG |= STATF_LYC;
     LYC_REG = 144;
@@ -52,6 +54,4 @@ uint16_t main() {
   }
 
   mainLoop();
-
-  return 1;
 }
