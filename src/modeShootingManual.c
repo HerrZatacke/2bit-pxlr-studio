@@ -1,5 +1,3 @@
-#pragma bank 255
-
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
@@ -23,7 +21,7 @@
 
 uint8_t manualMenuPos = 0;
 
-void renderManualMenu() BANKED {
+void renderManualMenu() {
   clonk();
   fill_bkg_rect(0, 0, 20, 2, BLNK);
   fill_bkg_rect(0, 16, 20, 2, BLNK);
@@ -49,7 +47,7 @@ void renderManualMenu() BANKED {
   writeNumber(12, 16, 2, numVisibleImages);
 }
 
-void initManualMode() BANKED {
+void initManualMode() {
   clearBkg();
   set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
   sortImages();
@@ -57,14 +55,14 @@ void initManualMode() BANKED {
   renderManualMenu();
 }
 
-void storeSettings() BANKED {
+void storeSettings() {
   SWITCH_RAM(1);
   for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     image_first_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
 }
 
-void restoreDefaults() BANKED {
+void restoreDefaults() {
   for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     menuItems[i]->value = menuItems[i]->defaultValue;
   }
@@ -72,7 +70,7 @@ void restoreDefaults() BANKED {
   storeSettings();
 }
 
-uint8_t loadSettingsFromRAM() BANKED {
+uint8_t loadSettingsFromRAM() {
   SWITCH_RAM(1);
 
   uint8_t i = 0;
@@ -99,13 +97,13 @@ uint8_t loadSettingsFromRAM() BANKED {
   return SETTINGS_REQUIRE_RESET;
 }
 
-void menuAction() BANKED {
+void menuAction() {
   if (menuItems[manualMenuPos]->action == MENU_ACTION_DITHER) {
     setDitherMatrix();
   }
 }
 
-void manualShootMenu() BANKED {
+void manualShootMenu() {
   if (jp == J_RIGHT) {
     manualMenuPos = (manualMenuPos + 1) % NUM_MENU_ELEMENTS;
     renderManualMenu();
