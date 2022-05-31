@@ -4,7 +4,7 @@
 #include <gbdk/platform.h>
 #include "typedefs/MenuOption.h"
 
-typedef struct {
+typedef struct MenuItem {
   const uint8_t x;
   const uint8_t page;
   uint8_t value;

@@ -66,7 +66,6 @@
 #define THUMBNAIL_BYTE_DITHERSET     0xE6
 #define THUMBNAIL_BYTE_CONTRAST      0xF6
 
-#define getMenuValue(menuItem) menuItem.options[menuItem.value].value
 #define yMenu(index) (index * 2) + 2
 #define yMenuSprite(index) (index * 16) + 31
 
