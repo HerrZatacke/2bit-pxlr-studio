@@ -1,8 +1,8 @@
 #pragma bank 2
 
 #include <gbdk/platform.h>
-#include "./valuesDefs.h"
-#include "./typedefs/MenuOption.h"
+#include "valuesDefs.h"
+#include "typedefs/MenuOption.h"
 
 // 0x0030 - Objects under direct sunlight.
 // 0x0300 - Objects not under direct sunlight.

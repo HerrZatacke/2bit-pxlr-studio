@@ -2,14 +2,14 @@
 #include <gbdk/platform.h>
 #include <string.h>
 
-#include "./banks.h"
-#include "./globals.h"
-#include "./defines.h"
-#include "./menus/shootingManualMenuItems.h"
-#include "./modeShootingManual.h"
-#include "./utils.h"
-#include "./joypad.h"
-#include "./values.h"
+#include "banks.h"
+#include "globals.h"
+#include "defines.h"
+#include "menus/shootingManualMenuItems.h"
+#include "modeShootingManual.h"
+#include "utils.h"
+#include "joypad.h"
+#include "values.h"
 
 void setDitherMatrix() {
   savedBank = _current_bank;

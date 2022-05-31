@@ -2,9 +2,9 @@
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
-#include "./banks.h"
-#include "./utils.h"
-#include "./globals.h"
+#include "banks.h"
+#include "utils.h"
+#include "globals.h"
 
 #define NUM_IMAGES 30
 #define IMAGE_DELETED 0xFF

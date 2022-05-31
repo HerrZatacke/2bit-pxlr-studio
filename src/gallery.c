@@ -2,21 +2,21 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./menus/imageMenuItems.h"
-#include "./mainMenu.h"
-#include "./joypad.h"
-#include "./utils.h"
-#include "./defines.h"
-#include "./globals.h"
-#include "./banks.h"
-#include "./bankedData.h"
-#include "./printCmd.h"
-#include "./expose.h"
-#include "./bleep.h"
-#include "./imageInfo.h"
-#include "../res/font.h"
-#include "../res/nope.h"
-#include "../res/maps.h"
+#include "menus/imageMenuItems.h"
+#include "mainMenu.h"
+#include "joypad.h"
+#include "utils.h"
+#include "defines.h"
+#include "globals.h"
+#include "banks.h"
+#include "bankedData.h"
+#include "printCmd.h"
+#include "expose.h"
+#include "bleep.h"
+#include "imageInfo.h"
+#include "font.h"
+#include "nope.h"
+#include "maps.h"
 
 void renderImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));

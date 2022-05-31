@@ -1,8 +1,8 @@
 #pragma bank 2
 
 #include <gb/gb.h>
-#include "../typedefs/MenuItem.h"
-#include "../values.h"
+#include "typedefs/MenuItem.h"
+#include "values.h"
 
 #define NUM_MENU_ELEMENTS 11
 #define MENU_ACTION_NONE 0

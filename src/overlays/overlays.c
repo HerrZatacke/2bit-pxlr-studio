@@ -2,9 +2,9 @@
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
-#include "../defines.h"
-#include "../globals.h"
-#include "./overlayDefs.h"
+#include "defines.h"
+#include "globals.h"
+#include "overlays/overlayDefs.h"
 
 void initOverlays() BANKED {
   set_sprite_tile(SPRITE_BORDER_H_1, OFFSET_BORDER_H);

@@ -3,17 +3,17 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
-#include "../res/maps.h"
-#include "../res/frames/frame_pxlr.h"
-#include "../res/font.h"
-#include "../res/tiles.h"
-#include "./banks.h"
-#include "./bankedData.h"
-#include "./joypad.h"
-#include "./defines.h"
-#include "./globals.h"
-#include "./utils.h"
-#include "./imageIndexing.h"
+#include "maps.h"
+#include "frame_pxlr.h"
+#include "font.h"
+#include "tiles.h"
+#include "banks.h"
+#include "bankedData.h"
+#include "joypad.h"
+#include "defines.h"
+#include "globals.h"
+#include "utils.h"
+#include "imageIndexing.h"
 
 #define PALETTE_EXPOSE_0 0b00000011u
 #define PALETTE_EXPOSE_1 0b00001111u

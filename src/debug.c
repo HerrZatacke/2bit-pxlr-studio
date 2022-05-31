@@ -2,12 +2,12 @@
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
-#include "./defines.h"
-#include "./joypad.h"
-#include "./utils.h"
-#include "./banks.h"
-#include "./mainMenu.h"
-#include "./overlays/overlays.h"
+#include "defines.h"
+#include "joypad.h"
+#include "utils.h"
+#include "banks.h"
+#include "mainMenu.h"
+#include "overlays/overlays.h"
 
 void debugMenu() BANKED {
   if (jp == J_B) {

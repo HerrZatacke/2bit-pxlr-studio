@@ -2,15 +2,15 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./defines.h"
-#include "./globals.h"
-#include "./banks.h"
-#include "./camera.h"
-#include "./modeShootingManual.h"
-#include "./modeShootingBurst.h"
-#include "./mainMenu.h"
-#include "./debug.h"
-#include "./gallery.h"
+#include "defines.h"
+#include "globals.h"
+#include "banks.h"
+#include "camera.h"
+#include "modeShootingManual.h"
+#include "modeShootingBurst.h"
+#include "mainMenu.h"
+#include "debug.h"
+#include "gallery.h"
 
 void fastLoadImageTiles() {
   SWITCH_RAM(0);

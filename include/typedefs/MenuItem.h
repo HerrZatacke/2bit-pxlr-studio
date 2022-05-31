@@ -2,7 +2,7 @@
 #define TYPEDEF_MENUITEM_H
 
 #include <gbdk/platform.h>
-#include "./MenuOption.h"
+#include "typedefs/MenuOption.h"
 
 typedef struct {
   const uint8_t x;

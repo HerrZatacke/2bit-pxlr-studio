@@ -3,11 +3,11 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
-#include "./globals.h"
-#include "./banks.h"
-#include "./defines.h"
-#include "./joypad.h"
-#include "./imageIndexing.h"
+#include "globals.h"
+#include "banks.h"
+#include "defines.h"
+#include "joypad.h"
+#include "imageIndexing.h"
 
 // Manual selection of tones
 //const uint8_t freqLookupN33[] = { 0x00, 0x44, 0x70, 0x90, 0xa4, 0xb4, 0xc2, 0xcd, 0xd7, 0xde, 0xe4, 0xe8, 0xed, 0xf0, 0xf2, 0xf4, };

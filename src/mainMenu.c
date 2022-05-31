@@ -2,18 +2,18 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./menus/mainMenuItems.h"
-#include "./globals.h"
-#include "./joypad.h"
-#include "./utils.h"
-#include "./defines.h"
-#include "./overlays/overlays.h"
-#include "./debug.h"
-#include "./gallery.h"
-#include "./modeShootingBurst.h"
-#include "./modeShootingManual.h"
-#include "./imageIndexing.h"
-#include "./dialog.h"
+#include "menus/mainMenuItems.h"
+#include "globals.h"
+#include "joypad.h"
+#include "utils.h"
+#include "defines.h"
+#include "overlays/overlays.h"
+#include "debug.h"
+#include "gallery.h"
+#include "modeShootingBurst.h"
+#include "modeShootingManual.h"
+#include "imageIndexing.h"
+#include "dialog.h"
 
 uint8_t mainMenuPos = 0;
 

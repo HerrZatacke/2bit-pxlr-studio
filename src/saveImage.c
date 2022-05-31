@@ -1,17 +1,17 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
-#include "../res/tiles.h"
-#include "./imageIndexing.h"
-#include "./defines.h"
-#include "./globals.h"
-#include "./utils.h"
-#include "./joypad.h"
-#include "./dialog.h"
-#include "./banks.h"
-#include "./values.h"
-#include "./menus/shootingManualMenuItems.h"
-#include "./modeShootingManual.h"
+#include "tiles.h"
+#include "imageIndexing.h"
+#include "defines.h"
+#include "globals.h"
+#include "utils.h"
+#include "joypad.h"
+#include "dialog.h"
+#include "banks.h"
+#include "values.h"
+#include "menus/shootingManualMenuItems.h"
+#include "modeShootingManual.h"
 
 void saveImage() BANKED {
   uint8_t firstFreeSlot = findFirstFreeSlot();

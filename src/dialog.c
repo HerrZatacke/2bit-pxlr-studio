@@ -2,10 +2,10 @@
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
-#include "./defines.h"
-#include "./joypad.h"
-#include "./utils.h"
-#include "./overlays/overlays.h"
+#include "defines.h"
+#include "joypad.h"
+#include "utils.h"
+#include "overlays/overlays.h"
 
 #define ANSWER_YES 0x01
 #define ANSWER_NO 0x00

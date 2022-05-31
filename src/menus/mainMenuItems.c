@@ -1,7 +1,7 @@
 #define NUM_MAIN_MENU_OPTIONS 5
 
-#include "../typedefs/MenuOption.h"
-#include "../defines.h"
+#include "typedefs/MenuOption.h"
+#include "defines.h"
 
 const MenuOption mainMenuItems[NUM_MAIN_MENU_OPTIONS] = {
 //  { MAIN_LOOP_NOT_IMPLEMENTED, "Automatic mode  ", },

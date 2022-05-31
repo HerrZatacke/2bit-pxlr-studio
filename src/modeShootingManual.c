@@ -1,20 +1,20 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./globals.h"
-#include "./defines.h"
-#include "./utils.h"
-#include "./joypad.h"
-#include "./saveImage.h"
-#include "../res/tiles.h"
-#include "../res/maps.h"
-#include "./menus/shootingManualMenuItems.h"
-#include "./overlays/overlays.h"
-#include "./banks.h"
-#include "./bankedData.h"
-#include "./mainMenu.h"
-#include "./camera.h"
-#include "./dialog.h"
+#include "globals.h"
+#include "defines.h"
+#include "utils.h"
+#include "joypad.h"
+#include "saveImage.h"
+#include "tiles.h"
+#include "maps.h"
+#include "menus/shootingManualMenuItems.h"
+#include "overlays/overlays.h"
+#include "banks.h"
+#include "bankedData.h"
+#include "mainMenu.h"
+#include "camera.h"
+#include "dialog.h"
 
 uint8_t manualMenuPos = 0;
 

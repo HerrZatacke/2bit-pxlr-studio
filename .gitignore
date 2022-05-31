@@ -1,8 +1,8 @@
 /obj
 .idea
-/version.h
-/branch.h
+/include/generated
 /pxlr.zip
 /release
+/build
 /cmake-build-debug/
 /CMakeLists.txt

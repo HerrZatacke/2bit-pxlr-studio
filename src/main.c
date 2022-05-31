@@ -1,16 +1,16 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./camera.h"
-#include "./defines.h"
-#include "./globals.h"
-#include "./imageIndexing.h"
-#include "./joypad.h"
-#include "./mainLoop.h"
-#include "./mainMenu.h"
-#include "./overlays/overlays.h"
-#include "./splash.h"
-#include "./utils.h"
+#include "camera.h"
+#include "defines.h"
+#include "globals.h"
+#include "imageIndexing.h"
+#include "joypad.h"
+#include "mainLoop.h"
+#include "mainMenu.h"
+#include "overlays/overlays.h"
+#include "splash.h"
+#include "utils.h"
 
 void scanlineIsr() {
   if (LYC_REG == 71) {

@@ -1,5 +1,5 @@
 #include <gbdk/platform.h>
-#include "./imageIndexing.h"
+#include "imageIndexing.h"
 
 uint8_t mainLoopState = 0;
 uint8_t isCapturing = 0;

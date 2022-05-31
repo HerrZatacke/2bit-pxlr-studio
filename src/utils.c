@@ -4,9 +4,9 @@
 #include <gbdk/platform.h>
 #include <gbdk/bcd.h>
 #include "defines.h"
-#include "../res/font.h"
-#include "../res/tiles.h"
-#include "./bankedData.h"
+#include "font.h"
+#include "tiles.h"
+#include "bankedData.h"
 
 void clearBkg() BANKED {
   fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);

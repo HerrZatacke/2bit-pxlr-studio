@@ -1,7 +1,7 @@
 #pragma bank 1
 
-#include "../typedefs/Overlay.h"
-#include "../defines.h"
+#include "typedefs/Overlay.h"
+#include "defines.h"
 
 #define NUM_OVERLAY_SPRITES 16
 

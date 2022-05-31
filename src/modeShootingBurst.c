@@ -1,16 +1,16 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./globals.h"
-#include "./defines.h"
-#include "./utils.h"
-#include "./joypad.h"
-#include "./saveImage.h"
-#include "../res/maps.h"
-#include "./overlays/overlays.h"
-#include "./imageIndexing.h"
-#include "./bankedData.h"
-#include "./mainMenu.h"
+#include "globals.h"
+#include "defines.h"
+#include "utils.h"
+#include "joypad.h"
+#include "saveImage.h"
+#include "maps.h"
+#include "overlays/overlays.h"
+#include "imageIndexing.h"
+#include "bankedData.h"
+#include "mainMenu.h"
 
 uint8_t burstActive = 0;
 

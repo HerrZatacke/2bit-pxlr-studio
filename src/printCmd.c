@@ -8,8 +8,8 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
-#include "../res/frames/frame_pxlr.h"
-#include "../res/font.h"
+#include "frame_pxlr.h"
+#include "font.h"
 
 uint8_t printerStatus[3];
 

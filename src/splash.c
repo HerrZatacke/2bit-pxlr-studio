@@ -1,13 +1,13 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
-#include "./joypad.h"
-#include "./bankedData.h"
-#include "./defines.h"
-#include "./utils.h"
-#include "../version.h"
-#include "../branch.h"
-#include "../res/pxlr-logo.h"
+#include "joypad.h"
+#include "bankedData.h"
+#include "defines.h"
+#include "utils.h"
+#include "generated/version.h"
+#include "generated/branch.h"
+#include "pxlr-logo.h"
 
 uint8_t splash() {
   HIDE_SPRITES;

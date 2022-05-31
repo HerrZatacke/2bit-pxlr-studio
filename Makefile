@@ -1,126 +1,174 @@
-CC = $(GBDK_FOLDER)/bin/lcc -Wa-l -Wl-m -Wl-j
-RU = $(GBDK_FOLDER)/romusage/romusage
+SHELL := /bin/bash
 
-BIN = pxlr.gb
+# If you move this project you can change the directory
+# to match your GBDK root directory (ex: GBDK_HOME = "C:/GBDK/"
 
-all: $(BIN) romusage
+GBDK_HOME = $(GBDK_FOLDER)/
+#GBCPU = gbz80
 
-obj/banks.o: src/images.c
-	$(CC) -c -o $@ $<
+#GBDK_HOME = ../../../gbdk-2020/build/gbdk/
+GBCPU = sm83
 
-obj/globals.o: src/globals.c
-	$(CC) -c -o $@ $<
+LCC = $(GBDK_HOME)bin/lcc
+PNG2ASSET = $(GBDK_HOME)bin/png2asset
 
-obj/values.o: src/values.c
-	$(CC) -c -o $@ $<
+# Set platforms to build here, spaced separated. (These are in the separate Makefile.targets)
+# They can also be built/cleaned individually: "make gg" and "make gg-clean"
+# Possible are: gb gbc pocket sms gg
+#TARGETS = gb gbc pocket sms gg
+TARGETS = gb
 
-obj/main.o: src/main.c
-	$(CC) -c -o $@ $<
+#LIBRARIES = -Wl-llib/$(PORT)/hUGEDriver.lib
+LIBRARIES =
 
-obj/camera.o: src/camera.c
-	$(CC) -c -o $@ $<
+# Configure platform specific LCC flags here:
+LCCFLAGS_gb      = $(LIBRARIES) -Wl-yt0x1A -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_pocket  = $(LIBRARIES) -Wl-yt0x1A -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_gbc     = $(LIBRARIES) -Wl-yt0x1A -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_sms     =
+LCCFLAGS_gg      =
 
-obj/splash.o: src/splash.c
-	$(CC) -c -o $@ $<
+LCCFLAGS += $(LCCFLAGS_$(EXT)) -Wm-yS # This adds the current platform specific LCC Flags
 
-obj/expose.o: src/expose.c
-	$(CC) -c -o $@ $<
+LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya1 -autobank -Wb-ext=.rel
+# LCCFLAGS += -debug # Uncomment to enable debug output
+# LCCFLAGS += -v     # Uncomment for lcc verbose output
 
-obj/gallery.o: src/gallery.c
-	$(CC) -c -o $@ $<
+CFLAGS = -Iinclude -Iinclude/$(PORT) -Iinclude/$(PLAT) -I$(RESDIR) -Iobj/$(PLAT)
 
-obj/mainMenu.o: src/mainMenu.c
-	$(CC) -c -o $@ $<
+# You can set the name of the ROM file here
+PROJECTNAME = pxlr
 
-obj/mainLoop.o: src/mainLoop.c
-	$(CC) -c -o $@ $<
+# EXT?=gb # Only sets extension to default (game boy .gb) if not populated
+SRCDIR      = src
+SRCPORT     = src/$(PORT)
+SRCPLAT     = src/$(PLAT)
+OBJDIR      = obj/$(EXT)
+RESDIR      = res
+BINDIR      = build/$(EXT)
+MKDIRS      = $(OBJDIR) $(BINDIR) include/generated # See bottom of Makefile for directory auto-creation
 
-obj/modeShootingManual.o: src/modeShootingManual.c
-	$(CC) -c -o $@ $<
+BINS	    = $(OBJDIR)/$(PROJECTNAME).$(EXT)
 
-obj/modeShootingBurst.o: src/modeShootingBurst.c
-	$(CC) -c -o $@ $<
+VGM_RES	    = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/sounds/*.vgm)))
+FX_RES	    = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/sounds/*.sav)))
+UGE_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/music/*.uge)))
+WAV_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/waveforms/*.wav)))
 
-obj/dialog.o: src/dialog.c
-	$(CC) -c -o $@ $<
+SPR_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/gfx/$(PLAT)/sprites/*.png)))
+BKG_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/gfx/$(PLAT)/backgrounds/*.png)))
 
-obj/overlayDefs.o: src/overlays/overlayDefs.c
-	$(CC) -c -o $@ $<
+CSOURCES    = $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(SRCPLAT),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(SRCPORT),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/*.c))) $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/menus/*.c))) $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/overlays/*.c)))
+ASMSOURCES  = $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s))) $(foreach dir,$(SRCPLAT),$(notdir $(wildcard $(dir)/*.s))) $(foreach dir,$(SRCPORT),$(notdir $(wildcard $(dir)/*.s)))
 
-obj/shootingManualMenuItems.o: src/menus/shootingManualMenuItems.c
-	$(CC) -c -o $@ $<
+OBJS        = $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
+RESOBJ      = $(VGM_RES:%.vgm=$(OBJDIR)/%.o) $(WAV_RES:%.wav=$(OBJDIR)/%.o) $(FX_RES:%.sav=$(OBJDIR)/%.o) $(UGE_RES:%.uge=$(OBJDIR)/%.o) $(SPR_RES:%.png=$(OBJDIR)/%.o) $(BKG_RES:%.png=$(OBJDIR)/%.o)
 
-obj/mainMenuItems.o: src/menus/mainMenuItems.c
-	$(CC) -c -o $@ $<
+DEPENDANT   = $(CSOURCES:%.c=$(OBJDIR)/%.o)
 
-obj/imageMenuItems.o: src/menus/imageMenuItems.c
-	$(CC) -c -o $@ $<
+# Builds all targets sequentially
+all: include/generated/version.h include/generated/branch.h $(TARGETS) build/gb/pxlr.sav
 
-obj/overlays.o: src/overlays/overlays.c
-	$(CC) -c -o $@ $<
+# Dependencies
+DEPS = $(DEPENDANT:%.o=%.d)
 
-obj/bleep.o: src/bleep.c
-	$(CC) -c -o $@ $<
+-include $(DEPS)
 
-obj/debug.o: src/debug.c
-	$(CC) -c -o $@ $<
+.SECONDEXPANSION:
+$(OBJDIR)/%.c:	$(RESDIR)/audio/$(PLAT)/sounds/%.vgm $$(wildcard $(RESDIR)/audio/$(PLAT)/sounds/%.vgm.meta)
+	python utils/vgm2data.py -5 -w -3 -d 4 -b 255 `cat <$<.meta 2>/dev/null` -o $@ $<
 
-obj/utils.o: src/utils.c
-	$(CC) -c -o $@ $<
+.SECONDEXPANSION:
+$(OBJDIR)/%.c:	$(RESDIR)/audio/$(PLAT)/sounds/%.sav $$(wildcard $(RESDIR)/audio/$(PLAT)/sounds/%.sav.meta)
+	python utils/fxhammer2data.py -d 4 -c -b 255 `cat <$<.meta 2>/dev/null` -o $@ $<
 
-obj/bankedData.o: src/bankedData.c
-	$(CC) -c -o $@ $<
+$(OBJDIR)/%.c:	$(RESDIR)/audio/$(PLAT)/music/%.uge
+	utils/uge2source $< -b 255 $(basename $(notdir $<)) $@
 
-obj/joypad.o: src/joypad.c
-	$(CC) -c -o $@ $<
+$(OBJDIR)/%.c:	$(RESDIR)/audio/$(PLAT)/waveforms/%.wav
+	python utils/wav2data.py -b 255 -o $@ $<
 
-obj/imageIndexing.o: src/imageIndexing.c
-	$(CC) -c -o $@ $<
+$(OBJDIR)/%.o:	$(RESDIR)/audio/$(PLAT)/%.c
+	$(LCC) $(CFLAGS) -c -o $@ $<
 
-obj/saveImage.o: src/saveImage.c
-	$(CC) -c -o $@ $<
 
-obj/printCmd.o: src/printCmd.c
-	$(CC) -c -o $@ $<
+.SECONDEXPANSION:
+$(OBJDIR)/%.c:	$(RESDIR)/gfx/$(PLAT)/sprites/%.png $$(wildcard $(RESDIR)/gfx/$(PLAT)/sprites/%.png.meta)
+	$(PNG2ASSET) $< -c $@ `cat <$<.meta 2>/dev/null` -spr8x16 -b 255
 
-obj/imageInfo.o: src/imageInfo.c
-	$(CC) -c -o $@ $<
+.SECONDEXPANSION:
+$(OBJDIR)/%.c:	$(RESDIR)/gfx/$(PLAT)/backgrounds/%.png $$(wildcard $(RESDIR)/gfx/$(PLAT)/backgrounds/%.png.meta)
+	$(PNG2ASSET) $< -c $@ -map `cat <$<.meta 2>/dev/null` -b 255
 
-obj/frame_pxlr.o: res/frames/frame_pxlr.c
-	$(CC) -c -o $@ $<
 
-obj/pxlr-logo.o: res/pxlr-logo.c
-	$(CC) -c -o $@ $<
+$(OBJDIR)/%.o:	$(OBJDIR)/%.c
+	$(LCC) $(CFLAGS) -c -o $@ $<
 
-obj/nope.o: res/nope.c
-	$(CC) -c -o $@ $<
+# Compile .c files in "res/" to .o object files
+$(OBJDIR)/%.o:	$(RESDIR)/%.c
+	$(LCC) -Wf-MMD $(CFLAGS) -c -o $@ $<
 
-obj/font.o: res/font.c
-	$(CC) -c -o $@ $<
 
-obj/maps.o: res/maps.c
-	$(CC) -c -o $@ $<
+# Compile .c files in "src/" to .o object files
+$(OBJDIR)/%.o:	$(SRCDIR)/%.c
+	$(LCC) -Wf-MMD $(CFLAGS) $(filter -Wf-ba%, $(subst .d,-Wf-ba,$(suffix $(<:%.c=%)))) -c -o $@ $<
 
-obj/tiles.o: res/tiles.c
-	$(CC) -c -o $@ $<
+# Compile .c files in "src/menus/" to .o object files
+$(OBJDIR)/%.o:	$(SRCDIR)/menus/%.c
+	$(LCC) -Wf-MMD $(CFLAGS) $(filter -Wf-ba%, $(subst .d,-Wf-ba,$(suffix $(<:%.c=%)))) -c -o $@ $<
 
-clean:
-	rm -rf obj && rm -f version.h && rm -f branch.h
+# Compile .c files in "src/overlays/" to .o object files
+$(OBJDIR)/%.o:	$(SRCDIR)/overlays/%.c
+	$(LCC) -Wf-MMD $(CFLAGS) $(filter -Wf-ba%, $(subst .d,-Wf-ba,$(suffix $(<:%.c=%)))) -c -o $@ $<
 
-obj: clean
-	mkdir obj
+# Compile .s assembly files in "src/" to .o object files
+$(OBJDIR)/%.o:	$(SRCDIR)/%.s
+	$(LCC) $(CFLAGS) -c -o $@ $<
 
-obj/pxlr.sav:
-	cp assets/pxlr.sav obj/pxlr.sav
 
-version.h: version
+# Compile .c files in "src/<platform>/" to .o object files
+$(OBJDIR)/%.o:	$(SRCPLAT)/%.c
+	$(LCC) -Wf-MMD $(CFLAGS) -c -o $@ $<
+
+# Compile .s assembly files in "src/<platform>/" to .o object files
+$(OBJDIR)/%.o:	$(SRCPLAT)/%.s
+	$(LCC) $(CFLAGS) -c -o $@ $<
+
+
+# Compile .c files in "src/<target>/" to .o object files
+$(OBJDIR)/%.o:	$(SRCPORT)/%.c
+	$(LCC) -Wf-MMD $(CFLAGS) -c -o $@ $<
+
+# Compile .s assembly files in "src/<target>/" to .o object files
+$(OBJDIR)/%.o:	$(SRCPORT)/%.s
+	$(LCC) $(CFLAGS) -c -o $@ $<
+
+
+# Link the compiled object files into a .gb ROM file
+$(BINS):	$(RESOBJ) $(OBJS)
+	$(LCC) $(LCCFLAGS) $(CFLAGS) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $^
+
+include/generated/version.h: version
 	tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t version[] = {\n/g; s/$$/};\n/g' > $@
 
-branch.h:
+include/generated/branch.h:
 	git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t branch[] = {\n/g; s/$$/};\n/g' > $@
 
-$(BIN): obj branch.h version.h obj/pxlr.sav obj/printCmd.o obj/pxlr-logo.o obj/font.o obj/maps.o obj/tiles.o obj/nope.o obj/utils.o obj/frame_pxlr.o obj/joypad.o obj/banks.o obj/imageIndexing.o obj/debug.o obj/globals.o obj/bleep.o obj/bankedData.o obj/dialog.o obj/expose.o obj/overlayDefs.o obj/overlays.o obj/values.o obj/shootingManualMenuItems.o obj/saveImage.o obj/imageInfo.o obj/mainMenuItems.o obj/imageMenuItems.o obj/gallery.o obj/mainMenu.o obj/modeShootingManual.o obj/modeShootingBurst.o obj/splash.o obj/camera.o obj/mainLoop.o obj/main.o
-	$(CC) -Wl-yt0xFC -Wl-yo16 -Wl-ya16 -Wm-yn"PXLR CAMERA" -o obj/$@ obj/*.o
+build/gb/pxlr.sav:
+	cp assets/pxlr.sav build/gb/pxlr.sav
 
-romusage:
-	$(RU) ./obj/pxlr.map
+clean:
+	@echo Cleaning
+	@for target in $(TARGETS); do \
+		$(MAKE) $$target-clean; \
+	done
+
+# Include available build targets
+include Makefile.targets
+
+
+# create necessary directories after Makefile is parsed but before build
+# info prevents the command from being pasted into the makefile
+ifneq ($(strip $(EXT)),)           # Only make the directories if EXT has been set by a target
+$(info $(shell mkdir -p $(MKDIRS)))
+endif
