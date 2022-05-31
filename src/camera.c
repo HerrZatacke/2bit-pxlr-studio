@@ -12,8 +12,6 @@
 #include "values.h"
 
 void setDitherMatrix() {
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
   SWITCH_RAM(16);
 
   uint8_t ditherSet = getMenuValue(ditherSetsMenu);
@@ -30,8 +28,6 @@ void setDitherMatrix() {
       memcpy(CAM_REG_DITHERPATTERN, ditherNoLowLightValues[contrast], 48);
     }
   }
-
-  SWITCH_ROM(savedBank);
 }
 
 void initCam() {
@@ -51,9 +47,6 @@ void initCam() {
 void capture() {
   SWITCH_RAM(16);
 
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
-
   CAM_REG_EDEXOPGAIN = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
   CAM_REG_EXPTIME = exposureTimesValues[getMenuValue(exposureTimesMenu)];
   CAM_REG_EDRAINVVREF = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
@@ -62,8 +55,6 @@ void capture() {
   isCapturing = 1;
 
   CAM_REG_CAPTURE = getMenuValue(captureModesMenu);
-
-  SWITCH_ROM(savedBank);
 
   captureJoypadISR();
 

@@ -1,5 +1,3 @@
-#pragma bank 2
-
 #include <gbdk/platform.h>
 #include "valuesDefs.h"
 #include "typedefs/MenuOption.h"

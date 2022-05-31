@@ -1,5 +1,3 @@
-#pragma bank 2
-
 #include <gb/gb.h>
 #include "typedefs/MenuItem.h"
 #include "values.h"

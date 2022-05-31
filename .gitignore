@@ -8,4 +8,4 @@
 /CMakeLists.txt
 unused
 .vscode
-/compile.bat
+/*.bat

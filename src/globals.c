@@ -5,7 +5,6 @@ uint8_t mainLoopState = 0;
 uint8_t isCapturing = 0;
 uint8_t imageMenuIndex = 0;
 uint8_t imageInfo[360];
-uint8_t savedBank = 0;
 uint8_t imageIndex = 0;
 uint8_t numVisibleImages = 0;
 uint8_t sortedIndices[NUM_IMAGES] = {

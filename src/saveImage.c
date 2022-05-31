@@ -1,3 +1,5 @@
+#pragma bank 255
+
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
@@ -29,9 +31,6 @@ void saveImage() BANKED {
 
   // ToDo:
   // This crashes if this .c file is in a #pragma bank 2
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
-
   memcpy(images[firstFreeSlot]->thumbnail, tiles_thumbnail, 256);
 
   uint16_t exposureTime = exposureTimesValues[getMenuValue(exposureTimesMenu)];
@@ -44,8 +43,6 @@ void saveImage() BANKED {
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO] = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET] = getMenuValue(ditherSetsMenu);
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST] = getMenuValue(contrastsMenu);
-
-  SWITCH_ROM(savedBank);
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 
