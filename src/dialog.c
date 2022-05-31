@@ -38,7 +38,7 @@ void disappearDialog() BANKED {
   move_win(7, 146);
 }
 
-uint8_t dialog(uint8_t *message, uint8_t handleOverlays) BANKED {
+uint8_t dialog(uint8_t *message, uint8_t handleOverlays) NONBANKED {
   if (handleOverlays) {
     hideLowerOverlay();
   }
