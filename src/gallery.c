@@ -8,7 +8,7 @@
 #include "utils.h"
 #include "defines.h"
 #include "globals.h"
-#include "banks.h"
+#include "images.h"
 #include "bankedData.h"
 #include "printCmd.h"
 #include "expose.h"

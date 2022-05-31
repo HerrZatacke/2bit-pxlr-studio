@@ -4,7 +4,7 @@
 #include <gbdk/platform.h>
 #include <string.h>
 #include "globals.h"
-#include "banks.h"
+#include "images.h"
 #include "defines.h"
 #include "joypad.h"
 #include "imageIndexing.h"

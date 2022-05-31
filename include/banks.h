@@ -2,7 +2,6 @@
 #define BANKS_H
 
 #include <gbdk/platform.h>
-#include "typedefs/Image.h"
 
 /*
  * Area 0x0000 to 0x1FFF in RAM
@@ -63,9 +62,5 @@ static uint8_t __at(0xA004) CAM_REG_EDRAINVVREF;
 static uint8_t __at(0xA005) CAM_REG_ZEROVOUT;
 // Camera hardware register: Dither Pattern (48 bytes)
 static uint8_t __at(0xA006) CAM_REG_DITHERPATTERN[48];
-
-#ifndef IN_BANKS
-extern const Image *images[30];
-#endif
 
 #endif

@@ -7,7 +7,7 @@
 #include "frame_pxlr.h"
 #include "font.h"
 #include "tiles.h"
-#include "banks.h"
+#include "images.h"
 #include "bankedData.h"
 #include "joypad.h"
 #include "defines.h"

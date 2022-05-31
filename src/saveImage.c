@@ -8,7 +8,7 @@
 #include "utils.h"
 #include "joypad.h"
 #include "dialog.h"
-#include "banks.h"
+#include "images.h"
 #include "values.h"
 #include "menus/shootingManualMenuItems.h"
 #include "modeShootingManual.h"
