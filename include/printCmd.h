@@ -11,7 +11,7 @@
 extern void printerInit(void) BANKED;
 extern uint8_t getPrinterStatus() BANKED;
 extern void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED;
-extern void printImageInfo(uint8_t *imageInfo, uint8_t *font) NONBANKED;
+extern void printImageInfo(uint8_t *imageInfo) NONBANKED;
 extern void waitPrinterReady() BANKED;
 
 #endif

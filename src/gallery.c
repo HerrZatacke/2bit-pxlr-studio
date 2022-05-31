@@ -124,7 +124,7 @@ static void imageMenuAction(uint8_t value) {
     } else {
 
       getImageInfo(imageIndex, imageInfo);
-      printImageInfo(imageInfo, font);
+      printImageInfo(imageInfo);
 
       waitPrinterReady();
 

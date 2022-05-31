@@ -160,7 +160,7 @@ void waitPrinterReady() BANKED {
 }
 
 
-void printTileData(const uint8_t *tileData, uint8_t num_packets, uint8_t margins, uint8_t palette, uint8_t exposure) BANKED {
+void printTileData(const uint8_t *tileData, uint8_t num_packets, uint8_t margins, uint8_t palette, uint8_t exposure) NONBANKED {
   uint8_t tileIndex;
 
   if (tile_num == 0) {
