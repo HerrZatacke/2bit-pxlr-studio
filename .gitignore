@@ -6,3 +6,6 @@
 /build
 /cmake-build-debug/
 /CMakeLists.txt
+unused
+.vscode
+/compile.bat
