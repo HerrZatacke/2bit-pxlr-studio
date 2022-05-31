@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "utils.h"
 #include "imageIndexing.h"
+#include "images.h"
 
 #define PALETTE_EXPOSE_0 0b00000011u
 #define PALETTE_EXPOSE_1 0b00001111u
