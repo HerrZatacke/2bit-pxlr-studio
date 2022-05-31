@@ -37,8 +37,8 @@ jobs:
         if: steps.checkTag.outputs.exists == 'false'
         run: |
           mkdir release
-          cp obj/pxlr.gb release/pxlr.gb
-          cp obj/pxlr.sav release/pxlr.sav          
+          cp build/gb/pxlr.gb release/pxlr.gb
+          cp build/gb/pxlr.sav release/pxlr.sav
           cd release
           zip -r ../pxlr.zip *
           cd ..
