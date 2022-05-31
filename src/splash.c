@@ -13,8 +13,8 @@ uint8_t splash() {
   HIDE_SPRITES;
   BGP_REG = PALETTE_BLANK;
 
-  set_data_banked(VRAM_9000, logo_tiles, logo_TILE_COUNT * 16, BANK(logo_tiles));
-  set_data_banked(VRAM_8000, logo_tiles, logo_TILE_COUNT * 16, BANK(logo_tiles));
+  set_data_banked(VRAM_9000, logo_tiles, logo_TILE_COUNT * 16, BANK(logo));
+  set_data_banked(VRAM_8000, logo_tiles, logo_TILE_COUNT * 16, BANK(logo));
 
   set_bkg_tiles_banked(0, 0, 20, 18, logo_map, 1);
 

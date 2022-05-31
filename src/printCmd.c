@@ -205,9 +205,9 @@ void printTileData(const uint8_t *tileData, uint8_t num_packets, uint8_t margins
   }
 }
 
-static void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
+void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
   uint8_t save = _current_bank;
-  SWITCH_ROM(frame_pxlr_tiles);
+  SWITCH_ROM(BANK(frame_pxlr));
 
   printerInit();
   SWITCH_RAM(bank);
@@ -234,9 +234,9 @@ static void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
   SWITCH_ROM(save);
 }
 
-static void printImageInfo(uint8_t *imageInfo) NONBANKED {
+void printImageInfo(uint8_t *imageInfo) NONBANKED {
   uint8_t save = _current_bank;
-  SWITCH_ROM(frame_pxlr_tiles);
+  SWITCH_ROM(BANK(frame_pxlr));
 
   uint16_t index;
   printerInit();
