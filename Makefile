@@ -30,7 +30,7 @@ LCCFLAGS_gg      =
 
 LCCFLAGS += $(LCCFLAGS_$(EXT)) -Wm-yS # This adds the current platform specific LCC Flags
 
-LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya1 -autobank -Wb-ext=.rel
+LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya16 -autobank -Wb-ext=.rel
 # LCCFLAGS += -debug # Uncomment to enable debug output
 # LCCFLAGS += -v     # Uncomment for lcc verbose output
 

@@ -13,7 +13,6 @@ void clearBkg() BANKED {
 }
 
 void initGfx() BANKED {
-  ENABLE_RAM;
   SHOW_BKG;
   BGP_REG = PALETTE_NORMAL;
 
