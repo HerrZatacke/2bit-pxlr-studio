@@ -6,13 +6,13 @@
 #define SETTINGS_REQUIRE_RESET TRUE
 #define SETTINGS_REQUIRE_NO_RESET FALSE
 
-extern void renderManualMenu() BANKED;
-extern void initManualMode() BANKED;
-extern void storeSettings() BANKED;
-extern void restoreDefaults() BANKED;
-extern uint8_t loadSettingsFromRAM() BANKED;
-extern void renderManualMenu() BANKED;
-extern void menuAction() BANKED;
-extern void manualShootMenu() BANKED;
+extern void renderManualMenu();
+extern void initManualMode();
+extern void storeSettings();
+extern void restoreDefaults();
+extern uint8_t loadSettingsFromRAM();
+extern void renderManualMenu();
+extern void menuAction();
+extern void manualShootMenu();
 
 #endif
