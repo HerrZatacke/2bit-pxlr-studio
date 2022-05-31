@@ -2,36 +2,36 @@
 #include "typedefs/Image.h"
 #include "banks.h"
 
-Image image01 = { 1, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image02 = { 1, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image03 = { 2, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image04 = { 2, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image05 = { 3, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image06 = { 3, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image07 = { 4, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image08 = { 4, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image09 = { 5, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image10 = { 5, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image11 = { 6, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image12 = { 6, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image13 = { 7, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image14 = { 7, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image15 = { 8, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image16 = { 8, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image17 = { 9, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image18 = { 9, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image19 = {10, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image20 = {10, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image21 = {11, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image22 = {11, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image23 = {12, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image24 = {12, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image25 = {13, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image26 = {13, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image27 = {14, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image28 = {14, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
-Image image29 = {15, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
-Image image30 = {15, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image01 = { 1, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image02 = { 1, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image03 = { 2, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image04 = { 2, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image05 = { 3, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image06 = { 3, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image07 = { 4, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image08 = { 4, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image09 = { 5, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image10 = { 5, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image11 = { 6, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image12 = { 6, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image13 = { 7, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image14 = { 7, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image15 = { 8, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image16 = { 8, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image17 = { 9, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image18 = { 9, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image19 = {10, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image20 = {10, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image21 = {11, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image22 = {11, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image23 = {12, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image24 = {12, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image25 = {13, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image26 = {13, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image27 = {14, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image28 = {14, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
+static const Image image29 = {15, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
+static const Image image30 = {15, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };
 
 const Image * const images[30] = {
   &image01, &image02, &image03, &image04, &image05,
