@@ -3,6 +3,9 @@
 
 #include <gbdk/platform.h>
 
+#define SETTINGS_REQUIRE_RESET TRUE
+#define SETTINGS_REQUIRE_NO_RESET FALSE
+
 extern void renderManualMenu() BANKED;
 extern void initManualMode() BANKED;
 extern void storeSettings() BANKED;

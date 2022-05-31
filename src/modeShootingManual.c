@@ -18,6 +18,9 @@
 #include "camera.h"
 #include "dialog.h"
 
+#define SETTINGS_REQUIRE_RESET TRUE
+#define SETTINGS_REQUIRE_NO_RESET FALSE
+
 uint8_t manualMenuPos = 0;
 
 void renderManualMenu() BANKED {
@@ -90,11 +93,10 @@ uint8_t loadSettingsFromRAM() BANKED {
       menuItems[i]->value = image_first_unused[menuItems[i]->storeOffset];
     }
 
-    return 0;
+    return SETTINGS_REQUIRE_NO_RESET;
   }
 
-  // 1 forces a reset to defaults
-  return 1;
+  return SETTINGS_REQUIRE_RESET;
 }
 
 void menuAction() BANKED {
