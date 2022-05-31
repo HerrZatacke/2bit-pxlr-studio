@@ -205,7 +205,10 @@ void printTileData(const uint8_t *tileData, uint8_t num_packets, uint8_t margins
   }
 }
 
-void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) BANKED {
+static void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
+  uint8_t save = _current_bank;
+  SWITCH_ROM(frame_pxlr_tiles);
+
   printerInit();
   SWITCH_RAM(bank);
   uint8_t x, y;
@@ -227,9 +230,14 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) BANKED {
       frameTileIndex++;
     }
   }
+
+  SWITCH_ROM(save);
 }
 
-void printImageInfo(uint8_t *imageInfo) BANKED {
+static void printImageInfo(uint8_t *imageInfo) NONBANKED {
+  uint8_t save = _current_bank;
+  SWITCH_ROM(frame_pxlr_tiles);
+
   uint16_t index;
   printerInit();
 
@@ -251,4 +259,6 @@ void printImageInfo(uint8_t *imageInfo) BANKED {
   for (index = 320; index < 360; index++) {
     printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x03, PALETTE_INVERTED, EXPOSURE_DEFAULT);
   }
+
+  SWITCH_ROM(save);
 }
