@@ -3,7 +3,7 @@
 // Print Screen function added by Christianr
 // Print Screen (360 tile mode) added by T0biasCZe
 
-#pragma bank 1
+#pragma bank 255
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>

@@ -26,9 +26,6 @@ void renderManualMenu() {
   fill_bkg_rect(0, 0, 20, 2, BLNK);
   fill_bkg_rect(0, 16, 20, 2, BLNK);
 
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
-
   uint8_t currentPage = menuItems[manualMenuPos]->page;
   uint8_t spriteX = (menuItems[manualMenuPos]->x * 8) + 8;
   move_sprite(SPRITE_MENU_INDICATOR, spriteX, 23);
@@ -46,8 +43,6 @@ void renderManualMenu() {
 
   set_bkg_based_tiles(0, 16, 9, 2, menuItems[manualMenuPos]->description, OFFSET_FONT - 32);
 
-  SWITCH_ROM(savedBank);
-
   set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);
   writeNumber(12, 16, 2, numVisibleImages);
 }
@@ -62,21 +57,15 @@ void initManualMode() {
 
 void storeSettings() {
   SWITCH_RAM(1);
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
   for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     image_first_unused[menuItems[i]->storeOffset] = menuItems[i]->value;
   }
-  SWITCH_ROM(savedBank);
 }
 
 void restoreDefaults() {
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
   for (uint8_t i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
     menuItems[i]->value = menuItems[i]->defaultValue;
   }
-  SWITCH_ROM(savedBank);
 
   storeSettings();
 }
@@ -87,8 +76,6 @@ uint8_t loadSettingsFromRAM() {
   uint8_t i = 0;
   uint8_t noAA = 0;
 
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
   // check if any of the storage cells already has a valid value
   // the initial value which is never changes on an original cart is 0xAA
   for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
@@ -96,17 +83,13 @@ uint8_t loadSettingsFromRAM() {
       noAA = 1;
     }
   }
-  SWITCH_ROM(savedBank);
 
   // load initial values from storage cells
   if (noAA) {
 
-    savedBank = _current_bank;
-    SWITCH_ROM(2);
     for (i = 0; i < NUM_MENU_ELEMENTS; i += 1) {
       menuItems[i]->value = image_first_unused[menuItems[i]->storeOffset];
     }
-    SWITCH_ROM(savedBank);
 
     return SETTINGS_REQUIRE_NO_RESET;
   }
@@ -115,12 +98,9 @@ uint8_t loadSettingsFromRAM() {
 }
 
 void menuAction() {
-  savedBank = _current_bank;
-  SWITCH_ROM(2);
   if (menuItems[manualMenuPos]->action == MENU_ACTION_DITHER) {
     setDitherMatrix();
   }
-  SWITCH_ROM(savedBank);
 }
 
 void manualShootMenu() {
@@ -134,10 +114,7 @@ void manualShootMenu() {
     joypadConsumed();
   } else if (jp == J_UP) {
 
-    savedBank = _current_bank;
-    SWITCH_ROM(2);
     menuItems[manualMenuPos]->value = (menuItems[manualMenuPos]->value + 1) % menuItems[manualMenuPos]->numOptions;
-    SWITCH_ROM(savedBank);
 
     menuAction();
     storeSettings();
@@ -145,10 +122,7 @@ void manualShootMenu() {
     joypadConsumed();
   } else if (jp == J_DOWN) {
 
-    savedBank = _current_bank;
-    SWITCH_ROM(2);
     menuItems[manualMenuPos]->value = (menuItems[manualMenuPos]->value + menuItems[manualMenuPos]->numOptions - 1) % menuItems[manualMenuPos]->numOptions;
-    SWITCH_ROM(savedBank);
 
     menuAction();
     storeSettings();

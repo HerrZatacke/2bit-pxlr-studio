@@ -2,6 +2,8 @@
 #include <gb/gb.h>
 #include "globals.h"
 
+static uint8_t savedBank;
+
 void set_bkg_tiles_banked(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t *map, uint8_t bank) {
   savedBank = _current_bank;
   SWITCH_ROM(bank);

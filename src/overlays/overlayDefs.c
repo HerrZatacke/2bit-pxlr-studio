@@ -1,5 +1,3 @@
-#pragma bank 1
-
 #include "typedefs/Overlay.h"
 #include "defines.h"
 
