@@ -36,7 +36,7 @@ void setDitherMatrix() {
 
 void initCam() {
   if (
-      loadSettingsFromRAM() ||
+      loadSettingsFromRAM() == SETTINGS_REQUIRE_RESET ||
       (joypad() == (J_START | J_SELECT)) // "factory" reset
       ) {
     restoreDefaults(); // reset all sensor params to default

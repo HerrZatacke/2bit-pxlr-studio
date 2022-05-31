@@ -3,6 +3,9 @@
 
 #include <gbdk/platform.h>
 
+#define SETTINGS_REQUIRE_RESET TRUE
+#define SETTINGS_REQUIRE_NO_RESET FALSE
+
 extern void renderManualMenu();
 extern void initManualMode();
 extern void storeSettings();

@@ -21,7 +21,7 @@ void fastLoadImageTiles() {
 
 void mainLoop() {
   // Loop forever
-  while (1) {
+  while (TRUE) {
     switch (mainLoopState) {
       case MAIN_LOOP_SHOOT_MANUAL:
         fastLoadImageTiles();
