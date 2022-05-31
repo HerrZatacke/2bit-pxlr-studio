@@ -1,3 +1,5 @@
+#pragma bank 255
+
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
@@ -11,7 +13,7 @@
 #include "joypad.h"
 #include "values.h"
 
-void setDitherMatrix() {
+void setDitherMatrix() BANKED {
   SWITCH_RAM(16);
 
   uint8_t ditherSet = getMenuValue(&ditherSetsMenu);
@@ -30,7 +32,7 @@ void setDitherMatrix() {
   }
 }
 
-void initCam() {
+void initCam() BANKED {
   if (
       loadSettingsFromRAM() ||
       (joypad() == (J_START | J_SELECT)) // "factory" reset
@@ -44,7 +46,7 @@ void initCam() {
   setDitherMatrix();
 }
 
-void capture() {
+void capture() BANKED {
   SWITCH_RAM(16);
 
   CAM_REG_EDEXOPGAIN = getMenuValue(&edgeOpModesMenu) | getMenuValue(&gainsMenu) | getMenuValue(&edgeExclusivesMenu);

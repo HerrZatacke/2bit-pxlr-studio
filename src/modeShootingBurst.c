@@ -1,3 +1,5 @@
+#pragma bank 255
+
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
@@ -14,12 +16,12 @@
 
 uint8_t burstActive = 0;
 
-void renderBurstMenu() {
+void renderBurstMenu() BANKED {
   set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);
   writeNumber(12, 16, 2, numVisibleImages);
 }
 
-void initBurstMode() {
+void initBurstMode() BANKED {
   clearBkg();
   set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
   sortImages();
@@ -29,7 +31,7 @@ void initBurstMode() {
   burstActive = 0;
 }
 
-void burstShootMenu() {
+void burstShootMenu() BANKED {
   if (jp == J_B) {
     burstActive = 0;
     menuSelectMode(MAIN_LOOP_MENU);

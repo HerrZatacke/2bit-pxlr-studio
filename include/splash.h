@@ -3,6 +3,6 @@
 
 #include <gbdk/platform.h>
 
-extern uint8_t splash();
+extern uint8_t splash() BANKED;
 
 #endif

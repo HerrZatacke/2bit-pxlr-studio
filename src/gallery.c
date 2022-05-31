@@ -1,3 +1,4 @@
+#pragma bank 255
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
@@ -19,11 +20,11 @@
 #include "maps.h"
 #include "images.h"
 
-void renderImageMenu() {
+inline void renderImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));
 }
 
-void appearImageMenu() {
+void appearImageMenu() BANKED {
   move_win(168, 0);
 
   for (uint8_t i = 0; i < 10; i += 1) {
@@ -35,7 +36,7 @@ void appearImageMenu() {
 }
 
 
-void disappearImageMenu() {
+static void disappearImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 0, 0);
 
   waitRelease();
@@ -48,7 +49,7 @@ void disappearImageMenu() {
   move_win(168, 0);
 }
 
-void loadAndShowGalleryImage() {
+void loadAndShowGalleryImage() BANKED {
   if (numVisibleImages > 0) {
     uint8_t imageSlot = getImageSlot(imageIndex);
     SWITCH_RAM(images[imageSlot]->bank);
@@ -68,7 +69,7 @@ void loadAndShowGalleryImage() {
   }
 }
 
-void initGallery() {
+void initGallery() BANKED {
   clearBkg();
   set_bkg_tiles_banked(2, 2, 16, 14, map_normal, 1);
 
@@ -78,7 +79,7 @@ void initGallery() {
   loadAndShowGalleryImage();
 }
 
-void initImageMenu() {
+void initImageMenu() BANKED {
   fill_win_rect(0, 0, 1, 32, MENU_BORDER_LEFT);
   fill_win_rect(1, 0, 31, 32, OFFSET_BLANK);
 
@@ -87,7 +88,7 @@ void initImageMenu() {
   }
 }
 
-void galleryMenu() {
+void galleryMenu() BANKED {
 
   if (jp == J_RIGHT) {
     imageIndex = (imageIndex + 1) % numVisibleImages;
@@ -107,7 +108,7 @@ void galleryMenu() {
 }
 
 
-void imageMenuAction(uint8_t value) {
+static void imageMenuAction(uint8_t value) {
   uint8_t address = getImageSlot(imageIndex);
 
   if (address >= NUM_IMAGES) {
@@ -161,7 +162,7 @@ void imageMenuAction(uint8_t value) {
   }
 }
 
-void imageMenu() {
+void imageMenu() BANKED {
 
   if (jp == J_UP) {
     imageMenuIndex = (imageMenuIndex + NUM_IMAGE_MENU_OPTIONS - 1) % NUM_IMAGE_MENU_OPTIONS;

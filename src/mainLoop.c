@@ -1,3 +1,4 @@
+#pragma bank 255
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
@@ -13,15 +14,15 @@
 #include "gallery.h"
 #include "images.h"
 
-void fastLoadImageTiles() {
+void fastLoadImageTiles() BANKED {
   SWITCH_RAM(0);
   set_data(VRAM_9000, last_seen_upper, HALF_IMAGE_SIZE);
   set_data(VRAM_8000, last_seen_lower, HALF_IMAGE_SIZE);
 }
 
-void mainLoop() {
+void mainLoop() BANKED {
   // Loop forever
-  while (1) {
+  while (TRUE) {
     switch (mainLoopState) {
       case MAIN_LOOP_SHOOT_MANUAL:
         fastLoadImageTiles();

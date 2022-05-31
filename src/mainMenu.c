@@ -1,3 +1,4 @@
+#pragma bank 255
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
@@ -17,11 +18,11 @@
 
 uint8_t mainMenuPos = 0;
 
-void mainMenuSprite() {
+inline void mainMenuSprite() {
   move_sprite(SPRITE_MENU_INDICATOR, 16, yMenuSprite(mainMenuPos));
 }
 
-void initMainMenu() {
+void initMainMenu() BANKED {
   clearBkg();
   hideOverlay();
 
@@ -32,7 +33,7 @@ void initMainMenu() {
   mainMenuSprite();
 }
 
-void menuSelectMode(uint8_t loopState) {
+void menuSelectMode(uint8_t loopState) BANKED {
   mainLoopState = loopState;
   if (loopState == MAIN_LOOP_SHOOT_MANUAL) {
     initManualMode();
@@ -62,7 +63,7 @@ void menuSelectMode(uint8_t loopState) {
   }
 }
 
-void mainMenu() {
+void mainMenu() BANKED {
   if (jp == J_DOWN) {
     clonk();
     mainMenuPos = (mainMenuPos + 1) % NUM_MAIN_MENU_OPTIONS;

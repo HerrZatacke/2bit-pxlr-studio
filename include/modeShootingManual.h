@@ -3,13 +3,13 @@
 
 #include <gbdk/platform.h>
 
-extern void renderManualMenu();
-extern void initManualMode();
-extern void storeSettings();
-extern void restoreDefaults();
-extern uint8_t loadSettingsFromRAM();
-extern void renderManualMenu();
-extern void menuAction();
-extern void manualShootMenu();
+extern void renderManualMenu() BANKED;
+extern void initManualMode() BANKED;
+extern void storeSettings() BANKED;
+extern void restoreDefaults() BANKED;
+extern uint8_t loadSettingsFromRAM() BANKED;
+extern void renderManualMenu() BANKED;
+extern void menuAction() BANKED;
+extern void manualShootMenu() BANKED;
 
 #endif

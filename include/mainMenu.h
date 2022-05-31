@@ -3,9 +3,8 @@
 
 #include <gbdk/platform.h>
 
-extern void menuSelectMode(uint8_t loopState);
-extern void mainMenuSprite();
-extern void initMainMenu();
-extern void mainMenu();
+extern void menuSelectMode(uint8_t loopState) BANKED;
+extern void initMainMenu() BANKED;
+extern void mainMenu() BANKED;
 
 #endif

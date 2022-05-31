@@ -1,3 +1,5 @@
+#pragma bank 255
+
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
@@ -9,7 +11,7 @@
 #include "generated/branch.h"
 #include "logo.h"
 
-uint8_t splash() {
+uint8_t splash() BANKED {
   HIDE_SPRITES;
   BGP_REG = PALETTE_BLANK;
 
