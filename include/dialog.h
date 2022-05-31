@@ -5,6 +5,6 @@
 
 void appearDialog() BANKED;
 void disappearDialog() BANKED;
-uint8_t dialog(uint8_t *message, uint8_t handleOverlays) BANKED;
+uint8_t dialog(uint8_t *message, uint8_t handleOverlays) NONBANKED;
 
 #endif
