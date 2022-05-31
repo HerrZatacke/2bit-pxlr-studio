@@ -16,7 +16,7 @@
 
 uint8_t burstActive = 0;
 
-void renderBurstMenu() BANKED {
+static void renderBurstMenu() {
   set_bkg_based_tiles(12, 16, 6, 2, "   /30Images", OFFSET_FONT - 32);
   writeNumber(12, 16, 2, numVisibleImages);
 }
