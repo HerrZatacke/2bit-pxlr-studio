@@ -1,3 +1,5 @@
+#pragma bank 255
+
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 #include <string.h>
@@ -11,11 +13,11 @@
 #include "joypad.h"
 #include "values.h"
 
-void setDitherMatrix() {
+void setDitherMatrix() BANKED {
   SWITCH_RAM(16);
 
-  uint8_t ditherSet = getMenuValue(ditherSetsMenu);
-  uint8_t contrast = getMenuValue(contrastsMenu);
+  uint8_t ditherSet = getMenuValue(&ditherSetsMenu);
+  uint8_t contrast = getMenuValue(&contrastsMenu);
 
   for (uint16_t i = 0; i < 48; i += 1) {
     if (ditherSet == DITHER_SET_HIGH) {
@@ -30,7 +32,7 @@ void setDitherMatrix() {
   }
 }
 
-void initCam() {
+void initCam() BANKED {
   if (
       loadSettingsFromRAM() == SETTINGS_REQUIRE_RESET ||
       (joypad() == (J_START | J_SELECT)) // "factory" reset
@@ -44,17 +46,17 @@ void initCam() {
   setDitherMatrix();
 }
 
-void capture() {
+void capture() BANKED {
   SWITCH_RAM(16);
 
-  CAM_REG_EDEXOPGAIN = getMenuValue(edgeOpModesMenu) | getMenuValue(gainsMenu) | getMenuValue(edgeExclusivesMenu);
-  CAM_REG_EXPTIME = exposureTimesValues[getMenuValue(exposureTimesMenu)];
-  CAM_REG_EDRAINVVREF = getMenuValue(edgeModesMenu) | getMenuValue(voltageRefsMenu) | getMenuValue(invertOutputsMenu);
-  CAM_REG_ZEROVOUT = getMenuValue(voltageOutsMenu) | getMenuValue(zeroPointsMenu);
+  CAM_REG_EDEXOPGAIN = getMenuValue(&edgeOpModesMenu) | getMenuValue(&gainsMenu) | getMenuValue(&edgeExclusivesMenu);
+  CAM_REG_EXPTIME = exposureTimesValues[getMenuValue(&exposureTimesMenu)];
+  CAM_REG_EDRAINVVREF = getMenuValue(&edgeModesMenu) | getMenuValue(&voltageRefsMenu) | getMenuValue(&invertOutputsMenu);
+  CAM_REG_ZEROVOUT = getMenuValue(&voltageOutsMenu) | getMenuValue(&zeroPointsMenu);
 
   isCapturing = 1;
 
-  CAM_REG_CAPTURE = getMenuValue(captureModesMenu);
+  CAM_REG_CAPTURE = getMenuValue(&captureModesMenu);
 
   captureJoypadISR();
 
