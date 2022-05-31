@@ -46,7 +46,7 @@ SRCPLAT     = src/$(PLAT)
 OBJDIR      = obj/$(EXT)
 RESDIR      = res
 BINDIR      = build/$(EXT)
-MKDIRS      = $(OBJDIR) $(BINDIR) include/generated # See bottom of Makefile for directory auto-creation
+MKDIRS      = $(OBJDIR) $(BINDIR) # See bottom of Makefile for directory auto-creation
 
 BINS	    = $(OBJDIR)/$(PROJECTNAME).$(EXT)
 
