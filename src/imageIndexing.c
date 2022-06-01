@@ -2,7 +2,7 @@
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
-#include "banks.h"
+#include "gbcamera.h"
 #include "utils.h"
 #include "globals.h"
 

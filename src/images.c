@@ -1,6 +1,6 @@
 #include <gbdk/platform.h>
 #include "typedefs/Image.h"
-#include "banks.h"
+#include "gbcamera.h"
 
 static const Image image01 = { 1, image_first_upper,  image_first_lower,  image_first_thumbnail,  image_first_meta,  image_first_meta_echo  };
 static const Image image02 = { 1, image_second_upper, image_second_lower, image_second_thumbnail, image_second_meta, image_second_meta_echo };

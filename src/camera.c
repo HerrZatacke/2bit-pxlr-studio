@@ -4,7 +4,7 @@
 #include <gbdk/platform.h>
 #include <string.h>
 
-#include "banks.h"
+#include "gbcamera.h"
 #include "globals.h"
 #include "defines.h"
 #include "menus/shootingManualMenuItems.h"

@@ -12,7 +12,7 @@
 #include "maps.h"
 #include "menus/shootingManualMenuItems.h"
 #include "overlays/overlays.h"
-#include "banks.h"
+#include "gbcamera.h"
 #include "bankedData.h"
 #include "mainMenu.h"
 #include "camera.h"
