@@ -15,6 +15,15 @@
 #define CAMERA_IMAGE_SIZE (CAMERA_IMAGE_TILE_WIDTH * CAMERA_IMAGE_TILE_HEIGHT * 16)
 #define CAMERA_THUMB_SIZE (CAMERA_THUMB_TILE_WIDTH * CAMERA_THUMB_TILE_HEIGHT * 16)
 
+#define CAMERA_MAGIC "Magic"
+
+typedef struct cam_game_data_t {
+    uint8_t imageslots[CAMERA_MAX_IMAGE_SLOTS];
+    uint8_t magic[5];
+    uint8_t CRC_add;
+    uint8_t CRC_xor;
+} cam_game_data_t;
+
 /*
  * Area 0x0000 to 0x1FFF in RAM
  * Using RAM Bank 0
@@ -27,12 +36,10 @@ static uint8_t AT(0xA100) last_seen_upper[CAMERA_IMAGE_SIZE >> 1];
 static uint8_t AT(0xA800) last_seen_lower[CAMERA_IMAGE_SIZE >> 1];
 //static uint8_t AT(0xAF00) last_seen_padding[256];
 //static uint8_t AT(0xB000) game_data_meta_pad_0[434];
-static uint8_t AT(0xB1B2) game_data_meta_imageslots[CAMERA_MAX_IMAGE_SLOTS];
-static uint8_t AT(0xB1D0) game_data_meta_magic[5];
-static uint8_t AT(0xB1D5) game_data_meta_imageslots_checksum[2];
-static uint8_t AT(0xB1D7) game_data_meta_imageslots_echo[CAMERA_MAX_IMAGE_SLOTS];
-static uint8_t AT(0xB1F5) game_data_meta_magic_echo[5];
-static uint8_t AT(0xB1FA) game_data_meta_imageslots_echo_checksum[2];
+
+static cam_game_data_t AT(0xB1B2) cam_game_data;
+static cam_game_data_t AT(0xB1D7) cam_game_data_echo;
+
 //static uint8_t AT(0xB1FC) game_data_meta[3588];
 
 /*
