@@ -9,6 +9,9 @@
 #include <gbdk/platform.h>
 #include <string.h>
 #include "frame_pxlr.h"
+#include "wild_top.h"
+#include "wild_center.h"
+#include "wild_bottom.h"
 #include "font.h"
 
 uint8_t printerStatus[3];
@@ -205,6 +208,54 @@ void printTileData(const uint8_t *tileData, uint8_t num_packets, uint8_t margins
   }
 }
 
+
+
+void printImageWild(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
+  uint8_t save = _current_bank;
+  uint16_t index;
+  uint8_t x;
+  uint8_t y;
+
+  printerInit();
+
+  SWITCH_ROM(BANK(wild_top));
+  for (index = 0; index < 280; index++) {
+    printTileData(&wild_top_tiles[wild_top_map[index] * 16], 7, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
+  }
+
+  waitPrinterReady();
+  printerInit();
+
+  SWITCH_RAM(bank);
+  SWITCH_ROM(BANK(wild_center));
+  uint8_t *image = upper;
+  for (y = 0; y < 14; y++) {
+    if (y == 7) {
+      image = lower;
+    }
+
+    for (x = 0; x < 20; x++) {
+      if (x < 2 || x >= 18) {
+        printTileData(&wild_center_tiles[wild_center_map[x] * 16], 7, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
+      } else {
+        printTileData(image, 7, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
+        image += 16;
+      }
+    }
+  }
+
+  waitPrinterReady();
+  printerInit();
+
+  SWITCH_ROM(BANK(wild_bottom));
+  for (index = 0; index < 320; index++) {
+    printTileData(&wild_bottom_tiles[wild_bottom_map[index] * 16], 8, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
+  }
+
+  SWITCH_ROM(save);
+}
+
+
 void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
   uint8_t save = _current_bank;
   SWITCH_ROM(BANK(frame_pxlr));
@@ -220,6 +271,7 @@ void printImage(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
       if (x == 0 && y == 9) {
         image = lower;
       }
+
       if (x < 2 || y < 2 || x >= 18 || y >= 16) {
         printTileData(&frame_pxlr_tiles[frame_pxlr_map[frameTileIndex] * 16], 9, 0x02, PALETTE_NORMAL, EXPOSURE_DEFAULT);
       } else {

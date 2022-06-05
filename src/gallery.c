@@ -20,6 +20,8 @@
 #include "maps.h"
 #include "images.h"
 
+uint8_t specialAction;
+
 inline void renderImageMenu() {
   move_sprite(SPRITE_MENU_INDICATOR, 88, yMenuSprite(imageMenuIndex));
 }
@@ -144,7 +146,11 @@ static void imageMenuAction(uint8_t value) {
     if (getPrinterStatus()) {
       boop();
     } else {
-      printImage(images[address]->tilesLower, images[address]->tilesUpper, images[address]->bank);
+      if (specialAction == TRUE) {
+        printImageWild(images[address]->tilesLower, images[address]->tilesUpper, images[address]->bank);
+      } else {
+        printImage(images[address]->tilesLower, images[address]->tilesUpper, images[address]->bank);
+      }
 
       waitPrinterReady();
 
@@ -163,6 +169,7 @@ static void imageMenuAction(uint8_t value) {
 }
 
 void imageMenu() BANKED {
+  specialAction = FALSE;
 
   if (jp == J_UP) {
     imageMenuIndex = (imageMenuIndex + NUM_IMAGE_MENU_OPTIONS - 1) % NUM_IMAGE_MENU_OPTIONS;
@@ -183,6 +190,14 @@ void imageMenu() BANKED {
     loadAndShowGalleryImage();
     joypadConsumed();
   } else if (jp == J_A) {
+    if (numVisibleImages > 0) {
+      imageMenuAction(imageMenuItems[imageMenuIndex].value);
+    } else {
+      boop();
+    }
+    joypadConsumed();
+  } else if (jp == J_START) {
+    specialAction = TRUE;
     if (numVisibleImages > 0) {
       imageMenuAction(imageMenuItems[imageMenuIndex].value);
     } else {
