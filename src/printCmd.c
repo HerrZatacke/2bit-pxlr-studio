@@ -300,6 +300,8 @@ void printImageInfo(uint8_t *imageInfo) NONBANKED {
   waitPrinterReady();
   printerInit();
 
+  SWITCH_ROM(BANK(font));
+
   for (index = 0; index < 360; index++) {
     printTileData(&font[(imageInfo[index] - 32) * 16], 9, 0x00, PALETTE_INVERTED, EXPOSURE_DARK);
   }
@@ -307,6 +309,8 @@ void printImageInfo(uint8_t *imageInfo) NONBANKED {
 
   waitPrinterReady();
   printerInit();
+
+  SWITCH_ROM(BANK(frame_pxlr));
 
   for (index = 320; index < 360; index++) {
     printTileData(&frame_pxlr_tiles[frame_pxlr_map[index] * 16], 1, 0x03, PALETTE_INVERTED, EXPOSURE_DEFAULT);
