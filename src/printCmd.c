@@ -249,7 +249,7 @@ void printImageWild(uint8_t *lower, uint8_t *upper, uint8_t bank) NONBANKED {
 
   SWITCH_ROM(BANK(wild_bottom));
   for (index = 0; index < 320; index++) {
-    printTileData(&wild_bottom_tiles[wild_bottom_map[index] * 16], 8, 0x00, PALETTE_NORMAL, EXPOSURE_DEFAULT);
+    printTileData(&wild_bottom_tiles[wild_bottom_map[index] * 16], 8, 0x02, PALETTE_NORMAL, EXPOSURE_DEFAULT);
   }
 
   SWITCH_ROM(save);
