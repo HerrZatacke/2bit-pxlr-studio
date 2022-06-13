@@ -9,10 +9,13 @@
 #include "joypad.h"
 #include "saveImage.h"
 #include "maps.h"
+#include "menus/shootingManualMenuItems.h"
 #include "overlays/overlays.h"
 #include "imageIndexing.h"
 #include "bankedData.h"
 #include "mainMenu.h"
+#include "camera.h"
+#include "values.h"
 
 uint8_t burstActive = 0;
 
@@ -32,7 +35,13 @@ void initBurstMode() BANKED {
 }
 
 void burstShootLoop() BANKED {
-  capture();
+  uint8_t capt = getMenuValue(&captureModesMenu);
+  uint8_t edExOpGain = getMenuValue(&edgeOpModesMenu) | getMenuValue(&gainsMenu) | getMenuValue(&edgeExclusivesMenu);
+  uint16_t expTime = exposureTimesValues[getMenuValue(&exposureTimesMenu)];
+  uint8_t edRInvVref = getMenuValue(&edgeModesMenu) | getMenuValue(&voltageRefsMenu) | getMenuValue(&invertOutputsMenu);
+  uint8_t zeroVout = getMenuValue(&voltageOutsMenu) | getMenuValue(&zeroPointsMenu);
+
+  capture(capt, edExOpGain, expTime, edRInvVref, zeroVout);
 
   if (jp == J_B) {
     burstActive = 0;

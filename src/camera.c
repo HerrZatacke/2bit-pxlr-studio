@@ -46,17 +46,17 @@ void initCam() BANKED {
   setDitherMatrix();
 }
 
-void capture() BANKED {
+void capture(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRInvVref, uint8_t zeroVout) BANKED {
   SWITCH_RAM(16);
 
-  CAM_REG_EDEXOPGAIN = getMenuValue(&edgeOpModesMenu) | getMenuValue(&gainsMenu) | getMenuValue(&edgeExclusivesMenu);
-  CAM_REG_EXPTIME = exposureTimesValues[getMenuValue(&exposureTimesMenu)];
-  CAM_REG_EDRAINVVREF = getMenuValue(&edgeModesMenu) | getMenuValue(&voltageRefsMenu) | getMenuValue(&invertOutputsMenu);
-  CAM_REG_ZEROVOUT = getMenuValue(&voltageOutsMenu) | getMenuValue(&zeroPointsMenu);
+  CAM_REG_EDEXOPGAIN = edExOpGain;
+  CAM_REG_EXPTIME = expTime;
+  CAM_REG_EDRAINVVREF = edRInvVref;
+  CAM_REG_ZEROVOUT = zeroVout;
 
   isCapturing = 1;
 
-  CAM_REG_CAPTURE = getMenuValue(&captureModesMenu);
+  CAM_REG_CAPTURE = capt;
 
   captureJoypadISR();
 

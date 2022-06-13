@@ -17,6 +17,7 @@
 #include "mainMenu.h"
 #include "camera.h"
 #include "dialog.h"
+#include "values.h"
 
 #define SETTINGS_REQUIRE_RESET TRUE
 #define SETTINGS_REQUIRE_NO_RESET FALSE
@@ -106,7 +107,13 @@ void menuAction() BANKED {
 }
 
 void manualShootLoop() BANKED {
-  capture();
+  uint8_t capt = getMenuValue(&captureModesMenu);
+  uint8_t edExOpGain = getMenuValue(&edgeOpModesMenu) | getMenuValue(&gainsMenu) | getMenuValue(&edgeExclusivesMenu);
+  uint16_t expTime = exposureTimesValues[getMenuValue(&exposureTimesMenu)];
+  uint8_t edRInvVref = getMenuValue(&edgeModesMenu) | getMenuValue(&voltageRefsMenu) | getMenuValue(&invertOutputsMenu);
+  uint8_t zeroVout = getMenuValue(&voltageOutsMenu) | getMenuValue(&zeroPointsMenu);
+
+  capture(capt, edExOpGain, expTime, edRInvVref, zeroVout);
 
   if (jp == J_RIGHT) {
     manualMenuPos = (manualMenuPos + 1) % NUM_MENU_ELEMENTS;
