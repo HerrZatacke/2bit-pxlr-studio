@@ -55,7 +55,7 @@ void burstShootLoop() BANKED {
 
   if (burstActive == 1) {
     if (findFirstFreeSlot() != NUM_IMAGES) {
-      saveImage();
+      saveImage(capt, edExOpGain, expTime, edRInvVref, zeroVout);
       renderBurstMenu();
     } else {
       boop();

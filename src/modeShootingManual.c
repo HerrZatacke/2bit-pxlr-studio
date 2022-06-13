@@ -151,7 +151,7 @@ void manualShootLoop() BANKED {
 
     joypadConsumed();
   } else if (jp == J_A) {
-    saveImageDialog();
+    saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout);
     joypadConsumed();
   } else if (jp == J_START) {
     nextOverlay();
