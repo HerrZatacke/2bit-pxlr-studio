@@ -23,8 +23,4 @@ extern MenuItem captureModesMenu;
 
 extern MenuItem *menuItems[NUM_MENU_ELEMENTS];
 
-inline uint8_t getMenuValue(MenuItem * menuItem) {
-    return menuItem->options[menuItem->value].value;
-}
-
 #endif

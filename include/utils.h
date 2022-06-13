@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <gbdk/platform.h>
+#include "typedefs/MenuItem.h"
 
 extern void initGfx() BANKED;
 extern void initSound() BANKED;
@@ -15,5 +16,9 @@ extern void dead() BANKED;
 extern void hexChar(uint8_t *target, uint8_t value) BANKED;
 extern void fadeIn() BANKED;
 extern void fadeOut() BANKED;
+
+inline uint8_t getMenuValue(MenuItem * menuItem) {
+  return menuItem->options[menuItem->value].value;
+}
 
 #endif
