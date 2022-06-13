@@ -162,6 +162,7 @@ clean:
 	@for target in $(TARGETS); do \
 		$(MAKE) $$target-clean; \
 	done
+	rm -rf include/generated/*
 
 # Include available build targets
 include Makefile.targets
