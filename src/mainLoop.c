@@ -9,6 +9,7 @@
 #include "camera.h"
 #include "modeShootingManual.h"
 #include "modeShootingBurst.h"
+#include "modeShootingAssisted.h"
 #include "mainMenu.h"
 #include "debug.h"
 #include "gallery.h"
@@ -31,6 +32,10 @@ void mainLoop() BANKED {
       case MAIN_LOOP_SHOOT_BURST:
         fastLoadImageTiles();
         burstShootLoop();
+        break;
+      case MAIN_LOOP_SHOOT_ASSISTED:
+        fastLoadImageTiles();
+        assistedShootLoop();
         break;
       case MAIN_LOOP_MENU:
         mainMenu();

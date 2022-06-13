@@ -13,6 +13,7 @@
 #include "gallery.h"
 #include "modeShootingBurst.h"
 #include "modeShootingManual.h"
+#include "modeShootingAssisted.h"
 #include "imageIndexing.h"
 #include "dialog.h"
 
@@ -39,6 +40,8 @@ void menuSelectMode(uint8_t loopState) BANKED {
     initManualMode();
   } else if (loopState == MAIN_LOOP_SHOOT_BURST) {
     initBurstMode();
+  } else if (loopState == MAIN_LOOP_SHOOT_ASSISTED) {
+    initAssistedMode();
   } else if (loopState == MAIN_LOOP_MENU) {
     initMainMenu();
   } else if (loopState == MAIN_LOOP_IMAGE_GALLERY) {
