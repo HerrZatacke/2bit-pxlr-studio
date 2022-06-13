@@ -9,47 +9,53 @@
 // 0x5000 - Room at night with no light, only a reading lamp.
 // 0xF000 - Room at night with only a TV on in the background.
 const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES] = {
-  0xFFFF, // 1050ms
-  0x24F4, // 1000ms
-  0x50C3, //  800ms
-  0x7C92, //  600ms
-  0x127A, //  500ms
-  0xA861, //  400ms
-  0x3E49, //  300ms
-  0x093D, //  250ms
-  0xD430, //  200ms
-  0x1027, //  160ms
-  0x851E, //  125ms
-  0x6A18, //  100ms
-  0x8813, //   80ms
-  0xA60E, //   60ms
-  0x350C, //   50ms
-  0xC409, //   40ms
-  0x5307, //   30ms
-  0x1B06, //   25ms
-  0xA404, //   20ms
-  0xAA03, //   15ms
-  0x0D03, // 12.5ms
-  0x7102, //   10ms
-  0xF401, //    8ms
-  0x7701, //    6ms
-  0x3901, //    5ms
-  0xFA00, //    4ms
-  0xBC00, //    3ms
-  0x9C00, //  2.5ms
-  0x7D00, //    2ms
-  0x5E00, //  1.5ms
-  0x4E00, // 1.25ms
-  0x3F00, //    1ms
-//0x3200, //  0.8ms
-//0x2600, //  0.6ms
-//0x1F00, //  0.5ms
-//0x1900, //  0.4ms
-//0x1300, //  0.3ms
-//0x0D00, //  0.2ms
+  A002_EXPOSURE_TIME_1050_00, // 1050ms
+  A002_EXPOSURE_TIME_1000_00, // 1000ms
+  A002_EXPOSURE_TIME_0800_00, //  800ms
+  A002_EXPOSURE_TIME_0600_00, //  600ms
+  A002_EXPOSURE_TIME_0500_00, //  500ms
+  A002_EXPOSURE_TIME_0400_00, //  400ms
+  A002_EXPOSURE_TIME_0300_00, //  300ms
+  A002_EXPOSURE_TIME_0250_00, //  250ms
+  A002_EXPOSURE_TIME_0200_00, //  200ms
+  A002_EXPOSURE_TIME_0160_00, //  160ms
+  A002_EXPOSURE_TIME_0125_00, //  125ms
+  A002_EXPOSURE_TIME_0100_00, //  100ms
+  A002_EXPOSURE_TIME_0080_00, //   80ms
+  A002_EXPOSURE_TIME_0060_00, //   60ms
+  A002_EXPOSURE_TIME_0050_00, //   50ms
+  A002_EXPOSURE_TIME_0040_00, //   40ms
+  A002_EXPOSURE_TIME_0030_00, //   30ms
+  A002_EXPOSURE_TIME_0025_00, //   25ms
+  A002_EXPOSURE_TIME_0020_00, //   20ms
+  A002_EXPOSURE_TIME_0015_00, //   15ms
+  A002_EXPOSURE_TIME_0012_50, // 12.5ms
+  A002_EXPOSURE_TIME_0010_00, //   10ms
+  A002_EXPOSURE_TIME_0008_00, //    8ms
+  A002_EXPOSURE_TIME_0006_00, //    6ms
+  A002_EXPOSURE_TIME_0005_00, //    5ms
+  A002_EXPOSURE_TIME_0004_00, //    4ms
+  A002_EXPOSURE_TIME_0003_00, //    3ms
+  A002_EXPOSURE_TIME_0002_50, //  2.5ms
+  A002_EXPOSURE_TIME_0002_00, //    2ms
+  A002_EXPOSURE_TIME_0001_50, //  1.5ms
+  A002_EXPOSURE_TIME_0001_25, // 1.25ms
+  A002_EXPOSURE_TIME_0001_00, //    1ms
+  A002_EXPOSURE_TIME_0000_80, //  0.8ms
+  A002_EXPOSURE_TIME_0000_60, //  0.6ms
+  A002_EXPOSURE_TIME_0000_50, //  0.5ms
+  A002_EXPOSURE_TIME_0000_40, //  0.4ms
+  A002_EXPOSURE_TIME_0000_30, //  0.3ms
+  A002_EXPOSURE_TIME_0000_20, //  0.2ms
 };
 
 const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
+  { 37, "   0.2", },
+  { 36, "   0.3", },
+  { 35, "   0.4", },
+  { 34, "   0.5", },
+  { 33, "   0.6", },
+  { 32, "   0.8", },
   { 31, "     1", },
   { 30, "  1.25", },
   { 29, "   1.5", },
@@ -82,12 +88,6 @@ const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
   {  2, "   800", },
   {  1, "  1000", },
   {  0, "  1050", },
-//  { 32, "   0.8", },
-//  { 33, "   0.6", },
-//  { 34, "   0.5", },
-//  { 35, "   0.4", },
-//  { 36, "   0.3", },
-//  { 37, "   0.2", },
 };
 
 // Set 1 (High Light)
