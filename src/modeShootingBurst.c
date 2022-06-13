@@ -32,6 +32,8 @@ void initBurstMode() BANKED {
 }
 
 void burstShootLoop() BANKED {
+  capture();
+
   if (jp == J_B) {
     burstActive = 0;
     menuSelectMode(MAIN_LOOP_MENU);

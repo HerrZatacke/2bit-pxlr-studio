@@ -26,12 +26,10 @@ void mainLoop() BANKED {
     switch (mainLoopState) {
       case MAIN_LOOP_SHOOT_MANUAL:
         fastLoadImageTiles();
-        capture();
         manualShootLoop();
         break;
       case MAIN_LOOP_SHOOT_BURST:
         fastLoadImageTiles();
-        capture();
         burstShootLoop();
         break;
       case MAIN_LOOP_MENU:
