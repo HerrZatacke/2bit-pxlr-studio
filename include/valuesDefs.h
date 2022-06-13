@@ -36,7 +36,7 @@
 #define A000_START_CAPTURE_POSITIVE 0b00000011
 #define A000_START_CAPTURE_NEGATIVE 0b00000001
 
-// The Game Boy Camera uses 0x00, 0x04, 0x08 and 0x0
+// The Game Boy Camera uses 0x00, 0x04, 0x08 and 0x0C
 // They are 14.0dB, 20.0dB, 26.0dB and 32dB, which translate to a gain of 5.01, 10.00, 19.95 and 39.81.
 #define A001_GAIN_140   0b00000000 // 14.0 (gbcam gain:  5.01)
 #define A001_GAIN_155   0b00000001 // 15.5
