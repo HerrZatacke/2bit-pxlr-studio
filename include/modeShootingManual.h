@@ -13,6 +13,6 @@ extern void restoreDefaults() BANKED;
 extern uint8_t loadSettingsFromRAM() BANKED;
 extern void renderManualMenu() BANKED;
 extern void menuAction() BANKED;
-extern void manualShootMenu() BANKED;
+extern void manualShootLoop() BANKED;
 
 #endif

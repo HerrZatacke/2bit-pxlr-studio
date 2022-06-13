@@ -2,6 +2,6 @@
 #define MODE_SHOOTING_BURST
 
 extern void initBurstMode() BANKED;
-extern void burstShootMenu() BANKED;
+extern void burstShootLoop() BANKED;
 
 #endif

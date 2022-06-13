@@ -105,7 +105,7 @@ void menuAction() BANKED {
   }
 }
 
-void manualShootMenu() BANKED {
+void manualShootLoop() BANKED {
   if (jp == J_RIGHT) {
     manualMenuPos = (manualMenuPos + 1) % NUM_MENU_ELEMENTS;
     renderManualMenu();
