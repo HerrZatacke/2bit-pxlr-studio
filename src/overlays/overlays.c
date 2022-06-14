@@ -24,6 +24,24 @@ void initOverlays() BANKED {
   set_sprite_tile(SPRITE_BORDER_V_6, OFFSET_BORDER_V);
   set_sprite_tile(SPRITE_BORDER_V_7, OFFSET_BORDER_V);
   set_sprite_tile(SPRITE_BORDER_V_8, OFFSET_BORDER_V);
+
+  set_sprite_prop(SPRITE_BORDER_H_1, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_2, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_3, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_4, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_5, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_6, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_7, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_H_8, S_PALETTE);
+
+  set_sprite_prop(SPRITE_BORDER_V_1, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_2, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_3, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_4, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_5, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_6, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_7, S_PALETTE);
+  set_sprite_prop(SPRITE_BORDER_V_8, S_PALETTE);
 }
 
 uint8_t currentOverlay = 1;
