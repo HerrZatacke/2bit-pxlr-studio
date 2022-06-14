@@ -6,7 +6,7 @@
 #define MENU_ACTION_NONE 0
 #define MENU_ACTION_DITHER 1
 
-MenuItem exposureTimesMenu =  {  0, 0, 0,  2,  NUM_EXPOSURE_TIMES, 15, "ExTime", " ExposureTime (ms)",  &exposureTimes[0], MENU_ACTION_NONE, };
+MenuItem exposureTimesMenu =  {  0, 0, 0,  2,  NUM_EXPOSURE_TIMES, 22, "ExTime", " ExposureTime (ms)",  &exposureTimes[0], MENU_ACTION_NONE, };
 MenuItem gainsMenu =          {  7, 0, 0,  1,     NUM_GAIN_LEVELS,  4, "  Gain", "   Sensor     Gain",          &gains[0], MENU_ACTION_NONE, };
 MenuItem voltageOutsMenu =    { 14, 0, 0,  8,    NUM_VOLTAGE_OUTS, 40, " V-Out", "  Voltage   Output",    &voltageOuts[0], MENU_ACTION_NONE, };
 
