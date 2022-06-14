@@ -102,7 +102,7 @@ uint8_t loadSettingsFromRAM() BANKED {
 
 void menuAction() BANKED {
   if (menuItems[manualMenuPos]->action == MENU_ACTION_DITHER) {
-    setDitherMatrix();
+    setDitherMatrix(getMenuValue(&ditherSetsMenu), getMenuValue(&contrastsMenu));
   }
 }
 
@@ -112,6 +112,9 @@ void manualShootLoop() BANKED {
   uint16_t expTime = exposureTimesValues[getMenuValue(&exposureTimesMenu)];
   uint8_t edRInvVref = getMenuValue(&edgeModesMenu) | getMenuValue(&voltageRefsMenu) | getMenuValue(&invertOutputsMenu);
   uint8_t zeroVout = getMenuValue(&voltageOutsMenu) | getMenuValue(&zeroPointsMenu);
+
+  uint8_t ditherSet = getMenuValue(&ditherSetsMenu);
+  uint8_t contrast = getMenuValue(&contrastsMenu);
 
   capture(capt, edExOpGain, expTime, edRInvVref, zeroVout);
 
@@ -145,13 +148,13 @@ void manualShootLoop() BANKED {
   } else if (jp == J_SELECT) {
     if (dialog("Reset settings? ", 1)) {
       restoreDefaults();
-      setDitherMatrix();
+      setDitherMatrix(getMenuValue(&ditherSetsMenu), getMenuValue(&contrastsMenu));
       renderManualMenu();
     }
 
     joypadConsumed();
   } else if (jp == J_A) {
-    saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout);
+    saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout, ditherSet, contrast);
     joypadConsumed();
   } else if (jp == J_START) {
     nextOverlay();

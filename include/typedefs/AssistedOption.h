@@ -10,6 +10,7 @@ typedef struct AssistedOption {
   uint8_t edgeExclusive;
   uint8_t edgeOperation;
   uint16_t expTime;
+  uint8_t ditherSet;
 } AssistedOption;
 
 #endif

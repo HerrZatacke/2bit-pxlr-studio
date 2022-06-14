@@ -22,6 +22,7 @@ const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES] = {
   A002_EXPOSURE_TIME_0125_00, //  125ms
   A002_EXPOSURE_TIME_0100_00, //  100ms
   A002_EXPOSURE_TIME_0080_00, //   80ms
+  A002_EXPOSURE_TIME_0070_00, //   70ms
   A002_EXPOSURE_TIME_0060_00, //   60ms
   A002_EXPOSURE_TIME_0050_00, //   50ms
   A002_EXPOSURE_TIME_0040_00, //   40ms
@@ -50,31 +51,32 @@ const uint16_t exposureTimesValues[NUM_EXPOSURE_TIMES] = {
 };
 
 const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
-  { 37, "   0.2", },
-  { 36, "   0.3", },
-  { 35, "   0.4", },
-  { 34, "   0.5", },
-  { 33, "   0.6", },
-  { 32, "   0.8", },
-  { 31, "     1", },
-  { 30, "  1.25", },
-  { 29, "   1.5", },
-  { 28, "     2", },
-  { 27, "   2.5", },
-  { 26, "     3", },
-  { 25, "     4", },
-  { 24, "     5", },
-  { 23, "     6", },
-  { 22, "     8", },
-  { 21, "    10", },
-  { 20, "  12.5", },
-  { 19, "    15", },
-  { 18, "    20", },
-  { 17, "    25", },
-  { 16, "    30", },
-  { 15, "    40", },
-  { 14, "    50", },
-  { 13, "    60", },
+  { 38, "   0.2", },
+  { 37, "   0.3", },
+  { 36, "   0.4", },
+  { 35, "   0.5", },
+  { 34, "   0.6", },
+  { 33, "   0.8", },
+  { 32, "     1", },
+  { 31, "  1.25", },
+  { 30, "   1.5", },
+  { 29, "     2", },
+  { 28, "   2.5", },
+  { 27, "     3", },
+  { 26, "     4", },
+  { 25, "     5", },
+  { 24, "     6", },
+  { 23, "     8", },
+  { 22, "    10", },
+  { 21, "  12.5", },
+  { 20, "    15", },
+  { 19, "    20", },
+  { 18, "    25", },
+  { 17, "    30", },
+  { 16, "    40", },
+  { 15, "    50", },
+  { 14, "    60", },
+  { 13, "    70", },
   { 12, "    80", },
   { 11, "   100", },
   { 10, "   125", },
@@ -237,10 +239,10 @@ const MenuOption edgeModes[NUM_EDGE_MODES] = {
 };
 
 const MenuOption ditherSets[NUM_DITHERSETS] = {
-  { DITHER_SET_HIGH,    "  D-Hi", },
-  { DITHER_SET_LOW,     "  D-Lo", },
-  { DITHER_SET_NO_HIGH, " ND-Hi", },
-  { DITHER_SET_NO_LOW,  " ND-Lo", },
+  { DITHERSET_HIGH | DITHER_ON,  "  D-Hi", },
+  { DITHERSET_LOW  | DITHER_ON,  "  D-Lo", },
+  { DITHERSET_HIGH | DITHER_OFF, " ND-Hi", },
+  { DITHERSET_LOW  | DITHER_OFF, " ND-Lo", },
 };
 
 const MenuOption invertOutputs[NUM_INVERT_OUTPUTS] = {

@@ -14,6 +14,7 @@
 #include "bankedData.h"
 #include "mainMenu.h"
 #include "camera.h"
+#include "menus/shootingManualMenuItems.h"
 #include "valuesAssisted.h"
 #include "valuesDefs.h"
 
@@ -44,22 +45,29 @@ void assistedShootLoop() BANKED {
   uint16_t expTime = assistedOptions[assistedOptionIndex].expTime;
   uint8_t edRInvVref = A004_EDGE_RATIO_050 | A004_VOLTAGE_REF_15 | A004_INVERT_OUTPUT_OFF;
   uint8_t zeroVout = assistedOptions[assistedOptionIndex].vOut | A005_ZERO_POSITIVE;
+  uint8_t ditherSet = assistedOptions[assistedOptionIndex].ditherSet | DITHER_ON;
+
+  uint8_t contrast = getMenuValue(&contrastsMenu);
 
   capture(capt, edExOpGain, expTime, edRInvVref, zeroVout);
 
   if (jp == J_UP) {
     assistedOptionIndex = (assistedOptionIndex + 1) % NUM_ASSISTED_OPTIONS;
+    ditherSet = assistedOptions[assistedOptionIndex].ditherSet | DITHER_ON;
+    setDitherMatrix(ditherSet, getMenuValue(&contrastsMenu));
     renderAssistedMenu();
     joypadConsumed();
   } else if (jp == J_DOWN) {
     assistedOptionIndex = (assistedOptionIndex + NUM_ASSISTED_OPTIONS - 1) % NUM_ASSISTED_OPTIONS;
+    ditherSet = assistedOptions[assistedOptionIndex].ditherSet | DITHER_ON;
+    setDitherMatrix(ditherSet, getMenuValue(&contrastsMenu));
     renderAssistedMenu();
     joypadConsumed();
   } else if (jp == J_B) {
     menuSelectMode(MAIN_LOOP_MENU);
     joypadConsumed();
   } else if (jp == J_A) {
-    saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout);
+    saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout, ditherSet, contrast);
     joypadConsumed();
   } else if (jp == J_START) {
     nextOverlay();

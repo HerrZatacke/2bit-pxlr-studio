@@ -3,7 +3,7 @@
 
 #include "typedefs/AssistedOption.h"
 
-#define NUM_ASSISTED_OPTIONS 44
+#define NUM_ASSISTED_OPTIONS 45
 
 extern const AssistedOption assistedOptions[NUM_ASSISTED_OPTIONS];
 

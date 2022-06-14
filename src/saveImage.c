@@ -12,11 +12,10 @@
 #include "dialog.h"
 #include "images.h"
 #include "values.h"
-#include "menus/shootingManualMenuItems.h"
 #include "modeShootingManual.h"
 #include "images.h"
 
-void saveImage(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRInvVref, uint8_t zeroVout) BANKED {
+void saveImage(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRInvVref, uint8_t zeroVout, uint8_t ditherSet, uint8_t contrast) BANKED {
   uint8_t firstFreeSlot = findFirstFreeSlot();
 
   if (firstFreeSlot >= NUM_IMAGES) {
@@ -40,8 +39,8 @@ void saveImage(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRIn
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_EDMOVOLT] = edRInvVref;
   images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_VOUTZERO] = zeroVout;
   // ToDo: Add dither and contrasts to save options
-  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET] = getMenuValue(&ditherSetsMenu);
-  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST] = getMenuValue(&contrastsMenu);
+  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_DITHERSET] = ditherSet;
+  images[firstFreeSlot]->thumbnail[THUMBNAIL_BYTE_CONTRAST] = contrast;
 
   setImageSlot(firstFreeSlot, numVisibleImages);
 
@@ -53,7 +52,7 @@ void saveImage(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRIn
   }
 }
 
-void saveImageDialog(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRInvVref, uint8_t zeroVout) BANKED {
+void saveImageDialog(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRInvVref, uint8_t zeroVout, uint8_t ditherSet, uint8_t contrast) BANKED {
   if (findFirstFreeSlot() >= NUM_IMAGES) {
     boop();
     waitRelease();
@@ -61,6 +60,6 @@ void saveImageDialog(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t
   }
 
   if (dialog("Save Image?     ", 1)) {
-    saveImage(capt, edExOpGain, expTime, edRInvVref, zeroVout);
+    saveImage(capt, edExOpGain, expTime, edRInvVref, zeroVout, ditherSet, contrast);
   }
 }

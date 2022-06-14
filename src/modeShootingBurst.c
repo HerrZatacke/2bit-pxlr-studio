@@ -41,6 +41,9 @@ void burstShootLoop() BANKED {
   uint8_t edRInvVref = getMenuValue(&edgeModesMenu) | getMenuValue(&voltageRefsMenu) | getMenuValue(&invertOutputsMenu);
   uint8_t zeroVout = getMenuValue(&voltageOutsMenu) | getMenuValue(&zeroPointsMenu);
 
+  uint8_t ditherSet = getMenuValue(&ditherSetsMenu);
+  uint8_t contrast = getMenuValue(&contrastsMenu);
+
   capture(capt, edExOpGain, expTime, edRInvVref, zeroVout);
 
   if (jp == J_B) {
@@ -55,7 +58,7 @@ void burstShootLoop() BANKED {
 
   if (burstActive == 1) {
     if (findFirstFreeSlot() != NUM_IMAGES) {
-      saveImage(capt, edExOpGain, expTime, edRInvVref, zeroVout);
+      saveImage(capt, edExOpGain, expTime, edRInvVref, zeroVout, ditherSet, contrast);
       renderBurstMenu();
     } else {
       boop();

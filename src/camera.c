@@ -13,20 +13,17 @@
 #include "joypad.h"
 #include "values.h"
 
-void setDitherMatrix() BANKED {
+void setDitherMatrix(uint8_t ditherSet, uint8_t contrast) BANKED {
   SWITCH_RAM(16);
 
-  uint8_t ditherSet = getMenuValue(&ditherSetsMenu);
-  uint8_t contrast = getMenuValue(&contrastsMenu);
-
   for (uint16_t i = 0; i < 48; i += 1) {
-    if (ditherSet == DITHER_SET_HIGH) {
+    if (ditherSet == DITHERSET_HIGH | DITHER_ON) {
       memcpy(CAM_REG_DITHERPATTERN, ditherHighLightValues[contrast], 48);
-    } else if (ditherSet == DITHER_SET_LOW) {
+    } else if (ditherSet == DITHERSET_LOW | DITHER_ON) {
       memcpy(CAM_REG_DITHERPATTERN, ditherLowLightValues[contrast], 48);
-    } else if (ditherSet == DITHER_SET_NO_HIGH) {
+    } else if (ditherSet == DITHERSET_HIGH | DITHER_OFF) {
       memcpy(CAM_REG_DITHERPATTERN, ditherNoHighLightValues[contrast], 48);
-    } else if (ditherSet == DITHER_SET_NO_LOW) {
+    } else if (ditherSet == DITHERSET_LOW | DITHER_OFF) {
       memcpy(CAM_REG_DITHERPATTERN, ditherNoLowLightValues[contrast], 48);
     }
   }
@@ -43,7 +40,7 @@ void initCam() BANKED {
     beep();
   }
 
-  setDitherMatrix();
+  setDitherMatrix(getMenuValue(&ditherSetsMenu), getMenuValue(&contrastsMenu));
 }
 
 void capture(uint8_t capt, uint8_t edExOpGain, uint16_t expTime, uint8_t edRInvVref, uint8_t zeroVout) BANKED {
