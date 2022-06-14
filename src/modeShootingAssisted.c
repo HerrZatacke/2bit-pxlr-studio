@@ -68,6 +68,7 @@ void assistedShootLoop() BANKED {
     joypadConsumed();
   } else if (jp == J_A) {
     saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout, ditherSet, contrast);
+    renderAssistedMenu();
     joypadConsumed();
   } else if (jp == J_START) {
     nextOverlay();
