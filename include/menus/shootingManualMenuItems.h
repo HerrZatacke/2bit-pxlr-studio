@@ -4,7 +4,6 @@
 #define NUM_MENU_ELEMENTS 11
 #define MENU_ACTION_NONE 0
 #define MENU_ACTION_DITHER 1
-#define MENU_TEXT_LENGTH 6
 
 #include "typedefs/MenuItem.h"
 

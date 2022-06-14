@@ -48,7 +48,7 @@ void main() {
   BGP_REG = PALETTE_NORMAL;
 
   if (splashPressed == J_A) {
-    menuSelectMode(MAIN_LOOP_SHOOT_MANUAL);
+    menuSelectMode(MAIN_LOOP_SHOOT_ASSISTED);
   } else {
     menuSelectMode(MAIN_LOOP_MENU);
   }
