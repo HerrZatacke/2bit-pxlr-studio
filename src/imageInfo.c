@@ -75,7 +75,7 @@ void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
   memcpy(&tileMap[0],
          "Image #??? Slot #???"
          "                    "
-         "Exposure Time ??????"
+         "Exposure Time ????ms"
          "Sensor Gain   ??????"
          "Voltage Output??????"
          "Dith. Contrast??????"
@@ -109,18 +109,7 @@ void getImageInfo(uint8_t imageIndex, uint8_t *tileMap) BANKED {
 #define POS_12 274
 
   uint16_t exposureTimeInt = (exposureHigh << 8) + exposureLow;
-  uint8_t exposureTime = 0xFF;
-  for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
-    if (exposureTimesValues[i] == exposureTimeInt) {
-      exposureTime = i;
-    }
-  }
-
-  for (i = 0; i < NUM_EXPOSURE_TIMES; i += 1) {
-    if (exposureTimes[i].value == exposureTime) {
-      memcpy(&tileMap[POS_01], exposureTimes[i].title, MENU_TEXT_LENGTH);
-    }
-  }
+  describeExposureTime(exposureTimeInt, &tileMap[POS_01]);
 
   for (i = 0; i < NUM_GAIN_LEVELS; i += 1) {
     if (gains[i].value == gain) {

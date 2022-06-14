@@ -2,11 +2,15 @@
 
 #include <gb/gb.h>
 #include <gbdk/platform.h>
+#include <string.h>
 #include <gbdk/bcd.h>
 #include "defines.h"
 #include "font.h"
 #include "tiles.h"
 #include "bankedData.h"
+
+#define EXPOSURE_MICROS_STEP 4096
+#define EXPOSURE_NANOS_STEP 16
 
 void clearBkg() BANKED {
   fill_bkg_rect(0, 0, 20, 18, OFFSET_BLANK);
@@ -141,4 +145,50 @@ void fadeOut() BANKED {
   BGP_REG = PALETTE_FADE_2;
   pause(8);
   BGP_REG = PALETTE_BLANK;
+}
+
+void describeExposureTime(uint16_t exposureTime, uint8_t *target) BANKED {
+  BCD bcd = MAKE_BCD(0);
+  uint8_t str[10];
+
+  uint32_t lower = (exposureTime >> 8) & 0xff;
+  uint32_t upper = exposureTime & 0xff;
+
+  uint32_t micros = upper * EXPOSURE_MICROS_STEP + lower * EXPOSURE_NANOS_STEP;
+
+  uint16_t numericValue = micros / 1000;
+
+  uint8_t decimals = 0;
+
+  if (numericValue < 10) {
+    numericValue = micros / 10;
+    decimals = 2;
+  } else if (numericValue < 100) {
+    numericValue = micros / 100;
+    decimals = 1;
+  }
+
+  uint2bcd(numericValue, &bcd);
+  bcd2text(&bcd, 48u, str);
+  memcpy(target, &str[4], 4);
+
+  if (decimals == 1) {
+    target[0] = str[5];
+    target[1] = str[6];
+    target[2] = '.';
+    target[3] = str[7];
+  } else if (decimals == 2) {
+    target[0] = str[5];
+    target[1] = '.';
+    target[2] = str[6];
+    target[3] = str[7];
+  } else {
+    for (uint8_t i = 0; i < 3; i++) {
+      if (target[i] != '0') {
+        return;
+      }
+      target[i] = ' ';
+    }
+  }
+
 }

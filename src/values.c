@@ -89,7 +89,7 @@ const MenuOption exposureTimes[NUM_EXPOSURE_TIMES] = {
   {  3, "   600", },
   {  2, "   800", },
   {  1, "  1000", },
-  {  0, "  1050", },
+  {  0, "  1048", },
 };
 
 // Set 1 (High Light)
