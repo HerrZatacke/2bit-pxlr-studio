@@ -15,6 +15,7 @@
 #include "expose.h"
 #include "bleep.h"
 #include "imageInfo.h"
+#include "analysis.h"
 #include "font.h"
 #include "nope.h"
 #include "maps.h"
@@ -132,6 +133,10 @@ static void imageMenuAction(uint8_t value) {
 
       beep();
     }
+  } else if (value == IMAGE_MENU_HISTOGRAM) {
+    displayHistogram(imageIndex);
+    initImageMenu();
+    renderImageMenu();
   } else if (value == IMAGE_MENU_DELETE) {
     setImageSlot(address, 0xff);
     reduceIndexAfterDelete(imageIndex);
