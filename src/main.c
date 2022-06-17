@@ -15,6 +15,7 @@
 
 void scanlineIsr() {
   if (LYC_REG == 71) {
+    while (STAT_REG & STATF_LCD != 0);
     LCDC_REG |= LCDCF_BG8000;
     LYC_REG = 144;
   } else if (LYC_REG == 144) {
