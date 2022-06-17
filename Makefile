@@ -71,7 +71,7 @@ RESOBJ      = $(VGM_RES:%.vgm=$(OBJDIR)/%.o) $(WAV_RES:%.wav=$(OBJDIR)/%.o) $(FX
 DEPENDANT   = $(CSOURCES:%.c=$(OBJDIR)/%.o)
 
 # Builds all targets sequentially
-all: $(TARGETS) build/gb/pxlr.sav
+all: $(TARGETS) build/$(EXT)/pxlr.sav
 
 # Dependencies
 DEPS = $(DEPENDANT:%.o=%.d)
@@ -151,8 +151,8 @@ $(OBJDIR)/%.o:	$(SRCPORT)/%.s
 $(BINS):	$(RESOBJ) $(OBJS)
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $^
 
-build/gb/pxlr.sav:
-	cp assets/pxlr.sav build/gb/pxlr.sav
+build/$(EXT)/pxlr.sav:
+	cp assets/pxlr.sav build/$(EXT)/pxlr.sav
 
 clean:
 	@echo Cleaning
