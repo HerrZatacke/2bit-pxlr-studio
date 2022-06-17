@@ -3,10 +3,10 @@ SHELL := /bin/bash
 # If you move this project you can change the directory
 # to match your GBDK root directory (ex: GBDK_HOME = "C:/GBDK/"
 
-GBDK_HOME = $(GBDK_FOLDER)/
+#GBDK_HOME = $(GBDK_FOLDER)/
 #GBCPU = gbz80
 
-#GBDK_HOME = ../../../gbdk-2020/build/gbdk/
+GBDK_HOME = ../../../gbdk-2020/build/gbdk/
 GBCPU = sm83
 
 LCC = $(GBDK_HOME)bin/lcc
@@ -16,7 +16,7 @@ PNG2ASSET = $(GBDK_HOME)bin/png2asset
 # They can also be built/cleaned individually: "make gg" and "make gg-clean"
 # Possible are: gb gbc pocket sms gg
 #TARGETS = gb gbc pocket sms gg
-TARGETS = gb
+TARGETS = gb gbc
 
 #LIBRARIES = -Wl-llib/$(PORT)/hUGEDriver.lib
 LIBRARIES =
@@ -24,7 +24,7 @@ LIBRARIES =
 # Configure platform specific LCC flags here:
 LCCFLAGS_gb      = $(LIBRARIES) -Wl-yt0xFC -Wm-yn"$(PROJECTNAME)"
 LCCFLAGS_pocket  = $(LIBRARIES) -Wl-yt0xFC -Wm-yn"$(PROJECTNAME)"
-LCCFLAGS_gbc     = $(LIBRARIES) -Wl-yt0xFC -Wm-yn"$(PROJECTNAME)"
+LCCFLAGS_gbc     = $(LIBRARIES) -Wl-yt0xFC -Wm-yc -Wm-yn"$(PROJECTNAME)"
 LCCFLAGS_sms     =
 LCCFLAGS_gg      =
 
@@ -34,7 +34,7 @@ LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya16 -autobank -Wb-ext=.rel
 # LCCFLAGS += -debug # Uncomment to enable debug output
 # LCCFLAGS += -v     # Uncomment for lcc verbose output
 
-CFLAGS += -Iinclude -Iinclude/$(PORT) -Iinclude/$(PLAT) -I$(RESDIR) -Iobj/$(PLAT)
+CFLAGS += -Iinclude -Iinclude/$(PORT) -Iinclude/$(PLAT) -I$(RESDIR) -Iobj/$(EXT)
 
 BRANCH      = $(shell git rev-parse --abbrev-ref HEAD)
 VERSION     = $(shell git describe --abbrev=0 --tags)
@@ -59,8 +59,8 @@ FX_RES      = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/s
 UGE_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/music/*.uge)))
 WAV_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/waveforms/*.wav)))
 
-SPR_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/gfx/$(PLAT)/sprites/*.png)))
-BKG_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/gfx/$(PLAT)/backgrounds/*.png)))
+SPR_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/gfx/$(EXT)/sprites/*.png)))
+BKG_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/gfx/$(EXT)/backgrounds/*.png)))
 
 CSOURCES    = $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(SRCPLAT),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(SRCPORT),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/*.c))) $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/menus/*.c))) $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/overlays/*.c)))
 ASMSOURCES  = $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s))) $(foreach dir,$(SRCPLAT),$(notdir $(wildcard $(dir)/*.s))) $(foreach dir,$(SRCPORT),$(notdir $(wildcard $(dir)/*.s)))

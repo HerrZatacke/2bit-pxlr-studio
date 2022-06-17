@@ -11,6 +11,7 @@
 #include "overlays/overlays.h"
 #include "splash.h"
 #include "utils.h"
+#include "systemdetect.h"
 
 void scanlineIsr() {
   if (LYC_REG == 71) {
@@ -27,6 +28,12 @@ void scanlineIsr() {
 }
 
 void main() {
+  detect_system();
+  if (_is_COLOR) {
+    cpu_fast();
+    cgb_compatibility();
+  }
+
   ENABLE_RAM;
 
   CRITICAL {
