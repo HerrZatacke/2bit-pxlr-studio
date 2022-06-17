@@ -31,33 +31,26 @@ const uint8_t bitsSetLUT[256] = {
     4u, 5u, 5u, 6u, 5u, 6u, 6u, 7u, 5u, 6u, 6u, 7u, 6u, 7u, 7u, 8u,
 };
 
+
 void createHistogram(uint8_t *data, Histogram *histogram) BANKED {
-  uint16_t start = sys_time;
+  static Histogram hist;
 
-  histogram->white = 0;
-  histogram->lgrey = 0;
-  histogram->dgrey = 0;
-  histogram->black = 0;
+  hist.white = hist.lgrey = hist.dgrey = hist.black = 0;
+  hist.time = sys_time;
 
-  uint8_t *lower = data;
-  uint8_t *upper = data + 1;
-  uint8_t invUpper;
-  uint8_t invLower;
-  uint8_t cpUpper;
-  uint8_t cpLower;
-
-  for (uint16_t i = 0; i < CAMERA_IMAGE_SIZE; i += 2, lower += 2, upper += 2) {
-    invUpper = ~*upper;
-    invLower = ~*lower;
-    cpUpper = *upper;
-    cpLower = *lower;
-    histogram->white += (uint16_t)bitsSetLUT[(uint8_t)(invLower & invUpper)];
-    histogram->lgrey += (uint16_t)bitsSetLUT[(uint8_t)( cpLower & invUpper)];
-    histogram->dgrey += (uint16_t)bitsSetLUT[(uint8_t)(invLower &  cpUpper)];
-    histogram->black += (uint16_t)bitsSetLUT[(uint8_t)( cpLower &  cpUpper)];
+  static uint8_t lower, upper;
+  for (uint8_t * ptr = data; ptr < data + CAMERA_IMAGE_SIZE; ) {
+      lower = *ptr++;
+      upper = *ptr++;
+      hist.white += bitsSetLUT[~lower & ~upper];
+      hist.lgrey += bitsSetLUT[lower & ~upper];
+      hist.dgrey += bitsSetLUT[~lower & upper];
+      hist.black += bitsSetLUT[lower & upper];
   }
 
-  histogram->time = sys_time - start;
+  hist.time = sys_time - hist.time;
+
+  *histogram = hist;
 }
 
 void getHistogram(uint8_t imageIndex, uint8_t *tileMap) BANKED {
