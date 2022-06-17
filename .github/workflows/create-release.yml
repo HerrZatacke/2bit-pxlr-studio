@@ -38,6 +38,7 @@ jobs:
         run: |
           mkdir release
           cp build/gb/pxlr.gb release/pxlr.gb
+          cp build/gbc/pxlr.gbc release/pxlr.gbc
           cp build/gb/pxlr.sav release/pxlr.sav
           cd release
           zip -r ../pxlr.zip *
@@ -49,7 +50,10 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_VERSION }}
           name: Version ${{ env.RELEASE_VERSION }}
-          files: pxlr.zip
+          files: |
+            release/pxlr.gb
+            release/pxlr.gbc
+            release/pxlr.sav
 
       - name: Create itch.io release 🎉
         if: steps.checkTag.outputs.exists == 'false'
