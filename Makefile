@@ -97,11 +97,11 @@ $(OBJDIR)/%.o:	$(RESDIR)/audio/$(PLAT)/%.c
 
 
 .SECONDEXPANSION:
-$(OBJDIR)/%.c:	$(RESDIR)/gfx/$(PLAT)/sprites/%.png $$(wildcard $(RESDIR)/gfx/$(PLAT)/sprites/%.png.meta)
+$(OBJDIR)/%.c:	$(RESDIR)/gfx/$(EXT)/sprites/%.png $$(wildcard $(RESDIR)/gfx/$(EXT)/sprites/%.png.meta)
 	$(PNG2ASSET) $< -c $@ `cat <$<.meta 2>/dev/null` -spr8x16 -b 255
 
 .SECONDEXPANSION:
-$(OBJDIR)/%.c:	$(RESDIR)/gfx/$(PLAT)/backgrounds/%.png $$(wildcard $(RESDIR)/gfx/$(PLAT)/backgrounds/%.png.meta)
+$(OBJDIR)/%.c:	$(RESDIR)/gfx/$(EXT)/backgrounds/%.png $$(wildcard $(RESDIR)/gfx/$(EXT)/backgrounds/%.png.meta)
 	$(PNG2ASSET) $< -c $@ -map `cat <$<.meta 2>/dev/null` -b 255
 
 
