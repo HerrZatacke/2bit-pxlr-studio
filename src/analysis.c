@@ -41,12 +41,20 @@ void createHistogram(uint8_t *data, Histogram *histogram) BANKED {
 
   uint8_t *lower = data;
   uint8_t *upper = data + 1;
+  uint8_t invUpper;
+  uint8_t invLower;
+  uint8_t cpUpper;
+  uint8_t cpLower;
 
   for (uint16_t i = 0; i < CAMERA_IMAGE_SIZE; i += 2, lower += 2, upper += 2) {
-    histogram->white += (uint16_t)bitsSetLUT[(uint8_t)(~*lower & ~*upper)];
-    histogram->lgrey += (uint16_t)bitsSetLUT[(uint8_t)( *lower & ~*upper)];
-    histogram->dgrey += (uint16_t)bitsSetLUT[(uint8_t)(~*lower &  *upper)];
-    histogram->black += (uint16_t)bitsSetLUT[(uint8_t)( *lower &  *upper)];
+    invUpper = ~*upper;
+    invLower = ~*lower;
+    cpUpper = *upper;
+    cpLower = *lower;
+    histogram->white += (uint16_t)bitsSetLUT[(uint8_t)(invLower & invUpper)];
+    histogram->lgrey += (uint16_t)bitsSetLUT[(uint8_t)( cpLower & invUpper)];
+    histogram->dgrey += (uint16_t)bitsSetLUT[(uint8_t)(invLower &  cpUpper)];
+    histogram->black += (uint16_t)bitsSetLUT[(uint8_t)( cpLower &  cpUpper)];
   }
 
   histogram->time = sys_time - start;
