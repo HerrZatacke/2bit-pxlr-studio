@@ -31,7 +31,7 @@ void scanlineIsr() {
 void main() {
   detect_system();
   if (_is_COLOR) {
-    cpu_fast();
+//    cpu_fast(); // cant use cpu_fast() with gbcamera
     cgb_compatibility();
   }
 
