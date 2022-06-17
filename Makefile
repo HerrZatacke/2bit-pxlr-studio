@@ -149,10 +149,14 @@ $(BINS):	$(RESOBJ) $(OBJS)
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $^
 
 include/generated/version.h: version
-	tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t version[] = {\n/g; s/$$/};\n/g' > $@
+	@if tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t version[] = {\n/g; s/$$/};\n/g' > $@ || false; then \
+	  echo "const uint8_t version[] = {'?'};\n" > $@ ; \
+    fi
 
 include/generated/branch.h:
-	git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t branch[] = {\n/g; s/$$/};\n/g' > $@
+	@if git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t branch[] = {\n/g; s/$$/};\n/g' > $@  || false; then \
+	  echo "const uint8_t branch[] = {'?'};\n" > $@ ; \
+	fi
 
 build/gb/pxlr.sav:
 	cp assets/pxlr.sav build/gb/pxlr.sav
