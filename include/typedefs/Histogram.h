@@ -8,6 +8,7 @@ typedef struct {
   uint16_t lgrey;
   uint16_t dgrey;
   uint16_t black;
+  uint16_t time;
 } Histogram;
 
 #endif

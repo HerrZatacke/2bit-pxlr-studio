@@ -32,17 +32,24 @@ const uint8_t bitsSetLUT[256] = {
 };
 
 void createHistogram(uint8_t *data, Histogram *histogram) BANKED {
+  uint16_t start = sys_time;
+
   histogram->white = 0;
   histogram->lgrey = 0;
   histogram->dgrey = 0;
   histogram->black = 0;
 
-  for (uint16_t i = 0; i < CAMERA_IMAGE_SIZE; i += 2) {
-    histogram->white += (uint16_t)bitsSetLUT[(uint8_t)(~data[i] & ~data[i + 1])];
-    histogram->lgrey += (uint16_t)bitsSetLUT[(uint8_t)( data[i] & ~data[i + 1])];
-    histogram->dgrey += (uint16_t)bitsSetLUT[(uint8_t)(~data[i] &  data[i + 1])];
-    histogram->black += (uint16_t)bitsSetLUT[(uint8_t)( data[i] &  data[i + 1])];
+  uint8_t *lower = data;
+  uint8_t *upper = data + 1;
+
+  for (uint16_t i = 0; i < CAMERA_IMAGE_SIZE; i += 2, lower += 2, upper += 2) {
+    histogram->white += (uint16_t)bitsSetLUT[(uint8_t)(~*lower & ~*upper)];
+    histogram->lgrey += (uint16_t)bitsSetLUT[(uint8_t)( *lower & ~*upper)];
+    histogram->dgrey += (uint16_t)bitsSetLUT[(uint8_t)(~*lower &  *upper)];
+    histogram->black += (uint16_t)bitsSetLUT[(uint8_t)( *lower &  *upper)];
   }
+
+  histogram->time = sys_time - start;
 }
 
 void getHistogram(uint8_t imageIndex, uint8_t *tileMap) BANKED {
@@ -55,7 +62,6 @@ void getHistogram(uint8_t imageIndex, uint8_t *tileMap) BANKED {
   SWITCH_RAM(images[imageSlot]->bank);
   createHistogram(images[imageSlot]->tilesUpper, &histogram);
   memcpy(&tileMap[0],
-        "                    "
         "                    "
         "  Histogram         "
         "                    "
@@ -71,25 +77,30 @@ void getHistogram(uint8_t imageIndex, uint8_t *tileMap) BANKED {
         "  Black             "
         "    ?????           "
         "                    "
-        "                    "
+        "  Time              "
+        "    ?????           "
         "                    ",
         360);
 
   uint2bcd(histogram.white, &bcd);
   bcd2text(&bcd, 48u, digits);
-  memcpy(&tileMap[104], &digits[3], 5);
+  memcpy(&tileMap[84], &digits[3], 5);
 
   uint2bcd(histogram.lgrey, &bcd);
   bcd2text(&bcd, 48u, digits);
-  memcpy(&tileMap[164], &digits[3], 5);
+  memcpy(&tileMap[144], &digits[3], 5);
 
   uint2bcd(histogram.dgrey, &bcd);
   bcd2text(&bcd, 48u, digits);
-  memcpy(&tileMap[224], &digits[3], 5);
+  memcpy(&tileMap[204], &digits[3], 5);
 
   uint2bcd(histogram.black, &bcd);
   bcd2text(&bcd, 48u, digits);
-  memcpy(&tileMap[284], &digits[3], 5);
+  memcpy(&tileMap[264], &digits[3], 5);
+
+  uint2bcd(histogram.time, &bcd);
+  bcd2text(&bcd, 48u, digits);
+  memcpy(&tileMap[324], &digits[3], 5);
 }
 
 void displayHistogram(uint8_t imageIndex) BANKED {
