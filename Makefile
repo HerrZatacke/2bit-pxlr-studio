@@ -71,7 +71,7 @@ RESOBJ      = $(VGM_RES:%.vgm=$(OBJDIR)/%.o) $(WAV_RES:%.wav=$(OBJDIR)/%.o) $(FX
 DEPENDANT   = $(CSOURCES:%.c=$(OBJDIR)/%.o)
 
 # Builds all targets sequentially
-all: $(TARGETS) build/$(EXT)/pxlr.sav
+all: $(TARGETS)
 
 # Dependencies
 DEPS = $(DEPENDANT:%.o=%.d)
@@ -150,9 +150,7 @@ $(OBJDIR)/%.o:	$(SRCPORT)/%.s
 # Link the compiled object files into a .gb ROM file
 $(BINS):	$(RESOBJ) $(OBJS)
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $^
-
-build/$(EXT)/pxlr.sav:
-	cp assets/pxlr.sav build/$(EXT)/pxlr.sav
+	@cp assets/pxlr.sav $(BINDIR)/pxlr.sav
 
 clean:
 	@echo Cleaning
