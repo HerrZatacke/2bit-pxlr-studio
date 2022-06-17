@@ -38,7 +38,7 @@ jobs:
         run: |
           mkdir release
           cp build/gb/pxlr.gb release/pxlr.gb
-          cp build/gb/pxlr.gbc release/pxlr.gbc
+          cp build/gbc/pxlr.gbc release/pxlr.gbc
           cp build/gb/pxlr.sav release/pxlr.sav
           cd release
           zip -r ../pxlr.zip *
