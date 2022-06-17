@@ -34,7 +34,11 @@ LCCFLAGS += -Wl-j -Wm-yoA -Wm-ya16 -autobank -Wb-ext=.rel
 # LCCFLAGS += -debug # Uncomment to enable debug output
 # LCCFLAGS += -v     # Uncomment for lcc verbose output
 
-CFLAGS = -Iinclude -Iinclude/$(PORT) -Iinclude/$(PLAT) -I$(RESDIR) -Iobj/$(PLAT)
+CFLAGS += -Iinclude -Iinclude/$(PORT) -Iinclude/$(PLAT) -I$(RESDIR) -Iobj/$(PLAT)
+
+BRANCH      = $(shell git rev-parse --abbrev-ref HEAD)
+VERSION     = $(shell git describe --abbrev=0 --tags)
+CFLAGS      += -DBRANCH=$(BRANCH) -DVERSION=$(VERSION)
 
 # You can set the name of the ROM file here
 PROJECTNAME = pxlr
@@ -48,10 +52,10 @@ RESDIR      = res
 BINDIR      = build/$(EXT)
 MKDIRS      = $(OBJDIR) $(BINDIR) # See bottom of Makefile for directory auto-creation
 
-BINS	    = $(OBJDIR)/$(PROJECTNAME).$(EXT)
+BINS        = $(OBJDIR)/$(PROJECTNAME).$(EXT)
 
-VGM_RES	    = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/sounds/*.vgm)))
-FX_RES	    = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/sounds/*.sav)))
+VGM_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/sounds/*.vgm)))
+FX_RES      = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/sounds/*.sav)))
 UGE_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/music/*.uge)))
 WAV_RES     = $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/audio/$(PLAT)/waveforms/*.wav)))
 
@@ -67,7 +71,7 @@ RESOBJ      = $(VGM_RES:%.vgm=$(OBJDIR)/%.o) $(WAV_RES:%.wav=$(OBJDIR)/%.o) $(FX
 DEPENDANT   = $(CSOURCES:%.c=$(OBJDIR)/%.o)
 
 # Builds all targets sequentially
-all: include/generated/version.h include/generated/branch.h $(TARGETS) build/gb/pxlr.sav
+all: $(TARGETS) build/gb/pxlr.sav
 
 # Dependencies
 DEPS = $(DEPENDANT:%.o=%.d)
@@ -125,7 +129,6 @@ $(OBJDIR)/%.o:	$(SRCDIR)/overlays/%.c
 $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 	$(LCC) $(CFLAGS) -c -o $@ $<
 
-
 # Compile .c files in "src/<platform>/" to .o object files
 $(OBJDIR)/%.o:	$(SRCPLAT)/%.c
 	$(LCC) -Wf-MMD $(CFLAGS) -c -o $@ $<
@@ -148,12 +151,6 @@ $(OBJDIR)/%.o:	$(SRCPORT)/%.s
 $(BINS):	$(RESOBJ) $(OBJS)
 	$(LCC) $(LCCFLAGS) $(CFLAGS) -o $(BINDIR)/$(PROJECTNAME).$(EXT) $^
 
-include/generated/version.h: version
-	tr -d '\r\n ' < $< | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t version[] = {\n/g; s/$$/};\n/g' > $@
-
-include/generated/branch.h:
-	git rev-parse --abbrev-ref HEAD | tr -d '\r\n' | sed 's/master/ /g' | xxd -u -p -c 1 | sed 's/\s+/_/g' | sed 's/^/  0x/g; s/$$/,/g' | sed -z 's/^/const uint8_t branch[] = {\n/g; s/$$/};\n/g' > $@
-
 build/gb/pxlr.sav:
 	cp assets/pxlr.sav build/gb/pxlr.sav
 
@@ -162,7 +159,6 @@ clean:
 	@for target in $(TARGETS); do \
 		$(MAKE) $$target-clean; \
 	done
-	rm -rf include/generated/*
 
 # Include available build targets
 include Makefile.targets

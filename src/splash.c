@@ -7,9 +7,14 @@
 #include "bankedData.h"
 #include "defines.h"
 #include "utils.h"
-#include "generated/version.h"
-#include "generated/branch.h"
 #include "logo.h"
+
+#define Q(x) #x
+#define QUOTE(x) Q(x)
+
+static const uint8_t branch[] = QUOTE(BRANCH);
+static const uint8_t version[] = QUOTE(VERSION);
+
 
 uint8_t splash() BANKED {
   HIDE_SPRITES;
@@ -20,8 +25,8 @@ uint8_t splash() BANKED {
 
   set_bkg_tiles_banked(0, 0, 20, 18, logo_map, 1);
 
-  set_bkg_based_tiles(0, 16, sizeof(branch), 1, branch, OFFSET_FONT - 32);
-  set_bkg_based_tiles(0, 17, sizeof(version), 1, version, OFFSET_FONT - 32);
+  set_bkg_based_tiles(0, 16, sizeof(branch) - 1, 1, branch, OFFSET_FONT - 32);
+  set_bkg_based_tiles(0, 17, sizeof(version) - 1, 1, version, OFFSET_FONT - 32);
   set_bkg_based_tiles(13, 16, 7, 2, "Shoot A Menu B", OFFSET_FONT - 32);
 
   fadeIn();
