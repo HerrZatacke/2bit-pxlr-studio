@@ -12,6 +12,7 @@
 #include "splash.h"
 #include "utils.h"
 #include "systemdetect.h"
+#include "flasher.h"
 
 void scanlineIsr() {
   if (LYC_REG == 71) {
