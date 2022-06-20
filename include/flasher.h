@@ -3,9 +3,8 @@
 
 #include <stdint.h>
 
-void restore_sram_bank(uint8_t bank);
-void restore_sram();
-
-uint8_t save_sram();
+uint8_t check_gallery_exist(uint8_t slot) NONBANKED;
+uint8_t load_gallery_from_slot(uint8_t slot) BANKED;
+uint8_t save_gallery_to_slot(uint8_t slot) BANKED;
 
 #endif
