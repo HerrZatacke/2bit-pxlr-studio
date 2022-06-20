@@ -40,9 +40,6 @@ jobs:
           cp build/gb/pxlr.gb release/pxlr.gb
           cp build/gbc/pxlr.gbc release/pxlr.gbc
           cp build/gb/pxlr.sav release/pxlr.sav
-          cd release
-          zip -r ../pxlr.zip *
-          cd ..
 
       - name: Create GitHub Release 🥳
         uses: softprops/action-gh-release@v1
@@ -63,6 +60,6 @@ jobs:
           CHANNEL: gameboy
           ITCH_GAME: 2bit-pxlr-studio
           ITCH_USER: ${{ secrets.ITCHIO_USER }}
-          PACKAGE: pxlr.zip
+          PACKAGE: release
           VERSION_FILE: version
 
