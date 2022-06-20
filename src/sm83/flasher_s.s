@@ -3,10 +3,17 @@
         .globl  .start_save
         .globl __current_bank
 
-        .area   _CODE
-
+        .area _INITIALIZED
 _save_rom_bank:: 
+        .ds 1
+_save_sram_bank_offset::
+        .ds 1
+
+        .area _INITIALIZER
         .db .start_save
+        .db 0
+
+        .area   _CODE
 
 .macro .wb addr, val
         ld a, val
@@ -44,7 +51,11 @@ _flash_data_routine:
 
 1$:
         .wb     #rRAMG, #0x0A                   ; enable SRAM
-        .wb     #rRAMB, c                       ; switch SRAM
+
+        ld      a, (_save_sram_bank_offset)
+        add     c
+        ldh     (#rRAMB), a                     ; switch SRAM
+
         ld      a, (de)                         ; read byte
         ld      b, a
 
@@ -121,7 +132,7 @@ _save_sram_banks::
         ld      e, #0                           ; result
         sub     #1
         jr      c, 3$                           ; copy zero banks?
-        and     #3                              ; max 4 banks
+        and     #7                              ; max 8 banks
 1$:
         push    af
 
