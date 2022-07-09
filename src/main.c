@@ -13,6 +13,7 @@
 #include "utils.h"
 #include "systemdetect.h"
 #include "flasher.h"
+#include "shutter.h"
 
 void scanlineIsr() {
   if (LYC_REG == 71) {
@@ -45,6 +46,7 @@ void main() {
   }
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
 
+  init_shutter();
   initGfx();
   initSound();
   initCam();

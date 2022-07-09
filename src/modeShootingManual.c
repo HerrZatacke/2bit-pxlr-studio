@@ -18,6 +18,7 @@
 #include "camera.h"
 #include "dialog.h"
 #include "values.h"
+#include "shutter.h"
 
 #define SETTINGS_REQUIRE_RESET TRUE
 #define SETTINGS_REQUIRE_NO_RESET FALSE
@@ -56,6 +57,7 @@ void initManualMode() BANKED {
   sortImages();
   showOverlay();
   renderManualMenu();
+  activate_shutter(SHUTTER_ACTIVATE);
 }
 
 void storeSettings() BANKED {
@@ -143,6 +145,7 @@ void manualShootLoop() BANKED {
     renderManualMenu();
     joypadConsumed();
   } else if (jp == J_B) {
+    activate_shutter(SHUTTER_SUSPEND);
     menuSelectMode(MAIN_LOOP_MENU);
     joypadConsumed();
   } else if (jp == J_SELECT) {
@@ -153,7 +156,7 @@ void manualShootLoop() BANKED {
     }
 
     joypadConsumed();
-  } else if (jp == J_A) {
+  } else if ((jp == J_A) || (check_and_reset_shutter())) {
     saveImageDialog(capt, edExOpGain, expTime, edRInvVref, zeroVout, ditherSet, contrast);
     joypadConsumed();
   } else if (jp == J_START) {
