@@ -20,6 +20,7 @@
 #include "nope.h"
 #include "maps.h"
 #include "images.h"
+#include "remote.h"
 
 uint8_t specialAction;
 
@@ -120,6 +121,7 @@ static void imageMenuAction(uint8_t value) {
   }
 
   if (value == IMAGE_MENU_INFO) {
+    remote_activate(REMOTE_DISABLED);
     if (getPrinterStatus()) {
       displayImageInfo(imageIndex);
       initImageMenu();
@@ -133,6 +135,7 @@ static void imageMenuAction(uint8_t value) {
 
       beep();
     }
+    remote_activate(REMOTE_ENABLED);
   } else if (value == IMAGE_MENU_HISTOGRAM) {
     displayHistogram(imageIndex);
     initImageMenu();
@@ -147,6 +150,7 @@ static void imageMenuAction(uint8_t value) {
     loadAndShowGalleryImage();
     clonk();
   } else if (value == IMAGE_MENU_PRINT) {
+    remote_activate(REMOTE_DISABLED);  
     printerInit();
     if (getPrinterStatus()) {
       boop();
@@ -161,6 +165,7 @@ static void imageMenuAction(uint8_t value) {
 
       beep();
     }
+    remote_activate(REMOTE_ENABLED);
   } else if (value == IMAGE_MENU_BLEEP) {
     disappearImageMenu();
     bleep();

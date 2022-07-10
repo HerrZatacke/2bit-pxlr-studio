@@ -52,12 +52,10 @@ uint16_t CRC;
 
 uint8_t sendPrinterByte(uint8_t byte) BANKED {
   uint8_t result;
-  disable_interrupts();
-  SB_REG = byte; //data to send
-  SC_REG = 0x81; //1000 0001 - start, internal clock
-  while (SC_REG & 0x80) {} //wait until b1 reset
-  result = SB_REG; //return response stored in SB_REG
-  enable_interrupts();
+  SB_REG = byte;          // data to send
+  SC_REG = 0x81;          // 1000 0001 - start, internal clock
+  while (SC_REG & 0x80);  // wait until b1 reset
+  result = SB_REG;        // return response stored in SB_REG
   return result;
 }
 

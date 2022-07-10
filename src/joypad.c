@@ -3,6 +3,8 @@
 #include <gb/gb.h>
 #include <gbdk/platform.h>
 
+#include "remote.h"
+
 // global joypad store variable
 volatile uint8_t jp = 0;
 static uint8_t jpCooldown = 0;
@@ -22,10 +24,11 @@ void waitRelease() BANKED {
 }
 
 void captureJoypadISR() BANKED {
-  if (jpCooldown && joypad()) {
+  uint8_t value = (joypad() | remote_joypad()); 
+  if (jpCooldown && (value)) {
     jpCooldown--;
   } else {
-    jp = joypad();
+    jp = value;
     jpCooldown = 0;
   }
 }
