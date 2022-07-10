@@ -67,14 +67,12 @@ __endasm;
 }
 
 void isr_remote_VBL() NONBANKED {
-/*
     if (remote_watchdog < WATCHDOG_DELAY) {
         if ((++remote_watchdog) == WATCHDOG_DELAY) {
             SIO_cancel_transfer();
             SIO_request_transfer();
         } 
     }
-*/
 }
 
 void remote_init() BANKED {
