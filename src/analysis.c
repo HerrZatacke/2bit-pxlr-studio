@@ -56,7 +56,6 @@ void createHistogram(uint8_t *data, Histogram *histogram) BANKED {
 void getHistogram(uint8_t imageIndex, uint8_t *tileMap) BANKED {
   Histogram histogram;
   uint8_t imageSlot = getImageSlot(imageIndex);
-  uint8_t i;
   uint8_t digits[10];
   BCD bcd = MAKE_BCD(0);
 

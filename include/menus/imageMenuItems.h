@@ -1,7 +1,7 @@
 #ifndef IMAGE_MENUITEMS_H
 #define IMAGE_MENUITEMS_H
 
-#define NUM_IMAGE_MENU_OPTIONS 5
+#define NUM_IMAGE_MENU_OPTIONS 6
 
 #include "typedefs/MenuOption.h"
 

@@ -1,4 +1,4 @@
-#define NUM_IMAGE_MENU_OPTIONS 5
+#define NUM_IMAGE_MENU_OPTIONS 6
 
 #include "typedefs/MenuOption.h"
 #include "defines.h"
