@@ -4,7 +4,7 @@
 #include "valuesDefs.h"
 #include "typedefs/AssistedOption.h"
 
-#define NUM_ASSISTED_OPTIONS 45
+#define NUM_ASSISTED_OPTIONS 127
 
 extern const AssistedOption assistedOptionsValues[NUM_ASSISTED_OPTIONS];
 extern const MenuOption assistedOptions[NUM_ASSISTED_OPTIONS];
